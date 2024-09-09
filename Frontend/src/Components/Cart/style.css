@@ -1,0 +1,31 @@
+.cart{
+  position: fixed;
+  bottom: 18%;
+  right: 3%;
+  border: 1px solid black;
+  padding: 10px 15px;
+  border-radius: 50%;
+}
+.table-relative{
+  position: relative;
+}
+.table-img{
+  height: 50px;
+  width: 40px;
+}
+.cart-count{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 0 8px;
+  border-radius: 50%;
+  position: absolute;
+  right: -13px;
+  top: -13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart:hover{
+ box-shadow: 0 0 8px black;
+}
