@@ -1,0 +1,980 @@
+[{
+  "_id": "1",
+  "name": "Momo",
+  "description": "Steamed dumplings stuffed with minced chicken or vegetables.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "2",
+  "name": "Chicken Sekuwa",
+  "description": "Grilled marinated chicken skewers.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "3",
+  "name": "Buff Sekuwa",
+  "description": "Grilled marinated buffalo meat skewers.",
+  "price": 270,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "4",
+  "name": "Paneer Chilly",
+  "description": "Spicy paneer stir-fried with bell peppers and onions.",
+  "price": 180,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "5",
+  "name": "Chicken Chilly",
+  "description": "Spicy stir-fried chicken with bell peppers and onions.",
+  "price": 220,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "6",
+  "name": "Aloo Sandheko",
+  "description": "Spicy potato salad mixed with green chilies, onions, and cilantro.",
+  "price": 100,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "7",
+  "name": "Egg Chilly",
+  "description": "Spicy stir-fried eggs with onions and chilies.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "8",
+  "name": "Mixed Vegetable Pakora",
+  "description": "Deep-fried mixed vegetable fritters.",
+  "price": 100,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "9",
+  "name": "Fried Prawns",
+  "description": "Crispy fried prawns served with a dipping sauce.",
+  "price": 300,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "10",
+  "name": "Fish Fingers",
+  "description": "Crispy fried fish strips served with tartar sauce.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "11",
+  "name": "Veg Momo",
+  "description": "Steamed dumplings stuffed with mixed vegetables.",
+  "price": 130,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "12",
+  "name": "Chicken Momo",
+  "description": "Steamed dumplings stuffed with minced chicken.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "13",
+  "name": "Buff Momo",
+  "description": "Steamed dumplings stuffed with minced buffalo meat.",
+  "price": 170,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "14",
+  "name": "Paneer Momo",
+  "description": "Steamed dumplings stuffed with cottage cheese.",
+  "price": 180,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "15",
+  "name": "Jhol Momo",
+  "description": "Momos served in a tangy, spicy broth.",
+  "price": 200,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "16",
+  "name": "Vegetable Chow Mein",
+  "description": "Nepali-style stir-fried noodles with mixed vegetables.",
+  "price": 180,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "17",
+  "name": "Chicken Chow Mein",
+  "description": "Stir-fried noodles with chicken and vegetables.",
+  "price": 200,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "18",
+  "name": "Buff Chow Mein",
+  "description": "Stir-fried noodles with buffalo meat and vegetables.",
+  "price": 220,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "19",
+  "name": "Fried Rice",
+  "description": "Nepali-style fried rice with mixed vegetables and egg.",
+  "price": 170,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "20",
+  "name": "Chicken Fried Rice",
+  "description": "Fried rice with chicken and vegetables.",
+  "price": 190,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "21",
+  "name": "Buff Fried Rice",
+  "description": "Fried rice with buffalo meat and vegetables.",
+  "price": 210,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "22",
+  "name": "Thakali Thali",
+  "description": "Traditional Nepali set meal with rice, lentils, vegetables, and choice of meat.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "23",
+  "name": "Dal Bhat Tarkari",
+  "description": "Rice served with lentils, vegetables, and curry.",
+  "price": 250,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "24",
+  "name": "Mutton Curry",
+  "description": "Tender mutton cooked in a rich and spicy curry sauce.",
+  "price": 350,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "25",
+  "name": "Chicken Curry",
+  "description": "Spiced chicken cooked in a traditional Nepali curry sauce.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "26",
+  "name": "Paneer Butter Masala",
+  "description": "Soft paneer cooked in a creamy tomato-based sauce.",
+  "price": 250,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "27",
+  "name": "Saag Paneer",
+  "description": "Paneer cooked with spinach in a flavorful gravy.",
+  "price": 220,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "28",
+  "name": "Pork Sekuwa",
+  "description": "Grilled marinated pork skewers.",
+  "price": 270,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "29",
+  "name": "Chicken Biryani",
+  "description": "Fragrant rice cooked with spiced chicken.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "30",
+  "name": "Veg Biryani",
+  "description": "Fragrant rice cooked with mixed vegetables.",
+  "price": 250,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "31",
+  "name": "Coke",
+  "description": "Chilled Coca-Cola served in a glass or bottle.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "32",
+  "name": "Fanta",
+  "description": "Chilled Fanta, perfect for a refreshing break.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "33",
+  "name": "Sprite",
+  "description": "Chilled Sprite, a refreshing lemon-lime soda.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "34",
+  "name": "Iced Coffee",
+  "description": "Cold brewed coffee, served with milk and ice.",
+  "price": 120,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "35",
+  "name": "Hot Coffee",
+  "description": "Freshly brewed coffee served hot with milk and sugar.",
+  "price": 100,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "36",
+  "name": "Green Tea",
+  "description": "Light and refreshing green tea, served hot.",
+  "price": 80,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "37",
+  "name": "Black Tea",
+  "description": "Simple black tea served with or without sugar.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "38",
+  "name": "Milk Tea",
+  "description": "Traditional Nepali tea brewed with milk and sugar.",
+  "price": 70,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "39",
+  "name": "Cold Coffee",
+  "description": "Chilled coffee blended with ice and milk, perfect for a hot day.",
+  "price": 130,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "40",
+  "name": "Chow Mein",
+  "description": "Nepali-style stir-fried noodles with vegetables and your choice of meat.",
+  "price": 200,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "41",
+  "name": "Chicken Wings",
+  "description": "Crispy fried chicken wings tossed in a spicy sauce.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "42",
+  "name": "Prawn Pakora",
+  "description": "Deep-fried prawn fritters served with a tangy dipping sauce.",
+  "price": 280,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "43",
+  "name": "Chicken Drumsticks",
+  "description": "Crispy fried chicken drumsticks served with a spicy dip.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "44",
+  "name": "Vegetable Samosa",
+  "description": "Crispy pastry filled with spiced potatoes and peas.",
+  "price": 50,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "45",
+  "name": "Egg Rolls",
+  "description": "Crispy rolls filled with spiced egg and vegetables.",
+  "price": 120,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "46",
+  "name": "Fish Curry",
+  "description": "Tender fish cooked in a rich and spicy curry sauce, served with rice.",
+  "price": 350,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "47",
+  "name": "Mutton Biryani",
+  "description": "Fragrant biryani cooked with spiced mutton.",
+  "price": 350,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "48",
+  "name": "Plain Naan",
+  "description": "Soft, oven-baked flatbread.",
+  "price": 50,
+  "category": "Side Dish",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "49",
+  "name": "Butter Naan",
+  "description": "Soft naan brushed with butter.",
+  "price": 60,
+  "category": "Side Dish",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "50",
+  "name": "Garlic Naan",
+  "description": "Naan bread topped with garlic and herbs.",
+  "price": 70,
+  "category": "Side Dish",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "51",
+  "name": "Chicken Tikka Masala",
+  "description": "Grilled chicken cooked in a rich tomato-based sauce.",
+  "price": 320,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "52",
+  "name": "Vegetable Thali",
+  "description": "Nepali set meal with rice, lentils, vegetables, and pickles.",
+  "price": 250,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "53",
+  "name": "Nepali Khaja Set",
+  "description": "A traditional Nepali snack platter with chiura, achar, and fried items.",
+  "price": 180,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "54",
+  "name": "Chicken Spring Roll",
+  "description": "Crispy rolls filled with spiced chicken and vegetables.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "55",
+  "name": "Masala Papad",
+  "description": "Crispy papad topped with spiced onions and tomatoes.",
+  "price": 30,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "56",
+  "name": "Chicken Thukpa",
+  "description": "Traditional Nepali noodle soup with chicken and vegetables.",
+  "price": 200,
+  "category": "Soup",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "57",
+  "name": "Veg Thukpa",
+  "description": "Nepali-style hot noodle soup with vegetables.",
+  "price": 180,
+  "category": "Soup",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "58",
+  "name": "Egg Fried Rice",
+  "description": "Fried rice with scrambled eggs and vegetables.",
+  "price": 190,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "59",
+  "name": "Vegetable Soup",
+  "description": "A light and healthy soup made with seasonal vegetables.",
+  "price": 120,
+  "category": "Soup",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "60",
+  "name": "Chicken Clear Soup",
+  "description": "Light chicken broth with herbs and spices.",
+  "price": 150,
+  "category": "Soup",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "61",
+  "name": "Nepali Aloo Chop",
+  "description": "Deep-fried potato patties served with achar.",
+  "price": 80,
+  "category": "Appetizer",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "62",
+  "name": "Kalo Daal",
+  "description": "Black lentil curry served with rice or roti.",
+  "price": 120,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "63",
+  "name": "Tandoori Chicken",
+  "description": "Chicken marinated in yogurt and spices, cooked in a tandoor oven.",
+  "price": 320,
+  "category": "Main Course",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "64",
+  "name": "Lassi",
+  "description": "Refreshing yogurt-based drink, available in sweet or salty flavors.",
+  "price": 80,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "65",
+  "name": "Mango Lassi",
+  "description": "A sweet yogurt-based drink with mango flavor.",
+  "price": 100,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "66",
+  "name": "Nepali Butter Tea",
+  "description": "Traditional salted tea mixed with butter.",
+  "price": 60,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "67",
+  "name": "Hot Chocolate",
+  "description": "Rich and creamy hot chocolate.",
+  "price": 120,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "68",
+  "name": "Lemon Soda",
+  "description": "Chilled soda with a fresh lemon twist.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "69",
+  "name": "Fresh Lime Juice",
+  "description": "Freshly squeezed lime juice, served chilled.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+},
+{
+  "_id": "70",
+  "name": "Chocolate Brownie",
+  "description": "Rich and fudgy chocolate brownie.",
+  "price": 120,
+  "category": "Dessert",
+  "availability": true,
+  "reviews": [
+    {
+      "name": "",
+      "body": ""
+    }
+  ]
+}]

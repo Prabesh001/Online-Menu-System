@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function index() {
+function Index({ onCategorySelect }) {
   const [selectedIndex, setSelectedIndex] = useState(
-    localStorage.getItem("index") || ""
+    localStorage.getItem("index") || "home"
   );
-
-  const [items, setItem] = useState(0);
 
   function selectIndex(index) {
     setSelectedIndex(index);
     localStorage.setItem("index", index);
+    onCategorySelect(index); // Call the filter function passed as a prop
   }
 
   return (
@@ -20,11 +19,14 @@ function index() {
         <Link
           className="navbar-brand"
           to="/home"
-          onClick={() => selectIndex("home")}
+          onClick={() => {
+            selectIndex("home");
+            onCategorySelect("All"); // Show all items when navigating to home
+          }}
         >
           TableMate
         </Link>
-        
+
         <button
           className="navbar-toggler"
           type="button"
@@ -36,7 +38,7 @@ function index() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item" onClick={() => selectIndex("home")}>
@@ -50,44 +52,66 @@ function index() {
               </Link>
             </li>
 
-            <li className="nav-item" onClick={() => selectIndex("cuisines")}>
+            <li className="nav-item" onClick={() => selectIndex("Appetizer")}>
               <Link
                 className={
-                  selectedIndex === "cuisines" ? "nav-link active" : "nav-link"
+                  selectedIndex === "Appetizer" ? "nav-link active" : "nav-link"
                 }
-                to="/cuisines"
+                to="/category/Appetizer"
               >
-                Cuisines
+                Appetizer
               </Link>
             </li>
-            <li className="nav-item" onClick={() => selectIndex("drinks")}>
+            <li className="nav-item" onClick={() => selectIndex("Main Course")}>
               <Link
                 className={
-                  selectedIndex === "drinks" ? "nav-link active" : "nav-link"
+                  selectedIndex === "Main Course"
+                    ? "nav-link active"
+                    : "nav-link"
                 }
-                to="/drinks"
+                to="/category/Main Course"
               >
-                Drinks
+                Main Course
               </Link>
             </li>
-            <li className="nav-item" onClick={() => selectIndex("snacks")}>
+            <li className="nav-item" onClick={() => selectIndex("Side Dish")}>
               <Link
                 className={
-                  selectedIndex === "snacks" ? "nav-link active" : "nav-link"
+                  selectedIndex === "Side Dish" ? "nav-link active" : "nav-link"
                 }
-                to="/snacks"
+                to="/category/Side Dish"
               >
-                Snacks
+                Side Dish
               </Link>
             </li>
-            <li className="nav-item" onClick={() => selectIndex("khajaSet")}>
+            <li className="nav-item" onClick={() => selectIndex("Beverage")}>
               <Link
                 className={
-                  selectedIndex === "khajaSet" ? "nav-link active" : "nav-link"
+                  selectedIndex === "Beverage" ? "nav-link active" : "nav-link"
                 }
-                to="/khaja-set"
+                to="/category/Beverage"
               >
-                Khaja Set
+                Beverage
+              </Link>
+            </li>
+            <li className="nav-item" onClick={() => selectIndex("Soup")}>
+              <Link
+                className={
+                  selectedIndex === "Soup" ? "nav-link active" : "nav-link"
+                }
+                to="/category/Soup"
+              >
+                Soup
+              </Link>
+            </li>
+            <li className="nav-item" onClick={() => selectIndex("Dessert")}>
+              <Link
+                className={
+                  selectedIndex === "Dessert" ? "nav-link active" : "nav-link"
+                }
+                to="/category/Dessert"
+              >
+                Dessert
               </Link>
             </li>
           </ul>
@@ -108,4 +132,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

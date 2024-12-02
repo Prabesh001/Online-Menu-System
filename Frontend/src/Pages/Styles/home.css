@@ -1,0 +1,49 @@
+.home-offer{
+  font-weight: bold;
+  margin-top: 40px;
+}
+.menu-items{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-left: 10PX;
+}
+.discounted{
+  margin-right: 5px;
+}
+
+.item-name{
+  max-width: 100px;
+  overflow: hidden;
+}
+
+.offer-photo{
+  margin-bottom: 5px;
+  height: 270px;
+  width: 180px;
+  border-radius: 5px;
+  transform: scale(1);
+  box-shadow: 3px 3px 5px gray;
+  transition: all 0.3s ease-in-out;
+}
+.offer-photo:hover{
+  transform: scale(1.02);
+  box-shadow: -2px -2px 5px gray;
+}
+.slogan{
+  font-size: 18px;
+  font-weight: bold;
+}
+.add-to-cart {
+  padding: 0.4rem 0.8rem;
+  background-color: #ff914d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-to-cart:hover {
+  background-color: #ff7a1c;
+}

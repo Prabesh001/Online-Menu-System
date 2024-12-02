@@ -10,6 +10,7 @@
 .welcome-button{
   padding: 10px 50px;
   font-weight: bold;
-  background-color: rgb(26, 187, 12);
+  background-color: beige;
   border: none;
+  border-radius: 10px;
 }
