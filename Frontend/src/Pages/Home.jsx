@@ -23,7 +23,7 @@ function MenuSection({ title, category }) {
                 <span>Rs. {item.discountedPrice.toFixed(2)}</span>
               )}
               <br />
-              <AddToCart onClick={() => alert("Item Added")}/>
+              <AddToCart />
             </div>
           ))}
       </div>

@@ -1,18 +1,16 @@
 import React from "react";
-import tableImage from "../Components/assets/Table.png"; // Add the image path
+import tableImage from "../Components/assets/Table.png";
 import "./Styles/Table.css";
 
-function Table({ toggleCart, value }) {
+function Table({value }) {
   return (
-    <div className="table-container">
+    <div className="table-container" title="Your Orders!">
       <img
         src={tableImage}
         alt="Table"
         className="table-image"
-        onClick={toggleCart} // Toggle cart visibility on image click
       />
-
-      <div className="counter">{value}</div>
+      <div className="counter" title={value}>{value}</div>
     </div>
   );
 }

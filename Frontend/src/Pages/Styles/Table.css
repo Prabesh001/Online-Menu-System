@@ -22,7 +22,7 @@
   .counter{
     background-color: rgb(239, 28, 28);
     position: absolute;
-    font-size: 13px;
+    font-size: 12px;
     height: 20px;
     width: 20px;
     display: flex;
@@ -33,6 +33,5 @@
     color: white;
     padding: 0;
     border-radius: 50%;
-    font-weight: 400;
   }
   

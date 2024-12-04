@@ -4,13 +4,13 @@ import "./navbar.css";
 
 function Index({ onCategorySelect }) {
   const [selectedIndex, setSelectedIndex] = useState(
-    localStorage.getItem("index") || "home"
+    localStorage.getItem("index") || "Home"
   );
 
   function selectIndex(index) {
     setSelectedIndex(index);
     localStorage.setItem("index", index);
-    onCategorySelect(index); // Call the filter function passed as a prop
+    onCategorySelect(index);
   }
 
   return (
@@ -18,10 +18,10 @@ function Index({ onCategorySelect }) {
       <div className="container-fluid">
         <Link
           className="navbar-brand"
-          to="/home"
+          to="/Home"
           onClick={() => {
-            selectIndex("home");
-            onCategorySelect("All"); // Show all items when navigating to home
+            selectIndex("Home");
+            onCategorySelect("All");
           }}
         >
           TableMate
@@ -41,12 +41,12 @@ function Index({ onCategorySelect }) {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item" onClick={() => selectIndex("home")}>
+            <li className="nav-item" onClick={() => selectIndex("Home")}>
               <Link
                 className={
-                  selectedIndex === "home" ? "nav-link active" : "nav-link"
+                  selectedIndex === "Home" ? "nav-link active" : "nav-link"
                 }
-                to="/home"
+                to="/Home"
               >
                 Home
               </Link>
