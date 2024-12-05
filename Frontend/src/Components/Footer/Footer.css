@@ -1,12 +1,15 @@
 .footer{
   border-top: 2px solid lightgray;
   width: 100%;
-  padding: 10px;
+  padding: 80px;
   padding-bottom: 0;
   background-color: #f0620a;
   color: white;
   position: absolute;
-  /* bottom: 0; */
+}
+.footer-top{
+  display: flex;
+  justify-content: space-between;
 }
 a{
   color: beige;

@@ -22,20 +22,30 @@ function Layout() {
     JSON.parse(localStorage.getItem("CartItems")) || []
   );
 
+  const [itemQuantity, setItemQuantity] = useState(1)
+
   const location = useLocation();
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || cartItems.length
   );
 
   const addToCart = (item) => {
+    const updatedItems = Array.isArray(item)
+    ? item.map((ele) => ({
+        ...ele,
+        quantity: itemQuantity,
+      }))
+    : [{ ...item, quantity: itemQuantity }];
+  
     setCartItems((prevItems) => {
-      const updatedCart = [...prevItems, item];
-      console.log(item)
+      const updatedCart = [...prevItems, ...updatedItems];
+      console.log(updatedCart);
       setCount(updatedCart.length);
       localStorage.setItem("CartItems", JSON.stringify(updatedCart));
       return updatedCart;
     });
   };
+  
 
   const navigate = useNavigate();
   const handleTableClick = () => {
@@ -56,7 +66,7 @@ function Layout() {
           element={<FoodCategory onAddToCart={addToCart} />}
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/table" element={<Cart items={cartItems} setItems={setCartItems} updateCartNo={setCount}/>} />
+        <Route path="/table" element={<Cart items={cartItems} setItems={setCartItems} updateCartNo={setCount} setItemQuantity={setItemQuantity}/>} />
       </Routes>
       {!hideNavbarFooter.includes(location.pathname) && <Footer />}
       {!hideCart.includes(location.pathname) && (
