@@ -11,11 +11,11 @@ app.use(express.json());
 // MongoDB connection
 mongoose.connect('mongodb+srv://shresthaniraj43:BMC%40123@tablemate.l4zz8.mongodb.net/Tablemate?retryWrites=true&w=majority&appName=TableMate')
     .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch(err => console.log(err));
+    .catch(err => console.error('Failed to connect to MongoDB Atlas:', err));
 
 // Define a schema with more fields
 const itemSchema = new mongoose.Schema({
-    item_id: String,
+    _id: String,
     name: String,
     description: String,
     price: Number,
@@ -34,6 +34,7 @@ app.get('/api/menu', async (req, res) => {
     try {
         const items = await Item.find(); // Fetch all items
         res.json(items); // Return the items array
+        console.log('fetched items:', items);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
