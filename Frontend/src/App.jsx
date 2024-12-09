@@ -29,24 +29,56 @@ function Layout() {
     Number(localStorage.getItem("count")) || cartItems.length
   );
 
+  // const addToCart = (item) => {
+  //   const updatedItems = Array.isArray(item)
+  //   ? item.map((ele) => ({
+  //       ...ele,
+  //       quantity: itemQuantity,
+  //     }))
+  //   : [{ ...item, quantity: itemQuantity }];
+  
+  //   setCartItems((prevItems) => {
+  //     const updatedCart = [...prevItems, ...updatedItems];
+  //     console.log(updatedCart);
+  //     setCount(updatedCart.length);
+  //     localStorage.setItem("CartItems", JSON.stringify(updatedCart));
+  //     return updatedCart;
+  //   });
+  // };
+  
   const addToCart = (item) => {
     const updatedItems = Array.isArray(item)
-    ? item.map((ele) => ({
-        ...ele,
-        quantity: itemQuantity,
-      }))
-    : [{ ...item, quantity: itemQuantity }];
+      ? item.map((ele) => ({
+          ...ele,
+          quantity: itemQuantity,
+        }))
+      : [{ ...item, quantity: itemQuantity }];
   
     setCartItems((prevItems) => {
-      const updatedCart = [...prevItems, ...updatedItems];
-      console.log(updatedCart);
+      const updatedCart = [...prevItems];
+  
+      updatedItems.forEach((newItem) => {
+        const existingItemIndex = updatedCart.findIndex(
+          (cartItem) => cartItem._id === newItem._id
+        );
+  
+        if (existingItemIndex > -1) {
+          updatedCart[existingItemIndex] = {
+            ...updatedCart[existingItemIndex],
+            quantity: updatedCart[existingItemIndex].quantity + newItem.quantity,
+          };
+        } else {
+          updatedCart.push(newItem);
+        }
+      });
+  
       setCount(updatedCart.length);
+      localStorage.setItem("count", count);
       localStorage.setItem("CartItems", JSON.stringify(updatedCart));
       return updatedCart;
     });
   };
   
-
   const navigate = useNavigate();
   const handleTableClick = () => {
     navigate("/table");

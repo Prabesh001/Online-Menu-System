@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
-import { FaSync, FaRedo, FaArrowCircleUp, FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import "./Cart.css";
 
 function Cart({ items, setItems, updateCartNo, setItemQuantity }) {
@@ -51,7 +51,7 @@ function Cart({ items, setItems, updateCartNo, setItemQuantity }) {
                     <button className="updateAmount"
                     title="Update quantity"
                     onClick={()=>updateAmount(item)}>
-                    <FaSync style={{ fontSize: "20px"}} />
+                    <FaEdit style={{ fontSize: "20px"}} />
                     </button>
                   </div>
                 </div>
