@@ -8,10 +8,11 @@ function Welcome() {
   const handleLoginSuccess = (response) => {
     console.log("login successful: ", response);
     navigate("/home");
-    //handle the token or user data here
   };
+  
   const handleLoginFailure = (error) => {
     console.error("Login Failed: ", error);
+    <p>Login Failed! Try Again!</p>
   };
   return (
     <div className="welcome-page">
@@ -21,7 +22,6 @@ function Welcome() {
         </Link>
       </div>
 
-      {/* Google Login Button */}
       <div>
         <GoogleLogin
           onSuccess={handleLoginSuccess}
