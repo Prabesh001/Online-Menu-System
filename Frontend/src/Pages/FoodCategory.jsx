@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import AddToCart from "../Components/AddToCart";
 import "./Styles/FoodCategory.css";
 
@@ -50,7 +50,7 @@ function FoodCategory({ onAddToCart }) {
               <div className="item-info">
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
-                <p>Rs. {item.price.toFixed(2)}</p>
+                <p>Rs. {item.price}</p>
               </div>
               <AddToCart
                 onClick={() => onAddToCart(item)}

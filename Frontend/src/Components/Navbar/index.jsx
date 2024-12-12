@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function Index({ onCategorySelect }) {
+function Index({
+  onCategorySelect,
+  searchFunction,
+  searchItem,
+  setSearchItem,
+}) {
   const [selectedIndex, setSelectedIndex] = useState(
     localStorage.getItem("index") || "Home"
   );
@@ -11,6 +16,10 @@ function Index({ onCategorySelect }) {
     setSelectedIndex(index);
     localStorage.setItem("index", index);
     onCategorySelect(index);
+  }
+
+  function handleSearchTerm(e) {
+    setSearchItem(e.target.value);
   }
 
   return (
@@ -121,10 +130,28 @@ function Index({ onCategorySelect }) {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={searchItem}
+              onChange={handleSearchTerm}
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            {searchItem == "" ? (
+              <button
+                className="btn btn-outline-success"
+                type="submit"
+                onClick={() => searchFunction(searchItem)}
+              >
+                Search
+              </button>
+            ) : (
+              <Link to="/SearchItem">
+                <button
+                  className="btn btn-outline-success"
+                  type="submit"
+                  onClick={() => searchFunction(searchItem)}
+                >
+                  Search
+                </button>
+              </Link>
+            )}
           </form>
         </div>
       </div>

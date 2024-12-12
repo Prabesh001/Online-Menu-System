@@ -18,9 +18,9 @@ function MenuSection({ title, category }) {
               <h6 className="item-name" title={item.name}>
                 {item.name}
               </h6>
-              <del className="discounted"> Rs. {item.price.toFixed(2)}</del>
+              <del className="discounted"> Rs. {item.price.toFixed(0)}</del>
               {item.discountedPrice && (
-                <span>Rs. {item.discountedPrice.toFixed(2)}</span>
+                <span>Rs. {item.discountedPrice.toFixed(0)}</span>
               )}
               <br />
               <AddToCart />

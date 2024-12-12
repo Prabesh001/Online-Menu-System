@@ -55,7 +55,7 @@ function Cart({ items, setItems, setItemQuantity }) {
             {items.map((item, index) => (
               <div className="itemInCart" key={index}>
                 <li>
-                  {item.name} - Rs. {item.price.toFixed(2)}
+                  {item.name} - Rs. {item.price}
                 </li>
                 <div>
                   <span>Quantity:</span>
@@ -91,10 +91,10 @@ function Cart({ items, setItems, setItemQuantity }) {
       <div className="cart-modal price-modal">
         <span>No. of items: {count}</span>
         <br />
-        <span>Total Cost: Rs.{totalPrice.toFixed(2)}</span>
+        <span>Total Cost: Rs.{totalPrice}</span>
         <br />
         <span>Discount: 10%</span>
-        <p>Final Price: Rs.{(totalPrice - 0.1 * totalPrice).toFixed(2)}</p>
+        <p>Final Price: Rs.{(totalPrice - 0.1 * totalPrice)}</p>
         <hr />
         <button className="payment-btn">Payment</button>
       </div>
