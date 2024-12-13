@@ -142,7 +142,7 @@ function Index({
                 Search
               </button>
             ) : (
-              <Link to="/SearchItem">
+              <Link to={"/search/"+searchItem}>
                 <button
                   className="btn btn-outline-success"
                   type="submit"

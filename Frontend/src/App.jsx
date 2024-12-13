@@ -5,6 +5,7 @@ import {
   Route,
   Link,
   useLocation,
+  useNavigate
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./Pages/Home.jsx";
@@ -25,6 +26,7 @@ function Layout() {
   );
   const [itemQuantity, setItemQuantity] = useState(1);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || 0
@@ -72,8 +74,8 @@ function Layout() {
     });
   };
 
-  function handleSearchItem(item){
-    console.log(item)
+  function handleSearchItem(item) {
+    console.log(item);
   }
 
   const hideNavbarFooter = ["/", "/login"];
@@ -81,34 +83,50 @@ function Layout() {
 
   return (
     <>
-      {!hideNavbarFooter.includes(location.pathname) && <Navbar searchFunction={handleSearchItem} searchItem={searchItem} setSearchItem={setSearchItem}/>}
-      <CartContext.Provider value={{ count, setCount }}>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/Home" element={<Home />} />
-        <Route
-          path="/category/:category"
-          element={<FoodCategory onAddToCart={addToCart} />}
+      {!hideNavbarFooter.includes(location.pathname) && (
+        <Navbar
+          searchFunction={handleSearchItem}
+          searchItem={searchItem}
+          setSearchItem={setSearchItem}
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/SearchItem" element={<SearchItem searchItem={searchItem} setSearchItem={setSearchItem} onAddToCart={addToCart}/>} />
-        <Route
-          path="/table"
-          element={
-            <Cart
-              items={cartItems}
-              setItems={setCartItems}
-              setItemQuantity={setItemQuantity}
-            />
-          }
-        />
-      </Routes>
-      {!hideNavbarFooter.includes(location.pathname) && <Footer/>}
-      {!hideCart.includes(location.pathname) && (
-        <Link to="/table">
-          <Table value={count} />
-        </Link>
       )}
+      <CartContext.Provider value={{ count, setCount }}>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/Home" element={<Home />} />
+          <Route
+            path="/category/:category"
+            element={<FoodCategory onAddToCart={addToCart} />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/search/:item"
+            element={
+              <SearchItem
+                searchItem={searchItem}
+                setSearchItem={setSearchItem}
+                onAddToCart={addToCart}
+                handleSearch={handleSearchItem}
+              />
+            }
+          />
+          <Route
+            path="/table"
+            element={
+              <Cart
+                items={cartItems}
+                setItems={setCartItems}
+                setItemQuantity={setItemQuantity}
+              />
+            }
+          />
+        </Routes>
+        {!hideNavbarFooter.includes(location.pathname) && <Footer />}
+        {!hideCart.includes(location.pathname) && (
+          <Link to="/table">
+            <Table value={count} />
+          </Link>
+        )}
       </CartContext.Provider>
     </>
   );
@@ -117,9 +135,9 @@ function Layout() {
 function App() {
   return (
     <GoogleOAuthProvider clientId="244499214878-ski0knaamlp5gra4dlivu1lr9c5k1b17.apps.googleusercontent.com">
-        <BrowserRouter>
-          <Layout />
-        </BrowserRouter>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
     </GoogleOAuthProvider>
   );
 }

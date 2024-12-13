@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AddToCart from "../Components/AddToCart/index.jsx"
 import axios from "axios";
 
-function SearchItem({searchItem, setSearchItem, onAddToCart}) {
+function SearchItem({searchItem, setSearchItem, onAddToCart, handleSearch}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -18,7 +18,7 @@ function SearchItem({searchItem, setSearchItem, onAddToCart}) {
         console.error("Error fetching data: ", error);
         setLoading(false);
       });
-  }, [items]);
+  }, [searchItem]);
 
   return (
     <div>
