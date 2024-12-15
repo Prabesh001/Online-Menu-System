@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
+import Popup from "../Popup/index.jsx";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { CartContext } from "../../App.jsx";
 import "./Cart.css";
 
-function Cart({ items, setItems, setItemQuantity }) {
+function Cart({ items, setItems }) {
   const { count, setCount } = useContext(CartContext);
   const navigate = useNavigate();
 

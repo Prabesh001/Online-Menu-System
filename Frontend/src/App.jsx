@@ -5,12 +5,12 @@ import {
   Route,
   Link,
   useLocation,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./Pages/Home.jsx";
 import FoodCategory from "./Pages/FoodCategory";
-import SearchItem from "./Pages/SearchItem.jsx"
+import SearchItem from "./Pages/SearchItem.jsx";
 import Login from "./Pages/Login";
 import Welcome from "./Pages/Welcome";
 import Navbar from "./Components/Navbar/index";
@@ -19,20 +19,27 @@ import Cart from "./Components/Cart/Cart.jsx";
 import Table from "./Pages/Table.jsx";
 
 export const CartContext = createContext();
+export const ItemContext = createContext();
 
 function Layout() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("CartItems")) || []
   );
   const [itemQuantity, setItemQuantity] = useState(1);
+
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || 0
   );
 
   const [searchItem, setSearchItem] = useState("");
+
+  const [popupVisiblilty, setPopupVisiblilty] = useState(false);
+
+  function closePopup() {
+    setPopupVisiblilty(false);
+  }
 
   useEffect(() => {
     localStorage.setItem("count", count);
@@ -82,53 +89,52 @@ function Layout() {
   const hideCart = ["/", "/login", "/table"];
 
   return (
-    <>
-      {!hideNavbarFooter.includes(location.pathname) && (
-        <Navbar
-          searchFunction={handleSearchItem}
-          searchItem={searchItem}
-          setSearchItem={setSearchItem}
-        />
-      )}
-      <CartContext.Provider value={{ count, setCount }}>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/Home" element={<Home />} />
-          <Route
-            path="/category/:category"
-            element={<FoodCategory onAddToCart={addToCart} />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/search/:item"
-            element={
-              <SearchItem
-                searchItem={searchItem}
-                setSearchItem={setSearchItem}
-                onAddToCart={addToCart}
-                handleSearch={handleSearchItem}
-              />
-            }
-          />
-          <Route
-            path="/table"
-            element={
-              <Cart
-                items={cartItems}
-                setItems={setCartItems}
-                setItemQuantity={setItemQuantity}
-              />
-            }
-          />
-        </Routes>
-        {!hideNavbarFooter.includes(location.pathname) && <Footer />}
-        {!hideCart.includes(location.pathname) && (
-          <Link to="/table">
-            <Table value={count} />
-          </Link>
-        )}
-      </CartContext.Provider>
-    </>
+    <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
+      <ItemContext.Provider
+        value={{ searchItem, setSearchItem, handleSearchItem }}
+      >
+        {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
+        <CartContext.Provider
+          value={{
+            count,
+            setCount,
+            popupVisiblilty,
+            setPopupVisiblilty,
+            closePopup,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/Home" element={<Home />} />
+            <Route
+              path="/category/:category"
+              element={<FoodCategory onAddToCart={addToCart} />}
+            />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/search/:item"
+              element={<SearchItem onAddToCart={addToCart} />}
+            />
+            <Route
+              path="/table"
+              element={
+                <Cart
+                  items={cartItems}
+                  setItems={setCartItems}
+                  setItemQuantity={setItemQuantity}
+                />
+              }
+            />
+          </Routes>
+          {!hideNavbarFooter.includes(location.pathname) && <Footer />}
+          {!hideCart.includes(location.pathname) && (
+            <Link to="/table">
+              <Table value={count} />
+            </Link>
+          )}
+        </CartContext.Provider>
+      </ItemContext.Provider>
+    </div>
   );
 }
 

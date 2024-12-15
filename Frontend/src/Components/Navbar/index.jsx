@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import { ItemContext } from "../../App";
 
 function Index({
-  onCategorySelect,
-  searchFunction,
-  searchItem,
-  setSearchItem,
+  onCategorySelect
 }) {
+  const { searchItem, setSearchItem, handleSearchItem} = useContext(ItemContext)
   const [selectedIndex, setSelectedIndex] = useState(
     localStorage.getItem("index") || "Home"
   );
@@ -137,7 +136,7 @@ function Index({
               <button
                 className="btn btn-outline-success"
                 type="submit"
-                onClick={() => searchFunction(searchItem)}
+                onClick={() => handleSearchItem(searchItem)}
               >
                 Search
               </button>
@@ -146,7 +145,9 @@ function Index({
                 <button
                   className="btn btn-outline-success"
                   type="submit"
-                  onClick={() => searchFunction(searchItem)}
+                  onClick={() => 
+                    handleSearchItem(searchItem)
+                  }
                 >
                   Search
                 </button>
