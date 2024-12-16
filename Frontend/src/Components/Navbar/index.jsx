@@ -6,10 +6,12 @@ import { ItemContext } from "../../App";
 function Index({
   onCategorySelect
 }) {
-  const { searchItem, setSearchItem, handleSearchItem} = useContext(ItemContext)
+  const { searchItem, setSearchItem} = useContext(ItemContext)
   const [selectedIndex, setSelectedIndex] = useState(
     localStorage.getItem("index") || "Home"
   );
+
+  const [input, setInput] = useState();
 
   function selectIndex(index) {
     setSelectedIndex(index);
@@ -18,7 +20,11 @@ function Index({
   }
 
   function handleSearchTerm(e) {
-    setSearchItem(e.target.value);
+    setInput(e.target.value);
+  }
+
+  function handleSearchItem(){
+    setSearchItem(input)
   }
 
   return (
@@ -129,7 +135,7 @@ function Index({
               type="search"
               placeholder="Search"
               aria-label="Search"
-              value={searchItem}
+              value={input}
               onChange={handleSearchTerm}
             />
             {searchItem == "" ? (
