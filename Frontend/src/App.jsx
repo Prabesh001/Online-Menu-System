@@ -47,6 +47,9 @@ function Layout() {
   }, [count, cartItems]);
 
   const addToCart = (item) => {
+    const audio = new Audio("../public/drop.m4a");
+    audio.play();
+
     const updatedItems = Array.isArray(item)
       ? item.map((ele) => ({
           ...ele,

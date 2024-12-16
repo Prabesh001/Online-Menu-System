@@ -6,7 +6,8 @@ import { CartContext } from "../../App.jsx";
 import "./Cart.css";
 
 function Cart({ items, setItems }) {
-  const { count, setCount } = useContext(CartContext);
+  const { count, setCount, popupVisiblilty, setPopupVisiblilty, closePopup } =
+    useContext(CartContext);
   const navigate = useNavigate();
 
   const totalPrice = items.reduce(
@@ -26,6 +27,8 @@ function Cart({ items, setItems }) {
   }
 
   function updateAmount(item) {
+    const audio = new Audio("../public/drop.m4a");
+    audio.play();
     const updatedItems = items.map((ele) =>
       ele.name === item.name
         ? { ...ele, quantity: Math.max(ele.quantity + 1, 1) }
@@ -95,10 +98,31 @@ function Cart({ items, setItems }) {
         <span>Total Cost: Rs.{totalPrice}</span>
         <br />
         <span>Discount: 10%</span>
-        <p>Final Price: Rs.{(totalPrice - 0.1 * totalPrice)}</p>
+        <p>Final Price: Rs.{totalPrice - 0.1 * totalPrice}</p>
         <hr />
-        <button className="payment-btn">Payment</button>
+        <button
+          className="payment-btn"
+          onClick={() => {
+            setPopupVisiblilty(true);
+          }}
+        >
+          Payment
+        </button>
       </div>
+      {popupVisiblilty && (
+        <Popup
+          message="Do you want to check out?"
+          addButtons={
+            <button
+              className="payment-btn"
+              onClick={() => alert("Tussi ja rahe ho? Mat jaao.")}
+            >
+              Payment
+            </button>
+          }
+          closePopup={closePopup}
+        />
+      )}
     </div>
   );
 }

@@ -26,7 +26,7 @@ function FoodCategory({ onAddToCart }) {
             : response.data.filter((item) => item.category === category);
 
             filteredItems.forEach(element => {
-              if(element._id%2==0){
+              if(element._id%2==1){
                 element.availability =false
               }
             });
