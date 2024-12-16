@@ -84,17 +84,13 @@ function Layout() {
     });
   };
 
-  function handleSearchItem(item) {
-    console.log(item);
-  }
-
   const hideNavbarFooter = ["/", "/login"];
   const hideCart = ["/", "/login", "/table"];
 
   return (
     <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
       <ItemContext.Provider
-        value={{ searchItem, setSearchItem, handleSearchItem }}
+        value={{ searchItem, setSearchItem }}
       >
         {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
         <CartContext.Provider

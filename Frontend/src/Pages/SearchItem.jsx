@@ -7,11 +7,10 @@ import { ItemContext } from "../App.jsx";
 
 function SearchItem({ onAddToCart }) {
   const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
-  const { searchItem, setSearchItem, handleSearchItem} = useContext(ItemContext)
+  const { searchItem, setSearchItem} = useContext(ItemContext)
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // function handleSearch() {
   useEffect(() => {
     setLoading(true);
     axios
@@ -36,7 +35,6 @@ function SearchItem({ onAddToCart }) {
         setLoading(false);
       });
   }, [searchItem]);
-  // }
 
   return (
     <div>

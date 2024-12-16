@@ -24,7 +24,12 @@ function Index({
   }
 
   function handleSearchItem(){
-    setSearchItem(input)
+    if(input!=""){
+      setSearchItem(input)
+    }
+    else{
+      setSearchItem("Momo");
+    }
   }
 
   return (
@@ -147,7 +152,7 @@ function Index({
                 Search
               </button>
             ) : (
-              <Link to={"/search/"+searchItem}>
+              <Link to={"/search/"+input}>
                 <button
                   className="btn btn-outline-success"
                   type="submit"
