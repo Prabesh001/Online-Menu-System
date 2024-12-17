@@ -5,6 +5,7 @@ import AddToCart from "../Components/AddToCart";
 import Popup from "../Components/Popup";
 import "./Styles/FoodCategory.css";
 import { CartContext } from "../App";
+import LoadingComponent from "../Components/Loading/loading";
 
 function FoodCategory({ onAddToCart }) {
   const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
@@ -41,7 +42,7 @@ function FoodCategory({ onAddToCart }) {
   }, [category]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingComponent/>;
   }
 
   if (error) {
@@ -50,7 +51,6 @@ function FoodCategory({ onAddToCart }) {
 
   return (
     <div className="food-category">
-      {/* <Popup></Popup> */}
       <h2 className="category-title">{category}</h2>
       <ul className="item-list">
         {items.length > 0 ? (

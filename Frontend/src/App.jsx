@@ -25,15 +25,22 @@ function Layout() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("CartItems")) || []
   );
+  const [selectedIndex, setSelectedIndex] = useState(
+    localStorage.getItem("index") || "Home"
+  );
+
   const [itemQuantity, setItemQuantity] = useState(1);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || 0
   );
 
-  const [searchItem, setSearchItem] = useState("");
+  const [searchItem, setSearchItem] = useState(
+    localStorage.getItem("searched-item") || ""
+  );
 
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
 
@@ -90,7 +97,7 @@ function Layout() {
   return (
     <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
       <ItemContext.Provider
-        value={{ searchItem, setSearchItem }}
+        value={{ searchItem, setSearchItem, selectedIndex, setSelectedIndex }}
       >
         {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
         <CartContext.Provider
@@ -127,9 +134,7 @@ function Layout() {
           </Routes>
           {!hideNavbarFooter.includes(location.pathname) && <Footer />}
           {!hideCart.includes(location.pathname) && (
-            <Link to="/table">
-              <Table value={count} />
-            </Link>
+            <Table value={count} onclick={() => navigate("/table")} />
           )}
         </CartContext.Provider>
       </ItemContext.Provider>

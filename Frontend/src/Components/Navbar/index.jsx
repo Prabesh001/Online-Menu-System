@@ -1,43 +1,40 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { ItemContext } from "../../App";
 
-function Index({
-  onCategorySelect
-}) {
-  const { searchItem, setSearchItem} = useContext(ItemContext)
-  const [selectedIndex, setSelectedIndex] = useState(
-    localStorage.getItem("index") || "Home"
-  );
+function Index({ onCategorySelect }) {
+  const { searchItem, setSearchItem, selectedIndex, setSelectedIndex } =
+    useContext(ItemContext);
 
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
-  function selectIndex(index) {
+  const selectIndex = (index) => {
     setSelectedIndex(index);
     localStorage.setItem("index", index);
     onCategorySelect(index);
-  }
+  };
 
-  function handleSearchTerm(e) {
+  const handleSearchTerm = (e) => {
     setInput(e.target.value);
-  }
+  };
 
-  function handleSearchItem(){
-    if(input!=""){
-      setSearchItem(input)
+  const handleSearchItem = () => {
+    setSelectedIndex(null);
+    if (input !== "") {
+      setSearchItem(input);
+      localStorage.setItem("searched-item", input);
+      navigate(`/search/${input}`);
     }
-    else{
-      setSearchItem("Momo");
-    }
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link
           className="navbar-brand"
-          to="/Home"
+          to="/home"
           onClick={() => {
             selectIndex("Home");
             onCategorySelect("All");
@@ -60,81 +57,37 @@ function Index({
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item" onClick={() => selectIndex("Home")}>
-              <Link
-                className={
-                  selectedIndex === "Home" ? "nav-link active" : "nav-link"
-                }
-                to="/Home"
+            {[
+              "Home",
+              "Appetizer",
+              "Main Course",
+              "Side Dish",
+              "Beverage",
+              "Soup",
+              "Dessert",
+            ].map((category) => (
+              <li
+                className="nav-item"
+                key={category}
+                onClick={() => selectIndex(category)}
               >
-                Home
-              </Link>
-            </li>
-
-            <li className="nav-item" onClick={() => selectIndex("Appetizer")}>
-              <Link
-                className={
-                  selectedIndex === "Appetizer" ? "nav-link active" : "nav-link"
-                }
-                to="/category/Appetizer"
-              >
-                Appetizer
-              </Link>
-            </li>
-            <li className="nav-item" onClick={() => selectIndex("Main Course")}>
-              <Link
-                className={
-                  selectedIndex === "Main Course"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-                to="/category/Main Course"
-              >
-                Main Course
-              </Link>
-            </li>
-            <li className="nav-item" onClick={() => selectIndex("Side Dish")}>
-              <Link
-                className={
-                  selectedIndex === "Side Dish" ? "nav-link active" : "nav-link"
-                }
-                to="/category/Side Dish"
-              >
-                Side Dish
-              </Link>
-            </li>
-            <li className="nav-item" onClick={() => selectIndex("Beverage")}>
-              <Link
-                className={
-                  selectedIndex === "Beverage" ? "nav-link active" : "nav-link"
-                }
-                to="/category/Beverage"
-              >
-                Beverage
-              </Link>
-            </li>
-            <li className="nav-item" onClick={() => selectIndex("Soup")}>
-              <Link
-                className={
-                  selectedIndex === "Soup" ? "nav-link active" : "nav-link"
-                }
-                to="/category/Soup"
-              >
-                Soup
-              </Link>
-            </li>
-            <li className="nav-item" onClick={() => selectIndex("Dessert")}>
-              <Link
-                className={
-                  selectedIndex === "Dessert" ? "nav-link active" : "nav-link"
-                }
-                to="/category/Dessert"
-              >
-                Dessert
-              </Link>
-            </li>
+                <Link
+                  className={
+                    selectedIndex === category ? "nav-link active" : "nav-link"
+                  }
+                  to={
+                    category === "Home"
+                      ? "/home"
+                      : `/category/${category.replace(" ", "%20")}`
+                  }
+                  aria-current={selectedIndex === category ? "page" : undefined}
+                >
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
-          <form className="d-flex" role="search">
+          <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
             <input
               className="form-control me-2"
               type="search"
@@ -142,28 +95,16 @@ function Index({
               aria-label="Search"
               value={input}
               onChange={handleSearchTerm}
+              required
             />
-            {searchItem == "" ? (
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                onClick={() => handleSearchItem(searchItem)}
-              >
-                Search
-              </button>
-            ) : (
-              <Link to={"/search/"+input}>
-                <button
-                  className="btn btn-outline-success"
-                  type="submit"
-                  onClick={() => 
-                    handleSearchItem(searchItem)
-                  }
-                >
-                  Search
-                </button>
-              </Link>
-            )}
+            <button
+              className="btn btn-outline-success"
+              type="submit"
+              onClick={handleSearchItem}
+              disabled={!input}
+            >
+              Search
+            </button>
           </form>
         </div>
       </div>

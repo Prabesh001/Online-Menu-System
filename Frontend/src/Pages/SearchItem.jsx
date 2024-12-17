@@ -4,12 +4,13 @@ import AddToCart from "../Components/AddToCart/index.jsx";
 import axios from "axios";
 import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
+import LoadingComponent from "../Components/Loading/loading.jsx";
 
 function SearchItem({ onAddToCart }) {
   const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
-  const { searchItem, setSearchItem} = useContext(ItemContext)
+  const { searchItem} = useContext(ItemContext)
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -26,16 +27,18 @@ function SearchItem({ onAddToCart }) {
           }
         });
         setItems(searchResultData);
-        if(loading){
-          return <p>Loading...</p>
-        }
+        setLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
         setLoading(false);
       });
-  }, [searchItem]);
+    }, [searchItem]);
 
+    if(loading){
+      return <LoadingComponent/>
+    }
+    
   return (
     <div>
       <p>Search Result for: {searchItem}</p>

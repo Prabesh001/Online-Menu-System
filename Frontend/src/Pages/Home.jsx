@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import menu from "./menu.js";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
@@ -13,7 +13,7 @@ function MenuSection({ title, category }) {
           .map((item) => (
             <div key={item.name} className="menu-item" title={item.details}>
               <div className="menu-photo">
-              <img src={item.photo} alt={item.name} className="offer-photo" />
+              <img src={item.photo} alt={item.name} className="offer-photo" loading={lazy}/>
               </div>
               <h6 className="item-name" title={item.name}>
                 {item.name}

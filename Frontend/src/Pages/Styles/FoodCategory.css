@@ -13,6 +13,7 @@
   .item-list {
     list-style: none;
     padding: 0;
+    min-height: 42.5vh;
   }
   
   .item {

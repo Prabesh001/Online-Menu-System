@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import tableImage from "../Components/assets/Table.png";
 import "./Styles/Table.css";
 
-function Table({ value }) {
+function Table({ value, onclick }) {
   return (
-    <div className="table-container" title="Your Orders!">
+    <div className="table-container" title="Your Orders!" onClick={onclick}>
       <img src={tableImage} alt="Table" className="table-image" />
       <div className="counter" title={value}>
         {value}
