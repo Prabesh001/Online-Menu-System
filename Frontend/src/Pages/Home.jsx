@@ -1,9 +1,14 @@
-import React, {lazy} from "react";
+import React, { useContext, useEffect} from "react";
 import menu from "./menu.js";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
+import { ItemContext } from "../App.jsx";
 
 function MenuSection({ title, category }) {
+  const {setSelectedIndex} = useContext(ItemContext);
+  useEffect(()=>{
+    setSelectedIndex("Home")
+  })
   return (
     <div>
       <h2 className="home-offer">{title}</h2>

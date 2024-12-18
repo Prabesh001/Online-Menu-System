@@ -1,61 +1,80 @@
 /* navbar.css */
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-    padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+}
+
+.navbar-nav .nav-link.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.autocomplete-suggestions {
+  top: 39px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.suggestion-item {
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
+  min-width: 100px;
+  z-index: 100;
+}
+.suggestion-item:hover {
+  background-color: #0867ffe6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: space-between;
   }
-  
-  .container-fluid {
+
+  .navbar-nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
   }
-  
+
+  .navbar-toggler {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 200px) {
   .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
+    font-size: 1rem;
   }
-  
-  .navbar-brand:hover {
-    text-decoration: none;
+  .navbar-nav .nav-item {
+    font-size: 0.8rem;
   }
-  
-  .navbar-nav .nav-link {
-    color: #333;
-  }
-  
-  .navbar-nav .nav-link.active {
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .navbar {
-      justify-content: space-between;
-    }
-  
-    .navbar-nav {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-  
-    .navbar-toggler {
-      align-self: flex-end;
-    }
-  }
-  
-  @media (max-width: 200px) {
-    .navbar-brand {
-      font-size: 1rem;
-    }
-    .navbar-nav .nav-item {
-      font-size: 0.8rem;
-    }
-  }
-  
+}

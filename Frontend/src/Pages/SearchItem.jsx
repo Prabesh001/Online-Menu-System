@@ -6,9 +6,32 @@ import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
 import LoadingComponent from "../Components/Loading/loading.jsx";
 
+// Levenshtein Distance for Fuzzy Search
+function levenshteinDistance(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, () =>
+    Array(b.length + 1).fill(0)
+  );
+
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+  }
+
+  return dp[a.length][b.length];
+}
+
 function SearchItem({ onAddToCart }) {
-  const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
-  const { searchItem} = useContext(ItemContext)
+  const { popupVisiblilty, setPopupVisiblilty, closePopup } =
+    useContext(CartContext);
+  const { searchItem } = useContext(ItemContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -17,39 +40,55 @@ function SearchItem({ onAddToCart }) {
     axios
       .get("http://localhost:5000/api/menu")
       .then((response) => {
-        const data = response.data;
-        const searchResultData = data.filter((item) =>
-          item.name.toLowerCase().includes(searchItem.toLowerCase())
-        );
-        searchResultData.forEach((element) => {
-          if (element._id % 2 == 1) {
-            element.availability = false;
-          }
-        });
-        setItems(searchResultData);
-        setLoading(false)
+        setItems(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
         setLoading(false);
       });
-    }, [searchItem]);
+  }, []);
 
-    if(loading){
-      return <LoadingComponent/>
-    }
+  if (loading) {
+    return <LoadingComponent />;
+  }
+
+  const performFuzzySearch = () => {
+    if (!searchItem) return [];
+
+    const searchResultData = items.filter((item) =>
+      item.name.toLowerCase().includes(searchItem.toLowerCase())
+    );
     
+    if (searchResultData.length != 0) {
+      return searchResultData;
+    } else {
+      return items
+        .map((item) => ({
+          ...item,
+          distance: levenshteinDistance(
+            searchItem.toLowerCase(),
+            item.name.toLowerCase()
+          ),
+        }))
+        .filter((item) => item.distance <= 2) // Allow matches within 2 edits
+        .sort((a, b) => a.distance - b.distance);
+    }
+  };
+
+  const filteredItems = performFuzzySearch();
+
   return (
     <div>
       <p>Search Result for: {searchItem}</p>
       <ul className="item-list">
-        {items.length > 0 && searchItem != "" ? (
-          items.map((item) => (
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
             <li key={item._id} className="item">
               <div className="item-info">
                 <h3>{item.name}</h3>
                 <span style={{ color: "grey", fontSize: "13px" }}>
-                  {item.category}{" "}
+                  {item.category}
                 </span>
                 <span style={{ fontSize: "13px", fontStyle: "italic" }}>
                   {item.availability ? (
@@ -63,7 +102,7 @@ function SearchItem({ onAddToCart }) {
               </div>
               <AddToCart
                 onClick={() => {
-                  item.availability == true
+                  item.availability
                     ? onAddToCart(item)
                     : setPopupVisiblilty(true);
                 }}
@@ -74,7 +113,7 @@ function SearchItem({ onAddToCart }) {
           <p>No items found.</p>
         )}
       </ul>
-      {popupVisiblilty == true && (
+      {popupVisiblilty && (
         <Popup
           message={<p>Item is not available!</p>}
           closePopup={closePopup}

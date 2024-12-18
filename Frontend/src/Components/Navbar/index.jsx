@@ -1,13 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { ItemContext } from "../../App";
 
-function Index({ onCategorySelect }) {
-  const { searchItem, setSearchItem, selectedIndex, setSelectedIndex } =
-    useContext(ItemContext);
+// TrieNode for Autocomplete
+class TrieNode {
+  constructor() {
+    this.children = {};
+    this.isEndOfWord = false;
+  }
+}
 
+// Trie Class
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
+
+  insert(word) {
+    let node = this.root;
+    for (const char of word.toLowerCase()) {
+      if (!node.children[char]) {
+        node.children[char] = new TrieNode();
+      }
+      node = node.children[char];
+    }
+    node.isEndOfWord = true;
+  }
+
+  searchPrefix(prefix) {
+    let node = this.root;
+    for (const char of prefix.toLowerCase()) {
+      if (!node.children[char]) return [];
+      node = node.children[char];
+    }
+    return this.collectWords(node, prefix);
+  }
+
+  collectWords(node, prefix) {
+    const results = [];
+    if (node.isEndOfWord) results.push(prefix);
+    for (const [char, childNode] of Object.entries(node.children)) {
+      results.push(...this.collectWords(childNode, prefix + char));
+    }
+    return results;
+  }
+}
+
+function Index({ onCategorySelect }) {
+  const { setSearchItem, selectedIndex, setSelectedIndex } =
+    useContext(ItemContext);
   const [input, setInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [trie, setTrie] = useState(new Trie());
   const navigate = useNavigate();
 
   const selectIndex = (index) => {
@@ -16,17 +61,69 @@ function Index({ onCategorySelect }) {
     onCategorySelect(index);
   };
 
+  useEffect(() => {
+    // Populate Trie with menu data
+    fetch("http://localhost:5000/api/menu")
+      .then((res) => res.json())
+      .then((data) => {
+        const newTrie = new Trie();
+        data.forEach((item) => newTrie.insert(item.name));
+        setTrie(newTrie);
+      })
+      .catch((err) => console.error("Error loading menu data:", err));
+  }, []);
+
   const handleSearchTerm = (e) => {
-    setInput(e.target.value);
+    const value = e.target.value;
+    setInput(value);
+
+    if (value.trim() !== "") {
+      // Perform Trie search for prefix matches
+      const prefixResults = trie.searchPrefix(value);
+
+      // Fetch all menu data and perform substring search
+      fetch("http://localhost:5000/api/menu")
+        .then((res) => res.json())
+        .then((data) => {
+          // Perform substring search
+          const substringResults = data
+            .filter((item) =>
+              item.name.toLowerCase().includes(value.toLowerCase())
+            )
+            .map((item) => item.name);
+
+          // Combine prefix and substring results and deduplicate (case insensitive)
+          const combinedResults = Array.from(
+            new Map(
+              [...prefixResults, ...substringResults].map((item) => [
+                item.toLowerCase(),
+                item,
+              ])
+            ).values()
+          );
+
+          setSuggestions(combinedResults.slice(0, 5)); // Limit to 5 suggestions
+        })
+        .catch((err) => console.error("Error loading menu data:", err));
+    } else {
+      setSuggestions([]);
+    }
   };
 
   const handleSearchItem = () => {
-    setSelectedIndex(null);
     if (input !== "") {
       setSearchItem(input);
       localStorage.setItem("searched-item", input);
       navigate(`/search/${input}`);
     }
+    setSuggestions([]);
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setInput(suggestion);
+    setSuggestions([]);
+    setSearchItem(suggestion);
+    navigate(`/search/${suggestion}`);
   };
 
   return (
@@ -87,7 +184,11 @@ function Index({ onCategorySelect }) {
               </li>
             ))}
           </ul>
-          <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="d-flex position-relative"
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <input
               className="form-control me-2"
               type="search"
@@ -95,7 +196,6 @@ function Index({ onCategorySelect }) {
               aria-label="Search"
               value={input}
               onChange={handleSearchTerm}
-              required
             />
             <button
               className="btn btn-outline-success"
@@ -105,6 +205,19 @@ function Index({ onCategorySelect }) {
             >
               Search
             </button>
+            {(suggestions.length > 0 && input!="") && (
+              <ul className="autocomplete-suggestions position-absolute bg-white border">
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                    className="suggestion-item p-2"
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
         </div>
       </div>

@@ -22,13 +22,12 @@
   height: 270px;
   width: 180px;
   border-radius: 5px;
-  transform: scale(1);
   box-shadow: 3px 3px 5px gray;
   transition: all 0.3s ease-in-out;
 }
 .offer-photo:hover{
-  transform: scale(1.02);
-  box-shadow: -2px -2px 5px gray;
+  box-shadow: none;
+  transform: scale(0.99);
 }
 .slogan{
   font-size: 18px;

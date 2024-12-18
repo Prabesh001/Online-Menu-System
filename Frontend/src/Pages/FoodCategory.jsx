@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import AddToCart from "../Components/AddToCart";
 import Popup from "../Components/Popup";
 import "./Styles/FoodCategory.css";
-import { CartContext } from "../App";
+import { CartContext, ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
 
 function FoodCategory({ onAddToCart }) {
+  const {setSelectedIndex} = useContext(ItemContext);
   const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
   const { category } = useParams(); // Get the category from the URL params
   const [items, setItems] = useState([]); // Items state to hold menu items
@@ -39,6 +40,8 @@ function FoodCategory({ onAddToCart }) {
         setError("Failed to load menu items.");
         setLoading(false);
       });
+
+      setSelectedIndex(category)
   }, [category]);
 
   if (loading) {
