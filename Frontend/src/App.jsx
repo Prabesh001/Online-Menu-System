@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -94,17 +93,16 @@ function Layout() {
   const hideNavbarFooter = ["/", "/login"];
   const hideCart = ["/", "/login", "/table"];
 
-  const noIndex = ["/table", "/search/"+searchItem]
+  const noIndex = ["/table", `/search/+${searchItem}`];
 
-  useEffect(()=>{
-    if(location.pathname == "/")
-    {
-      setSelectedIndex("Home")
+  useEffect(() => {
+    if (location.pathname == "/") {
+      setSelectedIndex("Home");
+    } else if (noIndex.includes(location.pathname)) {
+      console.log("yes")
+      setSelectedIndex(null);
     }
-    else if(noIndex.includes(location.pathname)){
-      setSelectedIndex(null)
-    }
-  },[location.pathname, setSelectedIndex, noIndex])
+  }, [location.pathname, setSelectedIndex, noIndex]);
 
   return (
     <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>

@@ -1,35 +1,35 @@
-.home-offer{
+.home-offer {
   font-weight: bold;
   margin-top: 40px;
 }
-.menu-items{
+.menu-items {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
-  margin-left: 10PX;
+  margin-left: 10px;
 }
-.discounted{
+.discounted {
   margin-right: 5px;
 }
 
-.item-name{
+.item-name {
   max-width: 100px;
   overflow: hidden;
 }
 
-.offer-photo{
+.offer-photo {
   margin-bottom: 5px;
   height: 270px;
-  width: 180px;
+  width: 190px;
   border-radius: 5px;
   box-shadow: 3px 3px 5px gray;
   transition: all 0.3s ease-in-out;
 }
-.offer-photo:hover{
+.offer-photo:hover {
   box-shadow: none;
   transform: scale(0.99);
 }
-.slogan{
+.slogan {
   font-size: 18px;
   font-weight: bold;
 }
@@ -45,4 +45,11 @@
 
 .add-to-cart:hover {
   background-color: #ff7a1c;
+}
+
+@media (max-width: 400px){
+  .offer-photo {
+    height: 242px;
+    width: 170px;
+  }
 }

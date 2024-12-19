@@ -131,7 +131,7 @@ function Index({ onCategorySelect }) {
       <div className="container-fluid">
         <Link
           className="navbar-brand"
-          to="/home"
+          to="/Home"
           onClick={() => {
             selectIndex("Home");
             onCategorySelect("All");
@@ -174,7 +174,7 @@ function Index({ onCategorySelect }) {
                   }
                   to={
                     category === "Home"
-                      ? "/home"
+                      ? "/Home"
                       : `/category/${category.replace(" ", "%20")}`
                   }
                   aria-current={selectedIndex === category ? "page" : undefined}

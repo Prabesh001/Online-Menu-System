@@ -31,7 +31,7 @@ function levenshteinDistance(a, b) {
 function SearchItem({ onAddToCart }) {
   const { popupVisiblilty, setPopupVisiblilty, closePopup } =
     useContext(CartContext);
-  const { searchItem } = useContext(ItemContext);
+  const { searchItem, setSelectedIndex } = useContext(ItemContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -47,6 +47,7 @@ function SearchItem({ onAddToCart }) {
         console.error("Error fetching data: ", error);
         setLoading(false);
       });
+      setSelectedIndex(null)
   }, []);
 
   if (loading) {

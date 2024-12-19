@@ -86,6 +86,7 @@ function FoodCategory({ onAddToCart }) {
       </ul>
       {popupVisiblilty == true && (
         <Popup
+          greeting={<span>Sorry!</span>}
           message={<p>Item is not available!</p>}
           closePopup={closePopup}
         />

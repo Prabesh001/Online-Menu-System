@@ -5,14 +5,14 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer-top">
-        <div>
+        <div className="footer-category">
           <span>Contact Us:</span> <br />
           <a href="#">Help and Support</a>
           <br />
           <a href="#">Join Us</a>
           <br />
         </div>
-        <div>
+        <div className="footer-category">
           <span>Our Product:</span>
           <br />
           <a href="#">About Us</a>
@@ -20,7 +20,7 @@ function Footer() {
           <a href="#">FAQ</a>
           <br />
         </div>
-        <div>
+        <div className="footer-category">
           <span>Legal:</span>
           <br />
           <a href="#">Terms & Conditions</a>

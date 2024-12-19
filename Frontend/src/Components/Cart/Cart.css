@@ -80,3 +80,9 @@
 .itemInCart input{
   max-width: 25px;
 }
+
+@media (max-width: 400px){
+  .cart-overlay{
+    flex-direction: column;
+  }
+}
