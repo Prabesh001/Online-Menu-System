@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import API_BASE_URL from "../../config.js"
 import { useParams } from "react-router-dom";
 import AddToCart from "../Components/AddToCart";
 import Popup from "../Components/Popup";
@@ -20,7 +21,7 @@ function FoodCategory({ onAddToCart }) {
     setError(null);
 
     axios
-      .get("http://localhost:5000/api/menu")
+      .get(`${API_BASE_URL}`)
       .then((response) => {
         const filteredItems =
           category === "All"

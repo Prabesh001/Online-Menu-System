@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import AddToCart from "../Components/AddToCart/index.jsx";
+import API_BASE_URL from "../../config.js"
 import axios from "axios";
 import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
@@ -38,7 +39,7 @@ function SearchItem({ onAddToCart }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/api/menu")
+      .get(`${API_BASE_URL}`)
       .then((response) => {
         setItems(response.data);
         setLoading(false);

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const http = require('http');
 
 const app = express();
 const PORT = 5000;
@@ -23,8 +24,7 @@ const itemSchema = new mongoose.Schema({
     availability: Boolean,
     image_url: String,
     promotion: Boolean,
-},
-{ collection: "menuItem" });
+}, { collection: "menuItem" });
 
 // Create a model from the schema
 const Item = mongoose.model('menuItem', itemSchema);
@@ -34,11 +34,18 @@ app.get('/api/menu', async (req, res) => {
     try {
         const items = await Item.find(); // Fetch all items
         res.json(items); // Return the items array
-        console.log('fetched items:', items);
+        console.log('Fetched items:', items);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
+// Create the HTTP server instance and set custom timeout values
+const server = http.createServer(app);
+
+// Adjust timeouts
+server.keepAliveTimeout = 120000; // 120 seconds for keep-alive connections
+server.headersTimeout = 120000;   // 120 seconds for headers to be received
+
 // Start the server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+server.listen(PORT, '0.0.0.0', () => console.log(`Server running on http://localhost:${PORT}`));
