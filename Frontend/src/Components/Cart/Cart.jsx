@@ -57,22 +57,21 @@ function Cart({ items, setItems }) {
         ) : (
           <ul className="items-list">
             {items.map((item, index) => (
-              <div className="itemInCart" key={index}>
-                <li>
-                  {item.name} - Rs. {item.price}
-                </li>
+              <li className="itemInCart" key={index}>
+                {item.name} - Rs. {item.price}
                 <div>
-                  <span>Quantity:</span>
-                  <span>
+                  <label>
+                    Quantity:
                     <input type="text" value={item.quantity} readOnly />
-                  </span>
+                  </label>
+
                   <div className="edit-buttons">
                     <button
                       className="removeFromCart"
                       title="Delete from cart"
                       onClick={() => removeFromCart(item)}
                     >
-                      <FaTrash style={{ fontSize: "20px" }} />
+                      <FaTrash />
                     </button>
                     <button
                       className="updateAmount"
@@ -83,7 +82,7 @@ function Cart({ items, setItems }) {
                     </button>
                   </div>
                 </div>
-              </div>
+              </li>
             ))}
           </ul>
         )}
@@ -111,6 +110,7 @@ function Cart({ items, setItems }) {
       </div>
       {popupVisiblilty && (
         <Popup
+          greeting="Payment"
           message="Do you want to check out?"
           addButtons={
             <button

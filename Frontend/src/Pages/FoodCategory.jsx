@@ -1,52 +1,60 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import API_BASE_URL from "../../config.js"
 import { useParams } from "react-router-dom";
 import AddToCart from "../Components/AddToCart";
 import Popup from "../Components/Popup";
 import "./Styles/FoodCategory.css";
 import { CartContext, ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
+import { fetchItems } from "../../fetchData.js";
 
 function FoodCategory({ onAddToCart }) {
-  const {setSelectedIndex} = useContext(ItemContext);
-  const {popupVisiblilty, setPopupVisiblilty, closePopup} = useContext(CartContext)
+  const {
+    setSelectedIndex,
+    loading,
+    setLoading,
+    error,
+    setError,
+    items,
+    setItems,
+  } = useContext(ItemContext);
+  const { popupVisiblilty, setPopupVisiblilty, closePopup } =
+    useContext(CartContext);
   const { category } = useParams(); // Get the category from the URL params
-  const [items, setItems] = useState([]); // Items state to hold menu items
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
+    setItems([]);
     setLoading(true);
     setError(null);
 
-    axios
-      .get(`${API_BASE_URL}`)
-      .then((response) => {
+    const getData = async () => {
+      try {
+        const data = await fetchItems();
         const filteredItems =
           category === "All"
-            ? response.data
-            : response.data.filter((item) => item.category === category);
+            ? data
+            : data.filter((item) => item.category === category);
 
-            filteredItems.forEach(element => {
-              if(element._id%2==1){
-                element.availability =false
-              }
-            });
+        filteredItems.forEach((element) => {
+          if (element._id % 2 === 1) {
+            element.availability = false;
+          }
+        });
+
         setItems(filteredItems);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data: ", error);
         setError("Failed to load menu items.");
+      } finally {
         setLoading(false);
-      });
+      }
+    };
 
-      setSelectedIndex(category)
+    getData();
+    setSelectedIndex(category);
   }, [category]);
 
   if (loading) {
-    return <LoadingComponent/>;
+    return <LoadingComponent />;
   }
 
   if (error) {
@@ -85,9 +93,9 @@ function FoodCategory({ onAddToCart }) {
           <p>No items found in this category.</p>
         )}
       </ul>
-      {popupVisiblilty == true && (
+      {popupVisiblilty && (
         <Popup
-          greeting={<span>Sorry!</span>}
+          greeting="Sorry!"
           message={<p>Item is not available!</p>}
           closePopup={closePopup}
         />

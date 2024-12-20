@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import "./App.css"
 import {
   BrowserRouter,
   Routes,
@@ -24,14 +25,10 @@ function Layout() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("CartItems")) || []
   );
+
   const [selectedIndex, setSelectedIndex] = useState(
     localStorage.getItem("index") || "Home"
   );
-
-  const [itemQuantity, setItemQuantity] = useState(1);
-
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || 0
@@ -41,7 +38,14 @@ function Layout() {
     localStorage.getItem("searched-item") || ""
   );
 
+  const [itemQuantity, setItemQuantity] = useState(1);
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [items, setItems] = useState([]);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   function closePopup() {
     setPopupVisiblilty(false);
@@ -99,7 +103,6 @@ function Layout() {
     if (location.pathname == "/") {
       setSelectedIndex("Home");
     } else if (noIndex.includes(location.pathname)) {
-      console.log("yes")
       setSelectedIndex(null);
     }
   }, [location.pathname, setSelectedIndex, noIndex]);
@@ -107,7 +110,18 @@ function Layout() {
   return (
     <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
       <ItemContext.Provider
-        value={{ searchItem, setSearchItem, selectedIndex, setSelectedIndex }}
+        value={{
+          searchItem,
+          setSearchItem,
+          selectedIndex,
+          setSelectedIndex,
+          error,
+          setError,
+          loading,
+          setLoading,
+          items,
+          setItems,
+        }}
       >
         {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
         <CartContext.Provider

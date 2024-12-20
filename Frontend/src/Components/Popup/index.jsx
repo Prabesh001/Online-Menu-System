@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./popup.css";
 
-function Popup({ message, closePopup,addButtons }) {
+function Popup({ greeting, message, closePopup, addButtons }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -12,7 +12,7 @@ function Popup({ message, closePopup,addButtons }) {
   return (
     <div className="popup-overlay">
       <div className="popup-window">
-        <h3 style={{ color: "red" }}>Sorry!</h3>
+        <h2 style={{ color: "red" }}>{greeting}</h2>
         <div>{message}</div>
         <div className="popup-btn-section">
           {addButtons}

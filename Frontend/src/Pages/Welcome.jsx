@@ -7,7 +7,7 @@ function Welcome() {
   const navigate = useNavigate();
   const handleLoginSuccess = (response) => {
     console.log("login successful: ", response);
-    navigate("/home");
+    navigate("/Home");
   };
   
   const handleLoginFailure = (error) => {
