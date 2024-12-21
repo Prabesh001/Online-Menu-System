@@ -1,14 +1,15 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import menu from "./menu.js";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
 
 function MenuSection({ title, category }) {
-  const {setSelectedIndex} = useContext(ItemContext);
-  useEffect(()=>{
-    setSelectedIndex("Home")
-  })
+  const { setSelectedIndex } = useContext(ItemContext);
+  useEffect(() => {
+    setSelectedIndex("Home");
+  }, []);
+
   return (
     <div>
       <h2 className="home-offer">{title}</h2>
@@ -16,39 +17,61 @@ function MenuSection({ title, category }) {
         {menu
           .filter((item) => item.status.includes(category))
           .map((item) => (
-            <div key={item.name} className="menu-item" title={item.details}>
+            <div
+              key={item.name + Math.random()}
+              className="menu-item"
+              title={item.details}
+            >
               <div className="menu-photo">
-              <img src={item.photo} alt={item.name} className="offer-photo" loading={lazy}/>
+                <img
+                  src={item.photo}
+                  alt={item.name}
+                  className="offer-photo"
+                  loading="lazy"
+                  draggable="false"
+                />
               </div>
-              <h6 className="item-name" title={item.name}>
+              <span className="item-name" title={item.name}>
                 {item.name}
-              </h6>
+              </span>
+              <br />
               <del className="discounted"> Rs. {item.price.toFixed(0)}</del>
               {item.discountedPrice && (
-                <span>Rs. {item.discountedPrice.toFixed(0)}</span>
+                <span className="actual-price">
+                  Rs. {item.discountedPrice.toFixed(0)}
+                </span>
               )}
               <br />
               <AddToCart />
             </div>
           ))}
       </div>
-      
     </div>
   );
 }
 
 function Home() {
+  const Menu = [
+    { title: "Today's Special", category: "hot-section" },
+    { title: "Winter Special", category: "winter" },
+    { title: "Christmas Special", category: "christmas" },
+    { title: "Combo Offers", category: "combo" },
+  ];
   return (
     <div className="home-section">
-        <MenuSection title="Today's Special" category="hot-section" />
-        <MenuSection title="Winter Special" category="winter" />
-        <MenuSection title="Christmas Special" category="christmas" />
-        <MenuSection title="Combo Offers" category="combo" />
-        <br />
-        <center>
-          <p className="slogan">Keep Eating....</p>
-        </center>
-      
+      {Menu.map((menu) => {
+        return (
+          <MenuSection
+            title={menu.title}
+            category={menu.category}
+            key={menu.title}
+          />
+        );
+      })}
+      <br />
+      <center>
+        <p className="slogan">Keep Eating....</p>
+      </center>
     </div>
   );
 }

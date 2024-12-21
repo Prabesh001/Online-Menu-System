@@ -6,7 +6,3 @@ body{
  padding: 0;
  background-color: var(--color);
 }
-.web-body.blur{
-  filter: blur(5px);
-  pointer-events: none; 
-}

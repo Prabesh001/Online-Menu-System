@@ -29,14 +29,25 @@ function FoodCategory({ onAddToCart }) {
     const getData = async () => {
       try {
         const data = await fetchItems();
-        const filteredItems =
+        const filteredData =
           category === "All"
             ? data
             : data.filter((item) => item.category === category);
 
+        const filteredItems = filteredData.map((ele) => ({
+          ...ele,
+          isVeg: true,
+        }));
+
         filteredItems.forEach((element) => {
+          const nonveg = ["chicken", "fish", "sekuwa", "buff", "egg", "prawn"];
           if (element._id % 2 === 1) {
             element.availability = false;
+          }
+
+          const nonVegItem = nonveg.some(item => element.name.toLowerCase().includes(item))
+          if(nonVegItem){
+            element.isVeg = false;
           }
         });
 
@@ -67,7 +78,7 @@ function FoodCategory({ onAddToCart }) {
       <ul className="item-list">
         {items.length > 0 ? (
           items.map((item) => (
-            <li key={item._id} className="item">
+            <li key={item._id} className="item" title={item.isVeg? "Veg": "Non-veg"}>
               <div className="item-info">
                 <h3>{item.name}</h3>
                 <span style={{ fontSize: "13px", fontStyle: "italic" }}>
