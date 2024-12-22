@@ -40,7 +40,7 @@ function FoodCategory({ onAddToCart }) {
         }));
 
         filteredItems.forEach((element) => {
-          const nonveg = ["chicken", "fish", "sekuwa", "buff", "egg", "prawn"];
+          const nonveg = ["chicken", "fish", "sekuwa", "buff", "egg", "prawn", "mutton"];
           if (element._id % 2 === 1) {
             element.availability = false;
           }
