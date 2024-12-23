@@ -6,8 +6,14 @@ import { CartContext } from "../../App.jsx";
 import "./Cart.css";
 
 function Cart({ items, setItems }) {
-  const { count, setCount, popupVisiblilty, setPopupVisiblilty, closePopup } =
-    useContext(CartContext);
+  const {
+    count,
+    setCount,
+    popupVisiblilty,
+    setPopupVisiblilty,
+    closePopup,
+    playAddToCartSound,
+  } = useContext(CartContext);
   const [updateQuant, setUpdateQuant] = useState(1);
   const [currentItem, setCurrentItem] = useState(null);
   const navigate = useNavigate();
@@ -26,7 +32,7 @@ function Cart({ items, setItems }) {
       0
     );
     setCount(newCount);
-    closePopup()
+    closePopup();
   }
 
   function handleAddSub(action) {
@@ -55,13 +61,19 @@ function Cart({ items, setItems }) {
         0
       );
       setCount(newCount);
-
+      playAddToCartSound();
       closePopup();
     }
   }
 
   function handleCloseButton() {
     navigate(-1);
+  }
+
+  const deleteClosePopup = () => {
+    closePopup();
+    setPopupVisiblilty(null);
+    setCurrentItem(null);
   }
 
   return (
@@ -74,7 +86,7 @@ function Cart({ items, setItems }) {
         ) : (
           <ul className="items-list">
             {items.map((item, index) => (
-              <li className="itemInCart" key={index}>
+              <li className="itemInCart" key={item.name}>
                 {item.name} - Rs. {item.price}
                 <div>
                   <label>
@@ -82,27 +94,13 @@ function Cart({ items, setItems }) {
                     <input type="text" value={item.quantity} readOnly />
                   </label>
 
-                  {popupVisiblilty == "delete" ? (
-                    <Popup
-                      greeting="WARNING!"
-                      message={
-                        <p>
-                          Are you sure you want to remove {item.name} from cart?
-                        </p>
-                      }
-                      addButtons={
-                        <button onClick={() => removeFromCart(item)} style={{backgroundColor: "red", color:"white", border:"none"}}>
-                          Delete
-                        </button>
-                      }
-                      closePopup={closePopup}
-                    />
-                  ) : null}
                   <div className="edit-buttons">
                     <button
                       className="removeFromCart"
                       title="Delete from cart"
-                      onClick={() => setPopupVisiblilty("delete")}
+                      onClick={() => {setPopupVisiblilty("delete")
+                        setCurrentItem(item)
+                      }}
                     >
                       <FaTrash />
                     </button>
@@ -111,7 +109,7 @@ function Cart({ items, setItems }) {
                       title="Update quantity"
                       onClick={() => updateAmount(item)}
                     >
-                      <FaEdit style={{ fontSize: "20px" }} />
+                      <FaEdit />
                     </button>
                   </div>
                 </div>
@@ -162,17 +160,33 @@ function Cart({ items, setItems }) {
           message={
             <>
               <p>Do you want to update Item's quantity?</p>
-              <button className="decrement" onClick={() => handleAddSub("sub")}>
-                -
-              </button>
-              <input type="number" readOnly value={updateQuant} />
-              <button className="increment" onClick={() => handleAddSub("add")}>
-                +
-              </button>
+
+              <div className="edit-item-quantity">
+                <button
+                  className="decrement"
+                  style={{ backgroundColor: "red" }}
+                  onClick={() => handleAddSub("sub")}
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  style={{ maxWidth: "45px" }}
+                  readOnly
+                  value={updateQuant}
+                />
+                <button
+                  className="increment"
+                  onClick={() => handleAddSub("add")}
+                >
+                  +
+                </button>
+              </div>
             </>
           }
           addButtons={
             <button
+              style={{ backgroundColor: "#266e19" }}
               className="update-amount-btn payment-btn"
               onClick={handleUpdateQuantity}
             >
@@ -182,6 +196,23 @@ function Cart({ items, setItems }) {
           closePopup={closePopup}
         />
       )}
+      {popupVisiblilty === "delete" && currentItem ? (
+        <Popup
+          greeting="WARNING!"
+          message={
+            <p>Are you sure you want to remove {currentItem.name} from cart?</p>
+          }
+          addButtons={
+            <button
+              className="del-from-cart-btn payment-btn"
+              onClick={() => removeFromCart(currentItem)}
+            >
+              Delete
+            </button>
+          }
+          closePopup={deleteClosePopup}
+        />
+      ) : null}
     </div>
   );
 }

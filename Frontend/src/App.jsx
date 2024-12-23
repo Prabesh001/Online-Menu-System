@@ -56,10 +56,13 @@ function Layout() {
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
 
-  const addToCart = (item) => {
+  function playAddToCartSound(){
     const audio = new Audio("../public/drop.m4a");
     audio.play();
+  }
 
+  const addToCart = (item) => {
+    playAddToCartSound();
     const updatedItems = Array.isArray(item)
       ? item.map((ele) => ({
           ...ele,
@@ -108,7 +111,7 @@ function Layout() {
   }, [location.pathname, setSelectedIndex, noIndex]);
 
   return (
-    <div className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
+    <div  className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
       <ItemContext.Provider
         value={{
           searchItem,
@@ -131,6 +134,7 @@ function Layout() {
             popupVisiblilty,
             setPopupVisiblilty,
             closePopup,
+            playAddToCartSound
           }}
         >
           <Routes>
