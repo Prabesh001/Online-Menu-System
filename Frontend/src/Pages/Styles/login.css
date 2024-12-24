@@ -1,6 +1,7 @@
 .login-page{
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -41,15 +42,3 @@
   background-color: #f0620a;
 }
 
-.toggleText {
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-.toggleButton {
-  color: #f0620a;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-}

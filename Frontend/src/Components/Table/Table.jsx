@@ -1,6 +1,6 @@
 import React from "react";
-import tableImage from "../Components/assets/Table.png";
-import "./Styles/Table.css";
+import tableImage from "../assets/Table.png";
+import "./Table.css";
 
 function Table({ value, onclick }) {
   return (
