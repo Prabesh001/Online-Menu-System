@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import "./App.css"
+import "./App.css";
 import {
   BrowserRouter,
   Routes,
@@ -15,11 +15,14 @@ import Login from "./Pages/Login";
 import Welcome from "./Pages/Welcome";
 import Navbar from "./Components/Navbar/index";
 import Footer from "./Components/Footer";
-import Cart from "./Components/Cart/Cart.jsx";
-import Table from "./Pages/Table.jsx";
+import Cart from "./Pages/Cart.jsx";
+import Table from "./Components/Table/Table.jsx";
+import EmployeePage from "./Pages/EmployeePage.jsx";
+import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
+export const AuthContext = createContext();
 
 function Layout() {
   const [cartItems, setCartItems] = useState(
@@ -43,6 +46,9 @@ function Layout() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") || false
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,19 +62,23 @@ function Layout() {
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
 
-  function playAddToCartSound(){
-    const audio = new Audio("../public/drop.m4a");
+  const audio = new Audio("../public/drop.m4a");
+
+  function playAddToCartSound() {
     audio.play();
   }
 
   const addToCart = (item) => {
     playAddToCartSound();
+
+    const orderedTime = new Date().toISOString();
     const updatedItems = Array.isArray(item)
       ? item.map((ele) => ({
           ...ele,
           quantity: itemQuantity,
+          orderedTime
         }))
-      : [{ ...item, quantity: itemQuantity }];
+      : [{ ...item, quantity: itemQuantity, orderedTime }];
 
     setCartItems((prevItems) => {
       const updatedCart = [...prevItems];
@@ -82,6 +92,7 @@ function Layout() {
           updatedCart[existingItemIndex] = {
             ...updatedCart[existingItemIndex],
             quantity: updatedCart[existingItemIndex].quantity + 1,
+            orderedTime: updatedCart[existingItemIndex].orderedTime
           };
         } else {
           updatedCart.push(newItem);
@@ -98,9 +109,9 @@ function Layout() {
   };
 
   const hideNavbarFooter = ["/", "/login"];
-  const hideCart = ["/", "/login", "/table"];
+  const hideCart = ["/", "/login", "/table", "/employee"];
 
-  const noIndex = ["/table", `/search/+${searchItem}`];
+  const noIndex = ["/table", "/employee" ,`/search/+${searchItem}`];
 
   useEffect(() => {
     if (location.pathname == "/") {
@@ -111,7 +122,7 @@ function Layout() {
   }, [location.pathname, setSelectedIndex, noIndex]);
 
   return (
-    <div  className={`web-body ${popupVisiblilty ? "blur" : ""}`}>
+    <>
       <ItemContext.Provider
         value={{
           searchItem,
@@ -124,6 +135,8 @@ function Layout() {
           setLoading,
           items,
           setItems,
+          cartItems,
+          setCartItems,
         }}
       >
         {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
@@ -134,39 +147,49 @@ function Layout() {
             popupVisiblilty,
             setPopupVisiblilty,
             closePopup,
-            playAddToCartSound
+            playAddToCartSound,
           }}
         >
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/Home" element={<Home />} />
-            <Route
-              path="/category/:category"
-              element={<FoodCategory onAddToCart={addToCart} />}
-            />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/search/:item"
-              element={<SearchItem onAddToCart={addToCart} />}
-            />
-            <Route
-              path="/table"
-              element={
-                <Cart
-                  items={cartItems}
-                  setItems={setCartItems}
-                  setItemQuantity={setItemQuantity}
-                />
-              }
-            />
-          </Routes>
-          {!hideNavbarFooter.includes(location.pathname) && <Footer />}
-          {!hideCart.includes(location.pathname) && (
-            <Table value={count} onclick={() => navigate("/table")} />
-          )}
+          <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/Home" element={<Home />} />
+              <Route
+                path="/category/:category"
+                element={<FoodCategory onAddToCart={addToCart} />}
+              />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/employee"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <EmployeePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/search/:item"
+                element={<SearchItem onAddToCart={addToCart} />}
+              />
+              <Route
+                path="/table"
+                element={
+                  <Cart
+                    items={cartItems}
+                    setItems={setCartItems}
+                    setItemQuantity={setItemQuantity}
+                  />
+                }
+              />
+            </Routes>
+            {!hideNavbarFooter.includes(location.pathname) && <Footer />}
+            {!hideCart.includes(location.pathname) && (
+              <Table value={count} onclick={() => navigate("/table")} />
+            )}
+          </AuthContext.Provider>
         </CartContext.Provider>
       </ItemContext.Provider>
-    </div>
+    </>
   );
 }
 

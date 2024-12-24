@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import AddToCart from "../Components/AddToCart/index.jsx";
-import API_BASE_URL from "../../config.js"
+import API_BASE_URL from "../JavaScript/config.js";
 import axios from "axios";
 import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
@@ -30,12 +30,21 @@ function levenshteinDistance(a, b) {
 }
 
 function SearchItem({ onAddToCart }) {
-  const { popupVisiblilty, setPopupVisiblilty, closePopup} =
+  const { popupVisiblilty, setPopupVisiblilty, closePopup } =
     useContext(CartContext);
-  const { searchItem, setSelectedIndex, loading, setLoading, error, setError, items, setItems } = useContext(ItemContext);
+  const {
+    searchItem,
+    setSelectedIndex,
+    loading,
+    setLoading,
+    error,
+    setError,
+    items,
+    setItems,
+  } = useContext(ItemContext);
 
   useEffect(() => {
-    setItems([])
+    setItems([]);
     setLoading(true);
     axios
       .get(`${API_BASE_URL}`)
@@ -45,10 +54,10 @@ function SearchItem({ onAddToCart }) {
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
-        setError(error)
+        setError(error);
         setLoading(false);
       });
-      setSelectedIndex(null)
+    setSelectedIndex(null);
   }, []);
 
   if (loading) {
@@ -58,11 +67,12 @@ function SearchItem({ onAddToCart }) {
   const performFuzzySearch = () => {
     if (!searchItem) return [];
 
-    const searchResultData = items.filter((item) =>
-      item.name.toLowerCase().includes(searchItem.toLowerCase()) ||
-      searchItem.toLowerCase().includes(item.name.toLowerCase())
-  );
-    
+    const searchResultData = items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchItem.toLowerCase()) ||
+        searchItem.toLowerCase().includes(item.name.toLowerCase())
+    );
+
     if (searchResultData.length != 0) {
       return searchResultData;
     } else {

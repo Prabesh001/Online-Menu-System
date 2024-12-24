@@ -1,95 +1,94 @@
-import React, { useState } from "react";
-import "././Styles/login.css";
+import React, { useState, useContext, useEffect } from "react";
+import "./Styles/login.css";
+import { AuthContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // Toggle between Sign In and Sign Up
+  const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
-  const handleToggle = () => {
-    setIsSignUp((prev) => !prev);
-    setFormData({ email: "", password: "", confirmPassword: "" }); // Reset form
-  };
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated);
+  }, [isAuthenticated]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSignUp) {
-      if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
-      console.log("Sign Up Data:", formData);
-      alert("Account created successfully!");
+
+    // try {
+    //   const response = await fetch("https://your-backend-api.com/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       email: formData.email,
+    //       password: formData.password,
+    //     }),
+    //   });
+
+    //   if (response.ok) {
+    //     const data = await response.json();
+    //     console.log("Sign In Success:", data);
+    //     alert("Signed in successfully!");
+    //   } else {
+    //     const error = await response.json();
+    //     alert(`Sign In Failed: ${error.message}`);
+    //   }
+    // } catch (error) {
+    //   console.error("Error during sign in:", error);
+    //   alert("An error occurred. Please try again.");
+    // }
+
+    if (
+      formData.email === "prabeshdaahal123@gmail.com" &&
+      formData.password === "dahal"
+    ) {
+      setIsAuthenticated(true);
+      navigate("/employee");
     } else {
-      console.log("Sign In Data:", formData);
-      alert("Signed in successfully!");
+      alert("Sign In Failed");
     }
   };
 
   return (
     <div className="login-page">
+      <h1>TableMate</h1>
+      <i>(Employee Only)</i>
       <div className="container">
-      <h2>{isSignUp ? "Sign Up" : "Sign In"}</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          className="input"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-          className="input"
-          required
-        />
-        {isSignUp && (
-          <>
+        <h2>Log In</h2>
+        <form className="form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="input"
+            required
+          />
           <input
             type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
             onChange={handleInputChange}
             className="input"
             required
           />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.formNumber}
-            onChange={handleInputChange}
-            className="input"
-            required
-          />
-          </>
-        )}
-        <button type="submit" className="button">
-          {isSignUp ? "Sign Up" : "Sign In"}
-        </button>
-      </form>
-      <p className="toggleText">
-        {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-        <button onClick={handleToggle} className="toggleButton">
-          {isSignUp ? "Sign In" : "Sign Up"}
-        </button>
-      </p>
-    </div>
+          <button type="submit" className="button">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

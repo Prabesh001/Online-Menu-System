@@ -5,7 +5,7 @@ import Popup from "../Components/Popup";
 import "./Styles/FoodCategory.css";
 import { CartContext, ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
-import { fetchItems } from "../../fetchData.js";
+import { fetchItems } from "../JavaScript/fetchData";
 
 function FoodCategory({ onAddToCart }) {
   const {
