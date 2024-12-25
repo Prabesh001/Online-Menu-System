@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Styles/login.css";
-import { AuthContext } from "../App";
+import { AuthContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -11,43 +11,40 @@ const LoginPage = () => {
     password: "",
   });
 
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated);
-  }, [isAuthenticated]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+
+  // try {
+  //   const response = await fetch("https://your-backend-api.com/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       email: formData.email,
+  //       password: formData.password,
+  //     }),
+  //   });
+
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     console.log("Sign In Success:", data);
+  //     alert("Signed in successfully!");
+  //   } else {
+  //     const error = await response.json();
+  //     alert(`Sign In Failed: ${error.message}`);
+  //   }
+  // } catch (error) {
+  //   console.error("Error during sign in:", error);
+  //   alert("An error occurred. Please try again.");
+  // }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // try {
-    //   const response = await fetch("https://your-backend-api.com/login", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: formData.email,
-    //       password: formData.password,
-    //     }),
-    //   });
-
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     console.log("Sign In Success:", data);
-    //     alert("Signed in successfully!");
-    //   } else {
-    //     const error = await response.json();
-    //     alert(`Sign In Failed: ${error.message}`);
-    //   }
-    // } catch (error) {
-    //   console.error("Error during sign in:", error);
-    //   alert("An error occurred. Please try again.");
-    // }
-
     if (
       formData.email === "prabeshdaahal123@gmail.com" &&
       formData.password === "dahal"
@@ -58,6 +55,10 @@ const LoginPage = () => {
       alert("Sign In Failed");
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <div className="login-page">

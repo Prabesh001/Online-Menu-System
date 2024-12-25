@@ -72,13 +72,14 @@ function Layout() {
     playAddToCartSound();
 
     const orderedTime = new Date().toISOString();
+
     const updatedItems = Array.isArray(item)
       ? item.map((ele) => ({
           ...ele,
           quantity: itemQuantity,
-          orderedTime
+          orderedTime: [orderedTime],
         }))
-      : [{ ...item, quantity: itemQuantity, orderedTime }];
+      : [{ ...item, quantity: itemQuantity, orderedTime: [orderedTime] }];
 
     setCartItems((prevItems) => {
       const updatedCart = [...prevItems];
@@ -92,7 +93,7 @@ function Layout() {
           updatedCart[existingItemIndex] = {
             ...updatedCart[existingItemIndex],
             quantity: updatedCart[existingItemIndex].quantity + 1,
-            orderedTime: updatedCart[existingItemIndex].orderedTime
+            orderedTime: [orderedTime, ...updatedCart[existingItemIndex].orderedTime]
           };
         } else {
           updatedCart.push(newItem);
