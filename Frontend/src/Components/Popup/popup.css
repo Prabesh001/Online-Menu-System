@@ -27,3 +27,7 @@
   justify-content: center;
   gap: 10px;
 }
+.popup-message{
+  font-family: var(--font-family);
+  font-size: 1.1em;
+}

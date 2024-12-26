@@ -47,7 +47,7 @@ function Layout() {
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuthenticated") || false
+    JSON.parse(localStorage.getItem("isAuthenticated")) || false
   );
 
   const location = useLocation();
@@ -61,6 +61,10 @@ function Layout() {
     localStorage.setItem("count", count);
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+  }, [isAuthenticated]);
 
   const audio = new Audio("../public/drop.m4a");
 
@@ -93,7 +97,10 @@ function Layout() {
           updatedCart[existingItemIndex] = {
             ...updatedCart[existingItemIndex],
             quantity: updatedCart[existingItemIndex].quantity + 1,
-            orderedTime: [orderedTime, ...updatedCart[existingItemIndex].orderedTime]
+            orderedTime: [
+              orderedTime,
+              ...updatedCart[existingItemIndex].orderedTime,
+            ],
           };
         } else {
           updatedCart.push(newItem);
@@ -112,7 +119,7 @@ function Layout() {
   const hideNavbarFooter = ["/", "/login"];
   const hideCart = ["/", "/login", "/table", "/employee"];
 
-  const noIndex = ["/table", "/employee" ,`/search/+${searchItem}`];
+  const noIndex = ["/table", "/employee", `/search/+${searchItem}`];
 
   useEffect(() => {
     if (location.pathname == "/") {

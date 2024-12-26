@@ -80,6 +80,8 @@
 }
 .price-modal {
   max-height: fit-content;
+  position: sticky;
+  top: 5px;
 }
 .itemInCart input {
   max-width: 25px;

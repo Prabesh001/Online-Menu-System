@@ -11,7 +11,7 @@ function Cart({ items, setItems }) {
     setCount,
     popupVisiblilty,
     setPopupVisiblilty,
-    closePopup,
+
     playAddToCartSound,
   } = useContext(CartContext);
   const [updateQuant, setUpdateQuant] = useState(1);
@@ -22,6 +22,7 @@ function Cart({ items, setItems }) {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  console.log(currentItem);
 
   function removeFromCart(item) {
     const filteredItems = items.filter((ele) => ele.name !== item.name);
@@ -32,7 +33,6 @@ function Cart({ items, setItems }) {
       0
     );
     setCount(newCount);
-    closePopup();
   }
 
   function handleAddSub(action) {
@@ -62,19 +62,13 @@ function Cart({ items, setItems }) {
       );
       setCount(newCount);
       playAddToCartSound();
-      closePopup();
+      setPopupVisiblilty(false);
     }
   }
 
   function handleCloseButton() {
     navigate(-1);
   }
-
-  const deleteClosePopup = () => {
-    closePopup();
-    setPopupVisiblilty(null);
-    setCurrentItem(null);
-  };
 
   return (
     <div className="cart-overlay">
@@ -152,7 +146,6 @@ function Cart({ items, setItems }) {
               Payment
             </button>
           }
-          closePopup={closePopup}
         />
       )}
       {popupVisiblilty === "update" && (
@@ -160,7 +153,7 @@ function Cart({ items, setItems }) {
           greeting="Update"
           message={
             <>
-              <p>Do you want to update Item's quantity?</p>
+              <p>Do you want to update <b>{currentItem.name}</b>'s quantity?</p>
 
               <div className="edit-item-quantity">
                 <button
@@ -194,24 +187,25 @@ function Cart({ items, setItems }) {
               Update
             </button>
           }
-          closePopup={closePopup}
         />
       )}
       {popupVisiblilty === "delete" && currentItem ? (
         <Popup
           greeting="WARNING!"
           message={
-            <p>Are you sure you want to remove {currentItem.name} from cart?</p>
+            <p>Are you sure you want to remove <b>{currentItem.name}</b> from cart?</p>
           }
           addButtons={
             <button
               className="del-from-cart-btn payment-btn"
-              onClick={() => removeFromCart(currentItem)}
+              onClick={() => {
+                removeFromCart(currentItem);
+                setCurrentItem(null);
+              }}
             >
               Delete
             </button>
           }
-          closePopup={deleteClosePopup}
         />
       ) : null}
     </div>

@@ -1,22 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "./popup.css";
+import { CartContext } from "../../App";
 
-function Popup({ greeting, message, closePopup, addButtons }) {
+function Popup({ greeting, message, addButtons }) {
+  const { popupVisiblilty, setPopupVisiblilty } =
+    useContext(CartContext);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+  function closePopup() {
+    setPopupVisiblilty(false);
+  }
 
   return (
     <div className="popup-overlay">
       <div className="popup-window">
         <h2 style={{ color: "red" }}>{greeting}</h2>
-        <div>{message}</div>
+        <div className="popup-message">{message}</div>
         <div className="popup-btn-section">
           {addButtons}
-          <button className="close-btn" onClick={closePopup}>
+          <button className="close-btn" onClick={()=>closePopup()}>
             Close
           </button>
         </div>

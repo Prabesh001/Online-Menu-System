@@ -4,12 +4,15 @@ import { AuthContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  document.title = "TableMate | Login";
+
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,15 +53,12 @@ const LoginPage = () => {
       formData.password === "dahal"
     ) {
       setIsAuthenticated(true);
+      console.log(isAuthenticated)
       navigate("/employee");
     } else {
       alert("Sign In Failed");
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated);
-  }, [isAuthenticated]);
 
   return (
     <div className="login-page">
