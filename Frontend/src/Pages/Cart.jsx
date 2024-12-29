@@ -11,7 +11,7 @@ function Cart({ items, setItems }) {
     setCount,
     popupVisiblilty,
     setPopupVisiblilty,
-
+    coupen,
     playAddToCartSound,
   } = useContext(CartContext);
   const [updateQuant, setUpdateQuant] = useState(1);
@@ -122,8 +122,11 @@ function Cart({ items, setItems }) {
         <br />
         <span>Total Cost: Rs.{totalPrice}</span>
         <br />
-        <span>Discount: 10%</span>
-        <p>Final Price: Rs.{totalPrice - 0.1 * totalPrice}</p>
+        <span>Discount: {coupen === true ? "10%" : "0%"}</span>
+        <p>
+          Final Price: Rs.{" "}
+          {coupen === true ? totalPrice - 0.1 * totalPrice : totalPrice}
+        </p>
         <hr />
         <button
           className="payment-btn"
@@ -153,7 +156,9 @@ function Cart({ items, setItems }) {
           greeting="Update"
           message={
             <>
-              <p>Do you want to update <b>{currentItem.name}</b>'s quantity?</p>
+              <p>
+                Do you want to update <b>{currentItem.name}</b>'s quantity?
+              </p>
 
               <div className="edit-item-quantity">
                 <button
@@ -193,7 +198,10 @@ function Cart({ items, setItems }) {
         <Popup
           greeting="WARNING!"
           message={
-            <p>Are you sure you want to remove <b>{currentItem.name}</b> from cart?</p>
+            <p>
+              Are you sure you want to remove <b>{currentItem.name}</b> from
+              cart?
+            </p>
           }
           addButtons={
             <button
