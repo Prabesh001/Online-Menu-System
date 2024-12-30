@@ -29,7 +29,7 @@ function EmployeePage() {
     setTimeout(() => {
       setPopupVisiblilty(false);
       setLoading(false);
-      setIsAuthenticated(false);
+      setIsAuthenticated(!isAuthenticated);
     }, 2000);
   }
   if (loading) {

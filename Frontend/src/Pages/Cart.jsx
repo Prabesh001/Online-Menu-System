@@ -22,7 +22,6 @@ function Cart({ items, setItems }) {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  console.log(currentItem);
 
   function removeFromCart(item) {
     const filteredItems = items.filter((ele) => ele.name !== item.name);
@@ -85,7 +84,13 @@ function Cart({ items, setItems }) {
                 <div>
                   <label>
                     Quantity:
-                    <input type="text" value={item.quantity} readOnly />
+                    <input
+                      type="text"
+                      name={index}
+                      id={index}
+                      value={item.quantity}
+                      readOnly
+                    />
                   </label>
 
                   <div className="edit-buttons">
@@ -122,10 +127,12 @@ function Cart({ items, setItems }) {
         <br />
         <span>Total Cost: Rs.{totalPrice}</span>
         <br />
-        <span>Discount: {coupen === true ? "10%" : "0%"}</span>
+        <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
         <p>
-          Final Price: Rs.{" "}
-          {coupen === true ? totalPrice - 0.1 * totalPrice : totalPrice}
+          Final Price: Rs.
+          {coupen === true
+            ? (totalPrice - 0.1 * totalPrice).toFixed(0)
+            : (totalPrice - 0.03 * totalPrice).toFixed(0)}
         </p>
         <hr />
         <button

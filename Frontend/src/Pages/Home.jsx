@@ -3,6 +3,7 @@ import menu from "../JavaScript/menu.js";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
+import { Toaster, toast } from "sonner";
 
 function MenuSection({ title, category }) {
   const { setSelectedIndex } = useContext(ItemContext);
@@ -42,7 +43,9 @@ function MenuSection({ title, category }) {
                 </span>
               )}
               <br />
-              <AddToCart />
+              <AddToCart
+                onClick={() => toast.success(item.name + " added to Cart.")}
+              />
             </div>
           ))}
       </div>
@@ -59,6 +62,7 @@ function Home() {
   ];
   return (
     <div className="home-section">
+      <Toaster richColors position="bottom-center" />
       {Menu.map((menu) => {
         return (
           <MenuSection

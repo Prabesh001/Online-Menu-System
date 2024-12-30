@@ -50,7 +50,7 @@ function Layout() {
     JSON.parse(localStorage.getItem("isAuthenticated")) || false
   );
 
-  const [coupen, setCoupen] = useState(localStorage.getItem("user")||false);
+  const [coupen, setCoupen] = useState(localStorage.getItem("user") || false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -58,6 +58,10 @@ function Layout() {
   function closePopup() {
     setPopupVisiblilty(false);
   }
+
+  useEffect(() => {
+    localStorage.setItem("user", coupen);
+  }, [coupen]);
 
   useEffect(() => {
     localStorage.setItem("count", count);
@@ -158,12 +162,13 @@ function Layout() {
             setPopupVisiblilty,
             closePopup,
             playAddToCartSound,
-            coupen
+            coupen,
+            setCoupen,
           }}
         >
           <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
             <Routes>
-              <Route path="/" element={<Welcome coupen={coupen} setCoupen={setCoupen}/>} />
+              <Route path="/" element={<Welcome />} />
               <Route path="/Home" element={<Home />} />
               <Route
                 path="/category/:category"
