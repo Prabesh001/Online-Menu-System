@@ -72,7 +72,7 @@ function Layout() {
     localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
   }, [isAuthenticated]);
 
-  const audio = new Audio("../public/drop.m4a");
+  const audio = new Audio("../drop.m4a");
 
   function playAddToCartSound() {
     audio.play();
