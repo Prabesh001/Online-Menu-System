@@ -97,7 +97,7 @@ function FoodCategory({ onAddToCart }) {
   return (
     <div className="food-category">
       <h2 className="category-title">{category}</h2>
-      <Toaster richColors />
+      <Toaster richColors position="bottom-center"/>
       <ul className="item-list">
         {items.length > 0 ? (
           items.map((item) => (

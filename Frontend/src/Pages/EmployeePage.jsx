@@ -32,6 +32,7 @@ function EmployeePage() {
       setIsAuthenticated(!isAuthenticated);
     }, 2000);
   }
+
   if (loading) {
     return <LoadingComponent />;
   }

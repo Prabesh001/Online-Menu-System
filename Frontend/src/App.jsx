@@ -88,8 +88,16 @@ function Layout() {
           ...ele,
           quantity: itemQuantity,
           orderedTime: [orderedTime],
+          isDelivered: false,
         }))
-      : [{ ...item, quantity: itemQuantity, orderedTime: [orderedTime] }];
+      : [
+          {
+            ...item,
+            quantity: itemQuantity,
+            orderedTime: [orderedTime],
+            isDelivered: false,
+          },
+        ];
 
     setCartItems((prevItems) => {
       const updatedCart = [...prevItems];
@@ -107,6 +115,7 @@ function Layout() {
               orderedTime,
               ...updatedCart[existingItemIndex].orderedTime,
             ],
+            isDelivered: false,
           };
         } else {
           updatedCart.push(newItem);
