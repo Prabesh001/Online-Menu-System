@@ -15,8 +15,11 @@
   margin-right: 5px;
 }
 .item-name {
-  max-width: 100px;
+  max-width: 12em;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: -20px;
 }
 
 .menu-photo {
@@ -61,9 +64,14 @@
   background-color: #ff7a1c;
 }
 
-/* @media (max-width: 400px){
-  .offer-photo {
-    height: 242px;
-    width: 170px;
+@media (max-width: 400px) {
+  .menu-photo {
+    height: 15.7em;
   }
-} */
+  .menu-items {
+    justify-content: flex-start;
+  }
+  .item-name {
+    max-width: 10em;
+  }
+}

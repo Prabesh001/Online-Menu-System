@@ -32,9 +32,9 @@ function MenuSection({ title, category }) {
                   draggable="false"
                 />
               </div>
-              <span className="item-name" title={item.name}>
+              <div className="item-name" title={item.name}>
                 {item.name}
-              </span>
+              </div>
               <br />
               <del className="discounted"> Rs. {item.price.toFixed(0)}</del>
               {item.discountedPrice && (
