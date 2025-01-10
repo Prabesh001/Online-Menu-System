@@ -1,9 +1,14 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
 .home-section {
   margin: 5px;
 }
 .home-offer {
   font-weight: bold;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .menu-items {
   display: flex;
@@ -27,7 +32,7 @@
   max-width: 13em;
   aspect-ratio: 9 / 13;
   margin-bottom: 5px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: -2px -2px 3px gray, 2px 2px 3px gray;
   border-radius: 5px;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
@@ -38,6 +43,7 @@
   object-fit: cover;
   transition: all 0.3s ease-in-out;
 }
+
 .menu-photo:hover {
   box-shadow: 1px 1px 3px gray;
   transform: scale(0.99);

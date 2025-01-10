@@ -1,0 +1,41 @@
+.table-collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+  padding: 15px;
+  justify-content: center;
+}
+.booking-table {
+  flex-grow: 1;
+  flex-shrink: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -2px -2px 3px gray, 2px 2px 3px gray;
+  padding: 20px 5px;
+  border-radius: 10px;
+  max-width: 10.5em;
+  min-width: 10em;
+  max-height: 13em;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  cursor: pointer;
+}
+.booking-table:hover {
+  box-shadow: 1px 1px 13px gray;
+  transform: scale(1.05);
+}
+.booking-table img {
+  height: 110px;
+}
+.table-warning{
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 3px gray, -1px -1px 3px lightgray;
+  background-color: #dfdede;
+  color: red;
+  padding: 10px;
+  font-size: 17px;
+  margin: 10px;
+}

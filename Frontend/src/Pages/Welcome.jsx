@@ -7,19 +7,20 @@ import { GoogleLogin } from "@react-oauth/google";
 function Welcome() {
   const { coupen, setCoupen } = useContext(CartContext);
   const navigate = useNavigate();
+
   const handleLoginSuccess = (response) => {
     console.log("login successful: ", response);
     setCoupen(true);
-    navigate("/Home");
+    navigate("/reserve-seat");
   };
-  
+
   const handleLoginFailure = (error) => {
     console.error("Login Failed: ", error);
     <p>Login Failed! Try Again!</p>;
   };
-  
+
   function handleGuestId() {
-    navigate("/Home");
+    navigate("/reserve-seat");
     setCoupen(false);
   }
   return (
@@ -27,9 +28,9 @@ function Welcome() {
       <div className="window-overlay"></div>
       <div className="user-btn">
         <div>
-            <button className="welcome-button" onClick={() => handleGuestId()}>
-              Guest
-            </button>
+          <button className="welcome-button" onClick={() => handleGuestId()}>
+            Guest
+          </button>
         </div>
 
         <div>

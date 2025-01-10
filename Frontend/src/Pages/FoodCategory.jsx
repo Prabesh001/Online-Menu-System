@@ -91,13 +91,13 @@ function FoodCategory({ onAddToCart }) {
   const addToCartSuccess = (element) => {
     onAddToCart(element);
     console.log("success");
-    toast.success("Item added to Cart.");
+    toast.success(element.name + " added to Cart.");
   };
 
   return (
     <div className="food-category">
       <h2 className="category-title">{category}</h2>
-      <Toaster richColors position="bottom-center"/>
+      <Toaster richColors position="bottom-center" />
       <ul className="item-list">
         {items.length > 0 ? (
           items.map((item) => (

@@ -19,6 +19,7 @@ import Cart from "./Pages/Cart.jsx";
 import Table from "./Components/Table/Table.jsx";
 import EmployeePage from "./Pages/EmployeePage.jsx";
 import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
+import TableReserve from "./Pages/TableReserve.jsx";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -41,6 +42,9 @@ function Layout() {
     localStorage.getItem("searched-item") || ""
   );
 
+  const [tableNumber, setTableNumber] = useState(
+    localStorage.getItem("TableNumber") || null
+  );
   const [itemQuantity, setItemQuantity] = useState(1);
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -131,8 +135,8 @@ function Layout() {
     });
   };
 
-  const hideNavbarFooter = ["/", "/login"];
-  const hideCart = ["/", "/login", "/table", "/employee"];
+  const hideNavbarFooter = ["/", "/login", "/reserve-seat"];
+  const hideCart = ["/", "/login", "/table", "/employee", "/reserve-seat"];
 
   const noIndex = ["/table", "/employee", `/search/+${searchItem}`];
 
@@ -173,6 +177,8 @@ function Layout() {
             playAddToCartSound,
             coupen,
             setCoupen,
+            setTableNumber,
+            tableNumber,
           }}
         >
           <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
@@ -206,6 +212,10 @@ function Layout() {
                   />
                 }
               />
+              <Route
+                path="reserve-seat"
+                element={<TableReserve noOfTables={25} />}
+              ></Route>
             </Routes>
             {!hideNavbarFooter.includes(location.pathname) && <Footer />}
             {!hideCart.includes(location.pathname) && (

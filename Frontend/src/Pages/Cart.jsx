@@ -13,7 +13,10 @@ function Cart({ items, setItems }) {
     setPopupVisiblilty,
     coupen,
     playAddToCartSound,
+    tableNumber,
+    setTableNumber,
   } = useContext(CartContext);
+
   const [updateQuant, setUpdateQuant] = useState(1);
   const [currentItem, setCurrentItem] = useState(null);
   const navigate = useNavigate();
@@ -69,6 +72,15 @@ function Cart({ items, setItems }) {
     navigate(-1);
   }
 
+  const handleCheckOut = () => {
+    setTableNumber(null);
+    setPopupVisiblilty(false);
+    setCount(0);
+    localStorage.clear();
+    setItems([])
+    navigate("/");
+  };
+
   return (
     <div className="cart-overlay">
       <div className="cart-modal">
@@ -123,6 +135,8 @@ function Cart({ items, setItems }) {
         </button>
       </div>
       <div className="cart-modal price-modal">
+        <span>Table Number: {tableNumber}</span>
+        <br />
         <span>No. of items: {count}</span>
         <br />
         <span>Total Cost: Rs.{totalPrice}</span>
@@ -149,10 +163,7 @@ function Cart({ items, setItems }) {
           greeting="Payment"
           message="Do you want to check out?"
           addButtons={
-            <button
-              className="payment-btn"
-              onClick={() => alert("Tussi ja rahe ho? Mat jaao.")}
-            >
+            <button className="payment-btn" onClick={handleCheckOut}>
               Payment
             </button>
           }

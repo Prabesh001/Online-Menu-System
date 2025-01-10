@@ -12,7 +12,7 @@ function MenuSection({ title, category }) {
   }, []);
 
   return (
-    <div>
+    <div className="home-page">
       <h2 className="home-offer">{title}</h2>
       <div className="menu-items">
         {menu
