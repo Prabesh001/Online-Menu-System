@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   z-index: 1000;
-  height: 55.5vh;
+  min-height: 55.5vh;
 }
 
 .cart-modal {
