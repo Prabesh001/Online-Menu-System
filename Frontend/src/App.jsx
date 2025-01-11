@@ -193,7 +193,11 @@ function Layout() {
               <Route
                 path="/employee"
                 element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <ProtectedRoute
+                    condition={isAuthenticated}
+                    passCondition={true}
+                    destination="/login"
+                  >
                     <EmployeePage />
                   </ProtectedRoute>
                 }
@@ -214,7 +218,15 @@ function Layout() {
               />
               <Route
                 path="reserve-seat"
-                element={<TableReserve noOfTables={25} />}
+                element={
+                  <ProtectedRoute
+                    condition={tableNumber}
+                    passCondition={null}
+                    destination="/Home"
+                  >
+                    <TableReserve noOfTables={25} />
+                  </ProtectedRoute>
+                }
               ></Route>
             </Routes>
             {!hideNavbarFooter.includes(location.pathname) && <Footer />}

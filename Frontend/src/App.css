@@ -18,3 +18,6 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb{
   background-color: var(--theme-color);
 }
+body::-webkit-scrollbar{
+  background-color: #f7f2ee3c;
+}

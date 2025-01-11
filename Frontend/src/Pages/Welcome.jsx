@@ -5,13 +5,21 @@ import { CartContext } from "../App.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 
 function Welcome() {
-  const { coupen, setCoupen } = useContext(CartContext);
+  const { setCoupen, tableNumber } = useContext(CartContext);
   const navigate = useNavigate();
+
+  function handleEntry() {
+    if (tableNumber !== null) {
+      navigate("/Home");
+    } else {
+      navigate("/reserve-seat");
+    }
+  }
 
   const handleLoginSuccess = (response) => {
     console.log("login successful: ", response);
     setCoupen(true);
-    navigate("/reserve-seat");
+    handleEntry();
   };
 
   const handleLoginFailure = (error) => {
@@ -20,9 +28,13 @@ function Welcome() {
   };
 
   function handleGuestId() {
-    navigate("/reserve-seat");
+    handleEntry();
     setCoupen(false);
   }
+
+  document.addEventListener("offline", () => {
+    return <p>Hello</p>;
+  });
   return (
     <div className="welcome-page">
       <div className="window-overlay"></div>

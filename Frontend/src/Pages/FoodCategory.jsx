@@ -18,7 +18,7 @@ function FoodCategory({ onAddToCart }) {
     items,
     setItems,
   } = useContext(ItemContext);
-  const { popupVisiblilty, setPopupVisiblilty, closePopup } =
+  const { popupVisiblilty, setPopupVisiblilty } =
     useContext(CartContext);
   const { category } = useParams(); // Get the category from the URL params
 
@@ -80,7 +80,7 @@ function FoodCategory({ onAddToCart }) {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <div className="loading-failed">{error}</div>;
   }
 
   const addToCartError = () => {

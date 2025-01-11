@@ -135,12 +135,9 @@ function Cart({ items, setItems }) {
         </button>
       </div>
       <div className="cart-modal price-modal">
-        <span>Table Number: {tableNumber}</span>
-        <br />
+        <center><span style={{fontWeight:"bold",fontSize:"20px"}}>Table Number: {tableNumber}</span></center><hr />
         <span>No. of items: {count}</span>
-        <br />
-        <span>Total Cost: Rs.{totalPrice}</span>
-        <br />
+        <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
         <p>
           Final Price: Rs.

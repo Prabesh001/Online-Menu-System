@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   z-index: 1000;
+  height: 55.5vh;
 }
 
 .cart-modal {
@@ -14,6 +15,7 @@
   border-radius: 8px;
   width: 80%;
   max-width: 400px;
+  height: max-content;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 10px;
 }
@@ -81,6 +83,8 @@
 .price-modal {
   max-height: fit-content;
   position: sticky;
+  display: flex;
+  flex-direction: column;
   top: 5px;
 }
 .itemInCart input {
@@ -110,7 +114,7 @@
   color: white;
   border: none;
 }
-.del-from-cart-btn:hover{
+.del-from-cart-btn:hover {
   background-color: #d82222;
 }
 @media (max-width: 650px) {

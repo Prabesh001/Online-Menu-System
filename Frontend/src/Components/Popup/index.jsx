@@ -3,8 +3,7 @@ import "./popup.css";
 import { CartContext } from "../../App";
 
 function Popup({ greeting, message, addButtons }) {
-  const { popupVisiblilty, setPopupVisiblilty } =
-    useContext(CartContext);
+  const { setPopupVisiblilty } = useContext(CartContext);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -12,6 +11,7 @@ function Popup({ greeting, message, addButtons }) {
       document.body.style.overflow = "auto";
     };
   }, []);
+  
   function closePopup() {
     setPopupVisiblilty(false);
   }
@@ -23,7 +23,7 @@ function Popup({ greeting, message, addButtons }) {
         <div className="popup-message">{message}</div>
         <div className="popup-btn-section">
           {addButtons}
-          <button className="close-btn" onClick={()=>closePopup()}>
+          <button className="close-btn" onClick={() => closePopup()}>
             Close
           </button>
         </div>
