@@ -94,7 +94,7 @@ function SearchItem({ onAddToCart }) {
   return (
     <div>
       <p>Search Result for: {searchItem}</p>
-      <ul className="item-list">
+      <ul className="item-list" style={{minHeight:"47.5vh"}}>
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
             <li key={item._id} className="item">

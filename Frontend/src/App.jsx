@@ -29,32 +29,30 @@ function Layout() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("CartItems")) || []
   );
-
   const [selectedIndex, setSelectedIndex] = useState(
     localStorage.getItem("index") || "Home"
   );
-
   const [count, setCount] = useState(
     Number(localStorage.getItem("count")) || 0
   );
-
   const [searchItem, setSearchItem] = useState(
     localStorage.getItem("searched-item") || ""
   );
-
   const [tableNumber, setTableNumber] = useState(
     localStorage.getItem("TableNumber") || null
   );
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    JSON.parse(localStorage.getItem("isAuthenticated")) || false
+  );
+  const [coupen, setCoupen] = useState(
+    localStorage.getItem("user") || false
+  );
+
   const [itemQuantity, setItemQuantity] = useState(1);
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    JSON.parse(localStorage.getItem("isAuthenticated")) || false
-  );
-
-  const [coupen, setCoupen] = useState(localStorage.getItem("user") || false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -73,7 +71,8 @@ function Layout() {
   }, [count, cartItems]);
 
   useEffect(() => {
-    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+    localStorage.setItem("isAuthenticated",
+       JSON.stringify(isAuthenticated));
   }, [isAuthenticated]);
 
   const audio = new Audio("../drop.m4a");

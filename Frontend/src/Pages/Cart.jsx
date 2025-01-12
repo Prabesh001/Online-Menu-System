@@ -81,11 +81,13 @@ function Cart({ items, setItems }) {
     navigate("/");
   };
 
+  const hrLine = <div style={{borderTop: "1px solid lightgray"}}></div>
+
   return (
     <div className="cart-overlay">
       <div className="cart-modal">
         <h2>Your Cart</h2>
-        <hr />
+        {hrLine}
         {items.length === 0 ? (
           <p>Your cart is empty!</p>
         ) : (
@@ -135,16 +137,16 @@ function Cart({ items, setItems }) {
         </button>
       </div>
       <div className="cart-modal price-modal">
-        <center><span style={{fontWeight:"bold",fontSize:"20px"}}>Table Number: {tableNumber}</span></center><hr />
+        <center><span style={{fontWeight:"bold",fontSize:"20px"}}>Table Number: {tableNumber}</span></center> {hrLine}
         <span>No. of items: {count}</span>
         <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
-        <p>
+        <span>
           Final Price: Rs.
           {coupen === true
             ? (totalPrice - 0.1 * totalPrice).toFixed(0)
             : (totalPrice - 0.03 * totalPrice).toFixed(0)}
-        </p>
+        </span>
         <hr />
         <button
           className="payment-btn"
