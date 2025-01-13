@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
   useNavigate,
+  Navigate
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./Pages/Home.jsx";
@@ -227,6 +228,7 @@ function Layout() {
                   </ProtectedRoute>
                 }
               ></Route>
+              <Route path="*" element={<Navigate to="/Home" replace />} />
             </Routes>
             {!hideNavbarFooter.includes(location.pathname) && <Footer />}
             {!hideCart.includes(location.pathname) && (
