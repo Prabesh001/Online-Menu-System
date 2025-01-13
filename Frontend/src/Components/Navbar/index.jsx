@@ -126,8 +126,40 @@ function Index({ onCategorySelect }) {
     navigate(`/search/${suggestion}`);
   };
 
+  const [scrollDirection, setScrollDirection] = useState(null);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScrollTop > 30) {
+          if (currentScrollTop > lastScrollTop) {
+            setScrollDirection("down");
+          } else if (currentScrollTop < lastScrollTop) {
+            setScrollDirection("up");
+          }
+        } else {
+          setScrollDirection(null); // Reset if scrolled back to the top
+        }
+  
+        setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop); // Avoid negative scroll
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [lastScrollTop]);
+
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav
+      className={`navbar navbar-expand-lg bg-body-tertiary ${
+        scrollDirection === "up" ? "navbar-scroll-up" : ""
+      }`}
+    >
       <div className="container-fluid">
         <Link
           className="navbar-brand"
@@ -205,7 +237,7 @@ function Index({ onCategorySelect }) {
             >
               Search
             </button>
-            {(suggestions.length > 0 && input!="") && (
+            {suggestions.length > 0 && input != "" && (
               <ul className="autocomplete-suggestions position-absolute bg-white border">
                 {suggestions.map((suggestion) => (
                   <li
