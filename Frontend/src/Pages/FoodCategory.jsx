@@ -34,7 +34,8 @@ function FoodCategory({ onAddToCart }) {
           category === "All"
             ? data
             : data.filter((item) => item.category === category);
-
+        
+        console.log(filteredData)
         const filteredItems = filteredData.map((ele) => ({
           ...ele,
           isVeg: true,

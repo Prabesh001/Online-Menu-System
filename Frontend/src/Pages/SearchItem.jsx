@@ -92,7 +92,7 @@ function SearchItem({ onAddToCart }) {
   const filteredItems = performFuzzySearch();
 
   return (
-    <div>
+    <div style={{padding:"10px"}}>
       <p>Search Result for: {searchItem}</p>
       <ul className="item-list" style={{minHeight:"47.5vh"}}>
         {filteredItems.length > 0 ? (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import menu from "../JavaScript/menu.js";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
