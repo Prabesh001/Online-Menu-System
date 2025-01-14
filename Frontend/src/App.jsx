@@ -25,6 +25,7 @@ import AboutUs from "./Pages/FooterOption/AboutUs.jsx";
 import Advertisement from "./Pages/FooterOption/Advertisement.jsx";
 import Marketing from "./Pages/FooterOption/Marketing.jsx";
 import TermsOfUse from "./Pages/FooterOption/TermsOfUse.jsx";
+import ErrorPage from "./Pages/ErrorPage.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
 
@@ -261,7 +262,10 @@ function Layout() {
               {/* <Route path="/cookie-policy" element={<CookiePolicy />} /> */}
               {/* <Routes path="/privacy-policy" element={<PrivacyPolicy />} /> */}
 
-              <Route path="*" element={<Navigate to="/Home" replace />} />
+              <Route
+                path="*"
+                element={<ErrorPage setSelectedIndex={setSelectedIndex} />}
+              />
             </Routes>
             {!hideNavbarFooter.includes(location.pathname) && <Footer />}
             {!hideCart.includes(location.pathname) && (
