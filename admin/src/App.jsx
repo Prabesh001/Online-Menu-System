@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,createContext } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { Route, Routes } from "react-router-dom";
@@ -15,20 +15,29 @@ import Bar from "./scenes/bar";
 import Calendar from "./scenes/calendar/calendar";
 import Line from "./scenes/line";
 // import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
 // import Geography from "./scenes/geography";
+import FAQ from "./scenes/faq";
+import { useEffect } from "react";
+
+export const CollapseContext = createContext();
 
 function App() {
   const [theme, colorMode] = useMode();
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSidebar, setIsSidebar] = useState(true);
+
+  useEffect(()=>{
+    localStorage.setItem("isNavCollapsed" , isCollapsed)
+  },[setIsCollapsed])
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
+      <CollapseContext.Provider value={{isCollapsed, setIsCollapsed}}>
         <CssBaseline />
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
+          <Sidebar isSidebar={isSidebar}/>
+          <main className="content" style={{marginLeft: `${isCollapsed? "80px":"270px"}`}}>
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -47,6 +56,7 @@ function App() {
             </Routes>
           </main>
         </div>
+        </CollapseContext.Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

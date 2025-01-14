@@ -17,6 +17,8 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { FaEdit } from "react-icons/fa";
+import { useContext } from "react";
+import { CollapseContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -42,7 +44,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const {isCollapsed, setIsCollapsed}= useContext(CollapseContext);
   const [selected, setSelected] = useState(localStorage.getItem("selected")||"Dashboard");
 
   return (
@@ -64,6 +66,7 @@ const Sidebar = () => {
           color: "#6870fa !important",
         },
       }}
+      style={{position:"fixed"}}
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
