@@ -131,9 +131,9 @@ function Index({ onCategorySelect }) {
 
     useEffect(() => {
       const handleScroll = () => {
-        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const currentScrollTop =  document.documentElement.scrollTop;
 
-        if (currentScrollTop > 30) {
+        if (currentScrollTop > 30 && window.pageYOffset>50) {
           if (currentScrollTop > lastScrollTop) {
             setScrollDirection("down");
           } else if (currentScrollTop < lastScrollTop) {
@@ -142,7 +142,6 @@ function Index({ onCategorySelect }) {
         } else {
           setScrollDirection(null); // Reset if scrolled back to the top
         }
-  
         setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop); // Avoid negative scroll
       };
 

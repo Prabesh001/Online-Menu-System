@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Table from "../Components/assets/OrderTable.png";
 import "./Styles/TableReserve.css";
 import { CartContext } from "../App";

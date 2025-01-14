@@ -16,6 +16,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import { FaEdit } from "react-icons/fa";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -26,7 +27,10 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       style={{
         color: colors.grey[100],
       }}
-      onClick={() => setSelected(title)}
+      onClick={() => {
+        setSelected(title)
+        localStorage.setItem("selected" , title)
+      }}
       icon={icon}
     >
       <Typography>{title}</Typography>
@@ -39,7 +43,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState(localStorage.getItem("selected")||"Dashboard");
 
   return (
     <Box
@@ -80,7 +84,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  ADMINS
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -140,6 +144,13 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Manage Items"
+              to="/items"
+              icon={<FaEdit />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Contacts Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
@@ -168,6 +179,15 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Item
+              title="Add Items"
+              to="/add-item"
+              icon={<FaEdit />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            
             <Item
               title="Calendar"
               to="/calendar"

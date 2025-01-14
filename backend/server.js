@@ -6,7 +6,21 @@ const http = require('http');
 const app = express();
 const PORT = 5000;
 
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from React app
+// CORS options to allow multiple origins
+const corsOptions = {
+  origin: (origin, callback) => {
+    const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      // Allow requests with no origin (e.g., Postman, mobile apps)
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+// Use the CORS options
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // MongoDB connection
@@ -34,7 +48,7 @@ app.get('/api/menu', async (req, res) => {
     try {
         const items = await Item.find(); // Fetch all items
         res.json(items); // Return the items array
-        console.log('Fetched items:', items);
+        console.log(items);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
