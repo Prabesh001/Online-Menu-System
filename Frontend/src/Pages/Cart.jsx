@@ -103,6 +103,7 @@ function Cart({ items, setItems }) {
                       name={index}
                       id={index}
                       value={item.quantity}
+                      style={{textAlign: "center"}}
                       readOnly
                     />
                   </label>

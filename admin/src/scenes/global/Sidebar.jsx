@@ -66,7 +66,7 @@ const Sidebar = () => {
           color: "#6870fa !important",
         },
       }}
-      style={{position:"fixed"}}
+      style={{position:"fixed", zIndex: 1000}}
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">

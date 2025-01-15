@@ -12,48 +12,43 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import axios from "axios";
 import Header from "../../components/Header";
 
 const AddItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    const sanitizedValues = {
-      _id: values.id || "",
-      name: values.name || "",
-      description: values.description || "",
-      price: values.price || 0,
-      category: values.category || "",
-      availability: values.availability ?? true,
-      review: [{}],
-    };
-
     try {
-      console.log("Submitting sanitized data:", sanitizedValues);
-      const response = await axios.post(
-        "http://localhost:5000/api/menu",
-        sanitizedValues
-      );
-      console.log("Data successfully sent:", response.data);
-      resetForm();
-      alert("Item added successfully!");
-    } catch (error) {
-      console.error("Error sending data to API:", error);
-      if (error.response) {
-        console.error("Server Response:", error.response.data);
-        alert(
-          `Failed to add item: ${
-            error.response.data.message || "Unknown error"
-          }`
-        );
-      } else if (error.request) {
-        console.error("No response received:", error.request);
-        alert("Failed to reach the server. Please try again.");
+      // Mapping Formik values to the backend schema
+      const mappedValues = {
+        name: values.name,
+        description: values.description,
+        price: values.price,
+        category: values.category,
+        availability: values.availability,
+      };
+
+      const response = await fetch("http://localhost:5000/api/menu", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mappedValues), // Send mapped values to the backend
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Item added successfully:", data);
+        alert("Item created successfully!");
+        resetForm(); // Reset the form fields
       } else {
-        console.error("Request setup error:", error.message);
-        alert("An error occurred while setting up the request.");
+        const error = await response.json();
+        console.error("Error creating item:", error);
+        alert("Failed to create item. Please try again.");
       }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong!");
     }
   };
 
@@ -123,7 +118,10 @@ const AddItem = () => {
                 sx={{ gridColumn: "span 4" }}
               />
 
-              <FormControl sx={{ m: 1, minWidth: 200 }} error={!!touched.category && !!errors.category}>
+              <FormControl
+                sx={{ m: 1, minWidth: 200 }}
+                error={!!touched.category && !!errors.category}
+              >
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -143,11 +141,19 @@ const AddItem = () => {
                   <MenuItem value="Soup">Soup</MenuItem>
                   <MenuItem value="Dessert">Dessert</MenuItem>
                 </Select>
-                <FormHelperText>{touched.category && errors.category}</FormHelperText> {/* Display error here */}
+                <FormHelperText>
+                  {touched.category && errors.category}
+                </FormHelperText>{" "}
+                {/* Display error here */}
               </FormControl>
               <br />
-              <FormControl sx={{ m: 1, minWidth: 100 }} error={!!touched.availability && !!errors.availability}>
-                <InputLabel id="demo-simple-select-autowidth-label">Availability</InputLabel>
+              <FormControl
+                sx={{ m: 1, minWidth: 100 }}
+                error={!!touched.availability && !!errors.availability}
+              >
+                <InputLabel id="demo-simple-select-autowidth-label">
+                  Availability
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
@@ -163,7 +169,10 @@ const AddItem = () => {
                   <MenuItem value={true}>True</MenuItem>
                   <MenuItem value={false}>False</MenuItem>
                 </Select>
-                <FormHelperText>{touched.availability && errors.availability}</FormHelperText> {/* Display error here */}
+                <FormHelperText>
+                  {touched.availability && errors.availability}
+                </FormHelperText>{" "}
+                {/* Display error here */}
               </FormControl>
 
               <TextField
@@ -194,7 +203,7 @@ const AddItem = () => {
 
 const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
-  id: yup.string().required("required"),
+  id: yup.string(),
   description: yup.string().required("required"),
   price: yup.number().required("required").positive("Must be positive"),
   category: yup.string().required("required"),

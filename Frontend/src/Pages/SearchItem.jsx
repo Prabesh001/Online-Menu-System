@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import AddToCart from "../Components/AddToCart/index.jsx";
-import API_BASE_URL from "../JavaScript/config.js";
-import axios from "axios";
+import { fetchItems } from "../JavaScript/fetchData.js";
 import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
 import LoadingComponent from "../Components/Loading/loading.jsx";
-
+import {Breadcrumbs, Typography} from "@mui/material";
+import { Link } from "react-router-dom";
 // Levenshtein Distance for Fuzzy Search
 function levenshteinDistance(a, b) {
   const dp = Array.from({ length: a.length + 1 }, () =>
@@ -46,17 +46,20 @@ function SearchItem({ onAddToCart }) {
   useEffect(() => {
     setItems([]);
     setLoading(true);
-    axios
-      .get(`${API_BASE_URL}`)
-      .then((response) => {
-        setItems(response.data);
+
+    const getData = async () => {
+      try {
+        const data = await fetchItems();
+        setItems(data);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data: ", error);
-        setError(error);
+        setError("Failed to load search items.", error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    getData();
     setSelectedIndex(null);
   }, []);
 
@@ -90,11 +93,17 @@ function SearchItem({ onAddToCart }) {
   };
 
   const filteredItems = performFuzzySearch();
-
   return (
-    <div style={{padding:"10px"}}>
-      <p>Search Result for: {searchItem}</p>
-      <ul className="item-list" style={{minHeight:"47.5vh"}}>
+    <div style={{ padding: "10px" }}>
+      <Breadcrumbs separator={">"} aria-label="breadcrumb">
+        search
+        <Typography underline="hover" color="inherit" href="/search">
+          Search
+        </Typography>
+        <Typography color="text.secondary">{searchItem}</Typography>
+      </Breadcrumbs>
+      <br />
+      <ul className="item-list" style={{ minHeight: "47.5vh" }}>
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
             <li key={item._id} className="item">

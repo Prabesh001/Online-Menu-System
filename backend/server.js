@@ -1,35 +1,38 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const http = require('http');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+const http = require("http");
 
 const app = express();
 const PORT = 5000;
 
-// CORS options to allow multiple origins
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// CORS options
 const corsOptions = {
   origin: (origin, callback) => {
-    const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+    const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
     if (allowedOrigins.includes(origin) || !origin) {
-      // Allow requests with no origin (e.g., Postman, mobile apps)
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
 };
-
-// Use the CORS options
 app.use(cors(corsOptions));
-app.use(express.json());
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://shresthaniraj43:BMC%40123@tablemate.l4zz8.mongodb.net/Tablemate?retryWrites=true&w=majority&appName=TableMate')
-    .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch(err => console.error('Failed to connect to MongoDB Atlas:', err));
+mongoose
+  .connect(
+    "mongodb+srv://shresthaniraj43:BMC%40123@tablemate.l4zz8.mongodb.net/Tablemate?retryWrites=true&w=majority&appName=TableMate"
+  )
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.error("Failed to connect to MongoDB Atlas:", err));
 
-// Define a schema with more fields
-const itemSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema(
+  {
     _id: String,
     name: String,
     description: String,
@@ -38,28 +41,152 @@ const itemSchema = new mongoose.Schema({
     availability: Boolean,
     image_url: String,
     promotion: Boolean,
-}, { collection: "menuItem" });
+  },
+  { collection: "menuItem", versionKey: false }
+);
+// Team schema and model
+const teamSchema = new mongoose.Schema(
+  {
+    _id: String,
+    id: String,
+    first_name: String,
+    last_name: String,
+    Username: String,
+    email: String,
+    password: String, // Store hashed passwords
+    age: Number,
+    phone_number: String,
+    access_level: { type: String, enum: ["admin", "manager", "employee"] },
+  },
+  { collection: "team", versionKey: false }
+);
+const Item = mongoose.model("menuItem", itemSchema);
+const Team = mongoose.model("team", teamSchema);
 
-// Create a model from the schema
-const Item = mongoose.model('menuItem', itemSchema);
-
-// Endpoint to get all items
-app.get('/api/menu', async (req, res) => {
-    try {
-        const items = await Item.find(); // Fetch all items
-        res.json(items); // Return the items array
-        console.log(items);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+app.get("/api/menu", async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
-// Create the HTTP server instance and set custom timeout values
+app.post("/api/menu", async (req, res) => {
+  try {
+    const { name, description, price, category, availability } = req.body;
+
+    if (!name || !description || !price || !category) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Create the new item using the correct model (Item instead of Team)
+    const newItem = new Item({
+      _id: new mongoose.Types.ObjectId().toString(), // Create a new ObjectId for the item
+      name,
+      description,
+      price,
+      category,
+      availability,
+    });
+
+    await newItem.save();
+    res.status(201).json({ message: "Item added successfully", newItem });
+  } catch (err) {
+    console.error("Error in adding item:", err); // Log the error to the backend console
+    res.status(500).json({ message: err.message, error: err });
+  }
+});
+
+// Get all team members
+app.get("/api/employee", async (req, res) => {
+  try {
+    const employees = await Team.find();
+    res.json(employees);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get a team member by id
+app
+  .route("/api/employee/:id")
+  .get(async (req, res) => {
+    try {
+      const id = req.params.id;
+      const employee = await Team.find({ id });
+      if (!employee) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.json(employee);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  })
+  .patch(async (req, res) => {
+    //Edit data
+    try {
+      const id = req.params.id;
+      const updatedEmployee = await Team.findOneAndUpdate(
+        { id },
+        { $set: req.body },
+        { new: true }
+      );
+
+      if (!updatedEmployee) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json(updatedEmployee);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
+// Add a new team member
+app.post("/api/employee", async (req, res) => {
+  try {
+    const {
+      first_name,
+      last_name,
+      Username,
+      email,
+      password,
+      age,
+      phone_number,
+      access_level,
+    } = req.body;
+
+    if (!first_name || !email || !password || !access_level) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the new employee without manually setting `id`
+    const newUser = new Team({
+      _id: new mongoose.Types.ObjectId().toString(),
+      id: new mongoose.Types.ObjectId().toString(),
+      first_name,
+      last_name,
+      Username,
+      email,
+      password: hashedPassword,
+      age,
+      phone_number,
+      access_level,
+    });
+
+    await newUser.save();
+    res.status(201).json({ message: "User added successfully", newUser });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Server setup
 const server = http.createServer(app);
-
-// Adjust timeouts
-server.keepAliveTimeout = 120000; // 120 seconds for keep-alive connections
-server.headersTimeout = 120000;   // 120 seconds for headers to be received
-
-// Start the server
-server.listen(PORT, '0.0.0.0', () => console.log(`Server running on http://localhost:${PORT}`));
+server.listen(PORT, "0.0.0.0", () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);

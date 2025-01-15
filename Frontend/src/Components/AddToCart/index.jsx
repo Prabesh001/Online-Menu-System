@@ -5,7 +5,7 @@ function AddToCart({onClick}) {
   return (
     <div>
       <button
-        className="add-button"
+        className="add-button no-select"
         onClick={onClick}
       >
         Add

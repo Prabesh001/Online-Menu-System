@@ -91,17 +91,17 @@ function Layout() {
 
     const orderedTime = new Date().toISOString();
 
-    const updatedItems = Array.isArray(item)
+    const itemsToAdd = Array.isArray(item)
       ? item.map((ele) => ({
           ...ele,
-          quantity: itemQuantity,
+          quantity: ele.quantity || 1,
           orderedTime: [orderedTime],
           isDelivered: false,
         }))
       : [
           {
             ...item,
-            quantity: itemQuantity,
+            quantity: item.quantity || 1,
             orderedTime: [orderedTime],
             isDelivered: false,
           },
@@ -110,7 +110,7 @@ function Layout() {
     setCartItems((prevItems) => {
       const updatedCart = [...prevItems];
 
-      updatedItems.forEach((newItem) => {
+      itemsToAdd.forEach((newItem) => {
         const existingItemIndex = updatedCart.findIndex(
           (cartItem) => cartItem._id === newItem._id
         );
@@ -118,10 +118,13 @@ function Layout() {
         if (existingItemIndex > -1) {
           updatedCart[existingItemIndex] = {
             ...updatedCart[existingItemIndex],
-            quantity: updatedCart[existingItemIndex].quantity + 1,
+            quantity:
+              updatedCart[existingItemIndex].quantity + newItem.quantity,
             orderedTime: [
-              orderedTime,
-              ...updatedCart[existingItemIndex].orderedTime,
+              ...new Set([
+                ...newItem.orderedTime,
+                ...updatedCart[existingItemIndex].orderedTime,
+              ]),
             ],
             isDelivered: false,
           };
@@ -135,6 +138,7 @@ function Layout() {
         0
       );
       setCount(newCount);
+
       return updatedCart;
     });
   };

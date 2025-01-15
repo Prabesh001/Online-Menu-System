@@ -1,20 +1,46 @@
+import { useState, useEffect } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import { fetchTeams } from "../../../../Frontend/src/JavaScript/fetchData";
 
 function Team() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [team, setTeam] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await fetchTeams();
+        const formattedData = data.map(({ _id, ...rest }, index) => ({
+          id: index,
+          ...rest,
+        }));
+        setTeam(formattedData);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    getData();
+  }, []);
+
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
+      field: "first_name",
       headerName: "Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "password",
+      headerName: "Password",
       flex: 1,
       cellClassName: "name-column--cell",
     },
@@ -26,7 +52,7 @@ function Team() {
       align: "left",
     },
     {
-      field: "phone",
+      field: "phone_number",
       headerName: "Phone Number",
       flex: 1,
     },
@@ -36,10 +62,10 @@ function Team() {
       flex: 1,
     },
     {
-      field: "accessLevel",
+      field: "access_level",
       headerName: "Access Level",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: ({ row: { access_level } }) => {
         return (
           <Box
             width="60%"
@@ -48,19 +74,19 @@ function Team() {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              access === "admin"
+              access_level === "admin"
                 ? colors.greenAccent[600]
-                : access === "manager"
+                : access_level === "manager"
                 ? colors.greenAccent[700]
                 : colors.greenAccent[700]
             }
             borderRadius="4px"
           >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
+            {access_level === "admin" && <AdminPanelSettingsOutlinedIcon />}
+            {access_level === "manager" && <SecurityOutlinedIcon />}
+            {access_level === "employee" && <LockOpenOutlinedIcon />}
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
+              {access_level}
             </Typography>
           </Box>
         );
@@ -97,7 +123,7 @@ function Team() {
           },
         }}
       >
-        <DataGrid rows={mockDataTeam} columns={columns} />
+        <DataGrid rows={team} columns={columns} />
       </Box>
     </Box>
   );

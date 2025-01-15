@@ -23,3 +23,8 @@ body::-webkit-scrollbar-thumb{
 body::-webkit-scrollbar{
   background-color: #f7f2ee3c;
 }
+.no-select {
+  user-select: none; 
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+}

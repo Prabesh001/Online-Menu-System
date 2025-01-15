@@ -48,6 +48,23 @@
   justify-content: center;
   align-items: center;
 }
+.add-btn-group{
+  display: flex;
+  align-items: baseline;
+  column-gap: 12px;
+}
+.set-item-quantity{
+  display: flex;
+  column-gap: 5px;
+}
+.set-item-quantity input{
+  border: none;
+  text-align: center;
+  border-bottom:2px solid lightgray ;
+  width: 40px;
+  font-weight: bold;
+  background: transparent;
+}
 
 @media (max-width: 768px) {
   .item {

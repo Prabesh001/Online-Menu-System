@@ -7,6 +7,7 @@ import { CartContext, ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
 import { fetchItems } from "../JavaScript/fetchData";
 import { Toaster, toast } from "sonner";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 function FoodCategory({ onAddToCart }) {
   const {
@@ -16,10 +17,9 @@ function FoodCategory({ onAddToCart }) {
     error,
     setError,
     items,
-    setItems,
+    setItems
   } = useContext(ItemContext);
-  const { popupVisiblilty, setPopupVisiblilty } =
-    useContext(CartContext);
+  const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { category } = useParams(); // Get the category from the URL params
 
   useEffect(() => {
@@ -34,8 +34,8 @@ function FoodCategory({ onAddToCart }) {
           category === "All"
             ? data
             : data.filter((item) => item.category === category);
-        
-        console.log(filteredData)
+
+        console.log(filteredData);
         const filteredItems = filteredData.map((ele) => ({
           ...ele,
           isVeg: true,
@@ -84,6 +84,21 @@ function FoodCategory({ onAddToCart }) {
     return <div className="loading-failed">{error}</div>;
   }
 
+  const handleAction = (action, itemId) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item._id === itemId
+          ? {
+              ...item,
+              quantity:
+                action === "plus"
+                  ? (item.quantity || 0) + 1
+                  : Math.max((item.quantity || 0) - 1, 0),
+            }
+          : item
+      )
+    );
+  };
   const addToCartError = () => {
     setPopupVisiblilty(true);
     console.log("error");
@@ -111,21 +126,36 @@ function FoodCategory({ onAddToCart }) {
                 <h3>{item.name}</h3>
                 <span style={{ fontSize: "13px", fontStyle: "italic" }}>
                   {item.availability ? (
-                    <span style={{ color: "green" }}>(Available)</span>
+                    <span style={{ color: "green" }} className="no-select">(Available)</span>
                   ) : (
                     <span style={{ color: "red" }}>(Not Available)</span>
                   )}
                 </span>
-                <p>{item.description}</p>
+                <p className="no-select">{item.description}</p>
                 <p>Rs. {item.price}</p>
               </div>
-              <AddToCart
-                onClick={() => {
-                  item.availability == true
-                    ? addToCartSuccess(item)
-                    : addToCartError();
-                }}
-              />
+              <div className="add-btn-group">
+                <div className="set-item-quantity">
+                  <MinusIcon
+                    size="20px"
+                    cursor="pointer"
+                    onClick={() => handleAction("minus", item._id)}
+                  />
+                  <input readOnly value={item.quantity || 1} />
+                  <PlusIcon
+                    size="20px"
+                    cursor="pointer"
+                    onClick={() => handleAction("plus", item._id)}
+                  />
+                </div>
+                <AddToCart
+                  onClick={() => {
+                    item.availability == true
+                      ? addToCartSuccess(item)
+                      : addToCartError();
+                  }}
+                />
+              </div>
             </li>
           ))
         ) : (

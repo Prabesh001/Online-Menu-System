@@ -1,4 +1,4 @@
-import { useState,createContext } from "react";
+import { useState,createContext, useEffect } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { Route, Routes } from "react-router-dom";
@@ -17,7 +17,6 @@ import Line from "./scenes/line";
 // import Pie from "./scenes/pie";
 // import Geography from "./scenes/geography";
 import FAQ from "./scenes/faq";
-import { useEffect } from "react";
 
 export const CollapseContext = createContext();
 

@@ -1,9 +1,9 @@
 import axios from "axios";
-import API_BASE_URL from "./config.js";
+import { API_BASE_URL, API_TEAM_URL } from "./config.js";
 
-export const fetchItems = async () => {
+const fetchAction = async (url) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}`);
+    const response = await axios.get(url);
     if (response.status !== 200) {
       throw new Error(`Unexpected response status: ${response.status}`);
     }
@@ -12,4 +12,13 @@ export const fetchItems = async () => {
     console.error("Error fetching items:", error);
     return [];
   }
+};
+
+// Define fetchItems and fetchTeams as asynchronous functions
+export const fetchItems = async () => {
+  return await fetchAction(`${API_BASE_URL}`);
+};
+
+export const fetchTeams = async () => {
+  return await fetchAction(`${API_TEAM_URL}`);
 };
