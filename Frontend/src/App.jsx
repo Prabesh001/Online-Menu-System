@@ -26,6 +26,8 @@ import Advertisement from "./Pages/FooterOption/Advertisement.jsx";
 import Marketing from "./Pages/FooterOption/Marketing.jsx";
 import TermsOfUse from "./Pages/FooterOption/TermsOfUse.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
+import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
+import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
 
@@ -59,6 +61,8 @@ function Layout() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
+
+  const [] = useState([])
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -263,6 +267,8 @@ function Layout() {
               <Route path="/tablemate/advertisement" element={<Advertisement />} />
               <Route path="/tablemate/marketing" element={<Marketing />} />
               <Route path="/tablemate/terms-of-use" element={<TermsOfUse />} />
+              <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+              <Route path="/paymentfailure" element={<PaymentFailure />} />
               {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
               {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 

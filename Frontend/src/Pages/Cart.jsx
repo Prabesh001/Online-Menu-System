@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { CartContext } from "../App.jsx";
 import "./Styles/cart.css";
+import Payment from "./Payment/Payment.jsx";
 
 function Cart({ items, setItems }) {
   const {
@@ -74,14 +75,16 @@ function Cart({ items, setItems }) {
 
   const handleCheckOut = () => {
     setTableNumber(null);
-    setPopupVisiblilty(false);
     setCount(0);
     localStorage.clear();
-    setItems([])
+    setItems([]);
     navigate("/");
   };
 
-  const hrLine = <div style={{borderTop: "1px solid lightgray"}}></div>
+  const withCoupen = totalPrice - 0.03 * totalPrice;
+  const withoutCoupen = totalPrice - 0.1 * totalPrice;
+
+  const hrLine = <div style={{ borderTop: "1px solid lightgray" }}></div>;
 
   return (
     <div className="cart-overlay">
@@ -103,7 +106,7 @@ function Cart({ items, setItems }) {
                       name={index}
                       id={index}
                       value={item.quantity}
-                      style={{textAlign: "center"}}
+                      style={{ textAlign: "center" }}
                       readOnly
                     />
                   </label>
@@ -138,37 +141,25 @@ function Cart({ items, setItems }) {
         </button>
       </div>
       <div className="cart-modal price-modal">
-        <center><span style={{fontWeight:"bold",fontSize:"20px"}}>Table Number: {tableNumber}</span></center> {hrLine}
+        <center>
+          <span style={{ fontWeight: "bold", fontSize: "20px" }}>
+            Table Number: {tableNumber}
+          </span>
+        </center>{" "}
+        {hrLine}
         <span>No. of items: {count}</span>
         <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
         <span>
           Final Price: Rs.
-          {coupen === true
-            ? (totalPrice - 0.1 * totalPrice).toFixed(0)
-            : (totalPrice - 0.03 * totalPrice).toFixed(0)}
+          {coupen === "true" ? withCoupen : withoutCoupen}
         </span>
         <hr />
-        <button
+        <Payment
           className="payment-btn"
-          onClick={() => {
-            setPopupVisiblilty(true);
-          }}
-        >
-          Payment
-        </button>
-      </div>
-      {popupVisiblilty === true && (
-        <Popup
-          greeting="Payment"
-          message="Do you want to check out?"
-          addButtons={
-            <button className="payment-btn" onClick={handleCheckOut}>
-              Payment
-            </button>
-          }
+          amount={coupen === "true" ? withCoupen : withoutCoupen}
         />
-      )}
+      </div>
       {popupVisiblilty === "update" && (
         <Popup
           greeting="Update"

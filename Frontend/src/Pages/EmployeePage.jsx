@@ -39,9 +39,16 @@ function EmployeePage() {
   const styleButton = { backgroundColor: "red" };
 
   return (
-    <div>
+    <div style={{ padding: "10px" }}>
       <Toaster richColors />
-      <h1>Orders</h1>
+      <span style={{ fontSize: "20px", fontWeight: "bold" }}>
+        Orders from Table No.{" "}
+      </span>
+
+      <select name="Table No" id="">
+        <option value="1">1</option>
+        <option value="1">2</option>
+      </select>
       <table border="1" style={{ width: "100%", textAlign: "left" }}>
         <thead>
           <tr>

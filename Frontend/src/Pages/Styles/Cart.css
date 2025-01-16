@@ -37,16 +37,18 @@
 .close-btn,
 .payment-btn {
   padding: 10px 20px;
-  background-color: #ff914d;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background-color: #ff7a1c;
 }
-
+.payment-btn{
+  width: 100%;
+}
 .close-btn:hover,
 .payment-btn:hover {
-  background-color: #ff7a1c;
+  background-color: #ff914d;
 }
 
 .itemInCart {
