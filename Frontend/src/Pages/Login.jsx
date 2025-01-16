@@ -25,20 +25,18 @@ const LoginPage = () => {
 
   const button = document.querySelector(".login-button");
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     setLoading(true);
     button.style.backgroundColor = "#f0620a";
 
     try {
-      // Fetch user data from the API
       const response = await fetch("http://localhost:5000/api/employee");
       if (!response.ok) {
         throw new Error("Failed to fetch employee data.");
       }
-      
+
       const employees = await response.json();
-      
-      // Find the employee with the matching email
+
       const user = employees.find(
         (employee) => employee.email === formData.email
       );
@@ -90,6 +88,7 @@ const LoginPage = () => {
             onChange={handleInputChange}
             className={error ? "input error-input" : "input"}
           />
+          <p className="error-msg">{error ? "*required" : ""}</p>
           <input
             type="password"
             name="password"
@@ -99,6 +98,10 @@ const LoginPage = () => {
             className={error ? "input error-input" : "input"}
             required
           />
+          <p className="error-msg">{error ? "*required" : ""}</p>
+          <div
+            style={{ borderTop: "1px solid lightgray", marginBottom: "10px" }}
+          ></div>
           <button type="submit" className="login-button">
             {loading ? <CircularProgress size={10} color="white" /> : "Login"}
           </button>
