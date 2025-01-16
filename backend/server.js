@@ -53,7 +53,8 @@ const teamSchema = new mongoose.Schema(
     last_name: String,
     Username: String,
     email: String,
-    password: String, // Store hashed passwords
+    password: String,
+    hashedPassword: String,
     age: Number,
     phone_number: String,
     access_level: { type: String, enum: ["admin", "manager", "employee"] },
@@ -141,6 +142,21 @@ app
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
+  })
+  .delete(async (req, res) => {
+    //Delete data
+    try {
+      const id = req.params.id;
+      const deleteId = await Team.findOneAndDelete({ id });
+
+      if (!deleteId) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({ message: "User not found" , deleteId});
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
   });
 
 // Add a new team member
@@ -164,14 +180,16 @@ app.post("/api/employee", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new employee without manually setting `id`
+    const newId = new mongoose.Types.ObjectId().toString();
     const newUser = new Team({
-      _id: new mongoose.Types.ObjectId().toString(),
-      id: new mongoose.Types.ObjectId().toString(),
+      _id: newId,
+      id: newId,
       first_name,
       last_name,
       Username,
       email,
-      password: hashedPassword,
+      password,
+      hashedPassword: hashedPassword,
       age,
       phone_number,
       access_level,

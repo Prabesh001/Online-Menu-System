@@ -81,8 +81,8 @@ const AddItem = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
-                label="Id"
+                type="hidden"
+                label=""
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.id}

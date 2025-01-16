@@ -150,24 +150,24 @@ function Layout() {
     "/table",
     "/employee",
     "/reserve-seat",
-    "/about-us",
-    "/advertisement",
-    "/marketing",
-    "/terms-of-use",
-    "/cookie-policy",
-    "/privacy-policy",
+    "/tablemate/about-us",
+    "/tablemate/advertisement",
+    "/tablemate/marketing",
+    "/tablemate/terms-of-use",
+    "/tablemate/cookie-policy",
+    "/tablemate/privacy-policy",
   ];
 
   const noIndex = [
     "/table",
     "/employee",
     `/search/+${searchItem}`,
-    "/about-us",
-    "/advertisement",
-    "/marketing",
-    "/terms-of-use",
-    "/cookie-policy",
-    "/privacy-policy",
+    "/tablemate/about-us",
+    "/tablemate/advertisement",
+    "/tablemate/marketing",
+    "/tablemate/terms-of-use",
+    "/tablemate/cookie-policy",
+    "/tablemate/privacy-policy",
   ];
 
   useEffect(() => {
@@ -259,12 +259,12 @@ function Layout() {
                 }
               ></Route>
 
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/advertisement" element={<Advertisement />} />
-              <Route path="/marketing" element={<Marketing />} />
-              <Route path="/terms-of-use" element={<TermsOfUse />} />
-              {/* <Route path="/cookie-policy" element={<CookiePolicy />} /> */}
-              {/* <Routes path="/privacy-policy" element={<PrivacyPolicy />} /> */}
+              <Route path="/tablemate/about-us" element={<AboutUs />} />
+              <Route path="/tablemate/advertisement" element={<Advertisement />} />
+              <Route path="/tablemate/marketing" element={<Marketing />} />
+              <Route path="/tablemate/terms-of-use" element={<TermsOfUse />} />
+              {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
+              {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 
               <Route
                 path="*"

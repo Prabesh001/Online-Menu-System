@@ -35,7 +35,6 @@ function FoodCategory({ onAddToCart }) {
             ? data
             : data.filter((item) => item.category === category);
 
-        console.log(filteredData);
         const filteredItems = filteredData.map((ele) => ({
           ...ele,
           isVeg: true,
@@ -92,7 +91,7 @@ function FoodCategory({ onAddToCart }) {
               ...item,
               quantity:
                 action === "plus"
-                  ? (item.quantity || 0) + 1
+                  ? (item.quantity || 1) + 1
                   : Math.max((item.quantity || 0) - 1, 0),
             }
           : item
@@ -141,7 +140,7 @@ function FoodCategory({ onAddToCart }) {
                     cursor="pointer"
                     onClick={() => handleAction("minus", item._id)}
                   />
-                  <input readOnly value={item.quantity || 1} />
+                  <input key={item.id} readOnly value={item.quantity || 1} />
                   <PlusIcon
                     size="20px"
                     cursor="pointer"

@@ -1,9 +1,9 @@
 import React from "react";
-// import Layout from "../layout/Layout";
+import Layout from "./Layout";
 
 const PrivacyPolicy = () => {
   return (
-    <div>
+    <Layout>
       <div className="min-h-screen bg-gray-100">
         <div className="container px-4 py-8 mx-auto md:py-16">
           <h1 className="mb-8 text-3xl font-bold text-center text-gray-800 md:text-4xl">
@@ -96,7 +96,7 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

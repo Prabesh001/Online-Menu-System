@@ -1,19 +1,19 @@
 import React from "react";
-import { Ticket, Film, Music, Users, Shield, Headphones } from "lucide-react";
-// import Layout from "./../layout/Layout";
+import { Ticket, Users, Shield, Headphones } from "lucide-react";
+import Layout from "./Layout";
 
 const AboutUs = () => {
   return (
-    <div>
+    <Layout>
       <div className="min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="mb-8 text-4xl font-bold text-center text-gray-900">
-            About TicketNest
+            About TableMate
           </h1>
 
           <section className="p-6 mb-8 bg-white rounded-lg shadow-lg">
             <h2 className="mb-4 text-2xl font-semibold text-gray-800">
-              Welcome to TicketNest
+              Welcome to TableMate
             </h2>
             <p className="mb-4 text-gray-600">
               Your premier destination for online ticket booking for movies,
@@ -28,7 +28,7 @@ const AboutUs = () => {
             <FeatureCard
               icon={<Ticket className="w-8 h-8 text-blue-500" />}
               title="Easy Booking"
-              description="Our user-friendly interface allows you to effortlessly search and book tickets for a wide array of entertainment options."
+              description="Our user-friendly interface allows you to effortlessly search and book table for your meal."
             />
             <FeatureCard
               icon={<Shield className="w-8 h-8 text-green-500" />}
@@ -43,7 +43,7 @@ const AboutUs = () => {
             <FeatureCard
               icon={<Users className="w-8 h-8 text-yellow-500" />}
               title="Inclusive Platform"
-              description="We cater to everyone, making entertainment accessible regardless of age or preference."
+              description="We cater to everyone, making your restaurant experience better."
             />
           </div>
 
@@ -86,14 +86,14 @@ const AboutUs = () => {
 
           <footer className="mt-12 text-center text-gray-500">
             <p>
-              Thank you for choosing TicketNest as your go-to source for
+              Thank you for choosing TableMate as your go-to source for
               ticketing. We look forward to being a part of your next
               unforgettable experience!
             </p>
           </footer>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
