@@ -6,7 +6,6 @@ import {
   Route,
   useLocation,
   useNavigate,
-  Navigate,
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./Pages/Home.jsx";
@@ -62,7 +61,7 @@ function Layout() {
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
 
-  const [] = useState([])
+  const [customerOrder, setCustomerOrder] = useState([])
 
   const location = useLocation();
   const navigate = useNavigate();

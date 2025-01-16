@@ -1,12 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Styles/EmployeePage.css";
 import { CartContext, ItemContext, AuthContext } from "../App";
 import { Toaster, toast } from "sonner";
 import LoadingComponent from "../Components/Loading/loading";
 import Popup from "../Components/Popup";
+import { DataGrid } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
+import { fetchItems } from "../JavaScript/fetchData";
+import data from "../Javascript/MOCK_DATA.json";
 
 function EmployeePage() {
-  const { cartItems, loading, setLoading } = useContext(ItemContext);
+  const { loading, setLoading } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
@@ -38,6 +42,56 @@ function EmployeePage() {
   }
   const styleButton = { backgroundColor: "red" };
 
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "name",
+      headerName: "Item Name",
+      flex: 1,
+    },
+    {
+      field: "description",
+      headerName: "Quantity",
+      width:200
+    },
+    {
+      field: "price",
+      headerName: "Price(Unit)",
+      flex: 1,
+    },
+    {
+      field: "",
+      headerName: "Ordered Time",
+      flex: 1,
+    },
+    {
+      field: "fullName",
+      headerName: "Delivery",
+      description: "Is item delivered?",
+      flex: 1,
+      valueGetter: (value, row) =>
+        `${row.firstName || ""} ${row.lastName || ""}`,
+    },
+  ];
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await fetchItems();
+        const formattedData = data.map(({ _id, ...rest }, index) => ({
+          id: index,
+          ...rest,
+        }));
+        setItems(formattedData);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <div style={{ padding: "10px" }}>
       <Toaster richColors />
@@ -49,45 +103,23 @@ function EmployeePage() {
         <option value="1">1</option>
         <option value="1">2</option>
       </select>
-      <table border="1" style={{ width: "100%", textAlign: "left" }}>
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Ordered Time</th>
-            <th>Delivery</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <tr key={item._id}>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>
-                  {item.orderedTime.map((element) => (
-                    <div key={element}>{displayTime(element)}</div>
-                  ))}
-                </td>
-                <td>
-                  <button
-                    className="close-btn"
-                    onClick={() => toast.success("Delivered")}
-                  >
-                    Deliver
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3" rowSpan="3" style={{ textAlign: "center" }}>
-                No items found
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+
+      <Box sx={{ height: 700, width: "100%" }}>
+        <DataGrid
+          rows={items}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 100,
+              },
+            },
+          }}
+          pageSizeOptions={[100]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
       <br />
       <button
         className="close-btn"

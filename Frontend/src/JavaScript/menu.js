@@ -195,3 +195,113 @@ const menu = [
 ];
 
 export default menu;
+
+
+/*
+{
+    "table": 1,
+    "available": true,
+    "orders": [{ "name": "momo", "price": 162 }]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "momo", "price": 76 },
+      { "name": "Thukpa", "price": 4 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [{ "name": "Thukpa", "price": 199 }]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Thukpa", "price": 109 },
+      { "name": "momo", "price": 105 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [
+      { "name": "momo", "price": 94 },
+      { "name": "momo", "price": 40 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [{ "name": "Chowmin", "price": 48 }]
+  },
+  { "table": 1, "available": false, "orders": [] },
+  { "table": 1, "available": false, "orders": [] },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [
+      { "name": "momo", "price": 181 },
+      { "name": "Thukpa", "price": 49 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [
+      { "name": "Chowmin", "price": 155 },
+      { "name": "Chowmin", "price": 6 },
+      { "name": "Chowmin", "price": 23 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Chowmin", "price": 74 },
+      { "name": "momo", "price": 89 },
+      { "name": "momo", "price": 51 }
+    ]
+  },
+  { "table": 1, "available": false, "orders": [] },
+  { "table": 1, "available": false, "orders": [] },
+  { "table": 1, "available": false, "orders": [] },
+  { "table": 1, "available": true, "orders": [] },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [{ "name": "momo", "price": 99 }]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Thukpa", "price": 98 },
+      { "name": "Thukpa", "price": 63 },
+      { "name": "Thukpa", "price": 122 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Chowmin", "price": 41 },
+      { "name": "Thukpa", "price": 111 },
+      { "name": "Chowmin", "price": 17 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": true,
+    "orders": [
+      { "name": "momo", "price": 5 },
+      { "name": "Thukpa", "price": 155 }
+    ]
+  },
+  {
+    "table": 1,
+    "available": false,
+    "orders": [{ "name": "Chowmin", "price": 142 }]
+  } */

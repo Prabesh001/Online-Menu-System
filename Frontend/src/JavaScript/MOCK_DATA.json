@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "momo", "price": 185 },
+      { "name": "Thukpa", "price": 121 },
+      { "name": "momo", "price": 69 }
+    ]
+  },
+  {
+    "id": 2,
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Chowmin", "price": 123 },
+      { "name": "momo", "price": 42 }
+    ]
+  },
+  {
+    "id": 3,
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Chowmin", "price": 56 },
+      { "name": "Thukpa", "price": 182 }
+    ]
+  },
+  {
+    "id": 4,
+    "table": 1,
+    "available": false,
+    "orders": [
+      { "name": "Thukpa", "price": 117 },
+      { "name": "Thukpa", "price": 151 }
+    ]
+  },
+  {
+    "id": 5,
+    "table": 1,
+    "available": false,
+    "orders": [{ "name": "momo", "price": 154 }]
+  }
+]
+
