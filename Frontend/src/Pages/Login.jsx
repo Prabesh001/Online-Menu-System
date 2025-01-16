@@ -3,12 +3,16 @@ import bcrypt from "bcryptjs";
 import "./Styles/login.css";
 import { AuthContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import { Toaster, toast } from "sonner";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,8 +23,11 @@ const LoginPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const button = document.querySelector(".login-button");
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setLoading(true);
+    button.style.backgroundColor = "#f0620a";
 
     try {
       // Fetch user data from the API
@@ -28,51 +35,45 @@ const LoginPage = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch employee data.");
       }
-
+      
       const employees = await response.json();
-
+      
       // Find the employee with the matching email
       const user = employees.find(
         (employee) => employee.email === formData.email
       );
 
-      if (!user || !user.password) {
-        alert("Invalid email or password.");
+      if (!user) {
+        setError(true);
+        toast.error("Invalid Email!");
+        if (!user.password) {
+          toast.error("Invalid Password!");
+        }
         return;
       }
 
       // Compare the password using bcrypt
       const isPasswordValid = await bcrypt.compare(
-        formData.password, // Plain text password
-        user.password // Hashed password from the database
+        formData.password,
+        user.password
       );
 
       if (isPasswordValid) {
         setIsAuthenticated(true);
-        console.log(isAuthenticated);
+        setError(false);
         navigate("/employee");
       } else {
-        alert("Invalid email or password.");
+        toast.error("Invalid Password!");
+        setError(true);
       }
     } catch (error) {
       console.error("Error during login process:", error);
-      alert("An error occurred. Please try again.");
+      setError(true);
+    } finally {
+      setLoading(false);
+      button.style.backgroundColor = "#ff914d";
     }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (
-  //     formData.email === "prabeshdaahal123@gmail.com" &&
-  //     formData.password === "dahal"
-  //   ) {
-  //     setIsAuthenticated(true);
-  //     console.log(isAuthenticated)
-  //     navigate("/employee");
-  //   } else {
-  //     alert("Sign In Failed");
-  //   }
-  // };
 
   return (
     <div className="login-page">
@@ -87,8 +88,7 @@ const LoginPage = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
-            className="input"
-            required
+            className={error ? "input error-input" : "input"}
           />
           <input
             type="password"
@@ -96,14 +96,15 @@ const LoginPage = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}
-            className="input"
+            className={error ? "input error-input" : "input"}
             required
           />
-          <button type="submit" className="button">
-            Login
+          <button type="submit" className="login-button">
+            {loading ? <CircularProgress size={10} color="white" /> : "Login"}
           </button>
         </form>
       </div>
+      <Toaster richColors />
     </div>
   );
 };

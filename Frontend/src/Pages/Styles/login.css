@@ -1,4 +1,4 @@
-.login-page{
+.login-page {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form {
@@ -28,7 +28,7 @@
   border-radius: 4px;
 }
 
-.button {
+.form .login-button {
   padding: 10px;
   font-size: 16px;
   background-color: #ff914d;
@@ -38,7 +38,9 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.button:hover{
+.login-button:hover {
   background-color: #f0620a;
 }
-
+.error-input {
+  border: 1px solid red;
+}

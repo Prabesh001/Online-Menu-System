@@ -73,6 +73,53 @@ app.get("/api/menu", async (req, res) => {
   }
 });
 
+app
+  .route("/api/menu/:id")
+  .get(async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const item = await Item.findOne({_id});
+      if (!item) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+      res.json(item);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  })
+  .patch(async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const updatedItem = await Item.findOneAndUpdate(
+        { _id },
+        { $set: req.body },
+        { new: true }
+      );
+
+      if (!updatedItem) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+
+      res.json(updatedItem);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  })
+  .delete(async (req, res) => {
+    try {
+      const _id = req.params.id;
+      const deleteId = await Item.findOneAndDelete({ _id });
+
+      if (!deleteId) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+
+      res.json({ message: "Deleted Item:", deleteId });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
 app.post("/api/menu", async (req, res) => {
   try {
     const { name, description, price, category, availability } = req.body;
@@ -81,9 +128,8 @@ app.post("/api/menu", async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Create the new item using the correct model (Item instead of Team)
     const newItem = new Item({
-      _id: new mongoose.Types.ObjectId().toString(), // Create a new ObjectId for the item
+      _id: new mongoose.Types.ObjectId().toString(),
       name,
       description,
       price,
@@ -153,7 +199,7 @@ app
         return res.status(404).json({ message: "User not found" });
       }
 
-      res.json({ message: "User not found" , deleteId});
+      res.json({ message: "Member removed:", deleteId });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
