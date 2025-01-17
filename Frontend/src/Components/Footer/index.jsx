@@ -4,8 +4,9 @@ import {
   FaFacebook,
   FaInstagram,
   FaPinterest,
-  FaTwitter,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { CiFacebook } from "react-icons/ci";
 import "./Footer.css";
 
 function Footer() {
@@ -38,7 +39,7 @@ function Footer() {
       </div>
       <hr />
       <center>
-        <div className="flex justify-center mb-4 space-x-4 sm:justify-start">
+        <div className="flex justify-center mb-4 space-x-4 sm:justify-start icon-collection">
           <button
             onClick={() => window.open("#", "_blank")}
             className="text-gray-400 transition-colors duration-300 hover:text-teal-400"
@@ -61,14 +62,14 @@ function Footer() {
             onClick={() => window.open("#", "_blank")}
             className="text-gray-400 transition-colors duration-300 hover:text-teal-400"
           >
-            <FaTwitter size={24} />
+            <FaXTwitter size={22} />
           </button>
         </div>
         <div>
           <a href="https://github.com/Nirajstha0905">Niraj</a> &nbsp;
           <a href="https://github.com/Prabesh001">Prabesh</a> &nbsp;
           <a href="/home">Samyukta</a>
-          <p>©All rights reserved by TableMate and Co.</p>
+          <p>© All rights reserved by TableMate and Co.</p>
         </div>
       </center>
     </div>

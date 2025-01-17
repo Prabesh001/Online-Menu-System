@@ -1,11 +1,14 @@
 import React from "react";
-function PaymentSuccess() {
-  
+import { useNavigate } from "react-router-dom";
+function PaymentSuccess({clearAll}) {
+  const navigate = useNavigate();
+  setTimeout(() => {
+    navigate("/");
+  }, 5000);
+
   return (
-    
     <div>
       <div>PaymentSuccess</div>
-      
     </div>
   );
 }

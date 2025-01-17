@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, API_TEAM_URL } from "./config.js";
+import { API_BASE_URL, API_TEAM_URL , API_HOME_MENU_URL} from "./config.js";
 
 const fetchAction = async (url) => {
   try {
@@ -21,4 +21,8 @@ export const fetchItems = async () => {
 
 export const fetchTeams = async () => {
   return await fetchAction(`${API_TEAM_URL}`);
+};
+
+export const fetchHomeMenu = async () => {
+  return await fetchAction(`${API_HOME_MENU_URL}`);
 };

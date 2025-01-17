@@ -29,6 +29,7 @@ import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
+import tabledata from "../../TableData.json";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -47,9 +48,6 @@ function Layout() {
   const [searchItem, setSearchItem] = useState(
     localStorage.getItem("searched-item") || ""
   );
-  const [tableNumber, setTableNumber] = useState(
-    localStorage.getItem("TableNumber") || null
-  );
   const [isAuthenticated, setIsAuthenticated] = useState(
     JSON.parse(localStorage.getItem("isAuthenticated")) || false
   );
@@ -61,14 +59,36 @@ function Layout() {
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
 
-  const [customerOrder, setCustomerOrder] = useState([])
+  const [customerOrder, setCustomerOrder] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
+  
   function closePopup() {
     setPopupVisiblilty(false);
   }
+  
+  const [tableNumber, setTableNumber] = useState(
+    Number(localStorage.getItem("TableNumber")) || null
+  );
+
+  useEffect(() => {
+    if(tableNumber === null){
+      navigate("/")
+      return;
+    }
+    const myTable = tabledata.find(
+      (tab) => tab.table === Number(tableNumber)
+    );
+  
+    if (myTable) {
+      myTable.available = false;
+      setCustomerOrder([myTable]);
+    } else {
+      console.warn("Table not found in tabledata");
+    }
+  }, [tableNumber]);
 
   useEffect(() => {
     localStorage.setItem("user", coupen);
@@ -78,6 +98,22 @@ function Layout() {
     localStorage.setItem("count", count);
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
+
+  useEffect(() => {
+    setCustomerOrder((prevOrders) =>
+      prevOrders.map((item) =>
+        item.table === tableNumber
+          ? { ...item, orders: cartItems }
+          : item
+      )
+    );
+  }, [cartItems, tableNumber]);
+
+  useEffect(() => {
+    if (customerOrder[0]) {
+      console.log("Customer Order:", customerOrder[0]);
+    }
+  }, [customerOrder]);
 
   useEffect(() => {
     localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
@@ -197,6 +233,7 @@ function Layout() {
           setItems,
           cartItems,
           setCartItems,
+          addToCart,
         }}
       >
         {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
@@ -212,9 +249,18 @@ function Layout() {
             setCoupen,
             setTableNumber,
             tableNumber,
+            customerOrder,
+            setCustomerOrder
           }}
         >
-          <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+          <AuthContext.Provider
+            value={{
+              isAuthenticated,
+              setIsAuthenticated,
+              tableNumber,
+              customerOrder,
+            }}
+          >
             <Routes>
               <Route path="/" element={<Welcome />} />
               <Route path="/Home" element={<Home />} />
@@ -261,9 +307,11 @@ function Layout() {
                   </ProtectedRoute>
                 }
               ></Route>
-
               <Route path="/tablemate/about-us" element={<AboutUs />} />
-              <Route path="/tablemate/advertisement" element={<Advertisement />} />
+              <Route
+                path="/tablemate/advertisement"
+                element={<Advertisement />}
+              />
               <Route path="/tablemate/marketing" element={<Marketing />} />
               <Route path="/tablemate/terms-of-use" element={<TermsOfUse />} />
               <Route path="/paymentsuccess" element={<PaymentSuccess />} />

@@ -27,7 +27,22 @@ a:hover {
   color: #ff914d;
   text-decoration: underline;
 }
-
+.icon-collection{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0;
+}
+.icon-collection button{
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 5px;
+}
+.icon-collection button:hover{
+  background-color: rgba(57, 55, 55, 0.237);
+  border-radius: 50%;
+}
 @media (max-width: 400px) {
   .footer {
     padding: 30px;

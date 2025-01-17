@@ -7,9 +7,10 @@ import Popup from "../Components/Popup";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { fetchItems } from "../JavaScript/fetchData";
-import data from "../Javascript/MOCK_DATA.json";
+import data from "../../../TableData.json";
 
 function EmployeePage() {
+  document.title = "TableMate | Employee";
   const { loading, setLoading } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -50,9 +51,9 @@ function EmployeePage() {
       flex: 1,
     },
     {
-      field: "description",
+      field: "quantity",
       headerName: "Quantity",
-      width:200
+      width: 200,
     },
     {
       field: "price",
@@ -60,17 +61,16 @@ function EmployeePage() {
       flex: 1,
     },
     {
-      field: "",
+      field: "orderedTime",
       headerName: "Ordered Time",
       flex: 1,
     },
     {
-      field: "fullName",
+      field: "isDelivered",
       headerName: "Delivery",
       description: "Is item delivered?",
       flex: 1,
-      valueGetter: (value, row) =>
-        `${row.firstName || ""} ${row.lastName || ""}`,
+      editable: true,
     },
   ];
 
@@ -101,7 +101,6 @@ function EmployeePage() {
 
       <select name="Table No" id="">
         <option value="1">1</option>
-        <option value="1">2</option>
       </select>
 
       <Box sx={{ height: 700, width: "100%" }}>

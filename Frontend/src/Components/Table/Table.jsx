@@ -5,7 +5,9 @@ import "./Table.css";
 function Table({ value, onclick }) {
   return (
     <div className="table-container" title="Your Orders!" onClick={onclick}>
+      <span>
       <img src={tableImage} alt="Table" className="table-image" />
+      </span>
       <div className="counter" title={value}>
         {value}
       </div>

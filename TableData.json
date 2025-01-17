@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "table": 1,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 2,
+    "table": 2,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 3,
+    "table": 3,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 4,
+    "table": 4,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 5,
+    "table": 5,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 6,
+    "table": 6,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 7,
+    "table": 7,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 8,
+    "table": 8,
+    "available": true,
+    "orders": [
+      
+    ]
+  },
+  {
+    "id": 9,
+    "table": 9,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 10,
+    "table": 10,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 11,
+    "table": 11,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 12,
+    "table": 12,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 13,
+    "table": 13,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 15,
+    "table": 15,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 16,
+    "table": 16,
+    "available": true,
+    "orders":[]
+  },
+  { "id": 17, "table": 17, "available": true, "orders": [] },
+  { "id": 18, "table": 18, "available": true, "orders": [] },
+  {
+    "id": 19,
+    "table": 19,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 20,
+    "table": 20,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 21,
+    "table": 21,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 22,
+    "table": 22,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 23,
+    "table": 23,
+    "available": true,
+    "orders": []
+  },
+  {
+    "id": 24,
+    "table": 24,
+    "available": true,
+    "orders":[]
+  },
+  {
+    "id": 25,
+    "table": 25,
+    "available": true,
+    "orders": []
+  }
+]

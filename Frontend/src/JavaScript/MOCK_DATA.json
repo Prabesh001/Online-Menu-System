@@ -14,8 +14,58 @@
     "table": 1,
     "available": false,
     "orders": [
-      { "name": "Chowmin", "price": 123 },
-      { "name": "momo", "price": 42 }
+      {
+        "_id": "6789d821db9ad43578698add",
+        "name": "BBQ Chicken Wings",
+        "availability": true,
+        "price": 799.2,
+        "discountedPrice": 679.2,
+        "category": ["hot-section", "combo"],
+        "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+        "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+        "quantity": 5,
+        "orderedTime": ["2025-01-17T06:38:39.612Z"],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ade",
+        "name": "Fiery Veggie Wrap",
+        "price": 639,
+        "discountedPrice": 559,
+        "category": ["hot-section"],
+        "photo": "https://imgs.search.brave.com/tdYOlpoKpGJEp4bu7A7eMuFBzx3lBeh0JmkCRtGDZ0w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9vaG15/dmVnZ2llcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTQv/MDQvc291dGh3ZXN0/ZXJuX3ZlZ2dpZV93/cmFwcy02MDB4OTAw/LmpwZw",
+        "availability": true,
+        "description": "A spicy wrap filled with fresh vegetables and tangy sauce.",
+        "quantity": 2,
+        "orderedTime": ["2025-01-17T06:38:43.896Z"],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad9",
+        "availability": true,
+        "name": "Winter Warmth Soup",
+        "price": 719,
+        "discountedPrice": 639,
+        "category": ["winter"],
+        "photo": "https://imgs.search.brave.com/pHTZ9h_QvFkFlXbnpEOqEX_NF-MsS0gECdp1RU1OeJc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy93aW50/ZXItc291cHMtdGFj/by1zb3VwLTE2NjQ1/NjE5MDEuanBlZz9j/cm9wPTF4dzoxeGg7/Y2VudGVyLHRvcCZy/ZXNpemU9OTgwOio",
+        "description": "A hearty soup with seasonal vegetables and herbs.",
+        "quantity": 4,
+        "orderedTime": ["2025-01-17T06:38:49.563Z"],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad7",
+        "availability": true,
+        "name": "Holiday Special Combo",
+        "price": 2399,
+        "discountedPrice": 2159,
+        "category": ["combo", "christmas"],
+        "photo": "https://imgs.search.brave.com/PpG9te7--rIGND8reZJIn5gjMHyTECRFI8AH6IOtfd4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/NzU4OTA0MS9waG90/by9tb21vLW9yLWR1/bXBsaW5ncy1zZXJ2/ZWQtaW4tYW4tZWdn/LXNoYXBlZC1wbGF0/ZS10b3Atdmlldy5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/elAzMGFCSGlkWUE3/eDhZV2ZETFcyY3Y5/TjBGQllDU0xoNFlo/MGFCSXRJTT0",
+        "description": "Includes Christmas Turkey, Peppermint Hot Chocolate, and dessert.",
+        "quantity": 2,
+        "orderedTime": ["2025-01-17T06:38:56.102Z"],
+        "isDelivered": false
+      }
     ]
   },
   {
@@ -43,4 +93,3 @@
     "orders": [{ "name": "momo", "price": 154 }]
   }
 ]
-

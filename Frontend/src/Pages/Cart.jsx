@@ -16,16 +16,15 @@ function Cart({ items, setItems }) {
     playAddToCartSound,
     tableNumber,
     setTableNumber,
+    setCustomerOrder,
+    customerOrder,
   } = useContext(CartContext);
 
   const [updateQuant, setUpdateQuant] = useState(1);
   const [currentItem, setCurrentItem] = useState(null);
   const navigate = useNavigate();
 
-  const totalPrice = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const totalPrice = items.reduce((acc, item) => acc + (item.price).toFixed(0) * item.quantity, 0)
 
   function removeFromCart(item) {
     const filteredItems = items.filter((ele) => ele.name !== item.name);
@@ -81,8 +80,8 @@ function Cart({ items, setItems }) {
     navigate("/");
   };
 
-  const withCoupen = totalPrice - 0.03 * totalPrice;
-  const withoutCoupen = totalPrice - 0.1 * totalPrice;
+  const withCoupen = (totalPrice - 0.03 * totalPrice).toFixed(0);
+  const withoutCoupen = (totalPrice - 0.1 * totalPrice).toFixed(0);
 
   const hrLine = <div style={{ borderTop: "1px solid lightgray" }}></div>;
 
@@ -179,7 +178,7 @@ function Cart({ items, setItems }) {
                 </button>
                 <input
                   type="number"
-                  style={{ maxWidth: "45px" }}
+                  style={{ maxWidth: "45px", textAlign: "center" }}
                   readOnly
                   value={updateQuant}
                 />

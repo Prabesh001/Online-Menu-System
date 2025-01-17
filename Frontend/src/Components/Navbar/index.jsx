@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { ItemContext } from "../../App";
+import { useLocation } from "react-router-dom";
 
 // TrieNode for Autocomplete
 class TrieNode {
@@ -54,6 +55,7 @@ function Index({ onCategorySelect }) {
   const [suggestions, setSuggestions] = useState([]);
   const [trie, setTrie] = useState(new Trie());
   const navigate = useNavigate();
+  const location = useLocation();
 
   const selectIndex = (index) => {
     setSelectedIndex(index);
@@ -129,11 +131,12 @@ function Index({ onCategorySelect }) {
   const [scrollDirection, setScrollDirection] = useState(null);
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
-    useEffect(() => {
+  useEffect(() => {
+    if (location.pathname !== "/table") {
       const handleScroll = () => {
-        const currentScrollTop =  document.documentElement.scrollTop;
+        const currentScrollTop = document.documentElement.scrollTop;
 
-        if (currentScrollTop > 30 && window.pageYOffset>50) {
+        if (currentScrollTop > 30 && window.pageYOffset > 70) {
           if (currentScrollTop > lastScrollTop) {
             setScrollDirection("down");
           } else if (currentScrollTop < lastScrollTop) {
@@ -150,8 +153,11 @@ function Index({ onCategorySelect }) {
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }, [lastScrollTop]);
-
+    }
+    else{
+      setScrollDirection(null)
+    }
+  }, [location, lastScrollTop]);
 
   return (
     <nav

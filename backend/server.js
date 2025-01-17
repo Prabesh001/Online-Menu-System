@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const http = require("http");
+const { url } = require("inspector");
 
 const app = express();
 const PORT = 5000;
@@ -39,10 +40,35 @@ const itemSchema = new mongoose.Schema(
     price: Number,
     category: String,
     availability: Boolean,
-    image_url: String,
+    photo: String,
     promotion: Boolean,
   },
   { collection: "menuItem", versionKey: false }
+);
+
+const orderSchema = new mongoose.Schema(
+  {
+    _id: String,
+    id: Number,
+    table: Number,
+    available: Boolean,
+    orders: Array,
+  },
+  { collection: "TableOrders", versionKey: false }
+);
+
+const homeItemSchema = new mongoose.Schema(
+  {
+    _id: String,
+    name: String,
+    description: String,
+    price: Number,
+    discountedPrice: Number,
+    category: Array,
+    availability: Boolean,
+    photo: String,
+  },
+  { collection: "specialMenu", versionKey: false }
 );
 // Team schema and model
 const teamSchema = new mongoose.Schema(
@@ -63,11 +89,77 @@ const teamSchema = new mongoose.Schema(
 );
 const Item = mongoose.model("menuItem", itemSchema);
 const Team = mongoose.model("team", teamSchema);
+const Home = mongoose.model("specialMenu", homeItemSchema);
+const Orders = mongoose.model("TableOrders", orderSchema);
 
+// Get menu items
 app.get("/api/menu", async (req, res) => {
   try {
     const items = await Item.find();
     res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get Items for Home menu
+app.get("/api/homeMenu", async (req, res) => {
+  try {
+    const items = await Home.find();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get Table condition
+app.get("/api/table", async (req, res) => {
+  try {
+    const table = await Orders.find();
+    res.json(table);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get all team members
+app.get("/api/employee", async (req, res) => {
+  try {
+    const employees = await Team.find();
+    res.json(employees);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.route("/api/table/:table")
+.get(async (req, res) => {
+  try {
+    const {table} = req.params;
+    const item = await Orders.findOne({ table: table });
+    if (!item) {
+      return res.status(404).json({ message: "Table not found" });
+    }
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}).patch(async (req, res) => {
+  //Edit data
+  try {
+    const {table} = req.params;
+
+    const updatedTable = await Orders.findOneAndUpdate(
+      { table: table },
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!updatedTable) {
+      return res.status(404).json({ message: "Table not found" });
+    }
+
+    res.json(updatedTable);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -78,7 +170,7 @@ app
   .get(async (req, res) => {
     try {
       const _id = req.params.id;
-      const item = await Item.findOne({_id});
+      const item = await Item.findOne({ _id });
       if (!item) {
         return res.status(404).json({ message: "Item not found" });
       }
@@ -122,7 +214,8 @@ app
 
 app.post("/api/menu", async (req, res) => {
   try {
-    const { name, description, price, category, availability } = req.body;
+    const { name, description, price, category, availability, photo } =
+      req.body;
 
     if (!name || !description || !price || !category) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -134,6 +227,7 @@ app.post("/api/menu", async (req, res) => {
       description,
       price,
       category,
+      photo,
       availability,
     });
 
@@ -142,16 +236,6 @@ app.post("/api/menu", async (req, res) => {
   } catch (err) {
     console.error("Error in adding item:", err); // Log the error to the backend console
     res.status(500).json({ message: err.message, error: err });
-  }
-});
-
-// Get all team members
-app.get("/api/employee", async (req, res) => {
-  try {
-    const employees = await Team.find();
-    res.json(employees);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
 });
 

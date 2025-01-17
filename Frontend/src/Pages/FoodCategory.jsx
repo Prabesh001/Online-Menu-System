@@ -78,7 +78,6 @@ function FoodCategory({ onAddToCart }) {
   if (loading) {
     return <LoadingComponent />;
   }
-
   if (error) {
     return <div className="loading-failed">{error}</div>;
   }
@@ -98,6 +97,7 @@ function FoodCategory({ onAddToCart }) {
       )
     );
   };
+  
   const addToCartError = () => {
     setPopupVisiblilty(true);
     console.log("error");
@@ -106,7 +106,7 @@ function FoodCategory({ onAddToCart }) {
   const addToCartSuccess = (element) => {
     onAddToCart(element);
     console.log("success");
-    toast.success(element.name + " added to Cart.");
+    toast.success(element.name + " added to Table.");
   };
 
   return (
@@ -136,20 +136,22 @@ function FoodCategory({ onAddToCart }) {
               <div className="add-btn-group">
                 <div className="set-item-quantity">
                   <MinusIcon
-                    size="20px"
+                    size="18px"
                     cursor="pointer"
+                    color="gray"
                     onClick={() => handleAction("minus", item._id)}
-                  />
+                    />
                   <input key={item.id} readOnly value={item.quantity || 1} />
                   <PlusIcon
-                    size="20px"
+                    size="18px"
+                    color="gray"
                     cursor="pointer"
                     onClick={() => handleAction("plus", item._id)}
                   />
                 </div>
                 <AddToCart
                   onClick={() => {
-                    item.availability == true
+                    item.availability === true
                       ? addToCartSuccess(item)
                       : addToCartError();
                   }}
