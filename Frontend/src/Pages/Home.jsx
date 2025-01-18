@@ -39,7 +39,6 @@ function MenuSection({ title, category }) {
         setLoading(false);
       }
     };
-
     getData();
   }, []);
 

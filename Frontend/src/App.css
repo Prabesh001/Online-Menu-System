@@ -10,7 +10,6 @@ body{
   --color: #FAF3E0;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   background: var(--color);
 }
 body::-webkit-scrollbar{
@@ -28,4 +27,13 @@ body::-webkit-scrollbar{
   user-select: none; 
   -webkit-user-select: none; 
   -ms-user-select: none; 
+}
+
+.app-main{
+  display: flex;
+  flex-direction: column;
+  min-height: 55.89vh;
+}
+.app-body{
+  flex: 1;
 }

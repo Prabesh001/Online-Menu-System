@@ -53,7 +53,7 @@ const LoginPage = () => {
       // Compare the password using bcrypt
       const isPasswordValid = await bcrypt.compare(
         formData.password,
-        user.password
+        user.hashedPassword
       );
 
       if (isPasswordValid) {

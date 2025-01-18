@@ -16,8 +16,6 @@ function Cart({ items, setItems }) {
     playAddToCartSound,
     tableNumber,
     setTableNumber,
-    setCustomerOrder,
-    customerOrder,
   } = useContext(CartContext);
 
   const [updateQuant, setUpdateQuant] = useState(1);
@@ -27,7 +25,7 @@ function Cart({ items, setItems }) {
   const totalPrice = items.reduce((acc, item) => acc + (item.price).toFixed(0) * item.quantity, 0)
 
   function removeFromCart(item) {
-    const filteredItems = items.filter((ele) => ele.name !== item.name);
+    const filteredItems = items.filter((ele) => ele._id !== item._id);
     setItems(filteredItems);
 
     const newCount = filteredItems.reduce(

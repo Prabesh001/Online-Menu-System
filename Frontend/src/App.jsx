@@ -17,7 +17,7 @@ import Navbar from "./Components/Navbar/index";
 import Footer from "./Components/Footer";
 import Cart from "./Pages/Cart.jsx";
 import Table from "./Components/Table/Table.jsx";
-import EmployeePage from "./Pages/EmployeePage.jsx";
+import EmployeePage from "./Pages/EmployeePage/EmployeePage.jsx";
 import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 import TableReserve from "./Pages/TableReserve.jsx";
 import AboutUs from "./Pages/FooterOption/AboutUs.jsx";
@@ -27,6 +27,7 @@ import TermsOfUse from "./Pages/FooterOption/TermsOfUse.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
+import Pdf from "./Pages/Payment/Pdf.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
 import tabledata from "../../TableData.json";
@@ -64,24 +65,21 @@ function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  
   function closePopup() {
     setPopupVisiblilty(false);
   }
-  
+
   const [tableNumber, setTableNumber] = useState(
     Number(localStorage.getItem("TableNumber")) || null
   );
 
   useEffect(() => {
-    if(tableNumber === null){
-      navigate("/")
+    if (tableNumber === null) {
+      navigate("/");
       return;
     }
-    const myTable = tabledata.find(
-      (tab) => tab.table === Number(tableNumber)
-    );
-  
+    const myTable = tabledata.find((tab) => tab.table === Number(tableNumber));
+
     if (myTable) {
       myTable.available = false;
       setCustomerOrder([myTable]);
@@ -102,9 +100,7 @@ function Layout() {
   useEffect(() => {
     setCustomerOrder((prevOrders) =>
       prevOrders.map((item) =>
-        item.table === tableNumber
-          ? { ...item, orders: cartItems }
-          : item
+        item.table === tableNumber ? { ...item, orders: cartItems } : item
       )
     );
   }, [cartItems, tableNumber]);
@@ -122,7 +118,17 @@ function Layout() {
   const addToCart = (item) => {
     playAddToCartSound();
 
-    const orderedTime = new Date().toISOString();
+    const getCurrentTime = () => {
+      const now = new Date();
+
+      const hours = now.getHours().toString().padStart(2, "0"); // Adds leading zero if needed
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const seconds = now.getSeconds().toString().padStart(2, "0");
+
+      return `${hours}:${minutes}:${seconds}`;
+    };
+
+    const orderedTime = getCurrentTime();
 
     const itemsToAdd = Array.isArray(item)
       ? item.map((ele) => ({
@@ -176,7 +182,7 @@ function Layout() {
     });
   };
 
-  const hideNavbarFooter = ["/", "/login", "/reserve-seat"];
+  const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
   const hideCart = [
     "/",
     "/login",
@@ -212,25 +218,27 @@ function Layout() {
   }, [location.pathname, setSelectedIndex, noIndex]);
 
   return (
-    <>
-      <ItemContext.Provider
-        value={{
-          searchItem,
-          setSearchItem,
-          selectedIndex,
-          setSelectedIndex,
-          error,
-          setError,
-          loading,
-          setLoading,
-          items,
-          setItems,
-          cartItems,
-          setCartItems,
-          addToCart,
-        }}
-      >
-        {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
+    <ItemContext.Provider
+      value={{
+        searchItem,
+        setSearchItem,
+        selectedIndex,
+        setSelectedIndex,
+        error,
+        setError,
+        loading,
+        setLoading,
+        items,
+        setItems,
+        cartItems,
+        setCartItems,
+        addToCart,
+      }}
+    >
+      <div className="app-main">
+        <div className="app-header">
+          {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
+        </div>
         <CartContext.Provider
           value={{
             count,
@@ -244,7 +252,7 @@ function Layout() {
             setTableNumber,
             tableNumber,
             customerOrder,
-            setCustomerOrder
+            setCustomerOrder,
           }}
         >
           <AuthContext.Provider
@@ -255,77 +263,85 @@ function Layout() {
               customerOrder,
             }}
           >
-            <Routes>
-              <Route path="/" element={<Welcome />} />
-              <Route path="/Home" element={<Home />} />
-              <Route
-                path="/category/:category"
-                element={<FoodCategory onAddToCart={addToCart} />}
-              />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/employee"
-                element={
-                  <ProtectedRoute
-                    condition={isAuthenticated}
-                    passCondition={true}
-                    destination="/login"
-                  >
-                    <EmployeePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/search/:item"
-                element={<SearchItem onAddToCart={addToCart} />}
-              />
-              <Route
-                path="/table"
-                element={
-                  <Cart
-                    items={cartItems}
-                    setItems={setCartItems}
-                    setItemQuantity={setItemQuantity}
-                  />
-                }
-              />
-              <Route
-                path="reserve-seat"
-                element={
-                  <ProtectedRoute
-                    condition={tableNumber}
-                    passCondition={null}
-                    destination="/Home"
-                  >
-                    <TableReserve noOfTables={25} />
-                  </ProtectedRoute>
-                }
-              ></Route>
-              <Route path="/tablemate/about-us" element={<AboutUs />} />
-              <Route
-                path="/tablemate/advertisement"
-                element={<Advertisement />}
-              />
-              <Route path="/tablemate/marketing" element={<Marketing />} />
-              <Route path="/tablemate/terms-of-use" element={<TermsOfUse />} />
-              <Route path="/paymentsuccess" element={<PaymentSuccess />} />
-              <Route path="/paymentfailure" element={<PaymentFailure />} />
-              {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
-              {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
+            <div className="app-body">
+              <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/Home" element={<Home />} />
+                <Route
+                  path="/category/:category"
+                  element={<FoodCategory onAddToCart={addToCart} />}
+                />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/employee"
+                  element={
+                    <ProtectedRoute
+                      condition={isAuthenticated}
+                      passCondition={true}
+                      destination="/login"
+                    >
+                      <EmployeePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/search/:item"
+                  element={<SearchItem onAddToCart={addToCart} />}
+                />
+                <Route
+                  path="/table"
+                  element={
+                    <Cart
+                      items={cartItems}
+                      setItems={setCartItems}
+                      setItemQuantity={setItemQuantity}
+                    />
+                  }
+                />
+                <Route
+                  path="reserve-seat"
+                  element={
+                    <ProtectedRoute
+                      condition={tableNumber}
+                      passCondition={null}
+                      destination="/Home"
+                    >
+                      <TableReserve noOfTables={25} />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+                <Route path="/tablemate/about-us" element={<AboutUs />} />
+                <Route
+                  path="/tablemate/advertisement"
+                  element={<Advertisement />}
+                />
+                <Route path="/tablemate/marketing" element={<Marketing />} />
+                <Route
+                  path="/tablemate/terms-of-use"
+                  element={<TermsOfUse />}
+                />
+                <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+                <Route path="/paymentfailure" element={<PaymentFailure />} />
+                <Route path="/pdf" element={<Pdf />} />
+                {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
+                {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 
-              <Route
-                path="*"
-                element={<ErrorPage setSelectedIndex={setSelectedIndex} />}
-              />
-            </Routes>
-            {!hideNavbarFooter.includes(location.pathname) && <Footer />}
+                <Route
+                  path="*"
+                  element={<ErrorPage setSelectedIndex={setSelectedIndex} />}
+                />
+              </Routes>
+            </div>
+            <div className="app-footer">
+              {!hideNavbarFooter.includes(location.pathname) && <Footer />}
+            </div>
             {!hideCart.includes(location.pathname) && (
               <Table value={count} onclick={() => navigate("/table")} />
             )}
           </AuthContext.Provider>
         </CartContext.Provider>
-      </ItemContext.Provider>
-    </>
+      </div>
+    </ItemContext.Provider>
   );
 }
 
