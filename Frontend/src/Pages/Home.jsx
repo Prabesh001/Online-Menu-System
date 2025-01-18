@@ -6,6 +6,7 @@ import { Toaster, toast } from "sonner";
 import { fetchHomeMenu } from "../JavaScript/fetchData.js";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Grid, Box, Skeleton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function MenuSection({ title, category }) {
   const {
@@ -18,6 +19,8 @@ function MenuSection({ title, category }) {
     setItems,
     addToCart,
   } = useContext(ItemContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedIndex("Home");
@@ -33,9 +36,7 @@ function MenuSection({ title, category }) {
         console.error("Error fetching data: ", error);
         setError("Failed to load menu items.");
       } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+        setLoading(false);
       }
     };
 
@@ -97,7 +98,7 @@ function MenuSection({ title, category }) {
       <div className="menu-items">
         {items
           .filter((item) => item.category.includes(category))
-          .map((item,i) => (
+          .map((item, i) => (
             <div key={i} className="menu-item" title={item.description}>
               <div className="menu-photo">
                 <img
@@ -135,9 +136,12 @@ function MenuSection({ title, category }) {
                     onClick={() => handleAction("plus", item._id)}
                   />
                 </div>
-                <AddToCart onClick={() => {addToCart(item)
-                  toast.success(`${item.name} added to Table.`)
-                }} />
+                <AddToCart
+                  onClick={() => {
+                    addToCart(item);
+                    toast.success(`${item.name} added to Table.`);
+                  }}
+                />
               </div>
             </div>
           ))}
@@ -157,20 +161,16 @@ function Home() {
     <>
       <div className="home-section">
         <Toaster richColors position="bottom-center" />
-        {Menu.map((menu,i) => {
+        {Menu.map((menu, i) => {
           return (
-            <MenuSection
-              title={menu.title}
-              category={menu.category}
-              key={i}
-            />
+            <MenuSection title={menu.title} category={menu.category} key={i} />
           );
         })}
         <br />
       </div>
-        <center>
-          <span className="slogan">Keep Eating....</span>
-        </center>
+      <center>
+        <span className="slogan">Keep Eating....</span>
+      </center>
     </>
   );
 }

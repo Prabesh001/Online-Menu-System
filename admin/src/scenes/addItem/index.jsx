@@ -135,8 +135,8 @@ const AddItem = () => {
                   sx={{ gridColumn: "span 4" }}
                 >
                   <MenuItem value="Appetizer">Appetizer</MenuItem>
-                  <MenuItem value="Main Dish">Main Dish</MenuItem>
-                  <MenuItem value="Side Dish">Side Dish</MenuItem>
+                  <MenuItem value="Main Course">Main Course</MenuItem>
+                  <MenuItem value="Side Course">Side Course</MenuItem>
                   <MenuItem value="Beverage">Beverage</MenuItem>
                   <MenuItem value="Soup">Soup</MenuItem>
                   <MenuItem value="Dessert">Dessert</MenuItem>

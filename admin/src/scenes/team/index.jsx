@@ -18,7 +18,7 @@ function Team() {
       try {
         const data = await fetchTeams();
         const formattedData = data.map(({ _id, ...rest }, index) => ({
-          id: index,
+          id: _id,
           ...rest,
         }));
         setTeam(formattedData);
@@ -39,7 +39,7 @@ function Team() {
       cellClassName: "name-column--cell",
     },
     {
-      field: "password",
+      field: "hashedPassword",
       headerName: "Password",
       flex: 1,
       cellClassName: "name-column--cell",

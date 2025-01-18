@@ -163,7 +163,20 @@ app.route("/api/table/:table")
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-});
+}).delete(async (req, res) => {
+  try {
+    const {table} = req.params;
+    const deleteId = await Item.findOneAndDelete({ table: table });
+
+    if (!deleteId) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.json({ message: "Deleted Item:", deleteId });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});;
 
 app
   .route("/api/menu/:id")
@@ -244,8 +257,8 @@ app
   .route("/api/employee/:id")
   .get(async (req, res) => {
     try {
-      const id = req.params.id;
-      const employee = await Team.find({ id });
+      const {id} = req.params;
+      const employee = await Team.find( {Username: id} );
       if (!employee) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -257,9 +270,9 @@ app
   .patch(async (req, res) => {
     //Edit data
     try {
-      const id = req.params.id;
+      const {id} = req.params;
       const updatedEmployee = await Team.findOneAndUpdate(
-        { id },
+        {Username: id},
         { $set: req.body },
         { new: true }
       );
@@ -276,8 +289,8 @@ app
   .delete(async (req, res) => {
     //Delete data
     try {
-      const id = req.params.id;
-      const deleteId = await Team.findOneAndDelete({ id });
+      const _id = req.params;
+      const deleteId = await Team.findOneAndDelete( _id );
 
       if (!deleteId) {
         return res.status(404).json({ message: "User not found" });

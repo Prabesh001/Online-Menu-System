@@ -7,14 +7,17 @@ import Popup from "../Components/Popup";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { fetchItems } from "../JavaScript/fetchData";
-import data from "../../../TableData.json";
+import { fetchOrders } from "../JavaScript/fetchData";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
   const { loading, setLoading } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-
+  const [selectedTable, setSelectedTable] = useState("");
+  const [allOrders, setAllOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  
   const displayTime = (time) => {
     const date = new Date(time);
 
@@ -28,6 +31,47 @@ function EmployeePage() {
     const formattedTime = `${hours}:${minutes}:${seconds} ${period}`;
     return formattedTime;
   };
+
+  const handleChange = (event) => {
+    setSelectedTable(event.target.value);
+  };
+
+  useEffect(() => {
+    const fetchAllOrders = async () => {
+      try {
+        const data = await fetchOrders();
+        setAllOrders(data);
+
+        const myTable = data.find(ele=>ele.orders.length!==0)
+        setSelectedTable(myTable.table)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchAllOrders();
+  }, []);
+
+  useEffect(() => {
+    if (selectedTable) {
+      const tableData = allOrders.find(
+        (item) => Number(item.table) === Number(selectedTable)
+      );
+
+      if (tableData && tableData.orders) {
+        const formattedData = tableData.orders.map(({ _id, ...rest }, index) => ({
+          id: index,
+          ...rest,
+        }));
+        setFilteredOrders(formattedData);
+      } else {
+        setFilteredOrders([]);
+      }
+    }
+  }, [selectedTable, allOrders]);
+
+  console.log(filteredOrders);
+
 
   function handleLogout() {
     setLoading(true);
@@ -74,24 +118,6 @@ function EmployeePage() {
     },
   ];
 
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchItems();
-        const formattedData = data.map(({ _id, ...rest }, index) => ({
-          id: index,
-          ...rest,
-        }));
-        setItems(formattedData);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    getData();
-  }, []);
-
   return (
     <div style={{ padding: "10px" }}>
       <Toaster richColors />
@@ -99,13 +125,20 @@ function EmployeePage() {
         Orders from Table No.{" "}
       </span>
 
-      <select name="Table No" id="">
-        <option value="1">1</option>
+      <select name="Table No" value={selectedTable} onChange={handleChange}>
+        <option value="" disabled>
+          Select a table
+        </option>
+        {Array.from({ length: 25 }, (_, index) => (
+          <option key={index + 1} value={index + 1}>
+            {index + 1}
+          </option>
+        ))}
       </select>
 
       <Box sx={{ height: 700, width: "100%" }}>
         <DataGrid
-          rows={items}
+          rows={filteredOrders}
           columns={columns}
           initialState={{
             pagination: {

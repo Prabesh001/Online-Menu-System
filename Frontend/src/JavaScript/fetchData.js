@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, API_TEAM_URL , API_HOME_MENU_URL} from "./config.js";
+import { API_BASE_URL, API_TEAM_URL , API_HOME_MENU_URL, API_ORDER_URL} from "./config.js";
 
 const fetchAction = async (url) => {
   try {
@@ -17,6 +17,10 @@ const fetchAction = async (url) => {
 // Define fetchItems and fetchTeams as asynchronous functions
 export const fetchItems = async () => {
   return await fetchAction(`${API_BASE_URL}`);
+};
+
+export const fetchOrders = async () => {
+  return await fetchAction(`${API_ORDER_URL}`);
 };
 
 export const fetchTeams = async () => {

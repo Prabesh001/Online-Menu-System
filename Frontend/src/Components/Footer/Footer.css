@@ -17,13 +17,13 @@
   color: #e1e1e1;
 }
 
-a {
+.footer-last-link-section a {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
 }
 
-a:hover {
+.footer-last-link-section a:hover {
   color: #ff914d;
   text-decoration: underline;
 }

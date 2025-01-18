@@ -110,12 +110,6 @@ function Layout() {
   }, [cartItems, tableNumber]);
 
   useEffect(() => {
-    if (customerOrder[0]) {
-      console.log("Customer Order:", customerOrder[0]);
-    }
-  }, [customerOrder]);
-
-  useEffect(() => {
     localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
   }, [isAuthenticated]);
 

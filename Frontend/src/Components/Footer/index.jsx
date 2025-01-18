@@ -12,18 +12,18 @@ import "./Footer.css";
 function Footer() {
   return (
     <div className="footer">
-      <div className="footer-top">
+      <div className="footer-top footer-last-link-section">
         <div className="footer-category">
           <span>Contact Us:</span> <br />
-          <Link to="/tablemate/terms-of-use">Terms Of Use</Link>
+          <Link to="/tablemate/about-us">About Us</Link>
           <br />
-          <Link to="/tablemate/advertisement">Advertisement</Link>
+          <Link to="/tablemate/terms-of-use">Terms Of Use</Link>
           <br />
         </div>
         <div className="footer-category">
           <span>Our Product:</span>
           <br />
-          <Link to="/tablemate/about-us">About Us</Link>
+          <Link to="/tablemate/advertisement">Advertisement</Link>
           <br />
           <Link to="/tablemate/marketing">Marketing</Link>
           <br />
@@ -65,7 +65,7 @@ function Footer() {
             <FaXTwitter size={22} />
           </button>
         </div>
-        <div>
+        <div className="footer-last-link-section">
           <a href="https://github.com/Nirajstha0905">Niraj</a> &nbsp;
           <a href="https://github.com/Prabesh001">Prabesh</a> &nbsp;
           <a href="/home">Samyukta</a>

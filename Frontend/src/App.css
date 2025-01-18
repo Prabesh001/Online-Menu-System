@@ -10,7 +10,8 @@ body{
   --color: #FAF3E0;
   margin: 0;
   padding: 0;
-  background: var(--color)
+  min-height: 100vh;
+  background: var(--color);
 }
 body::-webkit-scrollbar{
   width: 10px;
