@@ -13,6 +13,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -39,23 +41,23 @@ const AddItem = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Item added successfully:", data);
-        alert("Item created successfully!");
+        toast.success("Item created successfully!");
         resetForm(); // Reset the form fields
       } else {
         const error = await response.json();
         console.error("Error creating item:", error);
-        alert("Failed to create item. Please try again.");
+        toast.error("Failed to create item. Please try again.");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     }
   };
 
   return (
     <Box m="20px">
       <Header title="New Item" subtitle="Add a New Item to a Menu" />
-
+      <ToastContainer />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -135,8 +137,8 @@ const AddItem = () => {
                   sx={{ gridColumn: "span 4" }}
                 >
                   <MenuItem value="Appetizer">Appetizer</MenuItem>
-                  <MenuItem value="Main Course">Main Course</MenuItem>
-                  <MenuItem value="Side Course">Side Course</MenuItem>
+                  <MenuItem value="Main Dish">Main Dish</MenuItem>
+                  <MenuItem value="Side Dish">Side Dish</MenuItem>
                   <MenuItem value="Beverage">Beverage</MenuItem>
                   <MenuItem value="Soup">Soup</MenuItem>
                   <MenuItem value="Dessert">Dessert</MenuItem>

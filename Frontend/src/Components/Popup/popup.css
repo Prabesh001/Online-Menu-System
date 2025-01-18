@@ -30,4 +30,5 @@
 .popup-message{
   font-family: var(--font-family);
   font-size: 1.1em;
+  color: black;
 }

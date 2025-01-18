@@ -24,6 +24,7 @@ const LoginPage = () => {
   };
 
   const button = document.querySelector(".login-button");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,6 +41,7 @@ const LoginPage = () => {
       const user = employees.find(
         (employee) => employee.email === formData.email
       );
+      console.log(user)
 
       if (!user) {
         setError(true);
@@ -59,7 +61,14 @@ const LoginPage = () => {
       if (isPasswordValid) {
         setIsAuthenticated(true);
         setError(false);
-        navigate("/employee");
+        localStorage.setItem("employee-profile", JSON.stringify(user))
+        if (user.access_level === "employee") {
+          navigate("/employee")
+        }
+        if (user.access_level === "admin") {
+          // window.location.href="https://mui.com/material-ui/react-app-bar/#app-bar-with-responsive-menu"
+          navigate("/employee")
+        }
       } else {
         toast.error("Invalid Password!");
         setError(true);

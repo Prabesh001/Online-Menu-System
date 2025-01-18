@@ -1,22 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../Styles/EmployeePage.css";
-import { AuthContext } from "../../App";
 import { Toaster, toast } from "sonner";
-import Popup from "../../Components/Popup";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import { Select, MenuItem } from "@mui/material"; // Added import
+import { Select, MenuItem } from "@mui/material";
 import { fetchOrders } from "../../JavaScript/fetchData";
+import { ItemContext } from "../../App.jsx";
 import EmployeeNavbar from "./EmployeeNavbar";
 import Footer from "../../Components/Footer";
+import LoadingComponent from "../../Components/Loading/loading.jsx";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [selectedTable, setSelectedTable] = useState("");
   const [allOrders, setAllOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading } = useContext(ItemContext);
 
   const displayTime = (time) => {
     const date = new Date(time);
@@ -103,6 +102,9 @@ function EmployeePage() {
     },
   ];
 
+  if (loading) {
+    return <LoadingComponent />;
+  }
   return (
     <div>
       <EmployeeNavbar />

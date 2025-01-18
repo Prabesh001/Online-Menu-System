@@ -27,7 +27,6 @@ import TermsOfUse from "./Pages/FooterOption/TermsOfUse.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
-import Pdf from "./Pages/Payment/Pdf.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
 import tabledata from "../../TableData.json";
@@ -195,6 +194,7 @@ function Layout() {
     "/tablemate/terms-of-use",
     "/tablemate/cookie-policy",
     "/tablemate/privacy-policy",
+    "/paymentsuccess"
   ];
 
   const noIndex = [
@@ -322,7 +322,6 @@ function Layout() {
                 />
                 <Route path="/paymentsuccess" element={<PaymentSuccess />} />
                 <Route path="/paymentfailure" element={<PaymentFailure />} />
-                <Route path="/pdf" element={<Pdf />} />
                 {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
                 {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 

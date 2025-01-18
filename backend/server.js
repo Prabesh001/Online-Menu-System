@@ -38,6 +38,7 @@ const itemSchema = new mongoose.Schema(
     name: String,
     description: String,
     price: Number,
+    discountedPrice: Number,
     category: String,
     availability: Boolean,
     photo: String,
@@ -83,6 +84,7 @@ const teamSchema = new mongoose.Schema(
     hashedPassword: String,
     age: Number,
     phone_number: String,
+    photo: String,
     access_level: { type: String, enum: ["admin", "manager", "employee"] },
   },
   { collection: "team", versionKey: false }
@@ -227,7 +229,7 @@ app
 
 app.post("/api/menu", async (req, res) => {
   try {
-    const { name, description, price, category, availability, photo } =
+    const { name, description, price, category, availability, photo, discountedPrice } =
       req.body;
 
     if (!name || !description || !price || !category) {
@@ -242,6 +244,7 @@ app.post("/api/menu", async (req, res) => {
       category,
       photo,
       availability,
+      discountedPrice: price
     });
 
     await newItem.save();
@@ -314,6 +317,7 @@ app.post("/api/employee", async (req, res) => {
       age,
       phone_number,
       access_level,
+      photo
     } = req.body;
 
     if (!first_name || !email || !password || !access_level) {
@@ -335,6 +339,7 @@ app.post("/api/employee", async (req, res) => {
       hashedPassword: hashedPassword,
       age,
       phone_number,
+      photo,
       access_level,
     });
 

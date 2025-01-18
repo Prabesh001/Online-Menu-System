@@ -1,0 +1,21 @@
+.payment-page{
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  padding: 5px;
+  position: relative;
+}
+
+.payment-page .download-btn{
+  /* position: absolute; */
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  color: white;
+  background-color: green;
+  border: none;
+  box-shadow: 1px 1px 5px gray;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+}

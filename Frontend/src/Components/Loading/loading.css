@@ -3,8 +3,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 55.5vh;
   background-color: #f9f9f9;
+  background-color: transparent;
+  position: fixed; 
+  min-height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading-spinner {
