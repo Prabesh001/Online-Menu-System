@@ -17,16 +17,6 @@ function EmployeePage() {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const { loading, setLoading } = useContext(ItemContext);
 
-  const displayTime = (time) => {
-    const date = new Date(time);
-    let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-    const period = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
-    return `${hours}:${minutes}:${seconds} ${period}`;
-  };
-
   const handleChange = (event) => {
     setSelectedTable(event.target.value);
   };
@@ -103,7 +93,18 @@ function EmployeePage() {
   ];
 
   if (loading) {
-    return <LoadingComponent />;
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LoadingComponent />
+      </div>
+    );
   }
   return (
     <div>
@@ -123,7 +124,7 @@ function EmployeePage() {
             </option>
           ))}
         </select>
-        <Box sx={{ minHeight: 300, width: "100%" }}>
+        <Box sx={{ minHeight: 277, width: "100%" }}>
           <DataGrid
             rows={filteredOrders}
             columns={columns}

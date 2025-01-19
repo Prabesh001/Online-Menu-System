@@ -6,7 +6,6 @@ import { Toaster, toast } from "sonner";
 import { fetchHomeMenu } from "../JavaScript/fetchData.js";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Grid, Box, Skeleton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 function MenuSection({ title, category }) {
   const {
@@ -19,8 +18,6 @@ function MenuSection({ title, category }) {
     setItems,
     addToCart,
   } = useContext(ItemContext);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedIndex("Home");
@@ -102,7 +99,7 @@ function MenuSection({ title, category }) {
               <div className="menu-photo">
                 <img
                   src={item.photo}
-                  alt={item.name}
+                  alt={<Skeleton variant="rectangular"/>}
                   className="offer-photo no-select"
                   loading="lazy"
                   draggable="false"

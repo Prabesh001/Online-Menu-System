@@ -9,13 +9,211 @@
     "id": 2,
     "table": 2,
     "available": true,
-    "orders": []
+    "orders": [
+      {
+        "_id": "6789d821db9ad43578698ad8",
+        "name": "Spiced Pumpkin Latte",
+        "availability": true,
+        "price": 399.2,
+        "discountedPrice": 319.2,
+        "category": [
+          "winter"
+        ],
+        "photo": "https://imgs.search.brave.com/u1Xee6Q9XR25hCn0JBpI9iEAii3jW6MWG1L04x_eBJA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bGlxdW9yLmNvbS90/aG1iLzRvTWtZY1c0/Y19EQlU2SkM4MDYt/MjFpQkVEWT0vMTUw/MHgwL2ZpbHRlcnM6/bm9fdXBzY2FsZSgp/Om1heF9ieXRlcygx/NTAwMDApOnN0cmlw/X2ljYygpL19fb3B0/X19hYm91dGNvbV9f/Y29ldXNfX3Jlc291/cmNlc19fY29udGVu/dF9taWdyYXRpb25f/X2xpcXVvcl9fMjAx/N19fMTBfXzI1MDg0/MDI0X18xMS1Fc3Nl/bnRpYWwtQ29ja3Rh/aWxzLWZvci15b3Vy/LU5vdmVtYmVyLVBh/cnRpZXMtNzIweDcy/MC1hcnRpY2xlLTRl/MWQ1NzBhZGE0MDQw/NmE5ZTA3MWNhOTg4/ZGIxNDRhLmpwZw",
+        "description": "Rich latte with pumpkin spice flavor and whipped cream.",
+        "quantity": 5,
+        "orderedTime": [
+          "2025-01-18T07:10:49.366Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ae5",
+        "name": "Apple Cinnamon Muffins",
+        "availability": true,
+        "price": 289,
+        "discountedPrice": 249,
+        "category": [
+          "winter"
+        ],
+        "photo": "https://imgs.search.brave.com/wf_cFfaWY-qItdrpLRhHNVwdMLkAoML0TIbdPXOhl-g/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zcC1h/by5zaG9ydHBpeGVs/LmFpL2NsaWVudC90/b193ZWJwLHFfZ2xv/c3N5LHJldF9pbWcs/d181MTIsaF83Njgv/aHR0cHM6Ly93d3cu/dGhlaHVuZ3J5aHV0/Y2guY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIwLzEyL0Fw/cGxlLUNpbm5hbW9u/LU11ZmZpbi1TdGFj/ay02ODN4MTAyNC5q/cGc",
+        "description": "Soft and moist muffins with the flavors of apples and cinnamon.",
+        "quantity": 6,
+        "orderedTime": [
+          "2025-01-18T07:10:53.431Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad1",
+        "availability": true,
+        "name": "Christmas Turkey Platter",
+        "price": 1999.2,
+        "discountedPrice": 1759.2,
+        "category": [
+          "christmas"
+        ],
+        "photo": "https://imgs.search.brave.com/SspO_OZnXTxJVyS1W4rmHQ9pGjnsNne62sQUqTx3iXU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy9jaHJp/c3RtYXMtdHVya2V5/LWRyeS1icmluZWQt/dHVya2V5LTE2MzUx/OTMxMjUuanBlZz9j/cm9wPTAuODAzeHc6/MS4wMHhoOzAuMTI2/eHcsMCZyZXNpemU9/OTgwOio",
+        "description": "Tender turkey served with cranberry sauce and mashed potatoes.",
+        "quantity": 6,
+        "orderedTime": [
+          "2025-01-18T07:10:58.799Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad7",
+        "availability": true,
+        "name": "Holiday Special Combo",
+        "price": 2399.2,
+        "discountedPrice": 2159.2,
+        "category": [
+          "combo",
+          "christmas"
+        ],
+        "photo": "https://imgs.search.brave.com/PpG9te7--rIGND8reZJIn5gjMHyTECRFI8AH6IOtfd4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/NzU4OTA0MS9waG90/by9tb21vLW9yLWR1/bXBsaW5ncy1zZXJ2/ZWQtaW4tYW4tZWdn/LXNoYXBlZC1wbGF0/ZS10b3Atdmlldy5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/elAzMGFCSGlkWUE3/eDhZV2ZETFcyY3Y5/TjBGQllDU0xoNFlo/MGFCSXRJTT0",
+        "description": "Includes Christmas Turkey, Peppermint Hot Chocolate, and dessert.",
+        "quantity": 6,
+        "orderedTime": [
+          "2025-01-18T07:11:03.468Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698adb",
+        "name": "Cheese Burst Pizza Combo",
+        "availability": true,
+        "price": 1279.2,
+        "discountedPrice": 1079.2,
+        "category": [
+          "combo"
+        ],
+        "photo": "https://imgs.search.brave.com/_SJK2byMckALj0jhcPFGqsnR1VPkLZBZrijlIchqE38/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG9taW5vcy5jby5p/bi8vZmlsZXMvaXRl/bXMvXzEzNDYxNjQ5/NTEuanBn",
+        "description": "12-inch cheese burst pizza with garlic bread and a drink.",
+        "quantity": 5,
+        "orderedTime": [
+          "2025-01-18T07:11:13.158Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698add",
+        "name": "BBQ Chicken Wings",
+        "availability": true,
+        "price": 799.2,
+        "discountedPrice": 679.2,
+        "category": [
+          "hot-section",
+          "combo"
+        ],
+        "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+        "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+        "quantity": 1,
+        "orderedTime": [
+          "2025-01-18T07:11:15.281Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698adf",
+        "availability": true,
+        "name": "Holiday Special Combo",
+        "price": 2399.2,
+        "discountedPrice": 2159.2,
+        "category": [
+          "combo",
+          "christmas"
+        ],
+        "photo": "https://imgs.search.brave.com/PpG9te7--rIGND8reZJIn5gjMHyTECRFI8AH6IOtfd4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/NzU4OTA0MS9waG90/by9tb21vLW9yLWR1/bXBsaW5ncy1zZXJ2/ZWQtaW4tYW4tZWdn/LXNoYXBlZC1wbGF0/ZS10b3Atdmlldy5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/elAzMGFCSGlkWUE3/eDhZV2ZETFcyY3Y5/TjBGQllDU0xoNFlo/MGFCSXRJTT0",
+        "description": "Includes Christmas Turkey, Peppermint Hot Chocolate, and dessert.",
+        "quantity": 1,
+        "orderedTime": [
+          "2025-01-18T07:11:18.394Z"
+        ],
+        "isDelivered": false
+      }
+    ]
   },
   {
     "id": 3,
     "table": 3,
     "available": true,
-    "orders": []
+    "orders": [
+      {
+        "_id": "6789d821db9ad43578698add",
+        "name": "BBQ Chicken Wings",
+        "availability": true,
+        "price": 799.2,
+        "discountedPrice": 679.2,
+        "category": [
+          "hot-section",
+          "combo"
+        ],
+        "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+        "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+        "quantity": 5,
+        "orderedTime": [
+          "2025-01-17T15:44:33.288Z",
+          "2025-01-17T15:42:39.200Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ae3",
+        "name": "Roasted Veggie Quinoa Salad",
+        "price": 699.2,
+        "discountedPrice": 589.2,
+        "category": [
+          "hot-section",
+          "combo"
+        ],
+        "photo": "https://imgs.search.brave.com/TQprQfnkoHUw0NSeSjK_mObpSaKZyH91uGOWZTqXLxc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZmxvYXRpbmdraXRj/aGVuLm5ldC93cC1j/b250ZW50L3VwbG9h/ZHMvMjAxOC8xMS9D/YXJyb3QtTWFzaC1P/cmFuZ2UtTWludC0x/LTQzNXg0MzUuanBn",
+        "availability": true,
+        "description": "A fresh quinoa salad topped with roasted vegetables and vinaigrette.",
+        "quantity": 9,
+        "orderedTime": [
+          "2025-01-17T15:56:52.407Z",
+          "2025-01-17T15:44:41.026Z",
+          "2025-01-17T15:44:08.883Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad3",
+        "name": "Peppermint Hot Chocolate",
+        "price": 479.2,
+        "discountedPrice": 399.2,
+        "availability": true,
+        "category": [
+          "winter",
+          "christmas"
+        ],
+        "photo": "https://imgs.search.brave.com/KboFfyMte9Xu7GO41ZOMxKDoc8-j_lIOQDPwRKm0ZgE/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9qb3lm/b29kc3Vuc2hpbmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE5LzEyL3BlcHBl/cm1pbnQtaG90LWNo/b2NvbGF0ZS1yZWNp/cGUtNS5qcGc",
+        "description": "Creamy hot chocolate with a hint of peppermint.",
+        "quantity": 2,
+        "orderedTime": [
+          "2025-01-17T16:08:39.536Z"
+        ],
+        "isDelivered": false
+      },
+      {
+        "_id": "6789d821db9ad43578698ad9",
+        "availability": true,
+        "name": "Winter Warmth Soup",
+        "price": 719.2,
+        "discountedPrice": 639.2,
+        "category": [
+          "winter"
+        ],
+        "photo": "https://imgs.search.brave.com/pHTZ9h_QvFkFlXbnpEOqEX_NF-MsS0gECdp1RU1OeJc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy93aW50/ZXItc291cHMtdGFj/by1zb3VwLTE2NjQ1/NjE5MDEuanBlZz9j/cm9wPTF4dzoxeGg7/Y2VudGVyLHRvcCZy/ZXNpemU9OTgwOio",
+        "description": "A hearty soup with seasonal vegetables and herbs.",
+        "quantity": 2,
+        "orderedTime": [
+          "2025-01-17T16:13:46.200Z"
+        ],
+        "isDelivered": false
+      }
+    ]
   },
   {
     "id": 4,
@@ -33,21 +231,19 @@
     "id": 6,
     "table": 6,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 7,
     "table": 7,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 8,
     "table": 8,
     "available": true,
-    "orders": [
-      
-    ]
+    "orders": []
   },
   {
     "id": 9,
@@ -59,25 +255,31 @@
     "id": 10,
     "table": 10,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 11,
     "table": 11,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 12,
     "table": 12,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 13,
     "table": 13,
     "available": true,
-    "orders":[]
+    "orders": []
+  },
+  {
+    "id": 14,
+    "table": 14,
+    "available": true,
+    "orders": []
   },
   {
     "id": 15,
@@ -89,7 +291,7 @@
     "id": 16,
     "table": 16,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   { "id": 17, "table": 17, "available": true, "orders": [] },
   { "id": 18, "table": 18, "available": true, "orders": [] },
@@ -115,7 +317,7 @@
     "id": 22,
     "table": 22,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 23,
@@ -127,7 +329,7 @@
     "id": 24,
     "table": 24,
     "available": true,
-    "orders":[]
+    "orders": []
   },
   {
     "id": 25,

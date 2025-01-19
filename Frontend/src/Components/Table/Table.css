@@ -18,9 +18,11 @@
   animation: beat 5s infinite;
   transition: all 0.3s ease-in-out;
 }
-
-.table-container:hover{
-  box-shadow: 3px 3px 10px black inset ;
+.table-container:hover {
+  transform: scale(1.05);
+}
+.table-container:active {
+  box-shadow: 3px 3px 10px black inset;
   transform: scale(0.98);
 }
 

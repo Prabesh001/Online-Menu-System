@@ -17,7 +17,7 @@ function FoodCategory({ onAddToCart }) {
     error,
     setError,
     items,
-    setItems
+    setItems,
   } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { category } = useParams(); // Get the category from the URL params
@@ -62,6 +62,7 @@ function FoodCategory({ onAddToCart }) {
           }
         });
 
+        // const filteredItems = data.filter((ele) => ele.availability ===true);
         setItems(filteredItems);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -75,9 +76,6 @@ function FoodCategory({ onAddToCart }) {
     setSelectedIndex(category);
   }, [category]);
 
-  if (loading) {
-    return <LoadingComponent />;
-  }
   if (error) {
     return <div className="loading-failed">{error}</div>;
   }
@@ -97,7 +95,7 @@ function FoodCategory({ onAddToCart }) {
       )
     );
   };
-  
+
   const addToCartError = () => {
     setPopupVisiblilty(true);
     console.log("error");
@@ -113,56 +111,62 @@ function FoodCategory({ onAddToCart }) {
     <div className="food-category">
       <h2 className="category-title">{category}</h2>
       <Toaster richColors position="bottom-center" />
-      <ul className="item-list">
-        {items.length > 0 ? (
-          items.map((item) => (
-            <li
-              key={item._id}
-              className="item"
-              title={item.isVeg ? "Veg" : "Non-veg"}
-            >
-              <div className="item-info">
-                <h3>{item.name}</h3>
-                <span style={{ fontSize: "13px", fontStyle: "italic" }}>
-                  {item.availability ? (
-                    <span style={{ color: "green" }} className="no-select">(Available)</span>
-                  ) : (
-                    <span style={{ color: "red" }}>(Not Available)</span>
-                  )}
-                </span>
-                <p className="no-select">{item.description}</p>
-                <p>Rs. {item.price}</p>
-              </div>
-              <div className="add-btn-group">
-                <div className="set-item-quantity">
-                  <MinusIcon
-                    size="18px"
-                    cursor="pointer"
-                    color="gray"
-                    onClick={() => handleAction("minus", item._id)}
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <ul className="item-list">
+          {items.length > 0 ? (
+            items.map((item) => (
+              <li
+                key={item._id}
+                className="item"
+                title={item.isVeg ? "Veg" : "Non-veg"}
+              >
+                <div className="item-info">
+                  <h3>{item.name}</h3>
+                  <span style={{ fontSize: "13px", fontStyle: "italic" }}>
+                    {item.availability ? (
+                      <span style={{ color: "green" }} className="no-select">
+                        (Available)
+                      </span>
+                    ) : (
+                      <span style={{ color: "red" }}>(Not Available)</span>
+                    )}
+                  </span>
+                  <p className="no-select">{item.description}</p>
+                  <p>Rs. {item.price}</p>
+                </div>
+                <div className="add-btn-group">
+                  <div className="set-item-quantity">
+                    <MinusIcon
+                      size="18px"
+                      cursor="pointer"
+                      color="gray"
+                      onClick={() => handleAction("minus", item._id)}
                     />
-                  <input key={item.id} readOnly value={item.quantity || 1} />
-                  <PlusIcon
-                    size="18px"
-                    color="gray"
-                    cursor="pointer"
-                    onClick={() => handleAction("plus", item._id)}
+                    <input key={item.id} readOnly value={item.quantity || 1} />
+                    <PlusIcon
+                      size="18px"
+                      color="gray"
+                      cursor="pointer"
+                      onClick={() => handleAction("plus", item._id)}
+                    />
+                  </div>
+                  <AddToCart
+                    onClick={() => {
+                      item.availability === true
+                        ? addToCartSuccess(item)
+                        : addToCartError();
+                    }}
                   />
                 </div>
-                <AddToCart
-                  onClick={() => {
-                    item.availability === true
-                      ? addToCartSuccess(item)
-                      : addToCartError();
-                  }}
-                />
-              </div>
-            </li>
-          ))
-        ) : (
-          <p>No items found in this category.</p>
-        )}
-      </ul>
+              </li>
+            ))
+          ) : (
+            <p>No items found in this category.</p>
+          )}
+        </ul>
+      )}
       {popupVisiblilty && (
         <Popup greeting="Sorry!" message={<p>Item is not available!</p>} />
       )}

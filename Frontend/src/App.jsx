@@ -13,13 +13,9 @@ import FoodCategory from "./Pages/FoodCategory";
 import SearchItem from "./Pages/SearchItem.jsx";
 import Login from "./Pages/Login";
 import Welcome from "./Pages/Welcome";
-import Navbar from "./Components/Navbar/index";
-import Footer from "./Components/Footer";
 import Cart from "./Pages/Cart.jsx";
-import Table from "./Components/Table/Table.jsx";
-import EmployeePage from "./Pages/EmployeePage/EmployeePage.jsx";
-import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 import TableReserve from "./Pages/TableReserve.jsx";
+import EmployeePage from "./Pages/EmployeePage/EmployeePage.jsx";
 import AboutUs from "./Pages/FooterOption/AboutUs.jsx";
 import Advertisement from "./Pages/FooterOption/Advertisement.jsx";
 import Marketing from "./Pages/FooterOption/Marketing.jsx";
@@ -29,7 +25,11 @@ import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
-import tabledata from "../../TableData.json";
+import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
+import Navbar from "./Components/Navbar/index";
+import Footer from "./Components/Footer";
+import Table from "./Components/Table/Table.jsx";
+import { fetchOrders } from "./JavaScript/fetchData.js";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -37,28 +37,31 @@ export const AuthContext = createContext();
 
 function Layout() {
   const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("CartItems")) || []
+    () => JSON.parse(localStorage.getItem("CartItems")) || []
   );
   const [selectedIndex, setSelectedIndex] = useState(
-    localStorage.getItem("index") || "Home"
+    () => localStorage.getItem("index") || "Home"
   );
   const [count, setCount] = useState(
-    Number(localStorage.getItem("count")) || 0
+    () => Number(localStorage.getItem("count")) || 0
   );
   const [searchItem, setSearchItem] = useState(
-    localStorage.getItem("searched-item") || ""
+    () => localStorage.getItem("searched-item") || ""
   );
   const [isAuthenticated, setIsAuthenticated] = useState(
-    JSON.parse(localStorage.getItem("isAuthenticated")) || false
+    () => JSON.parse(localStorage.getItem("isAuthenticated")) || false
   );
-  const [coupen, setCoupen] = useState(localStorage.getItem("user") || false);
+  const [coupen, setCoupen] = useState(
+    () => localStorage.getItem("user") || false
+  );
+  const [tableNumber, setTableNumber] = useState(
+    () => Number(localStorage.getItem("TableNumber")) || null
+  );
 
-  const [itemQuantity, setItemQuantity] = useState(1);
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
-
   const [customerOrder, setCustomerOrder] = useState([]);
 
   const location = useLocation();
@@ -68,23 +71,35 @@ function Layout() {
     setPopupVisiblilty(false);
   }
 
-  const [tableNumber, setTableNumber] = useState(
-    Number(localStorage.getItem("TableNumber")) || null
-  );
-
   useEffect(() => {
-    if (tableNumber === null) {
-      navigate("/");
-      return;
-    }
-    const myTable = tabledata.find((tab) => tab.table === Number(tableNumber));
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const tabledata = await fetchOrders();
 
-    if (myTable) {
-      myTable.available = false;
-      setCustomerOrder([myTable]);
-    } else {
-      console.warn("Table not found in tabledata");
-    }
+        if (tableNumber === null) {
+          navigate("/");
+          return;
+        }
+
+        const myTable = tabledata.find(
+          (tab) => tab.table === Number(tableNumber)
+        );
+
+        if (myTable) {
+          myTable.available = true;
+          setCustomerOrder([myTable]);
+        } else {
+          console.warn("Table not found in tabledata");
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [tableNumber]);
 
   useEffect(() => {
@@ -109,7 +124,6 @@ function Layout() {
   }, [isAuthenticated]);
 
   const audio = new Audio("../drop.m4a");
-
   function playAddToCartSound() {
     audio.play();
   }
@@ -117,17 +131,7 @@ function Layout() {
   const addToCart = (item) => {
     playAddToCartSound();
 
-    const getCurrentTime = () => {
-      const now = new Date();
-
-      const hours = now.getHours().toString().padStart(2, "0"); // Adds leading zero if needed
-      const minutes = now.getMinutes().toString().padStart(2, "0");
-      const seconds = now.getSeconds().toString().padStart(2, "0");
-
-      return `${hours}:${minutes}:${seconds}`;
-    };
-
-    const orderedTime = getCurrentTime();
+    const orderedTime = new Date().toLocaleTimeString();
 
     const itemsToAdd = Array.isArray(item)
       ? item.map((ele) => ({
@@ -183,30 +187,16 @@ function Layout() {
 
   const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
   const hideCart = [
-    "/",
-    "/login",
+    ...hideNavbarFooter,
     "/table",
-    "/employee",
-    "/reserve-seat",
+    "/paymentsuccess",
     "/tablemate/about-us",
-    "/tablemate/advertisement",
-    "/tablemate/marketing",
-    "/tablemate/terms-of-use",
-    "/tablemate/cookie-policy",
-    "/tablemate/privacy-policy",
-    "/paymentsuccess"
+    "/tablemate/advertisement"
   ];
-
   const noIndex = [
     "/table",
-    "/employee",
-    `/search/+${searchItem}`,
-    "/tablemate/about-us",
-    "/tablemate/advertisement",
-    "/tablemate/marketing",
-    "/tablemate/terms-of-use",
-    "/tablemate/cookie-policy",
-    "/tablemate/privacy-policy",
+    `/search/${searchItem}`,
+    ...hideNavbarFooter
   ];
 
   useEffect(() => {
@@ -215,7 +205,7 @@ function Layout() {
     } else if (noIndex.includes(location.pathname)) {
       setSelectedIndex(null);
     }
-  }, [location.pathname, setSelectedIndex, noIndex]);
+  }, [location.pathname, selectedIndex, noIndex]);
 
   return (
     <ItemContext.Provider
@@ -235,34 +225,34 @@ function Layout() {
         addToCart,
       }}
     >
-      <div className="app-main">
-        <div className="app-header">
-          {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
-        </div>
-        <CartContext.Provider
+      <CartContext.Provider
+        value={{
+          count,
+          setCount,
+          popupVisiblilty,
+          setPopupVisiblilty,
+          closePopup,
+          playAddToCartSound,
+          coupen,
+          setCoupen,
+          setTableNumber,
+          tableNumber,
+          customerOrder,
+          setCustomerOrder,
+        }}
+      >
+        <AuthContext.Provider
           value={{
-            count,
-            setCount,
-            popupVisiblilty,
-            setPopupVisiblilty,
-            closePopup,
-            playAddToCartSound,
-            coupen,
-            setCoupen,
-            setTableNumber,
+            isAuthenticated,
+            setIsAuthenticated,
             tableNumber,
             customerOrder,
-            setCustomerOrder,
           }}
         >
-          <AuthContext.Provider
-            value={{
-              isAuthenticated,
-              setIsAuthenticated,
-              tableNumber,
-              customerOrder,
-            }}
-          >
+          <div className="app-main">
+            <div className="app-header">
+              {!hideNavbarFooter.includes(location.pathname) && <Navbar />}
+            </div>
             <div className="app-body">
               <Routes>
                 <Route path="/" element={<Welcome />} />
@@ -290,13 +280,7 @@ function Layout() {
                 />
                 <Route
                   path="/table"
-                  element={
-                    <Cart
-                      items={cartItems}
-                      setItems={setCartItems}
-                      setItemQuantity={setItemQuantity}
-                    />
-                  }
+                  element={<Cart items={cartItems} setItems={setCartItems} />}
                 />
                 <Route
                   path="reserve-seat"
@@ -306,7 +290,7 @@ function Layout() {
                       passCondition={null}
                       destination="/Home"
                     >
-                      <TableReserve noOfTables={25} />
+                      <TableReserve noOfTables={20} />
                     </ProtectedRoute>
                   }
                 ></Route>
@@ -337,9 +321,9 @@ function Layout() {
             {!hideCart.includes(location.pathname) && (
               <Table value={count} onclick={() => navigate("/table")} />
             )}
-          </AuthContext.Provider>
-        </CartContext.Provider>
-      </div>
+          </div>
+        </AuthContext.Provider>
+      </CartContext.Provider>
     </ItemContext.Provider>
   );
 }

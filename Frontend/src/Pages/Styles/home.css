@@ -14,6 +14,7 @@
   background-color: #f9f9f9;
   box-sizing: border-box;
   box-shadow: 1px 1px 5px gray;
+  min-height: 40vh;
 }
 .home-offer {
   font-weight: bold;
@@ -27,11 +28,12 @@
 .menu-item {
   box-sizing: border-box;
   padding: 10px;
-  box-shadow: 2px 2px 5px lightgray, -2px -2px 5px lightgray;
+  box-shadow: -1px -1px 3px gray, 1px 1px 3px gray;
   border-radius: 10px;
 }
 .discounted {
-  margin-right: 5px;
+  margin-right: 8px;
+  color: #5d5757;
 }
 .item-name {
   max-width: 12em;
@@ -44,7 +46,7 @@
 .menu-photo {
   aspect-ratio: 9 / 13;
   margin-bottom: 5px;
-  box-shadow: -2px -2px 3px gray, 2px 2px 3px gray;
+  box-shadow: 2px 2px 5px lightgray, -2px -2px 5px lightgray;
   border-radius: 5px;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
@@ -63,6 +65,10 @@
 .actual-price,
 .item-name {
   font-weight: bold;
+}
+.actual-price{
+  font-size: 1.1rem;
+  color: var(--theme-color);
 }
 .slogan {
   font-size: 18px;

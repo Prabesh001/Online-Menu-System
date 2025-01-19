@@ -1,26 +1,29 @@
-import React, { useContext, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import React, { useState, useContext, useEffect } from "react";
+import {
+  MenuItem,
+  Tooltip,
+  Button,
+  Avatar,
+  Container,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Badge,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { CartContext, ItemContext } from "../../App.jsx";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { CartContext, ItemContext, AuthContext } from "../../App.jsx";
 import Popup from "../../Components/Popup";
-import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 function EmployeeNavbar() {
   const user = JSON.parse(localStorage.getItem("employee-profile")) || [];
-  const pages = ["Products", "Pricing", "Blog"];
-  const settings = [user.first_name, "Account", "Dashboard", "Logout"];
+  const pages = ["Products", "Pricing"];
+  const settings = ["Profile", "Dashboard", "Logout"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
@@ -43,7 +46,6 @@ function EmployeeNavbar() {
     setAnchorElUser(null);
   };
 
-  
   const handleLogout = () => {
     setLoading(true);
     setTimeout(() => {
@@ -54,12 +56,25 @@ function EmployeeNavbar() {
       setLoading(false);
     }, 5000);
   };
-  
-  const handleLogoutClicked = () => {
-    setAnchorElUser(null);
-    setPopupVisiblilty(true);
+
+  const handleSettingsAction = (setting) => {
+    if (setting === "Logout") {
+      setAnchorElUser(null);
+      setPopupVisiblilty(true);
+    } else if (setting === "Profile") {
+      console.log(setting);
+    } else if (setting === "Dashboard") {
+      {
+        user.access_level !== "admin"
+          ? setPopupVisiblilty("unauthorized")
+          : window.open("http://localhost:5174", "_blank");
+      }
+      handleCloseUserMenu();
+    } else {
+      handleCloseUserMenu();
+    }
   };
-  
+
   useEffect(() => {
     if (user.length === 0) {
       navigate("/login");
@@ -67,7 +82,7 @@ function EmployeeNavbar() {
   }, [user]);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor: "#008cba"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -75,18 +90,18 @@ function EmployeeNavbar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontFamily: "Roboto",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            TableMate
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -128,19 +143,19 @@ function EmployeeNavbar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Roboto",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            TableMate
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -153,6 +168,17 @@ function EmployeeNavbar() {
               </Button>
             ))}
           </Box>
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent="9+" color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </MenuItem>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -178,11 +204,7 @@ function EmployeeNavbar() {
               {settings.map((setting) => (
                 <MenuItem
                   key={setting}
-                  onClick={
-                    setting === "Logout"
-                      ? handleLogoutClicked
-                      : handleCloseUserMenu
-                  }
+                  onClick={() => handleSettingsAction(setting)}
                 >
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}
@@ -193,7 +215,7 @@ function EmployeeNavbar() {
           </Box>
         </Toolbar>
       </Container>
-      {popupVisiblilty && (
+      {popupVisiblilty === true && (
         <Popup
           greeting="Logout!"
           message={<p>Are you sure you want to Logout?</p>}
@@ -206,6 +228,12 @@ function EmployeeNavbar() {
               Logout
             </button>
           }
+        />
+      )}
+      {popupVisiblilty === "unauthorized" && (
+        <Popup
+          greeting="Unauthorized Access!"
+          message={<p>You are not authorized to use Dashboard.</p>}
         />
       )}
     </AppBar>
