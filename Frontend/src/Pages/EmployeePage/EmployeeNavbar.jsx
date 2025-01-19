@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,17 +15,18 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { CartContext, ItemContext } from "../../App.jsx";
 import Popup from "../../Components/Popup";
 import { AuthContext } from "../../App";
-
+import { useNavigate } from "react-router-dom";
 
 function EmployeeNavbar() {
-  const user = JSON.parse(localStorage.getItem("employee-profile"))
+  const user = JSON.parse(localStorage.getItem("employee-profile")) || [];
   const pages = ["Products", "Pricing", "Blog"];
   const settings = [user.first_name, "Account", "Dashboard", "Logout"];
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { loading, setLoading } = useContext(ItemContext);
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,22 +43,28 @@ function EmployeeNavbar() {
     setAnchorElUser(null);
   };
 
+  
   const handleLogout = () => {
     setLoading(true);
     setTimeout(() => {
       setPopupVisiblilty(false);
-      localStorage.removeItem("employee-profile")
+      localStorage.removeItem("employee-profile");
       setIsAuthenticated(!isAuthenticated);
-      localStorage.removeItem("isAuthenticated")
+      localStorage.removeItem("isAuthenticated");
       setLoading(false);
     }, 5000);
   };
-
   
   const handleLogoutClicked = () => {
     setAnchorElUser(null);
     setPopupVisiblilty(true);
   };
+  
+  useEffect(() => {
+    if (user.length === 0) {
+      navigate("/login");
+    }
+  }, [user]);
 
   return (
     <AppBar position="static">
@@ -152,7 +159,6 @@ function EmployeeNavbar() {
                 <Avatar alt="Remy Sharp" src={user.photo} />
               </IconButton>
             </Tooltip>
-            {console.log(user)}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

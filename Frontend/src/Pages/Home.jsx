@@ -64,8 +64,8 @@ function MenuSection({ title, category }) {
         <div style={{ padding: "10px" }}>
           <Grid container wrap="wrap" justifyContent="flex-start">
             {(loading ? Array.from(new Array(6)) : data).map((item, index) => (
-              <Box key={index} sx={{ width: 210, marginRight: 3, my: 5 }}>
-                <Skeleton variant="rectangular" width={210} height={255} />
+              <Box key={index} sx={{ width: 190, marginRight: 3, my: 1 }}>
+                <Skeleton variant="rectangular" width={190} height={225} />
 
                 <Box sx={{ pt: 0.5 }}>
                   <Skeleton />
@@ -73,7 +73,7 @@ function MenuSection({ title, category }) {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "10px",
+                      justifyContent:"space-between",
                     }}
                   >
                     <Skeleton width={100} height={55} />
