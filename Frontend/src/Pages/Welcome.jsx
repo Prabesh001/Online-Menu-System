@@ -27,20 +27,17 @@ function Welcome() {
     <p>Login Failed! Try Again!</p>;
   };
 
-  function handleGuestId() {
+  const handleGuestId=()=> {
     handleEntry();
     setCoupen(false);
   }
 
-  document.addEventListener("offline", () => {
-    return <p>Hello</p>;
-  });
   return (
     <div className="welcome-page">
       <div className="window-overlay"></div>
       <div className="user-btn">
         <div>
-          <button className="welcome-button" onClick={() => handleGuestId()}>
+          <button className="welcome-button" onClick={handleGuestId}>
             Guest
           </button>
         </div>

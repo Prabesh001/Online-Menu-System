@@ -3,7 +3,7 @@ import "../Styles/EmployeePage.css";
 import { Toaster, toast } from "sonner";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import { Select, MenuItem } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { fetchOrders } from "../../JavaScript/fetchData";
 import { ItemContext } from "../../App.jsx";
 import EmployeeNavbar from "./EmployeeNavbar";
@@ -16,6 +16,7 @@ function EmployeePage() {
   const [allOrders, setAllOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const { loading, setLoading } = useContext(ItemContext);
+  const [reservedTable, setReservedTable] = useState([]);
 
   const handleChange = (event) => {
     setSelectedTable(event.target.value);
@@ -28,7 +29,13 @@ function EmployeePage() {
         const data = await fetchOrders();
         setAllOrders(data);
         const myTable = data.find((ele) => ele.orders.length !== 0);
-        if (myTable) setSelectedTable(myTable.table);
+        
+        const reservedTable = data.filter((ele) => ele.available === false);
+        setReservedTable(reservedTable);
+
+        if (myTable) {
+          setSelectedTable(myTable.table);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -70,8 +77,8 @@ function EmployeePage() {
 
     return (
       <Select value={value || ""} onChange={handleChange} fullWidth>
-        <MenuItem value="Yes">Yes</MenuItem>
-        <MenuItem value="No">No</MenuItem>
+        <MenuItem value="True">true</MenuItem>
+        <MenuItem value="False">false</MenuItem>
       </Select>
     );
   }
@@ -92,54 +99,52 @@ function EmployeePage() {
     },
   ];
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <LoadingComponent />
-      </div>
-    );
-  }
   return (
     <div>
-      <EmployeeNavbar />
-      <div style={{ padding: "10px" }}>
-        <Toaster richColors />
-        <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-          Orders from Table No.{" "}
-        </span>
-        <select name="Table No" value={selectedTable} onChange={handleChange}>
-          <option value="" disabled>
-            Select a table
-          </option>
-          {Array.from({ length: 25 }, (_, index) => (
-            <option key={index + 1} value={index + 1}>
-              {index + 1}
-            </option>
-          ))}
-        </select>
-        <Box sx={{ minHeight: 277, width: "100%" }}>
-          <DataGrid
-            rows={filteredOrders}
-            columns={columns}
-            checkboxSelection
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 100,
+      <EmployeeNavbar reservedTable={ reservedTable } />
+      {loading ? (
+        <LoadingComponent mh={46.7} />
+      ) : (
+        <div style={{ padding: "20px 15px" }}>
+          <Toaster richColors />
+          <span style={{ fontSize: "20px", fontWeight: "bold", marginRight:"10px" }}>
+            Orders from Table No.
+          </span>
+
+          <FormControl>
+            <InputLabel id="demo-simple-select-label">Table</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedTable}
+              label="Table No."
+              onChange={handleChange}
+              style={{height:"40px"}}
+            >
+              {reservedTable.map((table) => (
+                <MenuItem key={table.table} value={table.table}>
+                  {table.table}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box sx={{ minHeight: 277, width: "100%", marginTop:"20px" }}>
+            <DataGrid
+              rows={filteredOrders}
+              columns={columns}
+              checkboxSelection
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 100,
+                  },
                 },
-              },
-            }}
-            pageSizeOptions={[100]}
-          />
-        </Box>
-      </div>
+              }}
+              pageSizeOptions={[100]}
+            />
+          </Box>
+        </div>
+      )}
       <Footer />
     </div>
   );

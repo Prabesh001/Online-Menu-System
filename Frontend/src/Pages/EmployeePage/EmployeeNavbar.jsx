@@ -15,20 +15,21 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import { MdOutlineTableBar } from "react-icons/md";
+import { FiMessageCircle } from "react-icons/fi";
 import { CartContext, ItemContext, AuthContext } from "../../App.jsx";
 import Popup from "../../Components/Popup";
 import { useNavigate } from "react-router-dom";
 
-function EmployeeNavbar() {
+function EmployeeNavbar({reservedTable}) {
   const user = JSON.parse(localStorage.getItem("employee-profile")) || [];
   const pages = ["Products", "Pricing"];
   const settings = ["Profile", "Dashboard", "Logout"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
-  const { loading, setLoading } = useContext(ItemContext);
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { setLoading } = useContext(ItemContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -51,7 +52,7 @@ function EmployeeNavbar() {
     setTimeout(() => {
       setPopupVisiblilty(false);
       localStorage.removeItem("employee-profile");
-      setIsAuthenticated(!isAuthenticated);
+      setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");
       setLoading(false);
     }, 5000);
@@ -82,7 +83,7 @@ function EmployeeNavbar() {
   }, [user]);
 
   return (
-    <AppBar position="static" style={{backgroundColor: "#008cba"}}>
+    <AppBar position="static" style={{ backgroundColor: "#008cba" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -103,7 +104,6 @@ function EmployeeNavbar() {
           >
             TableMate
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -168,50 +168,67 @@ function EmployeeNavbar() {
               </Button>
             ))}
           </Box>
-          <MenuItem>
+          <Box
+            sx={{
+              display: "flex",
+              columnGap: "7px",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show new notifications"
               color="inherit"
-            >
+              >
               <Badge badgeContent="9+" color="error">
-                <NotificationsIcon />
+                <FiMessageCircle />
               </Badge>
             </IconButton>
-          </MenuItem>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={user.photo} />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+            <IconButton
+              size="large"
+              aria-label="show new notifications"
+              title="Booked Table"
+              color="inherit"
             >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => handleSettingsAction(setting)}
-                >
-                  <Typography sx={{ textAlign: "center" }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              <Badge badgeContent={reservedTable.length} color="error">
+                <MdOutlineTableBar />
+              </Badge>
+            </IconButton>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src={user.photo} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleSettingsAction(setting)}
+                  >
+                    <Typography sx={{ textAlign: "center" }}>
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
           </Box>
         </Toolbar>
       </Container>

@@ -6,6 +6,8 @@ import {
   API_ORDER_URL,
 } from "./config.js";
 
+const skipFetchRoutes = ["/", "/reserve-seat"];
+
 const fetchAction = async (url) => {
   try {
     const response = await axios.get(url);
@@ -20,9 +22,12 @@ const fetchAction = async (url) => {
 };
 
 export const updateTable = async (tableNo, updatedData) => {
+  if (skipFetchRoutes.includes(location.pathname)) {
+    return;
+  }
   try {
     const response = await fetch(
-      `https://your-api-endpoint/tables/${tableNo}`,
+      `${API_ORDER_URL}/${tableNo}`,
       {
         method: "PATCH",
         headers: {
@@ -31,13 +36,10 @@ export const updateTable = async (tableNo, updatedData) => {
         body: JSON.stringify(updatedData),
       }
     );
-
     if (!response.ok) {
       throw new Error("Failed to update table");
     }
-
     const data = await response.json();
-    console.log("Table updated successfully", data);
   } catch (error) {
     console.error("Error updating table:", error);
   }

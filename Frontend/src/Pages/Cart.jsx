@@ -22,7 +22,10 @@ function Cart({ items, setItems }) {
   const [currentItem, setCurrentItem] = useState(null);
   const navigate = useNavigate();
 
-  const totalPrice = items.reduce((acc, item) => acc + (item.price).toFixed(0) * item.quantity, 0)
+  const totalPrice = items.reduce(
+    (acc, item) => acc + item.price.toFixed(0) * item.quantity,
+    0
+  );
 
   function removeFromCart(item) {
     const filteredItems = items.filter((ele) => ele._id !== item._id);
@@ -80,6 +83,8 @@ function Cart({ items, setItems }) {
 
   const withCoupen = (totalPrice - 0.03 * totalPrice).toFixed(0);
   const withoutCoupen = (totalPrice - 0.1 * totalPrice).toFixed(0);
+
+  const amount = coupen === "true" ? withCoupen : withoutCoupen;
 
   const hrLine = <div style={{ borderTop: "1px solid lightgray" }}></div>;
 
@@ -147,15 +152,11 @@ function Cart({ items, setItems }) {
         <span>No. of items: {count}</span>
         <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
-        <span>
-          Final Price: Rs.
-          {coupen === "true" ? withCoupen : withoutCoupen}
+        <span style={{fontWeight:"bold", color:"green"}}>
+          Final Price: Rs. {amount}
         </span>
         <hr />
-        <Payment
-          className="payment-btn"
-          amount={coupen === "true" ? withCoupen : withoutCoupen}
-        />
+        <Payment className="payment-btn" key={amount} amount={amount} />
       </div>
       {popupVisiblilty === "update" && (
         <Popup

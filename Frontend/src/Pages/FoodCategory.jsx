@@ -98,11 +98,11 @@ function FoodCategory({ onAddToCart }) {
 
   const addToCartError = () => {
     setPopupVisiblilty(true);
-    console.log("error");
     toast.error("Sorry, Item is not available.");
   };
   const addToCartSuccess = (element) => {
     onAddToCart(element);
+    element.quantity = 1
     console.log("success");
     toast.success(element.name + " added to Table.");
   };
@@ -112,7 +112,7 @@ function FoodCategory({ onAddToCart }) {
       <h2 className="category-title">{category}</h2>
       <Toaster richColors position="bottom-center" />
       {loading ? (
-        <LoadingComponent />
+        <LoadingComponent mh={50}/>
       ) : (
         <ul className="item-list">
           {items.length > 0 ? (

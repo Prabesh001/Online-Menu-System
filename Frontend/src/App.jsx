@@ -29,7 +29,7 @@ import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 import Navbar from "./Components/Navbar/index";
 import Footer from "./Components/Footer";
 import Table from "./Components/Table/Table.jsx";
-import { fetchOrders } from "./JavaScript/fetchData.js";
+import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -37,7 +37,7 @@ export const AuthContext = createContext();
 
 function Layout() {
   const [cartItems, setCartItems] = useState(
-    () => JSON.parse(localStorage.getItem("CartItems")) || []
+    ()=>JSON.parse(localStorage.getItem("CartItems")) || []
   );
   const [selectedIndex, setSelectedIndex] = useState(
     () => localStorage.getItem("index") || "Home"
@@ -52,7 +52,7 @@ function Layout() {
     () => JSON.parse(localStorage.getItem("isAuthenticated")) || false
   );
   const [coupen, setCoupen] = useState(
-    () => localStorage.getItem("user") || false
+    () => localStorage.getItem("user") || ""
   );
   const [tableNumber, setTableNumber] = useState(
     () => Number(localStorage.getItem("TableNumber")) || null
@@ -87,8 +87,10 @@ function Layout() {
         );
 
         if (myTable) {
-          myTable.available = true;
+          myTable.available = false;
           setCustomerOrder([myTable]);
+          const updatedData = { available: false };
+          updateTable(myTable.table, updatedData);
         } else {
           console.warn("Table not found in tabledata");
         }
@@ -107,6 +109,9 @@ function Layout() {
   }, [coupen]);
 
   useEffect(() => {
+    if(cartItems.length===0){
+      setCount(0)
+    }
     localStorage.setItem("count", count);
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
@@ -117,6 +122,8 @@ function Layout() {
         item.table === tableNumber ? { ...item, orders: cartItems } : item
       )
     );
+    const updatedTable = { orders: cartItems };
+    updateTable(tableNumber, updatedTable);
   }, [cartItems, tableNumber]);
 
   useEffect(() => {
@@ -191,13 +198,9 @@ function Layout() {
     "/table",
     "/paymentsuccess",
     "/tablemate/about-us",
-    "/tablemate/advertisement"
+    "/tablemate/advertisement",
   ];
-  const noIndex = [
-    "/table",
-    `/search/${searchItem}`,
-    ...hideNavbarFooter
-  ];
+  const noIndex = ["/table", `/search/${searchItem}`, ...hideNavbarFooter];
 
   useEffect(() => {
     if (location.pathname === "/") {

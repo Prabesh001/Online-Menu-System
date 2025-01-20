@@ -124,7 +124,7 @@ function MenuSection({ title, category }) {
                     color="gray"
                     onClick={() => handleAction("minus", item._id)}
                   />
-                  <input key={item.id} readOnly value={item.quantity || 1} />
+                  <input className="selected-quantity" key={item.id} readOnly value={item.quantity || 1} />
                   <PlusIcon
                     size="18px"
                     color="gray"
@@ -135,6 +135,7 @@ function MenuSection({ title, category }) {
                 <AddToCart
                   onClick={() => {
                     addToCart(item);
+                    item.quantity = 1
                     toast.success(`${item.name} added to Table.`);
                   }}
                 />

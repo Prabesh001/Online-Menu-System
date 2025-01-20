@@ -4,6 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const http = require("http");
 const { url } = require("inspector");
+const { Item, Orders, Home, Team } = require("./schemas.js");
 
 const app = express();
 const PORT = 5000;
@@ -31,68 +32,6 @@ mongoose
   )
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("Failed to connect to MongoDB Atlas:", err));
-
-const itemSchema = new mongoose.Schema(
-  {
-    _id: String,
-    name: String,
-    description: String,
-    price: Number,
-    discountedPrice: Number,
-    category: String,
-    availability: Boolean,
-    photo: String,
-    promotion: Boolean,
-  },
-  { collection: "menuItem", versionKey: false }
-);
-
-const orderSchema = new mongoose.Schema(
-  {
-    _id: String,
-    id: Number,
-    table: Number,
-    available: Boolean,
-    orders: Array,
-  },
-  { collection: "TableOrders", versionKey: false }
-);
-
-const homeItemSchema = new mongoose.Schema(
-  {
-    _id: String,
-    name: String,
-    description: String,
-    price: Number,
-    discountedPrice: Number,
-    category: Array,
-    availability: Boolean,
-    photo: String,
-  },
-  { collection: "specialMenu", versionKey: false }
-);
-// Team schema and model
-const teamSchema = new mongoose.Schema(
-  {
-    _id: String,
-    id: String,
-    first_name: String,
-    last_name: String,
-    Username: String,
-    email: String,
-    password: String,
-    hashedPassword: String,
-    age: Number,
-    phone_number: String,
-    photo: String,
-    access_level: { type: String, enum: ["admin", "manager", "employee"] },
-  },
-  { collection: "team", versionKey: false }
-);
-const Item = mongoose.model("menuItem", itemSchema);
-const Team = mongoose.model("team", teamSchema);
-const Home = mongoose.model("specialMenu", homeItemSchema);
-const Orders = mongoose.model("TableOrders", orderSchema);
 
 // Get menu items
 app.get("/api/menu", async (req, res) => {
@@ -134,52 +73,57 @@ app.get("/api/employee", async (req, res) => {
   }
 });
 
-app.route("/api/table/:table")
-.get(async (req, res) => {
-  try {
-    const {table} = req.params;
-    const item = await Orders.findOne({ table: table });
-    if (!item) {
-      return res.status(404).json({ message: "Table not found" });
+//get, patch and delete table
+app
+  .route("/api/table/:table")
+  .get(async (req, res) => {
+    try {
+      const { table } = req.params;
+      const item = await Orders.findOne({ table: table });
+      if (!item) {
+        return res.status(404).json({ message: "Table not found" });
+      }
+      res.json(item);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-    res.json(item);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-}).patch(async (req, res) => {
-  //Edit data
-  try {
-    const {table} = req.params;
+  })
+  .patch(async (req, res) => {
+    //Edit data
+    try {
+      const { table } = req.params;
 
-    const updatedTable = await Orders.findOneAndUpdate(
-      { table: table },
-      { $set: req.body },
-      { new: true }
-    );
+      const updatedTable = await Orders.findOneAndUpdate(
+        { table: table },
+        { $set: req.body },
+        { new: true }
+      );
 
-    if (!updatedTable) {
-      return res.status(404).json({ message: "Table not found" });
+      if (!updatedTable) {
+        return res.status(404).json({ message: "Table not found" });
+      }
+
+      res.json(updatedTable);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
+  })
+  .delete(async (req, res) => {
+    try {
+      const { table } = req.params;
+      const deleteId = await Item.findOneAndDelete({ table: table });
 
-    res.json(updatedTable);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-}).delete(async (req, res) => {
-  try {
-    const {table} = req.params;
-    const deleteId = await Item.findOneAndDelete({ table: table });
+      if (!deleteId) {
+        return res.status(404).json({ message: "Item not found" });
+      }
 
-    if (!deleteId) {
-      return res.status(404).json({ message: "Item not found" });
+      res.json({ message: "Deleted Item:", deleteId });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
+  });
 
-    res.json({ message: "Deleted Item:", deleteId });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});;
-
+//get, patch and delete menu
 app
   .route("/api/menu/:id")
   .get(async (req, res) => {
@@ -227,41 +171,13 @@ app
     }
   });
 
-app.post("/api/menu", async (req, res) => {
-  try {
-    const { name, description, price, category, availability, photo, discountedPrice } =
-      req.body;
-
-    if (!name || !description || !price || !category) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-
-    const newItem = new Item({
-      _id: new mongoose.Types.ObjectId().toString(),
-      name,
-      description,
-      price,
-      category,
-      photo,
-      availability,
-      discountedPrice: price
-    });
-
-    await newItem.save();
-    res.status(201).json({ message: "Item added successfully", newItem });
-  } catch (err) {
-    console.error("Error in adding item:", err); // Log the error to the backend console
-    res.status(500).json({ message: err.message, error: err });
-  }
-});
-
-// Get a team member by id
+//get, patch and delete team
 app
   .route("/api/employee/:id")
   .get(async (req, res) => {
     try {
-      const {id} = req.params;
-      const employee = await Team.find( {Username: id} );
+      const { id } = req.params;
+      const employee = await Team.find({ Username: id });
       if (!employee) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -273,9 +189,9 @@ app
   .patch(async (req, res) => {
     //Edit data
     try {
-      const {id} = req.params;
+      const { id } = req.params;
       const updatedEmployee = await Team.findOneAndUpdate(
-        {Username: id},
+        { Username: id },
         { $set: req.body },
         { new: true }
       );
@@ -293,7 +209,7 @@ app
     //Delete data
     try {
       const _id = req.params;
-      const deleteId = await Team.findOneAndDelete( _id );
+      const deleteId = await Team.findOneAndDelete(_id);
 
       if (!deleteId) {
         return res.status(404).json({ message: "User not found" });
@@ -304,6 +220,42 @@ app
       res.status(500).json({ message: err.message });
     }
   });
+
+//insert new menu items
+app.post("/api/menu", async (req, res) => {
+  try {
+    const {
+      name,
+      description,
+      price,
+      category,
+      availability,
+      photo,
+      discountedPrice,
+    } = req.body;
+
+    if (!name || !description || !price || !category) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const newItem = new Item({
+      _id: new mongoose.Types.ObjectId().toString(),
+      name,
+      description,
+      price,
+      category,
+      photo,
+      availability,
+      discountedPrice: price,
+    });
+
+    await newItem.save();
+    res.status(201).json({ message: "Item added successfully", newItem });
+  } catch (err) {
+    console.error("Error in adding item:", err); // Log the error to the backend console
+    res.status(500).json({ message: err.message, error: err });
+  }
+});
 
 // Add a new team member
 app.post("/api/employee", async (req, res) => {
@@ -317,7 +269,7 @@ app.post("/api/employee", async (req, res) => {
       age,
       phone_number,
       access_level,
-      photo
+      photo,
     } = req.body;
 
     if (!first_name || !email || !password || !access_level) {

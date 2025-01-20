@@ -6,7 +6,7 @@ import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
 import LoadingComponent from "../Components/Loading/loading.jsx";
 import {Breadcrumbs, Typography} from "@mui/material";
-import { Link } from "react-router-dom";
+
 // Levenshtein Distance for Fuzzy Search
 function levenshteinDistance(a, b) {
   const dp = Array.from({ length: a.length + 1 }, () =>
@@ -64,7 +64,7 @@ function SearchItem({ onAddToCart }) {
   }, []);
 
   if (loading) {
-    return <LoadingComponent />;
+    return <LoadingComponent mh={47}/>;
   }
 
   const performFuzzySearch = () => {

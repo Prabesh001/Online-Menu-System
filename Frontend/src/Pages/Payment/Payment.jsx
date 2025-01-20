@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CryptoJS from "crypto-js";
 
@@ -29,8 +28,7 @@ const Payment = ({ amount }) => {
   ) => {
     const hashString = `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`;
     const hash = CryptoJS.HmacSHA256(hashString, secret);
-    const hashedSignature = CryptoJS.enc.Base64.stringify(hash);
-    return hashedSignature;
+    return CryptoJS.enc.Base64.stringify(hash);
   };
 
   // useeffect
@@ -59,13 +57,6 @@ const Payment = ({ amount }) => {
             name="amount"
             autoComplete="off"
             value={formData.amount}
-            onChange={({ target }) =>
-              setformData({
-                ...formData,
-                amount: target.value,
-                total_amount: target.value,
-              })
-            }
             required
           />
         </div>
