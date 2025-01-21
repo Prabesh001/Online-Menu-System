@@ -16,6 +16,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { FaEdit } from "react-icons/fa";
 import { useContext } from "react";
 import { CollapseContext } from "../../App";
@@ -66,7 +67,7 @@ const Sidebar = () => {
           color: "#6870fa !important",
         },
       }}
-      style={{position:"fixed", zIndex: 1000}}
+      style={{position:"absolute", zIndex: 1000, top: 0, bottom: 0}}
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
@@ -149,7 +150,7 @@ const Sidebar = () => {
             <Item
               title="Manage Items"
               to="/items"
-              icon={<FaEdit />}
+              icon={<ShoppingCartIcon />}
               selected={selected}
               setSelected={setSelected}
             />

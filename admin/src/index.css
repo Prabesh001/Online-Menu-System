@@ -10,6 +10,11 @@ body,
   width: 100%;
   font-family: 'Source Code Pro', sans-serif;
 }
+.content{
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
 .app{
   display: flex;
   position: relative;

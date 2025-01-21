@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
@@ -7,11 +7,13 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { fetchTeams } from "../../../../Frontend/src/JavaScript/fetchData";
+import {CollectDataContext} from "../../App"
 
 function Team() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [team, setTeam] = useState([]);
+  const {setTeamMember} = useContext(CollectDataContext)
 
   useEffect(() => {
     const getData = async () => {
@@ -22,6 +24,7 @@ function Team() {
           ...rest,
         }));
         setTeam(formattedData);
+        setTeamMember(formattedData.length)
       } catch (error) {
         console.error("Error fetching data: ", error);
       }

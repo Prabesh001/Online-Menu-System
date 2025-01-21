@@ -1,8 +1,18 @@
-import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
+import {
+  Box,
+  Button,
+  TextField,
+  InputLabel,
+  FormControl,
+  MenuItem,
+  Select,
+  FormHelperText,
+} from "@mui/material";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import { toast, ToastContainer } from "react-toastify";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -18,37 +28,38 @@ const Form = () => {
         password: values.password,
         age: values.age,
         phone_number: values.contact,
-        access_level: "employee", // Assuming default 'employee' role
+        access_level: values.access_level,
+        photo: values.photo,
       };
-  
+
       const response = await fetch("http://localhost:5000/api/employee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(mappedValues), // Send mapped values to the backend
+        body: JSON.stringify(mappedValues),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log("User added successfully:", data);
-        alert("User created successfully!");
-        resetForm(); // Reset the form fields
+        toast.success("User created successfully!");
+        resetForm();
       } else {
         const error = await response.json();
         console.error("Error creating user:", error);
-        alert("Failed to create user. Please try again.");
+        toast.error("Failed to create user. Please try again.");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     }
   };
 
   return (
     <Box m="20px" p="5px">
+      <ToastContainer />
       <Header title="CREATE USER" subtitle="Create a New User Profile" />
-
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -101,6 +112,58 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
+                label="Phone Number"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.contact}
+                name="contact"
+                error={!!touched.contact && !!errors.contact}
+                helperText={touched.contact && errors.contact}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Age"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.age}
+                name="age"
+                error={!!touched.age && !!errors.age}
+                helperText={touched.age && errors.age}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Username"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.username}
+                name="username"
+                error={!!touched.username && !!errors.username}
+                helperText={touched.username && errors.username}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                name="password"
+                error={!!touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
                 label="Email"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -114,54 +177,43 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Phone Number"
+                label="Photo Url"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name="contact"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                value={values.photo}
+                name="photo"
+                error={!!touched.photo && !!errors.photo}
+                helperText={touched.photo && errors.photo}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Age"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.age}
-                name="age"
-                error={!!touched.age && !!errors.age}
-                helperText={touched.age && errors.age}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Username"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.username}
-                name="username"
-                error={!!touched.username && !!errors.username}
-                helperText={touched.username && errors.username}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Password"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
-                name="password"
-                error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 4" }}
-              />
+              <FormControl
+                sx={{ m: 1, minWidth: 200 }}
+                error={!!touched.access_level && !!errors.access_level}
+              >
+                <InputLabel id="demo-simple-select-label">
+                  Access Level
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={values.access_level}
+                  variant="filled"
+                  label="Access Level"
+                  name="access_level"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  sx={{ gridColumn: "span 4" }}
+                  required
+                >
+                  <MenuItem value="employee">Employee</MenuItem>
+                  <MenuItem value="manager">Manager</MenuItem>
+                  <MenuItem value="admin">Admin</MenuItem>
+                </Select>
+                <FormHelperText>
+                  {touched.access_level && errors.access_level}
+                </FormHelperText>{" "}
+                {/* Display error here */}
+              </FormControl>
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -189,6 +241,7 @@ const checkoutSchema = yup.object().shape({
     .required("required"),
   username: yup.string().required("required"),
   password: yup.string().required("required"),
+  access_level: yup.string().required("required"),
 });
 const initialValues = {
   firstName: "",
@@ -198,6 +251,8 @@ const initialValues = {
   contact: "",
   username: "",
   password: "",
+  photo: "",
+  access_level: "employee",
 };
 
 export default Form;

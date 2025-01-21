@@ -12,10 +12,13 @@ import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import { useContext } from "react";
+import { CollectDataContext } from "../../App";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const {teamMember} = useContext(CollectDataContext)
 
   return (
     <Box m="20px">
@@ -55,7 +58,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12"
+            title={teamMember}
             subtitle="No. of staffs"
             progress="0.75"
             increase="+14%"

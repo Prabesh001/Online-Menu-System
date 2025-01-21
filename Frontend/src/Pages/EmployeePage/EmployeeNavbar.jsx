@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 function EmployeeNavbar({reservedTable}) {
   const user = JSON.parse(localStorage.getItem("employee-profile")) || [];
   const pages = ["Products", "Pricing"];
-  const settings = ["Profile", "Dashboard", "Logout"];
+  const settings = [user.Username, "Dashboard", "Logout"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
