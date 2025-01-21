@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const http = require("http");
 const { url } = require("inspector");
 const { Item, Orders, Home, Team } = require("./schemas.js");
