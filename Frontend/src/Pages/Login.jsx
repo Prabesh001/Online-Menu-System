@@ -4,12 +4,14 @@ import "./Styles/login.css";
 import { AuthContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Toaster, toast } from "sonner";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
@@ -41,7 +43,7 @@ const LoginPage = () => {
       const user = employees.find(
         (employee) => employee.email === formData.email
       );
-      console.log(user)
+      console.log(user);
 
       if (!user) {
         setError(true);
@@ -61,13 +63,13 @@ const LoginPage = () => {
       if (isPasswordValid) {
         setIsAuthenticated(true);
         setError(false);
-        localStorage.setItem("employee-profile", JSON.stringify(user))
+        localStorage.setItem("employee-profile", JSON.stringify(user));
         if (user.access_level === "employee") {
-          navigate("/employee")
+          navigate("/employee");
         }
         if (user.access_level === "admin") {
           // window.location.href="https://mui.com/material-ui/react-app-bar/#app-bar-with-responsive-menu"
-          navigate("/employee")
+          navigate("/employee");
         }
       } else {
         toast.error("Invalid Password!");
@@ -97,17 +99,30 @@ const LoginPage = () => {
             onChange={handleInputChange}
             className={error ? "input error-input" : "input"}
           />
-          <p className="error-msg">{error ? "*required" : ""}</p>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleInputChange}
-            className={error ? "input error-input" : "input"}
-            required
-          />
-          <p className="error-msg">{error ? "*required" : ""}</p>
+          <p className="error-msg">{error ? "*Check your email properly" : ""}</p>
+          <div className="password-field">
+            <div
+              className="eye-field"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {!showPassword ? (
+                <IoEyeOffOutline fontSize={20} title="Show Password"/>
+              ) : (
+                <IoEyeOutline fontSize={20} title="Hide Password"/>
+              )}
+            </div>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="login-password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className={error ? "input error-input" : "input"}
+              required
+            />
+          </div>
+          <p className="error-msg">{error ? "*Check your password properly" : ""}</p>
           <div
             style={{ borderTop: "1px solid lightgray", marginBottom: "10px" }}
           ></div>

@@ -18,10 +18,10 @@
 .form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
-.input {
-  margin-bottom: 10px;
+.form .input {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -53,3 +53,25 @@
   /* margin-top: -10px; */
   color: red;
 }
+
+.password-field{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+}
+#login-password{
+  position: relative;
+  width: 100%;
+  padding: 10px 50px 10px 10px;
+}
+.eye-field{
+  position: absolute;
+  z-index: 10;
+  right: 5px;
+  cursor: pointer;
+  padding: 5px;
+  border-left: 1px solid lightgray;
+}
+

@@ -23,9 +23,9 @@ function FoodCategory({ onAddToCart }) {
   const { category } = useParams(); // Get the category from the URL params
 
   useEffect(() => {
-    setItems([]);
     setLoading(true);
     setError(null);
+    setItems([]);
 
     const getData = async () => {
       try {

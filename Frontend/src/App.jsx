@@ -293,7 +293,7 @@ function Layout() {
                       passCondition={null}
                       destination="/Home"
                     >
-                      <TableReserve noOfTables={20} />
+                      <TableReserve/>
                     </ProtectedRoute>
                   }
                 ></Route>

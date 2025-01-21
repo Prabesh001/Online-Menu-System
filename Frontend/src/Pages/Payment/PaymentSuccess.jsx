@@ -20,29 +20,27 @@ const styles = StyleSheet.create({
   table: {
     display: "table",
     width: "100%",
+    backgroundColor: "lightgray",
     marginBottom: 10,
   },
   row: {
     flexDirection: "row",
-    borderBottom: 1,
     borderColor: "#000",
     padding: 8,
   },
   cell: {
     width: "33%",
     textAlign: "center",
+    fontSize: 16,
     padding: 8,
+    flexWrap:"wrap"
   },
   header: {
-    fontWeight: "bold",
-    fontSize: 14,
+    backgroundColor: "gray"
   },
-  totalRow: {
-    marginTop: 10,
-    fontWeight: "bold",
-  },
-  totalText: {
-    textAlign: "right",
+  boldRow: {
+    fontSize: 18,
+    fontWeight: "bolder",
   },
 });
 
@@ -52,7 +50,7 @@ function PaymentSuccess() {
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.discountedPrice * item.quantity,
     0
-  );  
+  );
 
   const quantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -74,9 +72,9 @@ function PaymentSuccess() {
         <View style={styles.table}>
           {/* Header Row */}
           <View style={[styles.row, styles.header]}>
-            <Text style={styles.cell}>Item Name</Text>
-            <Text style={styles.cell}>Quantity</Text>
-            <Text style={styles.cell}>Price</Text>
+            <Text style={[styles.cell, styles.boldRow]}>Item Name</Text>
+            <Text style={[styles.cell, styles.boldRow]}>Quantity</Text>
+            <Text style={[styles.cell, styles.boldRow]}>Price</Text>
           </View>
 
           {/* Table rows */}
@@ -91,10 +89,12 @@ function PaymentSuccess() {
           ))}
 
           {/* Total Row */}
-          <View style={styles.row}>
-            <Text style={[styles.cell, styles.totalText]}>Total</Text>
-            <Text style={styles.cell}>{quantity}</Text>
-            <Text style={styles.cell}>{totalPrice.toFixed(0)}</Text>
+          <View style={[styles.row, styles.header]}>
+            <Text style={[styles.cell, styles.boldRow]}>Total</Text>
+            <Text style={[styles.cell, styles.boldRow]}>{quantity}</Text>
+            <Text style={[styles.cell, styles.boldRow]}>
+              {totalPrice.toFixed(0)}
+            </Text>
           </View>
         </View>
       </Page>

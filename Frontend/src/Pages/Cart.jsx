@@ -152,7 +152,7 @@ function Cart({ items, setItems }) {
         <span>No. of items: {count}</span>
         <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
-        <span style={{fontWeight:"bold", color:"green"}}>
+        <span style={{fontWeight:"bold", fontSize:"17px"}}>
           Final Price: Rs. {amount}
         </span>
         <hr />
@@ -183,6 +183,7 @@ function Cart({ items, setItems }) {
                 />
                 <button
                   className="increment"
+                  style={{ backgroundColor: "green" }}
                   onClick={() => handleAddSub("add")}
                 >
                   +
