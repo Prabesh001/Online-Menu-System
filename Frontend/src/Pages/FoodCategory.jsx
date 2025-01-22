@@ -133,9 +133,8 @@ function FoodCategory({ onAddToCart }) {
                 key={item._id}
                 className="item"
                 title={item.isVeg ? "Veg" : "Non-veg"}
-                onDoubleClick={() => setItemSelected(item)}
               >
-                <div className="item-info">
+                <div className="item-info no-select" onDoubleClick={() => setItemSelected(item)}>
                   <h3>{item.name}</h3>
                   <span style={{ fontSize: "13px", fontStyle: "italic" }}>
                     {item.availability ? (
@@ -157,7 +156,7 @@ function FoodCategory({ onAddToCart }) {
                   }}
                   forMinus={() => handleAction("minus", item._id)}
                   forPlus={() => handleAction("plus", item._id)}
-                  forInput={item.quantity || 1}
+                  forInput={item.quantity}
                 />
               </li>
             ))

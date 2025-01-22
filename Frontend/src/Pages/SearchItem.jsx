@@ -120,10 +120,9 @@ function SearchItem({ onAddToCart }) {
             <li
               key={item._id}
               className="item"
-              onDoubleClick={() => setItemSelected(item)}
             >
               <div className="item-info">
-                <h3>{item.name}</h3>
+                <h3 className="no-select" onDoubleClick={() => setItemSelected(item)}>{item.name}</h3>
                 <span style={{ color: "grey", fontSize: "13px" }}>
                   {item.category}
                 </span>
