@@ -4,7 +4,6 @@ import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
 import { Toaster, toast } from "sonner";
 import { fetchHomeMenu } from "../JavaScript/fetchData.js";
-import { MinusIcon, PlusIcon } from "lucide-react";
 import { Grid, Box, Skeleton } from "@mui/material";
 
 function MenuSection({ title, category }) {
@@ -70,7 +69,7 @@ function MenuSection({ title, category }) {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent:"space-between",
+                      justifyContent: "space-between",
                     }}
                   >
                     <Skeleton width={100} height={55} />
@@ -99,7 +98,7 @@ function MenuSection({ title, category }) {
               <div className="menu-photo">
                 <img
                   src={item.photo}
-                  alt={<Skeleton variant="rectangular"/>}
+                  alt={<Skeleton variant="rectangular" />}
                   className="offer-photo no-select"
                   loading="lazy"
                   draggable="false"
@@ -116,30 +115,16 @@ function MenuSection({ title, category }) {
                 </span>
               )}
               <br />
-              <div className="add-btn-group">
-                <div className="set-item-quantity">
-                  <MinusIcon
-                    size="18px"
-                    cursor="pointer"
-                    color="gray"
-                    onClick={() => handleAction("minus", item._id)}
-                  />
-                  <input className="selected-quantity" key={item.id} readOnly value={item.quantity || 1} />
-                  <PlusIcon
-                    size="18px"
-                    color="gray"
-                    cursor="pointer"
-                    onClick={() => handleAction("plus", item._id)}
-                  />
-                </div>
-                <AddToCart
-                  onClick={() => {
-                    addToCart(item);
-                    item.quantity = 1
-                    toast.success(`${item.name} added to Table.`);
-                  }}
-                />
-              </div>
+              <AddToCart
+                onClick={() => {
+                  addToCart(item);
+                  item.quantity = 1;
+                  toast.success(`${item.name} added to Table.`);
+                }}
+                forMinus={() => handleAction("minus", item._id)}
+                forPlus={() => handleAction("plus", item._id)}
+                forInput={item.quantity || 1}
+              />
             </div>
           ))}
       </div>

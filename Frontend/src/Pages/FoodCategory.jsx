@@ -7,7 +7,7 @@ import { CartContext, ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
 import { fetchItems } from "../JavaScript/fetchData";
 import { Toaster, toast } from "sonner";
-import { MinusIcon, PlusIcon } from "lucide-react";
+import Card from "../Components/Card";
 
 function FoodCategory({ onAddToCart }) {
   const {
@@ -21,6 +21,18 @@ function FoodCategory({ onAddToCart }) {
   } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
   const { category } = useParams(); // Get the category from the URL params
+
+  const [itemSelected, setItemSelected] = useState([]);
+  console.log(itemSelected.length)
+
+  useEffect(() => {
+    if (itemSelected.length===0) {
+      document.body.style.overflow= "auto"
+    }
+    else{
+      document.body.style.overflow= "hidden"
+    }
+  }, [itemSelected]);
 
   useEffect(() => {
     setLoading(true);
@@ -102,7 +114,7 @@ function FoodCategory({ onAddToCart }) {
   };
   const addToCartSuccess = (element) => {
     onAddToCart(element);
-    element.quantity = 1
+    element.quantity = 1;
     console.log("success");
     toast.success(element.name + " added to Table.");
   };
@@ -112,7 +124,7 @@ function FoodCategory({ onAddToCart }) {
       <h2 className="category-title">{category}</h2>
       <Toaster richColors position="bottom-center" />
       {loading ? (
-        <LoadingComponent mh={50}/>
+        <LoadingComponent mh={50} />
       ) : (
         <ul className="item-list">
           {items.length > 0 ? (
@@ -121,6 +133,7 @@ function FoodCategory({ onAddToCart }) {
                 key={item._id}
                 className="item"
                 title={item.isVeg ? "Veg" : "Non-veg"}
+                onDoubleClick={() => setItemSelected(item)}
               >
                 <div className="item-info">
                   <h3>{item.name}</h3>
@@ -136,34 +149,26 @@ function FoodCategory({ onAddToCart }) {
                   <p className="no-select">{item.description}</p>
                   <p>Rs. {item.price}</p>
                 </div>
-                <div className="add-btn-group">
-                  <div className="set-item-quantity">
-                    <MinusIcon
-                      size="18px"
-                      cursor="pointer"
-                      color="gray"
-                      onClick={() => handleAction("minus", item._id)}
-                    />
-                    <input key={item.id} readOnly value={item.quantity || 1} />
-                    <PlusIcon
-                      size="18px"
-                      color="gray"
-                      cursor="pointer"
-                      onClick={() => handleAction("plus", item._id)}
-                    />
-                  </div>
-                  <AddToCart
-                    onClick={() => {
-                      item.availability === true
-                        ? addToCartSuccess(item)
-                        : addToCartError();
-                    }}
-                  />
-                </div>
+                <AddToCart
+                  onClick={() => {
+                    item.availability === true
+                      ? addToCartSuccess(item)
+                      : addToCartError();
+                  }}
+                  forMinus={() => handleAction("minus", item._id)}
+                  forPlus={() => handleAction("plus", item._id)}
+                  forInput={item.quantity || 1}
+                />
               </li>
             ))
           ) : (
             <p>No items found in this category.</p>
+          )}
+          {itemSelected.length === 0 ? null : (
+            <Card
+              itemSelected={itemSelected}
+              setItemSelected={setItemSelected}
+            />
           )}
         </ul>
       )}

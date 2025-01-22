@@ -128,13 +128,12 @@ const Index = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box m="20px" overflow="hidden">
       <Header title="Items" subtitle="Managing the Menu Items" />
       <ToastContainer />
       <Box
         m="40px 0 0 0"
         height="75vh"
-        width="91vw"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",

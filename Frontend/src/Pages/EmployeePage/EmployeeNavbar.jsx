@@ -49,8 +49,8 @@ function EmployeeNavbar({reservedTable}) {
 
   const handleLogout = () => {
     setLoading(true);
+    setPopupVisiblilty(false);
     setTimeout(() => {
-      setPopupVisiblilty(false);
       localStorage.removeItem("employee-profile");
       setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");

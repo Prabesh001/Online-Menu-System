@@ -1,6 +1,7 @@
 /* FoodCategory.css */
 .food-category {
   padding: 1rem;
+  position: relative;
 }
 
 .category-title {

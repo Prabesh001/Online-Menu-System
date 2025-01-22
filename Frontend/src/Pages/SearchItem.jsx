@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { fetchItems } from "../JavaScript/fetchData.js";
 import { CartContext } from "../App.jsx";
 import { ItemContext } from "../App.jsx";
 import LoadingComponent from "../Components/Loading/loading.jsx";
-import {Breadcrumbs, Typography} from "@mui/material";
+import { Breadcrumbs, Typography } from "@mui/material";
+import MediaCard from "../Components/Card/index.jsx";
 
 // Levenshtein Distance for Fuzzy Search
 function levenshteinDistance(a, b) {
@@ -43,6 +44,16 @@ function SearchItem({ onAddToCart }) {
     setItems,
   } = useContext(ItemContext);
 
+  const [itemSelected, setItemSelected] = useState([]);
+
+  useEffect(() => {
+    if (itemSelected.length === 0) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }, [itemSelected]);
+
   useEffect(() => {
     setItems([]);
     setLoading(true);
@@ -64,7 +75,7 @@ function SearchItem({ onAddToCart }) {
   }, []);
 
   if (loading) {
-    return <LoadingComponent mh={47}/>;
+    return <LoadingComponent mh={47} />;
   }
 
   const performFuzzySearch = () => {
@@ -106,7 +117,11 @@ function SearchItem({ onAddToCart }) {
       <ul className="item-list" style={{ minHeight: "47.5vh" }}>
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
-            <li key={item._id} className="item">
+            <li
+              key={item._id}
+              className="item"
+              onDoubleClick={() => setItemSelected(item)}
+            >
               <div className="item-info">
                 <h3>{item.name}</h3>
                 <span style={{ color: "grey", fontSize: "13px" }}>
@@ -134,6 +149,12 @@ function SearchItem({ onAddToCart }) {
         ) : (
           <p>No items found.</p>
         )}
+        {itemSelected.length !== 0 ? (
+          <MediaCard
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
+        ) : null}
       </ul>
       {popupVisiblilty && (
         <Popup

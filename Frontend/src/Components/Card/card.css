@@ -1,0 +1,17 @@
+.item-card{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 60%;
+  box-shadow: 0 1px 3px white, 0 -1px 3px white;
+}
+.item-card-badge{
+  position: absolute;
+  background-color: #ff0000ec;
+  color: white;
+  padding: 5px 10px;
+  right: 0;
+  cursor: pointer;
+}

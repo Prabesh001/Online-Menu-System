@@ -71,11 +71,14 @@ function Team() {
       renderCell: ({ row: { access_level } }) => {
         return (
           <Box
-            width="60%"
+            width="100%"
             m="0 auto"
             p="5px"
             display="flex"
             justifyContent="center"
+            alignItems="center"
+            position="relative"
+            height="30px"
             backgroundColor={
               access_level === "admin"
                 ? colors.greenAccent[600]
@@ -85,10 +88,10 @@ function Team() {
             }
             borderRadius="4px"
           >
-            {access_level === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access_level === "manager" && <SecurityOutlinedIcon />}
-            {access_level === "employee" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+            {access_level === "admin" && <AdminPanelSettingsOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
+            {access_level === "manager" && <SecurityOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
+            {access_level === "employee" && <LockOpenOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
+            <Typography color={colors.grey[100]} sx={{ ml: "5px" }} position="absolute">
               {access_level}
             </Typography>
           </Box>
@@ -101,7 +104,6 @@ function Team() {
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         height="75vh"
-        width="90vw"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
