@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import { fetchHomeMenu } from "../JavaScript/fetchData.js";
 import { Grid, Box, Skeleton } from "@mui/material";
 
@@ -15,7 +15,6 @@ function MenuSection({ title, category }) {
     setError,
     items,
     setItems,
-    addToCart,
   } = useContext(ItemContext);
 
   useEffect(() => {
@@ -37,22 +36,6 @@ function MenuSection({ title, category }) {
     };
     getData();
   }, []);
-
-  const handleAction = (action, itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item._id === itemId
-          ? {
-              ...item,
-              quantity:
-                action === "plus"
-                  ? (item.quantity || 1) + 1
-                  : Math.max((item.quantity || 0) - 1, 0),
-            }
-          : item
-      )
-    );
-  };
 
   if (loading) {
     return (
@@ -115,16 +98,7 @@ function MenuSection({ title, category }) {
                 </span>
               )}
               <br />
-              <AddToCart
-                onClick={() => {
-                  addToCart(item);
-                  item.quantity = 1;
-                  toast.success(`${item.name} added to Table.`);
-                }}
-                forMinus={() => handleAction("minus", item._id)}
-                forPlus={() => handleAction("plus", item._id)}
-                forInput={item.quantity || 1}
-              />
+              <AddToCart item={item} />
             </div>
           ))}
       </div>

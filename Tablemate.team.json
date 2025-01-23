@@ -1,0 +1,42 @@
+[
+{
+  "_id": "678b4e88301a43306231067e",
+  "id": "678b4e88301a43306231067e",
+  "first_name": "Prabesh",
+  "last_name": "Dahal",
+  "Username": "prabesh_01",
+  "email": "prabeshdaahal123@gmail.com",
+  "hashedPassword": "$2b$10$U13THNHoKySfEvyTOA3DmOyo1LVlFEUEf5c6tEnIIA9UOfE7rBLTS",
+  "age": 22,
+  "phone_number": "9800000000",
+  "access_level": "employee",
+  "photo": "https://imgs.search.brave.com/DtXheniEdaiha-EBxYHTb1hNcB_aEImixgsNNEYIgxE/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYyLzhi/L2Q0LzYyOGJkNGI4/NjFiYzkwNDk1YjMy/Yzk3MjM0NDJmOTMz/LmpwZw"
+},
+{
+  "_id": "678fa6ff448f448f4dd5a172",
+  "id": "678fa6ff448f448f4dd5a172",
+  "first_name": "Samyukta",
+  "last_name": "Dahal",
+  "Username": "Samyukta1",
+  "email": "samyukta123@gmail.com",
+  "password": "Samyukta123",
+  "hashedPassword": "$2a$10$LyYoOMNjR9NfgMG4ZAuwWuvDXjj/cRtQzCufC2koPubcUmh6/759a",
+  "age": 24,
+  "phone_number": "9800000001",
+  "access_level": "employee",
+  "photo": "https://i.ytimg.com/vi/5DK-ZWyxZ8k/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDoRUGkYyGgQiKkFE1E0Z0V9_uSOA"
+},
+{
+  "_id": "678fb180942e8b5ea716bd6f",
+  "id": "678fb180942e8b5ea716bd6f",
+  "first_name": "Niraj",
+  "last_name": "Shrestha",
+  "Username": "Niraj@123",
+  "email": "niraj123@gmail.com",
+  "password": "Niraj123",
+  "hashedPassword": "$2a$10$r.7nucLz9/asZIwqceklvu6iMB0kz9jJvCxxU9x2VXnYKL9K0lp9q",
+  "age": 22,
+  "phone_number": "9800000023",
+  "access_level": "employee",
+  "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUOmvV-3CwWzl9tPH0N04d7K8ji5W3QmDb7x_AOj2QNd4NXeO5cNQ=s100-p-k-rw-no"
+}]

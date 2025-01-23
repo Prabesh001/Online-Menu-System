@@ -1,11 +1,18 @@
 .item-card{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1000;
+  position: relative;
   width: 60%;
   box-shadow: 0 1px 3px white, 0 -1px 3px white;
+  transition: all ease-in-out;
+  animation: popup 0.1s linear;
+}
+@keyframes popup{
+  from{
+    transform: scale(0.5);
+  }
+  to{
+    transform: scale(1);
+  }
 }
 .item-card-badge{
   position: absolute;

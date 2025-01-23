@@ -135,63 +135,6 @@ function Layout() {
     audio.play();
   }
 
-  const addToCart = (item) => {
-    playAddToCartSound();
-
-    const orderedTime = new Date().toLocaleTimeString();
-
-    const itemsToAdd = Array.isArray(item)
-      ? item.map((ele) => ({
-          ...ele,
-          quantity: ele.quantity || 1,
-          orderedTime: [orderedTime],
-          isDelivered: false,
-        }))
-      : [
-          {
-            ...item,
-            quantity: item.quantity || 1,
-            orderedTime: [orderedTime],
-            isDelivered: false,
-          },
-        ];
-
-    setCartItems((prevItems) => {
-      const updatedCart = [...prevItems];
-
-      itemsToAdd.forEach((newItem) => {
-        const existingItemIndex = updatedCart.findIndex(
-          (cartItem) => cartItem._id === newItem._id
-        );
-
-        if (existingItemIndex > -1) {
-          updatedCart[existingItemIndex] = {
-            ...updatedCart[existingItemIndex],
-            quantity:
-              updatedCart[existingItemIndex].quantity + newItem.quantity,
-            orderedTime: [
-              ...new Set([
-                ...newItem.orderedTime,
-                ...updatedCart[existingItemIndex].orderedTime,
-              ]),
-            ],
-            isDelivered: false,
-          };
-        } else {
-          updatedCart.push(newItem);
-        }
-      });
-
-      const newCount = updatedCart.reduce(
-        (acc, item) => acc + item.quantity,
-        0
-      );
-      setCount(newCount);
-
-      return updatedCart;
-    });
-  };
-
   const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
   const hideCart = [
     ...hideNavbarFooter,
@@ -225,7 +168,7 @@ function Layout() {
         setItems,
         cartItems,
         setCartItems,
-        addToCart,
+        // addToCart,
       }}
     >
       <CartContext.Provider
@@ -262,7 +205,7 @@ function Layout() {
                 <Route path="/Home" element={<Home />} />
                 <Route
                   path="/category/:category"
-                  element={<FoodCategory onAddToCart={addToCart} />}
+                  element={<FoodCategory  />}
                 />
                 <Route path="/login" element={<Login />} />
                 <Route
@@ -279,7 +222,7 @@ function Layout() {
                 />
                 <Route
                   path="/search/:item"
-                  element={<SearchItem onAddToCart={addToCart} />}
+                  element={<SearchItem />}
                 />
                 <Route
                   path="/table"

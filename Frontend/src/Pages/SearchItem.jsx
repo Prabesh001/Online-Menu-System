@@ -30,7 +30,7 @@ function levenshteinDistance(a, b) {
   return dp[a.length][b.length];
 }
 
-function SearchItem({ onAddToCart }) {
+function SearchItem() {
   const { popupVisiblilty, setPopupVisiblilty, closePopup } =
     useContext(CartContext);
   const {
@@ -136,13 +136,7 @@ function SearchItem({ onAddToCart }) {
                 <p>{item.description}</p>
                 <p>Rs. {item.price}</p>
               </div>
-              <AddToCart
-                onClick={() => {
-                  item.availability
-                    ? onAddToCart(item)
-                    : setPopupVisiblilty(true);
-                }}
-              />
+              <AddToCart item={item}/>
             </li>
           ))
         ) : (
