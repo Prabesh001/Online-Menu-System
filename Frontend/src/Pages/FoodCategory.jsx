@@ -42,7 +42,9 @@ function FoodCategory() {
             ? data
             : data.filter((item) => item.category === category);
 
-        const filteredItems = filteredData.filter((ele) => ele.availability === true);
+        const filteredItems = filteredData.filter(
+          (ele) => ele.availability === true
+        );
 
         setItems(filteredItems);
       } catch (error) {
@@ -64,36 +66,34 @@ function FoodCategory() {
   return (
     <div className="food-category">
       <h2 className="category-title">{category}</h2>
-      {loading ? (
+      {loading || items.length === 0 ? (
         <LoadingComponent mh={50} />
       ) : (
         <ul className="item-list">
-          {items.length > 0 ? (
-            items.map((item) => (
-              <li key={item._id} className="item">
-                <div
-                  className="item-info no-select"
-                  onDoubleClick={() => setItemSelected(item)}
-                >
-                  <h3>{item.name}</h3>
-                  <span style={{ fontSize: "13px", fontStyle: "italic" }}>
-                    {item.foodPreferences === "Veg" ? (
-                      <span style={{ color: "green" }} className="no-select">
-                        (Veg)
-                      </span>
-                    ): item.foodPreferences === "Non-veg"? (
-                      <span style={{ color: "red" }}>(Non-Veg)</span>
-                    ):""}
-                  </span>
-                  <p className="no-select">{item.description}</p>
-                  <p>Rs. {item.price}</p>
-                </div>
-                <AddToCart item={item} />
-              </li>
-            ))
-          ) : (
-            <p>No items found in this category.</p>
-          )}
+          {items.map((item) => (
+            <li key={item._id} className="item">
+              <div
+                className="item-info no-select"
+                onDoubleClick={() => setItemSelected(item)}
+              >
+                <h3>{item.name}</h3>
+                <span style={{ fontSize: "13px", fontStyle: "italic" }}>
+                  {item.foodPreferences === "Veg" ? (
+                    <span style={{ color: "green" }} className="no-select">
+                      (Veg)
+                    </span>
+                  ) : item.foodPreferences === "Non-veg" ? (
+                    <span style={{ color: "red" }}>(Non-Veg)</span>
+                  ) : (
+                    ""
+                  )}
+                </span>
+                <p className="no-select">{item.description}</p>
+                <p>Rs. {item.price}</p>
+              </div>
+              <AddToCart item={item} />
+            </li>
+          ))}
           {itemSelected.length === 0 ? null : (
             <Card
               itemSelected={itemSelected}

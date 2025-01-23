@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import "./add-to-cart.css";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { ItemContext, CartContext } from "../../App";
+import { toast, Toaster } from "sonner";
 
 function AddToCart({ item, setItemSelected }) {
   const { setItems, setCartItems } = useContext(ItemContext);
   const { setCount, playAddToCartSound } = useContext(CartContext);
-  console.log(item);
 
   const addToCart = (item) => {
     if (item.availability === false) {
-      // toast.error(`${item.name} isn't available!`);
+      toast.error(`${item.name} isn't available!`);
       return;
     } else {
       playAddToCartSound();
@@ -65,7 +65,7 @@ function AddToCart({ item, setItemSelected }) {
         );
         setCount(newCount);
         item.quantity = 1;
-        // toast.success(`${item.name} added to the table.`)
+        toast.success(`${item.name} added to the table.`)
 
         return updatedCart;
       });

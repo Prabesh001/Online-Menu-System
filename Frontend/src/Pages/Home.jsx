@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
-import { Toaster } from "sonner";
 import { fetchHomeMenu } from "../JavaScript/fetchData.js";
 import { Grid, Box, Skeleton } from "@mui/material";
 
@@ -116,7 +115,6 @@ function Home() {
   return (
     <>
       <div className="home-section">
-        <Toaster richColors position="bottom-center" />
         {Menu.map((menu, i) => {
           return (
             <MenuSection title={menu.title} category={menu.category} key={i} />

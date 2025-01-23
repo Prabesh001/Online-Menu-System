@@ -30,6 +30,7 @@ import Navbar from "./Components/Navbar/index";
 import Footer from "./Components/Footer";
 import Table from "./Components/Table/Table.jsx";
 import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
+import { Toaster, toast } from "sonner";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -37,7 +38,7 @@ export const AuthContext = createContext();
 
 function Layout() {
   const [cartItems, setCartItems] = useState(
-    ()=>JSON.parse(localStorage.getItem("CartItems")) || []
+    () => JSON.parse(localStorage.getItem("CartItems")) || []
   );
   const [selectedIndex, setSelectedIndex] = useState(
     () => localStorage.getItem("index") || "Home"
@@ -109,8 +110,8 @@ function Layout() {
   }, [coupen]);
 
   useEffect(() => {
-    if(cartItems.length===0){
-      setCount(0)
+    if (cartItems.length === 0) {
+      setCount(0);
     }
     localStorage.setItem("count", count);
     localStorage.setItem("CartItems", JSON.stringify(cartItems));
@@ -203,10 +204,7 @@ function Layout() {
               <Routes>
                 <Route path="/" element={<Welcome />} />
                 <Route path="/Home" element={<Home />} />
-                <Route
-                  path="/category/:category"
-                  element={<FoodCategory  />}
-                />
+                <Route path="/category/:category" element={<FoodCategory />} />
                 <Route path="/login" element={<Login />} />
                 <Route
                   path="/employee"
@@ -220,10 +218,7 @@ function Layout() {
                     </ProtectedRoute>
                   }
                 />
-                <Route
-                  path="/search/:item"
-                  element={<SearchItem />}
-                />
+                <Route path="/search/:item" element={<SearchItem />} />
                 <Route
                   path="/table"
                   element={<Cart items={cartItems} setItems={setCartItems} />}
@@ -236,7 +231,7 @@ function Layout() {
                       passCondition={null}
                       destination="/Home"
                     >
-                      <TableReserve/>
+                      <TableReserve />
                     </ProtectedRoute>
                   }
                 ></Route>
@@ -278,6 +273,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId="244499214878-ski0knaamlp5gra4dlivu1lr9c5k1b17.apps.googleusercontent.com">
       <BrowserRouter>
+        <Toaster richColors position="bottom-center" />
         <Layout />
       </BrowserRouter>
     </GoogleOAuthProvider>
