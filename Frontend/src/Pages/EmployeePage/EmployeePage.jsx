@@ -106,7 +106,6 @@ function EmployeePage() {
         <LoadingComponent mh={46.7} />
       ) : (
         <div style={{ padding: "20px 15px" }}>
-          <Toaster richColors />
           <span style={{ fontSize: "20px", fontWeight: "bold", marginRight:"10px" }}>
             Orders from Table No.
           </span>

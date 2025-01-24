@@ -127,11 +127,11 @@ function SearchItem() {
                   {item.category}
                 </span>
                 <span style={{ fontSize: "13px", fontStyle: "italic" }}>
-                  {item.availability ? (
-                    <span style={{ color: "green" }}>(Available)</span>
-                  ) : (
-                    <span style={{ color: "red" }}>(Not Available)</span>
-                  )}
+                  {item.foodPreferences === "Veg" ? (
+                    <span style={{ color: "green" }}>(Veg)</span>
+                  ): item.foodPreferences === "Non-veg"? (
+                    <span style={{ color: "red" }}>(Non-Veg)</span>
+                  ):""}
                 </span>
                 <p>{item.description}</p>
                 <p>Rs. {item.price}</p>
@@ -149,12 +149,6 @@ function SearchItem() {
           />
         ) : null}
       </ul>
-      {popupVisiblilty && (
-        <Popup
-          message={<p>Item is not available!</p>}
-          closePopup={closePopup}
-        />
-      )}
     </div>
   );
 }

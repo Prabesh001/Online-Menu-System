@@ -5,7 +5,7 @@ import { AuthContext } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";
@@ -131,7 +131,6 @@ const LoginPage = () => {
           </button>
         </form>
       </div>
-      <Toaster richColors />
     </div>
   );
 };

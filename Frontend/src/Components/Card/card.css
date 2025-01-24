@@ -8,17 +8,23 @@
 }
 @keyframes popup{
   from{
-    transform: scale(0.5);
+    transform: scale(0.4);
+    opacity: 0.4;
   }
   to{
     transform: scale(1);
+    opacity: 1;
   }
 }
 .item-card-badge{
   position: absolute;
-  background-color: #ff0000ec;
+  background-color: #4c4646d6;
   color: white;
   padding: 5px 10px;
   right: 0;
   cursor: pointer;
+}
+
+.item-card-badge:hover{
+  background-color: #ff0000ec;
 }
