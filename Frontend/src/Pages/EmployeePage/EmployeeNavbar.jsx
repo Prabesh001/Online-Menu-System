@@ -161,7 +161,15 @@ function EmployeeNavbar({reservedTable}) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>{
+                  if(page === "Products"){
+                    window.location.href = `http://localhost:5000/api/menu`;
+                  }
+                  else if (page === "Pricing"){
+                    window.location.href = `http://localhost:5173/Home`;
+                  }
+                  handleCloseNavMenu
+                }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

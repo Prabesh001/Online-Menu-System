@@ -21,7 +21,7 @@ import Advertisement from "./Pages/FooterOption/Advertisement.jsx";
 import Marketing from "./Pages/FooterOption/Marketing.jsx";
 import TermsOfUse from "./Pages/FooterOption/TermsOfUse.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
-import PaymentSuccess from "./Pages/Payment/PAymentSuccess.jsx";
+import PaymentSuccess from "./Pages/Payment/PaymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
@@ -169,7 +169,6 @@ function Layout() {
         setItems,
         cartItems,
         setCartItems,
-        // addToCart,
       }}
     >
       <CartContext.Provider
