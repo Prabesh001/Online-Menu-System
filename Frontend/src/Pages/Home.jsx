@@ -39,10 +39,10 @@ function MenuSection({ title, category }) {
   if (loading) {
     return (
       <>
-        <div style={{ padding: "10px" }}>
+        <div style={{ padding: "16px" }}>
           <Grid container wrap="wrap" justifyContent="flex-start">
             {(loading ? Array.from(new Array(6)) : data).map((item, index) => (
-              <Box key={index} sx={{ width: 190, marginRight: 3, my: 1 }}>
+              <Box key={index} sx={{ width: 190, marginRight: 4, my: 1 }}>
                 <Skeleton variant="rectangular" width={190} height={225} />
 
                 <Box sx={{ pt: 0.5 }}>

@@ -67,19 +67,18 @@
 }
 .removeFromCart,
 .updateAmount {
-  background-color: #e70d0d;
-  padding: 5px;
+  padding: 4px;
   border: none;
-  color: white;
+  color: #e70d0d;
   height: 20px;
-  width: 20px;
+  width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
 }
 .updateAmount {
-  background-color: #047704;
+color: #047704;
   height: 20px;
   width: 20x;
 }

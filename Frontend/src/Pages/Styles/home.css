@@ -18,6 +18,8 @@
 }
 .home-offer {
   font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 16px;
 }
 .menu-items {
   display: grid;
@@ -27,7 +29,7 @@
 }
 .menu-item {
   box-sizing: border-box;
-  padding: 10px;
+  padding: 8px;
   box-shadow: -1px -1px 3px gray, 1px 1px 3px gray;
   border-radius: 10px;
 }
@@ -36,7 +38,8 @@
   color: #5d5757;
 }
 .item-name {
-  max-width: 12em;
+  padding-top: 8px;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

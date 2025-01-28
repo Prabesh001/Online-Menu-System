@@ -65,7 +65,7 @@ function AddToCart({ item, setItemSelected }) {
         );
         setCount(newCount);
         item.quantity = 1;
-        toast.success(`${item.name} added to the table.`)
+        toast.success(`${item.name} added to the table.`);
 
         return updatedCart;
       });
@@ -103,16 +103,27 @@ function AddToCart({ item, setItemSelected }) {
     <div className="add-btn-group">
       <div className="set-item-quantity">
         <MinusIcon
-          size="18px"
+          size="16px"
           cursor="pointer"
-          color="gray"
+          color={item.quantity === 1 ? "grey" : "#ff7a1c"}
+          style={{ marginTop: "4px" }}
           onClick={() => handleAction("minus", item._id)}
         />
-        <input value={item.quantity || 1} readOnly />
+        <input
+          value={item.quantity || 1}
+          readOnly
+          style={{
+            userSelect: "none",
+            pointerEvents: "none",
+            border: "none",
+            color: "#ff7a1c",
+          }}
+        />
         <PlusIcon
-          size="18px"
-          color="gray"
+          size="16px"
+          color="#ff7a1c"
           cursor="pointer"
+          style={{ marginTop: "4px" }}
           onClick={() => handleAction("plus", item._id)}
         />
       </div>

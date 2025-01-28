@@ -108,7 +108,13 @@ function Cart({ items, setItems }) {
                       name={index}
                       id={index}
                       value={item.quantity}
-                      style={{ textAlign: "center" }}
+                      style={{
+                        userSelect: "none",
+                        textAlign: "center",
+                        border: "none",
+                        backgroundColor: "transparent",
+                        color: "#ff7a1c",
+                      }}
                       readOnly
                     />
                   </label>
@@ -122,14 +128,14 @@ function Cart({ items, setItems }) {
                         setCurrentItem(item);
                       }}
                     >
-                      <FaTrash />
+                      <u>Delete</u>
                     </button>
                     <button
                       className="updateAmount"
                       title="Update quantity"
                       onClick={() => updateAmount(item)}
                     >
-                      <FaEdit />
+                      <u>Edit</u>
                     </button>
                   </div>
                 </div>
@@ -152,7 +158,7 @@ function Cart({ items, setItems }) {
         <span>No. of items: {count}</span>
         <span>Total Cost: Rs. {totalPrice}</span>
         <span>Discount: {coupen === "true" ? "10%" : "3%"}</span>
-        <span style={{fontWeight:"bold", fontSize:"17px"}}>
+        <span style={{ fontWeight: "bold", fontSize: "17px" }}>
           Final Price: Rs. {amount}
         </span>
         <hr />
