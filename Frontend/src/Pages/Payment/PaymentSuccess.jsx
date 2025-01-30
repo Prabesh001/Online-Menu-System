@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { ItemContext } from "../../App";
+import React, { useContext, useEffect } from "react";
+import { ItemContext, CartContext } from "../../App";
+import { updateTable } from "../../JavaScript/fetchData";
 import ExcelJS from "exceljs";
 import {
   PDFDownloadLink,
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     padding: 8,
-    flexWrap:"wrap"
+    flexWrap: "wrap",
   },
   header: {
-    backgroundColor: "gray"
+    backgroundColor: "gray",
   },
   boldRow: {
     fontSize: 18,
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
 
 function PaymentSuccess() {
   const { cartItems } = useContext(ItemContext);
+  const { setCount, setTableNumber, tableNumber } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.discountedPrice * item.quantity,
@@ -136,7 +138,16 @@ function PaymentSuccess() {
       link.click();
     });
   };
-
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      localStorage.clear();
+      updateTable(tableNumber, { available: true, orders: [] });
+    }, 1000);
+    
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, []);
   return (
     <div className="payment-page">
       {cartItems.length === 0 ? (

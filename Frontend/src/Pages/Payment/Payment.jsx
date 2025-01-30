@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CryptoJS from "crypto-js";
+import { CartContext } from "../../App";
 
 const Payment = ({ amount }) => {
+  const { clickPayment, setClickPayment } = useContext(CartContext);
   amount = Number(amount);
   const [formData, setformData] = useState({
     amount: amount,
@@ -44,9 +46,16 @@ const Payment = ({ amount }) => {
     setformData({ ...formData, signature: hashedSignature });
   }, [formData.amount]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setClickPayment(true);
+    document.getElementById("payment-form").submit();
+  };
+
   return (
     <div>
       <form
+        id="payment-form"
         action="https://rc-epay.esewa.com.np/api/epay/main/v2/form"
         method="POST"
       >
@@ -120,7 +129,9 @@ const Payment = ({ amount }) => {
           name="signature"
           value={formData.signature}
         />
-        <input className="payment-btn" value="Payment" type="submit" />
+        <button className="payment-btn" type="submit" onClick={handleSubmit}>
+          Payment
+        </button>
       </form>
     </div>
   );

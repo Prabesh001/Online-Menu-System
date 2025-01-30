@@ -206,6 +206,7 @@ const AddItem = () => {
 const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
   id: yup.string(),
+  photo: yup.string().required("required"),
   description: yup.string().required("required"),
   price: yup.number().required("required").positive("Must be positive"),
   category: yup.string().required("required"),
@@ -219,6 +220,7 @@ const initialValues = {
   price: "",
   category: "",
   availability: true,
+  photo:"",
 };
 
 export default AddItem;

@@ -15,6 +15,7 @@
   box-sizing: border-box;
   box-shadow: 1px 1px 5px gray;
   min-height: 40vh;
+  min-width: fit-content;
 }
 .home-offer {
   font-weight: bold;
@@ -39,7 +40,7 @@
 }
 .item-name {
   padding-top: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

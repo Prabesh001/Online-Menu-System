@@ -64,6 +64,7 @@ function Layout() {
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
   const [customerOrder, setCustomerOrder] = useState([]);
+  const [clickPayment, setClickPayment] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -185,6 +186,7 @@ function Layout() {
           tableNumber,
           customerOrder,
           setCustomerOrder,
+          clickPayment, setClickPayment
         }}
       >
         <AuthContext.Provider
@@ -211,7 +213,7 @@ function Layout() {
                     <ProtectedRoute
                       condition={isAuthenticated}
                       passCondition={true}
-                      destination="/login"
+                      failDestination="/login"
                     >
                       <EmployeePage />
                     </ProtectedRoute>
@@ -228,7 +230,7 @@ function Layout() {
                     <ProtectedRoute
                       condition={tableNumber}
                       passCondition={null}
-                      destination="/Home"
+                      failDestination="/Home"
                     >
                       <TableReserve />
                     </ProtectedRoute>
@@ -244,7 +246,18 @@ function Layout() {
                   path="/tablemate/terms-of-use"
                   element={<TermsOfUse />}
                 />
-                <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+                <Route
+                  path="/paymentsuccess"
+                  element={
+                    <ProtectedRoute
+                      condition={clickPayment}
+                      passCondition={true}
+                      failDestination="/Home"
+                    >
+                      <PaymentSuccess />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/paymentfailure" element={<PaymentFailure />} />
                 {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
                 {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}

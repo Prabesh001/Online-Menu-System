@@ -252,7 +252,7 @@ app.post("/api/menu", async (req, res) => {
     await newItem.save();
     res.status(201).json({ message: "Item added successfully", newItem });
   } catch (err) {
-    console.error("Error in adding item:", err); // Log the error to the backend console
+    console.error("Error in adding item:", err);
     res.status(500).json({ message: err.message, error: err });
   }
 });

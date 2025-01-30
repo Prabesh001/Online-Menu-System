@@ -14,6 +14,7 @@ function TableReserve() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    localStorage.clear();
     const fetchData = async () => {
       setLoading(true)
       try {
@@ -50,7 +51,7 @@ function TableReserve() {
           In case you choose wrong table no. then your food may not reach you.
         </div>
       </center>
-      {loading?<LoadingComponent mh={36.9}/>:<div className="table-collection">
+      {loading?<LoadingComponent mh={40}/>:<div className="table-collection">
         {availableTable.map((element, i) => {
           const TableNumber = element.table;
           return (
