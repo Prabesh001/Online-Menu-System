@@ -10,8 +10,9 @@ const itemSchema = new mongoose.Schema(
     discountedPrice: Number,
     category: String,
     availability: Boolean,
-    photo: String,
+    photoUrl: String,
     promotion: Boolean,
+    foodPreferences: { type: String, enum: ["Veg", "Non-veg"] },
   },
   { collection: "menuItem", versionKey: false }
 );

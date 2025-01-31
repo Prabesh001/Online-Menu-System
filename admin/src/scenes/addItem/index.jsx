@@ -28,6 +28,8 @@ const AddItem = () => {
         price: values.price,
         category: values.category,
         availability: values.availability,
+        photoUrl: values.photoUrl,
+        foodPreferences: values.foodPreferences,
       };
 
       const response = await fetch("http://localhost:5000/api/menu", {
@@ -177,6 +179,30 @@ const AddItem = () => {
                 {/* Display error here */}
               </FormControl>
 
+              <FormControl
+                sx={{ m: 1, minWidth: 130 }}
+                error={!!touched.foodPreferences && !!errors.foodPreferences}
+              >
+                <InputLabel id="demo-simple-select-label">Food Preferences</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={values.foodPreferences}
+                  variant="filled"
+                  label="Food Preferences"
+                  name="foodPreferences"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  sx={{ gridColumn: "span 2" }}
+                >
+                  <MenuItem value="Veg">Veg</MenuItem>
+                  <MenuItem value="Non-veg">Non-veg</MenuItem>
+                </Select>
+                <FormHelperText>
+                  {touched.foodPreferences && errors.foodPreferences}
+                </FormHelperText>{" "}
+              </FormControl>
+              
               <TextField
                 fullWidth
                 variant="filled"
@@ -190,6 +216,20 @@ const AddItem = () => {
                 helperText={touched.price && errors.price}
                 sx={{ gridColumn: "span 4" }}
               />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Photo"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.photoUrl}
+                name="photoUrl"
+                error={!!touched.photoUrl && !!errors.photoUrl}
+                helperText={touched.photoUrl && errors.photoUrl}
+                sx={{ gridColumn: "span 4" }}
+              />
+
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -206,7 +246,8 @@ const AddItem = () => {
 const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
   id: yup.string(),
-  photo: yup.string().required("required"),
+  foodPreferences: yup.string(),
+  photoUrl: yup.string().required("required"),
   description: yup.string().required("required"),
   price: yup.number().required("required").positive("Must be positive"),
   category: yup.string().required("required"),
@@ -220,7 +261,8 @@ const initialValues = {
   price: "",
   category: "",
   availability: true,
-  photo:"",
+  photoUrl:"",
+  foodPreferences: "Veg",
 };
 
 export default AddItem;

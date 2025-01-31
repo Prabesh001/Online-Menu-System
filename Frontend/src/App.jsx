@@ -186,7 +186,8 @@ function Layout() {
           tableNumber,
           customerOrder,
           setCustomerOrder,
-          clickPayment, setClickPayment
+          clickPayment,
+          setClickPayment,
         }}
       >
         <AuthContext.Provider
@@ -258,7 +259,18 @@ function Layout() {
                     </ProtectedRoute>
                   }
                 />
-                <Route path="/paymentfailure" element={<PaymentFailure />} />
+                <Route
+                  path="/paymentfailure"
+                  element={
+                    <ProtectedRoute
+                      condition={clickPayment}
+                      passCondition={true}
+                      failDestination="/Home"
+                    >
+                      <PaymentFailure />
+                    </ProtectedRoute>
+                  }
+                />
                 {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
                 {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 

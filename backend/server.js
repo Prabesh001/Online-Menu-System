@@ -230,11 +230,12 @@ app.post("/api/menu", async (req, res) => {
       price,
       category,
       availability,
-      photo,
+      photoUrl,
       discountedPrice,
+      foodPreferences
     } = req.body;
 
-    if (!name || !description || !price || !category) {
+    if (!name || !description || !price || !category|| !photoUrl) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -244,9 +245,10 @@ app.post("/api/menu", async (req, res) => {
       description,
       price,
       category,
-      photo,
+      photoUrl,
       availability,
       discountedPrice: price,
+      foodPreferences
     });
 
     await newItem.save();
