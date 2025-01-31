@@ -123,7 +123,7 @@ const AddItem = () => {
               />
 
               <FormControl
-                sx={{ m: 1, minWidth: 200 }}
+                sx={{ mt: 1, minWidth: 150 }}
                 error={!!touched.category && !!errors.category}
               >
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -137,6 +137,7 @@ const AddItem = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   sx={{ gridColumn: "span 4" }}
+                  autoWidth
                 >
                   <MenuItem value="Appetizer">Appetizer</MenuItem>
                   <MenuItem value="Main Dish">Main Dish</MenuItem>
@@ -152,7 +153,7 @@ const AddItem = () => {
               </FormControl>
               <br />
               <FormControl
-                sx={{ m: 1, minWidth: 100 }}
+                sx={{ mt: 1, minWidth: 100 }}
                 error={!!touched.availability && !!errors.availability}
               >
                 <InputLabel id="demo-simple-select-autowidth-label">
@@ -180,10 +181,12 @@ const AddItem = () => {
               </FormControl>
 
               <FormControl
-                sx={{ m: 1, minWidth: 130 }}
+                sx={{ mt: 1, minWidth: 130 }}
                 error={!!touched.foodPreferences && !!errors.foodPreferences}
               >
-                <InputLabel id="demo-simple-select-label">Food Preferences</InputLabel>
+                <InputLabel id="demo-simple-select-label">
+                  Food Preferences
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -194,6 +197,7 @@ const AddItem = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   sx={{ gridColumn: "span 2" }}
+                
                 >
                   <MenuItem value="Veg">Veg</MenuItem>
                   <MenuItem value="Non-veg">Non-veg</MenuItem>
@@ -202,7 +206,7 @@ const AddItem = () => {
                   {touched.foodPreferences && errors.foodPreferences}
                 </FormHelperText>{" "}
               </FormControl>
-              
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -229,7 +233,6 @@ const AddItem = () => {
                 helperText={touched.photoUrl && errors.photoUrl}
                 sx={{ gridColumn: "span 4" }}
               />
-
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -261,7 +264,7 @@ const initialValues = {
   price: "",
   category: "",
   availability: true,
-  photoUrl:"",
+  photoUrl: "",
   foodPreferences: "Veg",
 };
 
