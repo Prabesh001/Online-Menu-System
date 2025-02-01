@@ -25,12 +25,13 @@ import PaymentSuccess from "./Pages/Payment/PaymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
-import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 import Navbar from "./Components/Navbar/index";
 import Footer from "./Components/Footer";
 import Table from "./Components/Table/Table.jsx";
 import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
 import { Toaster, toast } from "sonner";
+import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
+import { useLocalStorage } from "./JavaScript/useLocalStorage.jsx";
 
 export const CartContext = createContext();
 export const ItemContext = createContext();
@@ -58,13 +59,13 @@ function Layout() {
   const [tableNumber, setTableNumber] = useState(
     () => Number(localStorage.getItem("TableNumber")) || null
   );
+  const [clickPayment, setClickPayment] = useLocalStorage("clickPayment", false);
 
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
   const [customerOrder, setCustomerOrder] = useState([]);
-  const [clickPayment, setClickPayment] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -213,7 +214,6 @@ function Layout() {
                   element={
                     <ProtectedRoute
                       condition={isAuthenticated}
-                      passCondition={true}
                       failDestination="/login"
                     >
                       <EmployeePage />
@@ -226,11 +226,10 @@ function Layout() {
                   element={<Cart items={cartItems} setItems={setCartItems} />}
                 />
                 <Route
-                  path="reserve-seat"
+                  path="/reserve-seat"
                   element={
                     <ProtectedRoute
-                      condition={tableNumber}
-                      passCondition={null}
+                      condition={tableNumber === null}
                       failDestination="/Home"
                     >
                       <TableReserve />
@@ -252,7 +251,6 @@ function Layout() {
                   element={
                     <ProtectedRoute
                       condition={clickPayment}
-                      passCondition={true}
                       failDestination="/Home"
                     >
                       <PaymentSuccess />
@@ -264,7 +262,6 @@ function Layout() {
                   element={
                     <ProtectedRoute
                       condition={clickPayment}
-                      passCondition={true}
                       failDestination="/Home"
                     >
                       <PaymentFailure />

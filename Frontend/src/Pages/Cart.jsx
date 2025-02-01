@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import { useNavigate } from "react-router-dom";
-import { FaTrash, FaEdit } from "react-icons/fa";
 import { CartContext } from "../App.jsx";
 import "./Styles/cart.css";
 import Payment from "./Payment/Payment.jsx";

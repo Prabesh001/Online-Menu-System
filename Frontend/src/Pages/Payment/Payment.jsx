@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CryptoJS from "crypto-js";
-import { CartContext } from "../../App";
+import { CartContext } from "../../App.jsx";
 
 const Payment = ({ amount }) => {
-  const { clickPayment, setClickPayment } = useContext(CartContext);
+  const { setClickPayment } = useContext(CartContext);
   amount = Number(amount);
   const [formData, setformData] = useState({
     amount: amount,
@@ -49,8 +49,12 @@ const Payment = ({ amount }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setClickPayment(true);
-    document.getElementById("payment-form").submit();
+  
+    setTimeout(() => {
+      document.getElementById("payment-form").submit();
+    }, 100);
   };
+  
 
   return (
     <div>
