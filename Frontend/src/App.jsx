@@ -50,16 +50,13 @@ function Layout() {
   const [searchItem, setSearchItem] = useState(
     () => localStorage.getItem("searched-item") || ""
   );
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => JSON.parse(localStorage.getItem("isAuthenticated")) || false
-  );
-  const [coupen, setCoupen] = useState(
-    () => localStorage.getItem("user") || ""
-  );
+
   const [tableNumber, setTableNumber] = useState(
     () => Number(localStorage.getItem("TableNumber")) || null
   );
   const [clickPayment, setClickPayment] = useLocalStorage("clickPayment", false);
+  const [isAuthenticated, setIsAuthenticated] = useLocalStorage("isAuthenticated", false);
+  const [coupen, setCoupen] = useLocalStorage("user", "");
 
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -108,10 +105,6 @@ function Layout() {
   }, [tableNumber]);
 
   useEffect(() => {
-    localStorage.setItem("user", coupen);
-  }, [coupen]);
-
-  useEffect(() => {
     if (cartItems.length === 0) {
       setCount(0);
     }
@@ -128,10 +121,6 @@ function Layout() {
     const updatedTable = { orders: cartItems };
     updateTable(tableNumber, updatedTable);
   }, [cartItems, tableNumber]);
-
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
-  }, [isAuthenticated]);
 
   const audio = new Audio("../drop.m4a");
   function playAddToCartSound() {
