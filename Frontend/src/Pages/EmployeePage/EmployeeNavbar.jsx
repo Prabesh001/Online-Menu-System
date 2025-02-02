@@ -56,7 +56,7 @@ function EmployeeNavbar({ reservedTable }) {
       setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");
       setLoading(false);
-    }, 5000);
+    }, 3000);
   };
 
   const handleSettingsAction = (setting) => {
@@ -237,7 +237,7 @@ function EmployeeNavbar({ reservedTable }) {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting,i) => (
+                {settings.map((setting, i) => (
                   <MenuItem
                     key={i}
                     onClick={() => handleSettingsAction(setting)}

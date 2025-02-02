@@ -40,13 +40,11 @@ const LoginPage = () => {
         return;
       }
 
-      const { access_level, hashedPassword, ...rest } = data.user;
-
       localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
 
       toast.success("Login successful!");
-      navigate(data.user.access_level === "admin" ? "/employee" : "/employee");
+      navigate("/employee");
     } catch (error) {
       toast.error("Error logging in!");
       setError(true);

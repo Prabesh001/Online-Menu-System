@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
+# Ignore config.js
 src/JavaScript/config.js

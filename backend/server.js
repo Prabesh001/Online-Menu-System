@@ -35,7 +35,6 @@ mongoose
 const SECRET_KEY =process.env.JWT_SECRET;
 
 app.post("/api/employee", async (req, res) => {
-  console.log(req.body);
   try {
     const { password, ...otherDetails } = req.body;
     if (!password || !otherDetails.first_name || !otherDetails.last_name) {
@@ -52,7 +51,6 @@ app.post("/api/employee", async (req, res) => {
     await newEmployee.save();
     res.status(201).json({ message: "User created successfully!" });
   } catch (err) {
-    console.error("Error creating user:", err); 
     res.status(500).json({ error: "Error creating user." });
   }
 });
@@ -64,15 +62,10 @@ app.post("/api/employee/login", async (req, res) => {
     const user = await Team.findOne({ email });
 
     if (!user) {
-      console.log("NOT USER");
       return res.status(401).json({ error: "Invalid email or password." });
     }
 
     const isPasswordValid = bcrypt.compare(password, user.hashedPassword);
-
-    if (isPasswordValid) {
-      console.log("pass");
-    }
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid email or password." });
     }
