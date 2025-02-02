@@ -1,6 +1,5 @@
 GET http://localhost:5000/api/menu
 
-
 ###
 
 GET http://localhost:5000/api/home
@@ -8,3 +7,10 @@ GET http://localhost:5000/api/home
 ###
 
 GET http://localhost:5000/api/homeMenu
+
+###
+
+GET http://localhost:5000/api/employee
+###
+
+GET http://localhost:5000/api/table
