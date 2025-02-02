@@ -15,6 +15,7 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
