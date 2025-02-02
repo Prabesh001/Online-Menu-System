@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-JavaScript/config.js
+src/JavaScript/config.js
