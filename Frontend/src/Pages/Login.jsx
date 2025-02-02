@@ -57,7 +57,7 @@ const LoginPage = () => {
     <div className="login-page">
       <h1>TableMate</h1>
       <i>(Employee Only)</i>
-      <div className="container">
+      <div className="login-container">
         <h2>Log In</h2>
         <form className="form" onSubmit={handleSubmit}>
           <input

@@ -54,8 +54,14 @@ function Layout() {
   const [tableNumber, setTableNumber] = useState(
     () => Number(localStorage.getItem("TableNumber")) || null
   );
-  const [clickPayment, setClickPayment] = useLocalStorage("clickPayment", false);
-  const [isAuthenticated, setIsAuthenticated] = useLocalStorage("isAuthenticated", false);
+  const [clickPayment, setClickPayment] = useLocalStorage(
+    "clickPayment",
+    false
+  );
+  const [isAuthenticated, setIsAuthenticated] = useLocalStorage(
+    "isAuthenticated",
+    false
+  );
   const [coupen, setCoupen] = useLocalStorage("user", "");
 
   const [popupVisiblilty, setPopupVisiblilty] = useState(false);
@@ -127,13 +133,21 @@ function Layout() {
     audio.play();
   }
 
+  const footerOptions = [
+    "/tablemate/about-us",
+    "/tablemate/advertisement",
+    "/tablemate/terms-of-use",
+    "/tablemate/marketing",
+    "/tablemate/privacy-policy",
+    "/tablemate/cookie-policy",
+  ];
+
   const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
   const hideCart = [
     ...hideNavbarFooter,
     "/table",
     "/paymentsuccess",
-    "/tablemate/about-us",
-    "/tablemate/advertisement",
+    ...footerOptions,
   ];
   const noIndex = ["/table", `/search/${searchItem}`, ...hideNavbarFooter];
 
