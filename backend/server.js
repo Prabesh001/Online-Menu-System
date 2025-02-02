@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,14 +6,13 @@ const bcrypt = require("bcryptjs");
 const http = require("http");
 const { url } = require("inspector");
 const { Item, Orders, Home, Team } = require("./schemas.js");
-
 const app = express();
 const PORT = 5000;
+const jwt = require("jsonwebtoken");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// CORS options
 const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
@@ -25,13 +25,125 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// MongoDB connection
 mongoose
   .connect(
-    "mongodb+srv://shresthaniraj43:BMC%40123@tablemate.l4zz8.mongodb.net/Tablemate?retryWrites=true&w=majority&appName=TableMate"
+    process.env.MONGO_URI
   )
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("Failed to connect to MongoDB Atlas:", err));
+
+const SECRET_KEY =process.env.JWT_SECRET;
+
+app.post("/api/employee", async (req, res) => {
+  console.log(req.body);
+  try {
+    const { password, ...otherDetails } = req.body;
+    if (!password || !otherDetails.first_name || !otherDetails.last_name) {
+      return res.status(400).json({ error: "Missing required fields." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newEmployee = new Team({
+      ...otherDetails,
+      hashedPassword,
+    });
+
+    await newEmployee.save();
+    res.status(201).json({ message: "User created successfully!" });
+  } catch (err) {
+    console.error("Error creating user:", err); 
+    res.status(500).json({ error: "Error creating user." });
+  }
+});
+
+
+app.post("/api/employee/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Team.findOne({ email });
+
+    if (!user) {
+      console.log("NOT USER");
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+
+    const isPasswordValid = bcrypt.compare(password, user.hashedPassword);
+
+    if (isPasswordValid) {
+      console.log("pass");
+    }
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+
+    const { hashedPassword, ...userInfo } = user.toObject();
+    const token = jwt.sign( userInfo, SECRET_KEY, { expiresIn: "24h" });
+
+    res.json({ token, user });
+  } catch (error) {
+    res.status(500).json({ error: "Login failed." });
+  }
+});
+
+app.get("/api/employee", async (req, res) => {
+  try {
+    const employees = await Team.find();
+    res.json(employees);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch employees." });
+  }
+});
+
+// ✅ Get Employee by ID (Protected Route)
+app.get("/api/employee/:id", async (req, res) => {
+  try {
+    const employee = await Team.findById(req.params.id);
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found." });
+    }
+    res.json(employee);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch employee." });
+  }
+});
+
+// ✅ Update Employee (Protected Route)
+app.patch("/api/employee/:id", async (req, res) => {
+  try {
+    const { password, ...updateFields } = req.body;
+    if (password) {
+      updateFields.hashedPassword = await bcrypt.hash(password, 10);
+    }
+
+    const updatedEmployee = await Team.findByIdAndUpdate(
+      req.params.id,
+      updateFields,
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ error: "Employee not found." });
+    }
+
+    res.json(updatedEmployee);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update employee." });
+  }
+});
+
+// ✅ Delete Employee (Protected Route)
+app.delete("/api/employee/:id", async (req, res) => {
+  try {
+    const deletedEmployee = await Team.findByIdAndDelete(req.params.id);
+    if (!deletedEmployee) {
+      return res.status(404).json({ error: "Employee not found." });
+    }
+    res.json({ message: "Employee deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete employee." });
+  }
+});
 
 // Get menu items
 app.get("/api/menu", async (req, res) => {
@@ -58,16 +170,6 @@ app.get("/api/table", async (req, res) => {
   try {
     const table = await Orders.find();
     res.json(table);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Get all team members
-app.get("/api/employee", async (req, res) => {
-  try {
-    const employees = await Team.find();
-    res.json(employees);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -171,56 +273,6 @@ app
     }
   });
 
-//get, patch and delete team
-app
-  .route("/api/employee/:id")
-  .get(async (req, res) => {
-    try {
-      const { id } = req.params;
-      const employee = await Team.find({ Username: id });
-      if (!employee) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      res.json(employee);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  })
-  .patch(async (req, res) => {
-    //Edit data
-    try {
-      const { id } = req.params;
-      const updatedEmployee = await Team.findOneAndUpdate(
-        { Username: id },
-        { $set: req.body },
-        { new: true }
-      );
-
-      if (!updatedEmployee) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      res.json(updatedEmployee);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  })
-  .delete(async (req, res) => {
-    //Delete data
-    try {
-      const _id = req.params;
-      const deleteId = await Team.findOneAndDelete(_id);
-
-      if (!deleteId) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      res.json({ message: "Member removed:", deleteId });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
-
 //insert new menu items
 app.post("/api/menu", async (req, res) => {
   try {
@@ -232,10 +284,10 @@ app.post("/api/menu", async (req, res) => {
       availability,
       photoUrl,
       discountedPrice,
-      foodPreferences
+      foodPreferences,
     } = req.body;
 
-    if (!name || !description || !price || !category|| !photoUrl) {
+    if (!name || !description || !price || !category || !photoUrl) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -248,7 +300,7 @@ app.post("/api/menu", async (req, res) => {
       photoUrl,
       availability,
       discountedPrice: price,
-      foodPreferences
+      foodPreferences,
     });
 
     await newItem.save();
@@ -256,52 +308,6 @@ app.post("/api/menu", async (req, res) => {
   } catch (err) {
     console.error("Error in adding item:", err);
     res.status(500).json({ message: err.message, error: err });
-  }
-});
-
-// Add a new team member
-app.post("/api/employee", async (req, res) => {
-  try {
-    const {
-      first_name,
-      last_name,
-      Username,
-      email,
-      password,
-      age,
-      phone_number,
-      access_level,
-      photo,
-    } = req.body;
-
-    if (!first_name || !email || !password || !access_level) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create the new employee without manually setting `id`
-    const newId = new mongoose.Types.ObjectId().toString();
-    const newUser = new Team({
-      _id: newId,
-      id: newId,
-      first_name,
-      last_name,
-      Username,
-      email,
-      password,
-      hashedPassword: hashedPassword,
-      age,
-      phone_number,
-      photo,
-      access_level,
-    });
-
-    await newUser.save();
-    res.status(201).json({ message: "User added successfully", newUser });
-  } catch (err) {
-    console.error("Error:", err);
-    res.status(500).json({ message: err.message });
   }
 });
 

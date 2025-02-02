@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
-import bcrypt from "bcryptjs";
-import "./Styles/login.css";
-import { AuthContext } from "../App.jsx";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "sonner";
+import { AuthContext } from "../App.jsx";
+import "./Styles/login.css";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";
@@ -15,73 +14,44 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
-  
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const button = document.querySelector(".login-button");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    button.style.backgroundColor = "#f0620a";
 
     try {
-      const response = await fetch("http://localhost:5000/api/employee");
+      const response = await fetch("http://localhost:5000/api/employee/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to fetch employee data.");
-      }
-
-      const employees = await response.json();
-
-      const user = employees.find(
-        (employee) => employee.email === formData.email
-      );
-      console.log(user);
-
-      if (!user) {
+        toast.error(data.message || "Login failed!");
         setError(true);
-        toast.error("Invalid Email!");
-        if (!user.password) {
-          toast.error("Invalid Password!");
-        }
         return;
       }
 
-      // Compare the password using bcrypt
-      const isPasswordValid = await bcrypt.compare(
-        formData.password,
-        user.hashedPassword
-      );
+      const { access_level, hashedPassword, ...rest } = data.user;
 
-      if (isPasswordValid) {
-        setIsAuthenticated(true);
-        setError(false);
-        localStorage.setItem("employee-profile", JSON.stringify(user));
-        if (user.access_level === "employee") {
-          navigate("/employee");
-        }
-        if (user.access_level === "admin") {
-          // window.location.href="https://mui.com/material-ui/react-app-bar/#app-bar-with-responsive-menu"
-          navigate("/employee");
-        }
-      } else {
-        toast.error("Invalid Password!");
-        setError(true);
-      }
+      localStorage.setItem("token", data.token);
+      setIsAuthenticated(true);
+
+      toast.success("Login successful!");
+      navigate(data.user.access_level === "admin" ? "/employee" : "/employee");
     } catch (error) {
-      console.error("Error during login process:", error);
+      toast.error("Error logging in!");
       setError(true);
     } finally {
       setLoading(false);
-      button.style.backgroundColor = "#ff914d";
     }
   };
 
@@ -100,33 +70,34 @@ const LoginPage = () => {
             onChange={handleInputChange}
             className={error ? "input error-input" : "input"}
           />
-          <p className="error-msg">{error ? "*Check your email properly" : ""}</p>
+          <p className="error-msg">
+            {error ? "*Check your email properly" : ""}
+          </p>
           <div className="password-field">
             <div
               className="eye-field"
               onClick={() => setShowPassword(!showPassword)}
             >
               {!showPassword ? (
-                <IoEyeOffOutline fontSize={20} title="Show Password"/>
+                <IoEyeOffOutline fontSize={20} />
               ) : (
-                <IoEyeOutline fontSize={20} title="Hide Password"/>
+                <IoEyeOutline fontSize={20} />
               )}
             </div>
             <input
               type={showPassword ? "text" : "password"}
-              id="login-password"
               name="password"
               placeholder="Password"
+              id="login-password"
               value={formData.password}
               onChange={handleInputChange}
               className={error ? "input error-input" : "input"}
               required
             />
           </div>
-          <p className="error-msg">{error ? "*Check your password properly" : ""}</p>
-          <div
-            style={{ borderTop: "1px solid lightgray", marginBottom: "10px" }}
-          ></div>
+          <p className="error-msg">
+            {error ? "*Check your password properly" : ""}
+          </p>
           <button type="submit" className="login-button">
             {loading ? <CircularProgress size={10} color="white" /> : "Login"}
           </button>

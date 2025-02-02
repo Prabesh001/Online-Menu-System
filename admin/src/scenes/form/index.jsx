@@ -13,25 +13,26 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
+import bcrypt from "bcryptjs";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = async (values, { resetForm }) => {
     try {
-      // Mapping Formik values to the backend schema
+      const hashedPassword = await bcrypt.hash(values.password, 10);
       const mappedValues = {
         first_name: values.firstName,
         last_name: values.lastName,
         Username: values.username,
         email: values.email,
-        password: values.password,
+        password: hashedPassword,
         age: values.age,
         phone_number: values.contact,
         access_level: values.access_level,
         photo: values.photo,
       };
-
+  
       const response = await fetch("http://localhost:5000/api/employee", {
         method: "POST",
         headers: {
@@ -39,22 +40,22 @@ const Form = () => {
         },
         body: JSON.stringify(mappedValues),
       });
-
+  
+      const responseData = await response.json();
+      console.log("Backend Response:", responseData);  // Log the response data
+  
       if (response.ok) {
-        const data = await response.json();
-        console.log("User added successfully:", data);
         toast.success("User created successfully!");
         resetForm();
       } else {
-        const error = await response.json();
-        console.error("Error creating user:", error);
-        toast.error("Failed to create user. Please try again.");
+        toast.error(`Failed to create user. Error: ${responseData.error || 'Unknown'}`);
       }
     } catch (err) {
       console.error("Error:", err);
       toast.error("Something went wrong!");
     }
   };
+  
 
   return (
     <Box m="20px" p="5px">

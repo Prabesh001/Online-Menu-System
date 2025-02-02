@@ -37,13 +37,10 @@ const Home = mongoose.model("specialMenu", homeItemSchema);
 // Team Schema
 const teamSchema = new mongoose.Schema(
   {
-    _id: String,
-    id: String,
     first_name: String,
     last_name: String,
     Username: String,
     email: String,
-    password: String,
     hashedPassword: String,
     age: Number,
     phone_number: String,
