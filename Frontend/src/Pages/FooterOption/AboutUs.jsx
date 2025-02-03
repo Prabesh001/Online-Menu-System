@@ -1,6 +1,7 @@
 import React from "react";
-import { Ticket, Users, Shield, Headphones } from "lucide-react";
+import { Users, Shield, Headphones } from "lucide-react";
 import Layout from "./Layout";
+import { RiRestaurantLine } from "react-icons/ri";
 
 const AboutUs = () => {
   return (
@@ -25,34 +26,26 @@ const AboutUs = () => {
           </section>
 
           <div className="compartment ft-collections">
-            <div>
-              <FeatureCard
-                icon={<Ticket className="w-8 h-8 text-blue-500" />}
-                title="Easy Booking"
-                description="Our user-friendly interface allows you to effortlessly search and book table for your meal."
-              />
-            </div>
-            <div>
-              <FeatureCard
-                icon={<Shield className="w-8 h-8 text-green-500" />}
-                title="Secure Transactions"
-                description="We utilize top-notch encryption and security measures to protect your personal information and payment details."
-              />
-            </div>
-            <div>
-              <FeatureCard
-                icon={<Headphones className="w-8 h-8 text-purple-500" />}
-                title="Dedicated Support"
-                description="Our customer service team is always ready to assist you with any inquiries about event details or ticket issues."
-              />
-            </div>
-            <div>
-              <FeatureCard
-                icon={<Users className="w-8 h-8 text-yellow-500" />}
-                title="Inclusive Platform"
-                description="We cater to everyone, making your restaurant experience better."
-              />
-            </div>
+            <MyCard
+              icon={<RiRestaurantLine size={28} color="brown"/>}
+              title="Easy Booking"
+              description="Our user-friendly interface allows you to effortlessly search and book table for your meal."
+            />
+            <MyCard
+              icon={<Shield height={32} color="green"/>}
+              title="Secure Transactions"
+              description="We utilize top-notch encryption and security measures to protect your personal information and payment details."
+            />
+            <MyCard
+              icon={<Headphones height={32} color="blue"/>}
+              title="Dedicated Support"
+              description="Our customer service team is always ready to assist you with any inquiries about event details or ticket issues."
+            />
+            <MyCard
+              icon={<Users height={32} color="brown"/>}
+              title="Inclusive Platform"
+              description="We cater to everyone, making your restaurant experience better."
+            />
           </div>
 
           <section className="compartment">
@@ -85,7 +78,7 @@ const AboutUs = () => {
               />
               <button
                 type="submit"
-                style={{all:"unset", backgroundColor:"teal", color:"white", padding:"8px", marginLeft:"8px"}}
+                className="ft-sub-btn"
               >
                 Subscribe
               </button>
@@ -105,14 +98,15 @@ const AboutUs = () => {
   );
 };
 
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="p-6 bg-white rounded-lg shadow-md">
-    <div className="flex items-center mb-4">
-      {icon}
-      <h3 className="ml-3 text-xl font-semibold text-gray-800">{title}</h3>
+const MyCard = ({icon, title, description}) => {
+  return (
+    <div>
+      <div style={{display:"flex", gap:"8px"}}>
+        {icon}
+        <h3>{title}</h3>
+      </div>
+      <p>{description}</p>
     </div>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
-
+  )
+}
 export default AboutUs;

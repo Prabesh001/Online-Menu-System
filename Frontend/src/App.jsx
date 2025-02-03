@@ -251,6 +251,14 @@ function Layout() {
                   element={<Advertisement />}
                 />
                 <Route path="/tablemate/marketing" element={<Marketing />} />
+                {/* <Route
+                  path="/tablemate/cookie-policy"
+                  element={<CookiePolicy />}
+                />
+                <Route
+                  path="/tablemate/privacy-policy"
+                  element={<PrivacyPolicy />}
+                /> */}
                 <Route
                   path="/tablemate/terms-of-use"
                   element={<TermsOfUse />}
@@ -277,8 +285,6 @@ function Layout() {
                     </ProtectedRoute>
                   }
                 />
-                {/* <Route path="/tablemate/cookie-policy" element={<CookiePolicy />} /> */}
-                {/* <Routes path="/tablemate/privacy-policy" element={<PrivacyPolicy />} /> */}
 
                 <Route
                   path="*"

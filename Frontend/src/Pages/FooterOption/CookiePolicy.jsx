@@ -45,7 +45,7 @@ const CookiePolicy = () => {
                 We use both session and persistent cookies on our website and we
                 use different types of cookies to run the site:
               </p>
-              <ul className="pl-6 space-y-2 list-disc">
+              <ul className="bl-txt">
                 <li>Essential cookies</li>
                 <li>Functionality cookies</li>
                 <li>Analytics cookies</li>
@@ -65,7 +65,7 @@ const CookiePolicy = () => {
               </p>
             </section>
 
-            <p className="mt-8 text-sm text-gray-500">
+            <p className="up-dt">
               Last Updated: November 25, 2024
             </p>
           </div>

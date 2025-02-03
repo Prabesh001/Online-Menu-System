@@ -90,7 +90,7 @@ const PrivacyPolicy = () => {
               </p>
             </section>
 
-            <p className="mt-8 text-sm text-gray-500">
+            <p className="mt-8 text-sm text-gray-500 up-dt">
               Last Updated in November 25, 2024
             </p>
           </div>
