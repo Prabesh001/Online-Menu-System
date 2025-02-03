@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./Pages/Home.jsx";
@@ -25,7 +26,7 @@ import PaymentSuccess from "./Pages/Payment/PaymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
-import Navbar from "./Components/Navbar/index";
+import Navbar from "./Components/Navbar/navbar.jsx";
 import Footer from "./Components/Footer";
 import Table from "./Components/Table/Table.jsx";
 import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
@@ -142,19 +143,24 @@ function Layout() {
     "/tablemate/cookie-policy",
   ];
 
-  const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
-  const hideCart = [
-    ...hideNavbarFooter,
-    "/table",
-    "/paymentsuccess",
-    ...footerOptions,
+  const showCart = [
+    "/home",
+    "/category/appetizer",
+    "/category/main course",
+    "/category/side dish",
+    "/category/beverage",
+    "/category/soup",
+    "/category/dessert",
+    `/search/${searchItem}`,
+    "paymentfailure",
   ];
+  const hideNavbarFooter = ["/", "/login", "/reserve-seat", "/employee"];
+
   const noIndex = ["/table", `/search/${searchItem}`, ...hideNavbarFooter];
 
   useEffect(() => {
-    if (location.pathname === "/") {
-      setSelectedIndex("Home");
-    } else if (noIndex.includes(location.pathname)) {
+    const loc = location.pathname.toLowerCase();
+    if (!showCart.includes(loc.replace("%20", " "))) {
       setSelectedIndex(null);
     }
   }, [location.pathname, selectedIndex, noIndex]);
@@ -283,9 +289,9 @@ function Layout() {
             <div className="app-footer">
               {!hideNavbarFooter.includes(location.pathname) && <Footer />}
             </div>
-            {!hideCart.includes(location.pathname) && (
-              <Table value={count} onclick={() => navigate("/table")} />
-            )}
+            {showCart.includes(
+              location.pathname.toLowerCase().replace("%20", " ")
+            ) && <Table value={count} onclick={() => navigate("/table")} />}
           </div>
         </AuthContext.Provider>
       </CartContext.Provider>
@@ -294,9 +300,18 @@ function Layout() {
 }
 
 function App() {
+  function NormalizePath() {
+    const location = useLocation();
+
+    if (location.pathname !== "/" && location.pathname.endsWith("/")) {
+      return <Navigate to={location.pathname.replace(/\/+$/, "")} replace />;
+    }
+    return null;
+  }
   return (
     <GoogleOAuthProvider clientId="244499214878-ski0knaamlp5gra4dlivu1lr9c5k1b17.apps.googleusercontent.com">
       <BrowserRouter>
+        <NormalizePath />
         <Toaster richColors position="bottom-center" />
         <Layout />
       </BrowserRouter>

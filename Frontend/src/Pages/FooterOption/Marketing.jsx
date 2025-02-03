@@ -4,17 +4,17 @@ import Layout from "./Layout";
 const Marketing = () => {
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-100">
-        <div className="container px-4 py-8 mx-auto md:py-16">
+      <div >
+        <div >
           <h1 className="mb-8 text-3xl font-bold text-center text-gray-800 md:text-4xl">
             Marketing Policy
           </h1>
-          <div className="p-6 space-y-6 text-gray-700 bg-white rounded-lg shadow-md md:p-8">
+          <div>
             <section>
               <h2 className="mb-4 text-2xl font-semibold text-gray-800">
                 1. Our Marketing Approach
               </h2>
-              <p className="mb-4">
+              <p>
                 At TicketNest, we believe in transparent and ethical marketing
                 practices. Our goal is to provide you with relevant information
                 about our services while respecting your privacy and
@@ -59,7 +59,7 @@ const Marketing = () => {
               </p>
             </section>
 
-            <p className="mt-8 text-sm text-gray-500">
+            <p className="up-dt">
               Last Updated: November 25, 2024
             </p>
           </div>

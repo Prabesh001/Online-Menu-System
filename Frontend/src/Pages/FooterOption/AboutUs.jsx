@@ -11,11 +11,11 @@ const AboutUs = () => {
             About TableMate
           </h1>
 
-          <section className="p-6 mb-8 bg-white rounded-lg shadow-lg">
+          <section className="compartment cmp-1">
             <h2 className="mb-4 text-2xl font-semibold text-gray-800">
               Welcome to TableMate
             </h2>
-            <p className="mb-4 text-gray-600">
+            <p className="bl-txt">
               Your premier destination for online ticket booking for movies,
               events, theatres, games, and concerts. We understand the
               excitement that comes with experiencing live performances and
@@ -24,34 +24,42 @@ const AboutUs = () => {
             </p>
           </section>
 
-          <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
-            <FeatureCard
-              icon={<Ticket className="w-8 h-8 text-blue-500" />}
-              title="Easy Booking"
-              description="Our user-friendly interface allows you to effortlessly search and book table for your meal."
-            />
-            <FeatureCard
-              icon={<Shield className="w-8 h-8 text-green-500" />}
-              title="Secure Transactions"
-              description="We utilize top-notch encryption and security measures to protect your personal information and payment details."
-            />
-            <FeatureCard
-              icon={<Headphones className="w-8 h-8 text-purple-500" />}
-              title="Dedicated Support"
-              description="Our customer service team is always ready to assist you with any inquiries about event details or ticket issues."
-            />
-            <FeatureCard
-              icon={<Users className="w-8 h-8 text-yellow-500" />}
-              title="Inclusive Platform"
-              description="We cater to everyone, making your restaurant experience better."
-            />
+          <div className="compartment ft-collections">
+            <div>
+              <FeatureCard
+                icon={<Ticket className="w-8 h-8 text-blue-500" />}
+                title="Easy Booking"
+                description="Our user-friendly interface allows you to effortlessly search and book table for your meal."
+              />
+            </div>
+            <div>
+              <FeatureCard
+                icon={<Shield className="w-8 h-8 text-green-500" />}
+                title="Secure Transactions"
+                description="We utilize top-notch encryption and security measures to protect your personal information and payment details."
+              />
+            </div>
+            <div>
+              <FeatureCard
+                icon={<Headphones className="w-8 h-8 text-purple-500" />}
+                title="Dedicated Support"
+                description="Our customer service team is always ready to assist you with any inquiries about event details or ticket issues."
+              />
+            </div>
+            <div>
+              <FeatureCard
+                icon={<Users className="w-8 h-8 text-yellow-500" />}
+                title="Inclusive Platform"
+                description="We cater to everyone, making your restaurant experience better."
+              />
+            </div>
           </div>
 
-          <section className="p-6 mb-8 bg-white rounded-lg shadow-lg">
+          <section className="compartment">
             <h2 className="mb-4 text-2xl font-semibold text-gray-800">
               Our Offerings
             </h2>
-            <ul className="space-y-2 text-gray-600 list-disc list-inside">
+            <ul className="bl-txt">
               <li>Latest blockbuster movies</li>
               <li>Captivating stage performances</li>
               <li>Exciting sports events</li>
@@ -59,11 +67,11 @@ const AboutUs = () => {
             </ul>
           </section>
 
-          <section className="p-6 mb-8 bg-white rounded-lg shadow-lg">
+          <section className="compartment">
             <h2 className="mb-4 text-2xl font-semibold text-gray-800">
               Join Our Community
             </h2>
-            <p className="mb-4 text-gray-600">
+            <p className="bl-txt">
               Sign up for our newsletter to stay informed about upcoming events,
               exclusive promotions, and special offers. Be the first to know
               about the hottest shows and ticket releases!
@@ -77,7 +85,7 @@ const AboutUs = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-2 text-white transition duration-300 bg-teal-500 rounded-md hover:bg-teal-600"
+                style={{all:"unset", backgroundColor:"teal", color:"white", padding:"8px", marginLeft:"8px"}}
               >
                 Subscribe
               </button>

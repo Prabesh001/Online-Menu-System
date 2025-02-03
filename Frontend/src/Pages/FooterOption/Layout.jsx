@@ -1,9 +1,10 @@
 import React from "react";
+import "./footerOption.css"
 
 function Layout({ children }) {
   return (
     <div>
-      <main className="pt-[260px] sm:pt-[165px] md:pt-[150]">{children}</main>
+      <main className="footer-container">{children}</main>
     </div>
   );
 }

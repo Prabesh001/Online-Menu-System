@@ -4,8 +4,8 @@ import Layout from "./Layout";
 const Advertisement = () => {
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-100">
-        <div className="container px-4 py-8 mx-auto md:py-16">
+      <div >
+        <div>
           <h1 className="mb-8 text-3xl font-bold text-center text-gray-800 md:text-4xl">
             Advertisement Policy
           </h1>
@@ -18,7 +18,7 @@ const Advertisement = () => {
                 TicketNest may display various types of advertisements,
                 including but not limited to:
               </p>
-              <ul className="pl-6 space-y-2 list-disc">
+              <ul className="bl-txt">
                 <li>Display ads</li>
                 <li>Sponsored content</li>
                 <li>Email advertisements</li>
@@ -59,7 +59,7 @@ const Advertisement = () => {
               </p>
             </section>
 
-            <p className="mt-8 text-sm text-gray-500">
+            <p className="up-dt">
               Last Updated: November 25, 2024
             </p>
           </div>

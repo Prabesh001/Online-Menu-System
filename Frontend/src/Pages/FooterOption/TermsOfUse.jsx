@@ -68,7 +68,7 @@ const TermsOfUse = () => {
               </p>
             </section>
 
-            <p className="mt-8 text-sm text-gray-500">
+            <p className="up-dt">
               Last Updated: November 25, 2024
             </p>
           </div>
