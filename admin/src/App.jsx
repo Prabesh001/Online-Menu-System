@@ -14,8 +14,6 @@ import AddItem from "./scenes/addItem";
 import Bar from "./scenes/bar";
 import Calendar from "./scenes/calendar/calendar";
 import Line from "./scenes/line";
-// import Pie from "./scenes/pie";
-// import Geography from "./scenes/geography";
 import FAQ from "./scenes/faq";
 
 export const CollapseContext = createContext();
@@ -28,7 +26,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("isNavCollapsed", isCollapsed);
-  }, [setIsCollapsed]);
+  }, [isCollapsed]);
 
   return (
     <CollectDataContext.Provider value={{ teamMember, setTeamMember }}>
@@ -53,9 +51,9 @@ function App() {
                   <Route path="/form" element={<Form />} />
                   <Route path="/bar" element={<Bar />} />
                   <Route path="/calendar" element={<Calendar />} />
-                  {/* <Route path="/pie" element={<Pie />} /> */}
                   <Route path="/line" element={<Line />} />
                   <Route path="/faq" element={<FAQ />} />
+                  {/* <Route path="/pie" element={<Pie />} /> */}
                   {/* <Route path="/geography" element={<Geography />} /> */}
                 </Routes>
               </main>

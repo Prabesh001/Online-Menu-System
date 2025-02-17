@@ -11,13 +11,20 @@ function Popup({ greeting, message, addButtons }) {
       document.body.style.overflow = "auto";
     };
   }, []);
+
   
   function closePopup() {
-    setPopupVisiblilty(false);
+    setPopupVisiblilty(null);
   }
-
+  
+  const handleOverlayClick = (event) => {
+    if (event.target.classList.contains("popup-overlay")) {
+      closePopup();
+    }
+  };
+  
   return (
-    <div className="popup-overlay">
+    <div className="popup-overlay" onClick={handleOverlayClick}>
       <div className="popup-window">
         <h2 style={{ color: "red" }}>{greeting}</h2>
         <div className="popup-message">{message}</div>

@@ -29,12 +29,6 @@ function Cart({ items, setItems }) {
   function removeFromCart(item) {
     const filteredItems = items.filter((ele) => ele._id !== item._id);
     setItems(filteredItems);
-
-    const newCount = filteredItems.reduce(
-      (acc, currentItem) => acc + currentItem.quantity,
-      0
-    );
-    setCount(newCount);
   }
 
   function handleAddSub(action) {
@@ -57,14 +51,8 @@ function Cart({ items, setItems }) {
           : item
       );
       setItems(updatedItems);
-
-      const newCount = updatedItems.reduce(
-        (acc, currentItem) => acc + currentItem.quantity,
-        0
-      );
-      setCount(newCount);
       playAddToCartSound();
-      setPopupVisiblilty(false);
+      setPopupVisiblilty(null);
     }
   }
 

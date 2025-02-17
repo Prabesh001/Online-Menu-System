@@ -20,6 +20,7 @@ function TableReserve() {
       try {
         const tabledata = await fetchOrders();
         const myTable = tabledata.filter((tab)=>tab.available===true)
+        myTable.sort((a, b) => a.table - b.table)
         setAvailableTable(myTable)
       } catch (err) {
         console.log(err);

@@ -45,9 +45,7 @@ function Layout() {
   const [selectedIndex, setSelectedIndex] = useState(
     () => localStorage.getItem("index") || "Home"
   );
-  const [count, setCount] = useState(
-    () => Number(localStorage.getItem("count")) || 0
-  );
+  const [count, setCount] = useState(0);
   const [searchItem, setSearchItem] = useState(
     () => localStorage.getItem("searched-item") || ""
   );
@@ -63,9 +61,9 @@ function Layout() {
     "isAuthenticated",
     false
   );
-  const [coupen, setCoupen] = useLocalStorage("user", "");
+  const [coupen, setCoupen] = useLocalStorage("user", false);
 
-  const [popupVisiblilty, setPopupVisiblilty] = useState(false);
+  const [popupVisiblilty, setPopupVisiblilty] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
@@ -112,11 +110,16 @@ function Layout() {
   }, [tableNumber]);
 
   useEffect(() => {
+    localStorage.setItem("CartItems", JSON.stringify(cartItems));
     if (cartItems.length === 0) {
       setCount(0);
+    } else {
+      let length = 0;
+      cartItems.map((item) => {
+        length += item.quantity;
+        setCount(length)
+      });
     }
-    localStorage.setItem("count", count);
-    localStorage.setItem("CartItems", JSON.stringify(cartItems));
   }, [count, cartItems]);
 
   useEffect(() => {

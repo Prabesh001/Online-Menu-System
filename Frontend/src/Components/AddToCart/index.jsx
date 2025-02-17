@@ -6,7 +6,7 @@ import { toast, Toaster } from "sonner";
 
 function AddToCart({ item, setItemSelected }) {
   const { setItems, setCartItems } = useContext(ItemContext);
-  const { setCount, playAddToCartSound } = useContext(CartContext);
+  const { playAddToCartSound } = useContext(CartContext);
 
   const addToCart = (item) => {
     if (item.availability === false) {
@@ -58,12 +58,6 @@ function AddToCart({ item, setItemSelected }) {
             updatedCart.push(newItem);
           }
         });
-
-        const newCount = updatedCart.reduce(
-          (acc, item) => acc + item.quantity,
-          0
-        );
-        setCount(newCount);
         item.quantity = 1;
         toast.success(`${item.name} added to the table.`);
 

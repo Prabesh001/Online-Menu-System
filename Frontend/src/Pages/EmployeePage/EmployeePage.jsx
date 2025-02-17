@@ -29,7 +29,7 @@ function EmployeePage() {
         const data = await fetchOrders();
         setAllOrders(data);
         const myTable = data.find((ele) => ele.orders.length !== 0);
-        
+
         const reservedTable = data.filter((ele) => ele.available === false);
         setReservedTable(reservedTable);
 
@@ -66,47 +66,34 @@ function EmployeePage() {
     }
   }, [selectedTable, allOrders]);
 
-  function EditDeliveryCell(props) {
-    const { id, value, api } = props;
-
-    const handleChange = (event) => {
-      const newValue = event.target.value;
-      api.setEditCellValue({ id, field: "isDelivered", value: newValue });
-      api.stopCellEditMode({ id, field: "isDelivered" });
-    };
-
-    return (
-      <Select value={value || ""} onChange={handleChange} fullWidth>
-        <MenuItem value="True">true</MenuItem>
-        <MenuItem value="False">false</MenuItem>
-      </Select>
-    );
-  }
-
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Item Name", flex: 2 },
     { field: "quantity", headerName: "Quantity", width: 100 },
-    { field: "price", headerName: "Price(Unit)", flex: 1 },
+    { field: "price", headerName: "Price", flex: 1 },
     { field: "orderedTime", headerName: "Ordered Time", flex: 1 },
     {
       field: "isDelivered",
       headerName: "Delivered",
       description: "Is item delivered?",
       flex: 1,
-      editable: true,
-      renderEditCell: (params) => <EditDeliveryCell {...params} />,
     },
   ];
 
   return (
     <div>
-      <EmployeeNavbar reservedTable={ reservedTable } />
+      <EmployeeNavbar reservedTable={reservedTable} />
       {loading ? (
         <LoadingComponent mh={46.7} />
       ) : (
         <div style={{ padding: "20px 15px" }}>
-          <span style={{ fontSize: "20px", fontWeight: "bold", marginRight:"10px" }}>
+          <span
+            style={{
+              fontSize: "20px",
+              fontWeight: "bold",
+              marginRight: "10px",
+            }}
+          >
             Orders from Table No.
           </span>
 
@@ -118,7 +105,7 @@ function EmployeePage() {
               value={selectedTable}
               label="Table No."
               onChange={handleChange}
-              style={{height:"40px"}}
+              style={{ height: "40px" }}
             >
               {reservedTable.map((table) => (
                 <MenuItem key={table.table} value={table.table}>
@@ -127,7 +114,7 @@ function EmployeePage() {
               ))}
             </Select>
           </FormControl>
-          <Box sx={{ minHeight: 277, width: "100%", marginTop:"20px" }}>
+          <Box sx={{ minHeight: 277, width: "100%", marginTop: "20px" }}>
             <DataGrid
               rows={filteredOrders}
               columns={columns}
@@ -144,41 +131,12 @@ function EmployeePage() {
           </Box>
         </div>
       )}
+
+      <button className="update border-1 mr-[5px]">Update</button>
+      <button className="delete border-1 text-bg-dark">Deliver All</button>
       <Footer />
     </div>
   );
 }
 
 export default EmployeePage;
-
-// {loading ? (
-//   <p>Loading orders...</p>
-// ) : filteredOrders.length > 0 ? (
-//   <DataGrid
-//     rows={filteredOrders}
-//     columns={columns}
-//     checkboxSelection
-//     initialState={{
-//       pagination: {
-//         paginationModel: {
-//           pageSize: 100,
-//         },
-//       },
-//     }}
-//     pageSizeOptions={[100]}
-//   />
-// ) : (
-//   <DataGrid
-//     rows={filteredOrders}
-//     columns={columns}
-//     checkboxSelection
-//     initialState={{
-//       pagination: {
-//         paginationModel: {
-//           pageSize: 100,
-//         },
-//       },
-//     }}
-//     pageSizeOptions={[100]}
-//   />
-// )}

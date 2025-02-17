@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 // Item Schema
 const itemSchema = new mongoose.Schema(
   {
-    _id: String,
     name: String,
     description: String,
     price: Number,
@@ -21,7 +20,6 @@ const Item = mongoose.model("menuItem", itemSchema);
 // Home Schema
 const homeItemSchema = new mongoose.Schema(
   {
-    _id: String,
     name: String,
     description: String,
     price: Number,
@@ -54,7 +52,6 @@ const Team = mongoose.model("team", teamSchema);
 // Order Schema
 const orderSchema = new mongoose.Schema(
   {
-    _id: String,
     id: Number,
     table: Number,
     available: Boolean,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -38,13 +38,7 @@ function Team() {
     {
       field: "first_name",
       headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "hashedPassword",
-      headerName: "Password",
-      flex: 1,
+      flex: 3,
       cellClassName: "name-column--cell",
     },
     {
@@ -71,7 +65,7 @@ function Team() {
       renderCell: ({ row: { access_level } }) => {
         return (
           <Box
-            width="100%"
+            width="100px"
             m="0 auto"
             p="5px"
             display="flex"
@@ -88,10 +82,7 @@ function Team() {
             }
             borderRadius="4px"
           >
-            {access_level === "admin" && <AdminPanelSettingsOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
-            {access_level === "manager" && <SecurityOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
-            {access_level === "employee" && <LockOpenOutlinedIcon style={{position: "absolute", left: "40px"}}/>}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }} position="absolute">
+            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
               {access_level}
             </Typography>
           </Box>
@@ -122,13 +113,54 @@ function Team() {
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
           },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
             backgroundColor: colors.blueAccent[700],
           },
         }}
       >
-        <DataGrid rows={team} columns={columns} />
+        <DataGrid rows={team} columns={columns} 
+        checkboxSelection
+        sx={{
+          maxHeight: "74vh",
+          minHeight: "20vh",
+          "& .MuiDataGrid-columnHeaders": {
+            fontSize: "16px",
+            fontWeight: "bold",
+            border: `1px solid ${colors.blueAccent[700]}`,
+          },
+        }}
+        slots={{
+          toolbar: GridToolbar,
+        }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+            sx: {
+              backgroundColor: colors.primary[400],
+              padding: "6px 12px",
+              "& .MuiTypography-root": {
+                color: colors.greenAccent[300],
+              },
+              "& .MuiButton-root": {
+                color: colors.greenAccent[300],
+                fontSize:"0.8rem",
+              },
+              "& .MuiInputBase-input": {
+                color: colors.primary,
+              },
+              "& .MuiSvgIcon-root": {
+                color: colors.greenAccent[300],
+              },
+              "& .MuiDataGrid-toolbarContainer": {
+                fontSize:"25px",
+              },
+            },
+          },
+        }}/>
       </Box>
     </Box>
   );

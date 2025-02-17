@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
 function PaymentSuccess() {
   const { cartItems } = useContext(ItemContext);
-  const { setCount, setTableNumber, tableNumber } = useContext(CartContext);
+  const {  tableNumber } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.discountedPrice * item.quantity,

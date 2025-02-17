@@ -50,7 +50,7 @@ function EmployeeNavbar({ reservedTable }) {
 
   const handleLogout = () => {
     setLoading(true);
-    setPopupVisiblilty(false);
+    setPopupVisiblilty(null);
     setTimeout(() => {
       localStorage.removeItem("token");
       setIsAuthenticated(false);
@@ -62,7 +62,7 @@ function EmployeeNavbar({ reservedTable }) {
   const handleSettingsAction = (setting) => {
     if (setting === "Logout") {
       setAnchorElUser(null);
-      setPopupVisiblilty(true);
+      setPopupVisiblilty("logout");
     } else if (setting === "Profile") {
       console.log(setting);
     } else if (setting === "Dashboard") {
@@ -252,7 +252,7 @@ function EmployeeNavbar({ reservedTable }) {
           </Box>
         </Toolbar>
       </Container>
-      {popupVisiblilty === true && (
+      {popupVisiblilty === "logout" && (
         <Popup
           greeting="Logout!"
           message={<p>Are you sure you want to Logout?</p>}
