@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { ItemContext, CartContext } from "../../App";
-import { updateTable } from "../../JavaScript/fetchData";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../App";
+import { updateTable, fetchOrders } from "../../JavaScript/fetchData";
 import ExcelJS from "exceljs";
 import {
   PDFDownloadLink,
@@ -46,8 +46,19 @@ const styles = StyleSheet.create({
 });
 
 function PaymentSuccess() {
-  const { cartItems } = useContext(ItemContext);
-  const {  tableNumber } = useContext(CartContext);
+  const [cartItems, setCartItems] = useState([]);
+  const { tableNumber } = useContext(CartContext);
+
+  useEffect(() => {
+    const handleCartItems = async () => {
+      const data = await fetchOrders();
+      const myTable = data.find((tab) => tab.table === tableNumber);
+      if (myTable) {
+        setCartItems(myTable.deliveries || []);
+      }
+    };
+    handleCartItems();
+  }, []);
 
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.discountedPrice * item.quantity,
@@ -141,13 +152,14 @@ function PaymentSuccess() {
   useEffect(() => {
     const timer1 = setTimeout(() => {
       localStorage.clear();
-      updateTable(tableNumber, { available: true, orders: [] });
-    }, 1000);
-    
+      updateTable(tableNumber, { available: true, orders: [], deliveries: [] });
+    }, 60000);
+
     return () => {
       clearTimeout(timer1);
     };
   }, []);
+
   return (
     <div className="payment-page">
       {cartItems.length === 0 ? (
@@ -155,6 +167,9 @@ function PaymentSuccess() {
       ) : (
         <div>
           <center>
+            <i style={{ color: "green", margin: "10px" }}>
+              Thank You for stopping By🙏🙏🙏!
+            </i>
             <h1>TableMate</h1>
           </center>
           <table>

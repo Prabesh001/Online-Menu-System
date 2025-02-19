@@ -122,43 +122,51 @@ function NavbarBoot({ onCategorySelect }) {
   ];
 
   const [scrollDirection, setScrollDirection] = useState(null);
-  const lastScrollTop = useRef(0);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollTop = window.scrollY;
-      
-      if (currentScrollTop > 70) {
-        if (currentScrollTop > lastScrollTop.current && scrollDirection !== "down") {
-          setScrollDirection("down");
-        } else if (currentScrollTop < lastScrollTop.current && scrollDirection !== "up") {
-          setScrollDirection("up");
-        }
-      } else {
-        setScrollDirection(null);
-      }
-      
-      lastScrollTop.current = currentScrollTop; 
-    };
-    
     if (location.pathname !== "/table") {
+      const handleScroll = () => {
+        const currentScrollTop = document.documentElement.scrollTop;
+
+        if (currentScrollTop > 30 && window.pageYOffset > 70) {
+          if (currentScrollTop > lastScrollTop) {
+            setScrollDirection("down");
+          } else if (currentScrollTop < lastScrollTop) {
+            setScrollDirection("up");
+          }
+        } else {
+          setScrollDirection(null);
+        }
+        setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
+      };
+
       window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    } else {
+      setScrollDirection(null);
     }
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location, scrollDirection]);
+  }, [location, lastScrollTop]);
 
   return (
     <Navbar
       expand="lg"
-      fixed={scrollDirection === "up" && location.pathname !== "/table"  ? "top" : ""}
-      className={`no-select ${scrollDirection === "up"? "navbar-scroll-up" : ""}`}
-      >
+      fixed={
+        scrollDirection === "up" && location.pathname !== "/table" ? "top" : ""
+      }
+      className={`no-select ${
+        scrollDirection === "up" ? "navbar-scroll-up" : ""
+      }`}
+    >
       <Container fluid>
         <Navbar.Brand
           as={Link}
           to="/Home"
           onClick={() => onCategorySelect("All")}
-          style={{fontSize: "1.5em"}}
+          style={{ fontSize: "1.5em" }}
         >
           TableMate
         </Navbar.Brand>

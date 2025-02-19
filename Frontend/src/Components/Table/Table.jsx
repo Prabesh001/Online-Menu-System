@@ -6,7 +6,7 @@ function Table({ value, onclick }) {
   return (
     <div className="table-container" title="Your Orders!" onClick={onclick}>
       <span>
-      <img src={tableImage} alt="Table" className="table-image" />
+      <img src={tableImage} alt="Table" className="table-image" draggable="false"/>
       </span>
       <div className="counter" title={value}>
         {value}

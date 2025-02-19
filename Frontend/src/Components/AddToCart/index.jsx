@@ -2,93 +2,51 @@ import React, { useContext } from "react";
 import "./add-to-cart.css";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { ItemContext, CartContext } from "../../App";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 function AddToCart({ item, setItemSelected }) {
   const { setItems, setCartItems } = useContext(ItemContext);
   const { playAddToCartSound } = useContext(CartContext);
 
   const addToCart = (item) => {
-    if (item.availability === false) {
+    if (!item.availability) {
       toast.error(`${item.name} isn't available!`);
       return;
-    } else {
-      playAddToCartSound();
-
-      const orderedTime = new Date().toLocaleTimeString();
-
-      const itemsToAdd = Array.isArray(item)
-        ? item.map((ele) => ({
-            ...ele,
-            quantity: ele.quantity || 1,
-            orderedTime: [orderedTime],
-            isDelivered: false,
-          }))
-        : [
-            {
-              ...item,
-              quantity: item.quantity || 1,
-              orderedTime: [orderedTime],
-              isDelivered: false,
-            },
-          ];
-
-      setCartItems((prevItems) => {
-        const updatedCart = [...prevItems];
-
-        itemsToAdd.forEach((newItem) => {
-          const existingItemIndex = updatedCart.findIndex(
-            (cartItem) => cartItem._id === newItem._id
-          );
-
-          if (existingItemIndex > -1) {
-            updatedCart[existingItemIndex] = {
-              ...updatedCart[existingItemIndex],
-              quantity:
-                updatedCart[existingItemIndex].quantity + newItem.quantity,
-              orderedTime: [
-                ...new Set([
-                  ...newItem.orderedTime,
-                  ...updatedCart[existingItemIndex].orderedTime,
-                ]),
-              ],
-              isDelivered: false,
-            };
-          } else {
-            updatedCart.push(newItem);
-          }
-        });
-        item.quantity = 1;
-        toast.success(`${item.name} added to the table.`);
-
-        return updatedCart;
-      });
     }
+    playAddToCartSound();
+    const orderedTime = new Date().toLocaleTimeString();
+    const newItem = {
+      ...item,
+      quantity: item.quantity || 1,
+      orderedTime: [orderedTime],
+      isDelivered: false,
+    };
+
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((cartItem) => cartItem._id === newItem._id);
+      if (existingItem) {
+        existingItem.quantity += newItem.quantity;
+        existingItem.orderedTime = [...new Set([...existingItem.orderedTime, ...newItem.orderedTime])];
+      } else {
+        prevItems.push(newItem);
+      }
+      item.quantity = 1;
+      toast.success(`${item.name} added to the table.`);
+      return [...prevItems];
+    });
   };
 
   const handleAction = (action, itemId) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
         item._id === itemId
-          ? {
-              ...item,
-              quantity:
-                action === "plus"
-                  ? (item.quantity || 1) + 1
-                  : Math.max((item.quantity || 0) - 1, 0),
-            }
+          ? { ...item, quantity: Math.max((item.quantity || 1) + (action === "plus" ? 1 : -1), 1) }
           : item
       )
     );
     setItemSelected((prevSelected) =>
       prevSelected && prevSelected._id === itemId
-        ? {
-            ...prevSelected,
-            quantity:
-              action === "plus"
-                ? (prevSelected.quantity || 1) + 1
-                : Math.max((prevSelected.quantity || 0) - 1, 0),
-          }
+        ? { ...prevSelected, quantity: Math.max((prevSelected.quantity || 1) + (action === "plus" ? 1 : -1), 1) }
         : prevSelected
     );
   };
@@ -125,7 +83,7 @@ function AddToCart({ item, setItemSelected }) {
         className="add-button no-select"
         onClick={() => {
           addToCart(item);
-          setItemSelected([]);
+          setItemSelected(null);
         }}
       >
         <span>Add</span>

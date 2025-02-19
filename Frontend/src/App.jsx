@@ -9,6 +9,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+
+//Pages
 import Home from "./Pages/Home.jsx";
 import FoodCategory from "./Pages/FoodCategory";
 import SearchItem from "./Pages/SearchItem.jsx";
@@ -26,14 +28,19 @@ import PaymentSuccess from "./Pages/Payment/PaymentSuccess.jsx";
 import PaymentFailure from "./Pages/Payment/PaymentFailure.jsx";
 // import CookiePolicy from "./Pages/FooterOption/CookiePolicy.jsx";
 // import PrivacyPolicy from "./Pages/FooterOption/PrivacyPolicy.jsx";
+
+//Components
 import Navbar from "./Components/Navbar/navbar.jsx";
 import Footer from "./Components/Footer";
 import Table from "./Components/Table/Table.jsx";
-import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
 import { Toaster, toast } from "sonner";
+
+//Functions or Functional Components
+import { fetchOrders, updateTable } from "./JavaScript/fetchData.js";
 import ProtectedRoute from "./JavaScript/ProtectedRoute.jsx";
 import { useLocalStorage } from "./JavaScript/useLocalStorage.jsx";
 
+//Contexts
 export const CartContext = createContext();
 export const ItemContext = createContext();
 export const AuthContext = createContext();
@@ -45,14 +52,13 @@ function Layout() {
   const [selectedIndex, setSelectedIndex] = useState(
     () => localStorage.getItem("index") || "Home"
   );
-  const [count, setCount] = useState(0);
   const [searchItem, setSearchItem] = useState(
     () => localStorage.getItem("searched-item") || ""
   );
-
   const [tableNumber, setTableNumber] = useState(
     () => Number(localStorage.getItem("TableNumber")) || null
   );
+
   const [clickPayment, setClickPayment] = useLocalStorage(
     "clickPayment",
     false
@@ -63,6 +69,7 @@ function Layout() {
   );
   const [coupen, setCoupen] = useLocalStorage("user", false);
 
+  const [count, setCount] = useState(0);
   const [popupVisiblilty, setPopupVisiblilty] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -117,7 +124,7 @@ function Layout() {
       let length = 0;
       cartItems.map((item) => {
         length += item.quantity;
-        setCount(length)
+        setCount(length);
       });
     }
   }, [count, cartItems]);

@@ -3,23 +3,152 @@ import "../Styles/EmployeePage.css";
 import { Toaster, toast } from "sonner";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Hidden,
+} from "@mui/material";
 import { fetchOrders } from "../../JavaScript/fetchData";
-import { ItemContext } from "../../App.jsx";
+import { CartContext, ItemContext } from "../../App.jsx";
 import EmployeeNavbar from "./EmployeeNavbar";
 import Footer from "../../Components/Footer";
 import LoadingComponent from "../../Components/Loading/loading.jsx";
+import Popup from "../../Components/Popup/index.jsx";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
   const [selectedTable, setSelectedTable] = useState("");
   const [allOrders, setAllOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const { loading, setLoading } = useContext(ItemContext);
   const [reservedTable, setReservedTable] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [updateRow, setUpdateRow] = useState([]);
+
+  const { loading, setLoading } = useContext(ItemContext);
+  const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
 
   const handleChange = (event) => {
     setSelectedTable(event.target.value);
+  };
+
+  useEffect(() => {
+    const myData = filteredOrders.filter((item) => item.id === selectedRows[0]);
+    if (myData.length > 0) {
+      setUpdateRow(myData);
+    }
+  }, [selectedRows]);
+
+  useEffect(() => {
+    if (popupVisiblilty !== "update") {
+      setInterval(() => window.location.reload(), 60000);
+
+      return () => clearInterval();
+    }
+  }, []);
+
+  console.log(updateRow);
+
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (updateRow.length > 0) {
+      setFormData({
+        id: updateRow[0].id,
+        name: updateRow[0].name,
+        quantity: updateRow[0].quantity,
+        amountDelivered: "",
+      });
+    }
+  }, [updateRow]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "amountDelivered" && value > formData.quantity) {
+      toast.error("Delivered amount cannot exceed available quantity!");
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDeliverAll = async () => {
+    try {
+      for (const orderId of selectedRows) {
+        const response = await fetch(
+          "http://localhost:5000/api/table/move-order/full-delivery",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId, selectedTable }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to move order");
+        }
+      }
+
+      toast.success("Delivered successfully!");
+      setFilteredOrders(
+        filteredOrders.filter((order) => !selectedRows.includes(order.id))
+      );
+    } catch (err) {
+      toast.error("Operation Failed: " + err.message);
+    } finally {
+      setSelectedRows([]);
+      setPopupVisiblilty(null);
+    }
+  };
+
+  const handleDeliverAmount = async () => {
+    if (!formData.amountDelivered || formData.amountDelivered <= 0) {
+      toast.error("Enter a valid amount to deliver!");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/table/move-order/partial-delivery",
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderId: formData.id,
+            selectedTable,
+            deliveredAmount: formData.amountDelivered,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update order delivery");
+      }
+
+      toast.success("Amount Delivered Successfully!");
+
+      // Update local state: Reduce quantity if partially delivered
+      setFilteredOrders(
+        (prevOrders) =>
+          prevOrders
+            .map((order) =>
+              order.id === formData.id
+                ? {
+                    ...order,
+                    quantity: order.quantity - formData.amountDelivered,
+                  }
+                : order
+            )
+            .filter((order) => order.quantity > 0) // Remove if quantity becomes zero
+      );
+
+      setPopupVisiblilty(null);
+      setFormData({ id: "", name: "", quantity: 0, amountDelivered: "" });
+    } catch (err) {
+      toast.error("Operation Failed: " + err.message);
+    }
   };
 
   useEffect(() => {
@@ -53,12 +182,11 @@ function EmployeePage() {
       );
 
       if (tableData?.orders) {
-        const formattedData = tableData.orders.map(
-          ({ _id, ...rest }, index) => ({
-            id: index,
-            ...rest,
-          })
-        );
+        const formattedData = tableData.orders.map(({ _id, ...ele }, i) => ({
+          rank: i,
+          id: _id,
+          ...ele,
+        }));
         setFilteredOrders(formattedData);
       } else {
         setFilteredOrders([]);
@@ -67,7 +195,8 @@ function EmployeePage() {
   }, [selectedTable, allOrders]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "rank", headerName: "S.N.", width: 90 },
+    { field: "id", headerName: "ID", width: 10 },
     { field: "name", headerName: "Item Name", flex: 2 },
     { field: "quantity", headerName: "Quantity", width: 100 },
     { field: "price", headerName: "Price", flex: 1 },
@@ -127,14 +256,105 @@ function EmployeePage() {
                 },
               }}
               pageSizeOptions={[100]}
+              rowSelectionModel={selectedRows}
+              onRowSelectionModelChange={(newSelection) => {
+                setSelectedRows(newSelection);
+              }}
             />
           </Box>
         </div>
       )}
 
-      <button className="update border-1 mr-[5px]">Update</button>
-      <button className="delete border-1 text-bg-dark">Deliver All</button>
+      <button
+        className="update border-1"
+        style={{
+          margin: "5px",
+          border: "1px solid green",
+          backgroundColor: "green",
+          color: "white",
+        }}
+        onClick={() => setPopupVisiblilty("update")}
+      >
+        Update
+      </button>
+
+      <button
+        className="delete border-1 text-bg-dark"
+        style={{ margin: "5px" }}
+        onClick={() => setPopupVisiblilty("delete")}
+      >
+        Deliver All
+      </button>
+
       <Footer />
+
+      {selectedRows.length !== 0 && popupVisiblilty === "delete" && (
+        <Popup
+          greeting={"Deliver All!"}
+          message={"Are you sure you delivered all?"}
+          addButtons={
+            <button
+              className="close-btn"
+              style={{ backgroundColor: "green" }}
+              onClick={handleDeliverAll}
+            >
+              Deliver All
+            </button>
+          }
+        />
+      )}
+
+      {selectedRows.length !== 0 && popupVisiblilty === "update" && (
+        <Popup
+          greeting={"Update"}
+          message={
+            <form className="flex flex-col gap-2 mt-3 text-[18px]">
+              <input
+                type="text"
+                name="id"
+                className="w-full p-2 border border-gray-400 rounded-md"
+                placeholder="Order ID"
+                value={formData.id}
+                readOnly
+              />
+              <input
+                type="text"
+                name="name"
+                className="w-full p-2 border border-gray-400 rounded-md"
+                placeholder="Item Name"
+                value={formData.name}
+                readOnly
+              />
+              <input
+                type="number"
+                name="quantity"
+                className="w-full p-2 border border-gray-400 rounded-md"
+                placeholder="Quantity"
+                value={formData.quantity}
+                readOnly
+              />
+              <input
+                type="number"
+                name="amountDelivered"
+                className="w-full p-2 border border-gray-400 rounded-md"
+                placeholder="Amount to Deliver"
+                value={formData.amountDelivered}
+                onChange={handleInputChange}
+                max={formData.quantity}
+              />
+            </form>
+          }
+          addButtons={
+            <button
+              className="close-btn"
+              style={{ backgroundColor: "green" }}
+              onClick={handleDeliverAmount}
+            >
+              Deliver Amount
+            </button>
+          }
+        />
+      )}
     </div>
   );
 }

@@ -153,9 +153,8 @@ function Index({ onCategorySelect }) {
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }
-    else{
-      setScrollDirection(null)
+    } else {
+      setScrollDirection(null);
     }
   }, [location, lastScrollTop]);
 

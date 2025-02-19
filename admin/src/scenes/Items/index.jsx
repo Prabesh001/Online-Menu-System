@@ -76,7 +76,7 @@ const Index = () => {
           onClick={() => handleDeleteClick(row._id, row.name, setItems)}
           sx={{
             cursor: "pointer",
-            "&:hover": { backgroundColor: colors.greenAccent[400] },
+            "&:hover": { color: colors.redAccent[500] },
           }}
         >
           <DeleteIcon fontSize="large" />

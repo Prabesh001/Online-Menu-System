@@ -56,6 +56,7 @@ const orderSchema = new mongoose.Schema(
     table: Number,
     available: Boolean,
     orders: Array,
+    deliveries: Array,
   },
   { collection: "TableOrders", versionKey: false }
 );

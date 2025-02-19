@@ -96,7 +96,7 @@ function EmployeeNavbar({ reservedTable }) {
   }, []);
 
   return (
-    <AppBar position="static" style={{ backgroundColor: "#008cba" }}>
+    <AppBar position="static" style={{ backgroundColor: "#008cba", width:"100%" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

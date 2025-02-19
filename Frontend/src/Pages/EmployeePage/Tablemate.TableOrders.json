@@ -1,0 +1,396 @@
+[{
+  "_id": "679ba3c89806b242b16a8312",
+  "table": 1,
+  "available": false,
+  "orders": [
+    {
+      "_id": "6789d821db9ad43578698ad4",
+      "availability": true,
+      "name": "BBQ Chicken Wings",
+      "price": 799,
+      "discountedPrice": 679,
+      "category": [
+        "hot-section",
+        "combo"
+      ],
+      "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+      "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+      "count": 0,
+      "quantity": 2,
+      "orderedTime": [
+        "1:28:32 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "16",
+      "name": "Vegetable Chow Mein",
+      "description": "Nepali-style stir-fried noodles with mixed vegetables.",
+      "price": 180,
+      "category": "Main Course",
+      "availability": true,
+      "reviews": [
+        {
+          "name": "",
+          "body": ""
+        }
+      ],
+      "discountedPrice": 180,
+      "foodPreferences": "Veg",
+      "photoUrl": "https://imgs.search.brave.com/L63H2hb3L-DJQwcQfK9cL4re5twZ7wWohUiE-HJIQCI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jdXBm/dWxvZmthbGUuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIw/LzAyL1ZlZ2FuLVZl/Z2V0YWJsZS1DaG93/LU1laW4uanBn",
+      "count": 0,
+      "quantity": 3,
+      "orderedTime": [
+        "1:28:42 PM",
+        "1:28:41 PM"
+      ],
+      "isDelivered": false
+    }
+  ],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8313",
+  "table": 2,
+  "available": false,
+  "orders": [
+    {
+      "_id": "6789d821db9ad43578698ad4",
+      "availability": true,
+      "name": "BBQ Chicken Wings",
+      "price": 799,
+      "discountedPrice": 679,
+      "category": [
+        "hot-section",
+        "combo"
+      ],
+      "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+      "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+      "count": 0,
+      "quantity": 1,
+      "orderedTime": [
+        "8:10:02 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "6789d821db9ad43578698ad6",
+      "name": "Fiery Veggie Wrap",
+      "price": 639,
+      "discountedPrice": 559,
+      "category": [
+        "hot-section"
+      ],
+      "availability": true,
+      "photo": "https://imgs.search.brave.com/tdYOlpoKpGJEp4bu7A7eMuFBzx3lBeh0JmkCRtGDZ0w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9vaG15/dmVnZ2llcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTQv/MDQvc291dGh3ZXN0/ZXJuX3ZlZ2dpZV93/cmFwcy02MDB4OTAw/LmpwZw",
+      "description": "A spicy wrap filled with fresh vegetables and tangy sauce.",
+      "count": 0,
+      "quantity": 1,
+      "orderedTime": [
+        "8:10:06 PM"
+      ],
+      "isDelivered": false
+    }
+  ],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8314",
+  "table": 3,
+  "available": false,
+  "orders": [
+    {
+      "_id": "6789d821db9ad43578698ad6",
+      "name": "Fiery Veggie Wrap",
+      "price": 639,
+      "discountedPrice": 559,
+      "category": [
+        "hot-section"
+      ],
+      "availability": true,
+      "photo": "https://imgs.search.brave.com/tdYOlpoKpGJEp4bu7A7eMuFBzx3lBeh0JmkCRtGDZ0w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9vaG15/dmVnZ2llcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTQv/MDQvc291dGh3ZXN0/ZXJuX3ZlZ2dpZV93/cmFwcy02MDB4OTAw/LmpwZw",
+      "description": "A spicy wrap filled with fresh vegetables and tangy sauce.",
+      "count": 0,
+      "quantity": 3,
+      "orderedTime": [
+        "10:01:06 PM",
+        "8:42:59 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "6789d821db9ad43578698add",
+      "name": "SpiceKing Chicken Wings",
+      "availability": true,
+      "price": 1000,
+      "discountedPrice": 850,
+      "category": [
+        "hot-section",
+        "combo"
+      ],
+      "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+      "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+      "count": 0,
+      "quantity": 7,
+      "orderedTime": [
+        "10:01:12 PM",
+        "8:43:06 PM"
+      ],
+      "isDelivered": false
+    }
+  ],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8315",
+  "table": 4,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8316",
+  "table": 5,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8317",
+  "table": 6,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8318",
+  "table": 7,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8319",
+  "table": 8,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831a",
+  "table": 9,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831b",
+  "table": 10,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831c",
+  "table": 11,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831d",
+  "table": 12,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831e",
+  "table": 13,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a831f",
+  "table": 14,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8320",
+  "table": 15,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8321",
+  "table": 16,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8322",
+  "table": 17,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8323",
+  "table": 18,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8324",
+  "table": 19,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8325",
+  "table": 20,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8326",
+  "table": 21,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8327",
+  "table": 22,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8328",
+  "table": 23,
+  "available": false,
+  "orders": [
+    {
+      "_id": "6789d821db9ad43578698ade",
+      "name": "Fiery Wrap",
+      "price": 63,
+      "discountedPrice": 559,
+      "category": [
+        "hot-section"
+      ],
+      "photo": "https://imgs.search.brave.com/tdYOlpoKpGJEp4bu7A7eMuFBzx3lBeh0JmkCRtGDZ0w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9vaG15/dmVnZ2llcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTQv/MDQvc291dGh3ZXN0/ZXJuX3ZlZ2dpZV93/cmFwcy02MDB4OTAw/LmpwZw",
+      "availability": true,
+      "description": "A spicy wrap filled with fresh vegetables and tangy sauce.",
+      "quantity": 1,
+      "orderedTime": [
+        "8:42:47 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "6789d821db9ad43578698ad4",
+      "availability": true,
+      "name": "BBQ Chicken Wings",
+      "price": 799,
+      "discountedPrice": 679,
+      "category": [
+        "hot-section",
+        "combo"
+      ],
+      "photo": "https://imgs.search.brave.com/aLwSNNw4abk7wBr0DY1QWeqMaXiTCQDpY53r3UnDRuw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhldGlw/c3lob3VzZXdpZmUu/b3JnL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzAxL2ltZ18x/MDk2LTEuanBnP3Jl/c2l6ZT04NDcsMTAy/NCZzc2w9MQ",
+      "description": "Smoky and flavorful chicken wings served with BBQ sauce.",
+      "quantity": 2,
+      "orderedTime": [
+        "8:44:12 PM",
+        "8:42:49 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "6789d821db9ad43578698ad6",
+      "name": "Fiery Veggie Wrap",
+      "price": 639,
+      "discountedPrice": 559,
+      "category": [
+        "hot-section"
+      ],
+      "availability": true,
+      "photo": "https://imgs.search.brave.com/tdYOlpoKpGJEp4bu7A7eMuFBzx3lBeh0JmkCRtGDZ0w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9vaG15/dmVnZ2llcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTQv/MDQvc291dGh3ZXN0/ZXJuX3ZlZ2dpZV93/cmFwcy02MDB4OTAw/LmpwZw",
+      "description": "A spicy wrap filled with fresh vegetables and tangy sauce.",
+      "quantity": 1,
+      "orderedTime": [
+        "8:44:18 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "15",
+      "name": "Veg jhol Momo",
+      "description": "Momos served in a tangy, spicy broth.",
+      "price": 200,
+      "category": "Appetizer",
+      "availability": true,
+      "reviews": [
+        {
+          "name": "",
+          "body": ""
+        }
+      ],
+      "discountedPrice": 200,
+      "foodPreferences": "Veg",
+      "photoUrl": "https://imgs.search.brave.com/EM1Hx9cFD5M2nqkMsnnlNGisKH8PVc5I_c-j01S6YBA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aG9tZW1hZGUtamhv/bC1tb21vLXYwLWk3/OTZhNW9iOHZrOTEu/anBnP3dpZHRoPTY0/MCZjcm9wPXNtYXJ0/JmF1dG89d2VicCZz/PWNlNmU1YmJhMjY1/YTY0YjAzNjBhY2Fk/ODU1ZTExNWNhMGEz/ZTRmYmE",
+      "quantity": 2,
+      "orderedTime": [
+        "1:51:51 PM"
+      ],
+      "isDelivered": false
+    },
+    {
+      "_id": "1",
+      "name": "Momo",
+      "description": "Steamed dumplings stuffed with minced chicken or vegetables.",
+      "price": 150,
+      "category": "Appetizer",
+      "availability": true,
+      "reviews": [
+        {
+          "name": "",
+          "body": ""
+        }
+      ],
+      "discountedPrice": 150,
+      "foodPreferences": "Veg",
+      "photoUrl": "https://imgs.search.brave.com/n1CiBZqmHLSctollJyvw-yZ7cHzBPjiV43zI59f4ed8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ldmVy/ZXN0bGV4LmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8w/Ny92ZWctbW9tby0x/MDI0eDUzNi5qcGc",
+      "count": 8,
+      "quantity": 1,
+      "orderedTime": [
+        "9:22:56 AM"
+      ],
+      "isDelivered": false
+    }
+  ],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a8329",
+  "table": 24,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+},
+{
+  "_id": "679ba3c89806b242b16a832a",
+  "table": 25,
+  "available": true,
+  "orders": [],
+  "deliveries": []
+}]

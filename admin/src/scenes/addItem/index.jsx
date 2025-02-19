@@ -37,14 +37,14 @@ const AddItem = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(mappedValues), // Send mapped values to the backend
+        body: JSON.stringify(mappedValues),
       });
 
       if (response.ok) {
         const data = await response.json();
         console.log("Item added successfully:", data);
         toast.success("Item created successfully!");
-        resetForm(); // Reset the form fields
+        resetForm();
       } else {
         const error = await response.json();
         console.error("Error creating item:", error);
@@ -197,7 +197,6 @@ const AddItem = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   sx={{ gridColumn: "span 2" }}
-                
                 >
                   <MenuItem value="Veg">Veg</MenuItem>
                   <MenuItem value="Non-veg">Non-veg</MenuItem>
@@ -219,6 +218,7 @@ const AddItem = () => {
                 error={!!touched.price && !!errors.price}
                 helperText={touched.price && errors.price}
                 sx={{ gridColumn: "span 4" }}
+                inputProps={{ min: 0 }}
               />
               <TextField
                 fullWidth
