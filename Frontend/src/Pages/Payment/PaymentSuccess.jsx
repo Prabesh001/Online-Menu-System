@@ -60,6 +60,31 @@ function PaymentSuccess() {
     handleCartItems();
   }, []);
 
+  const handleAllDelivery = async (item) => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/homeMenu/transaction",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Item added successfully:", data);
+      } else {
+        const error = await response.json();
+        console.error("Error adding item:", error);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
+
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.discountedPrice * item.quantity,
     0
@@ -149,16 +174,18 @@ function PaymentSuccess() {
       link.click();
     });
   };
+
   useEffect(() => {
     const timer1 = setTimeout(() => {
-      localStorage.clear();
-      updateTable(tableNumber, { available: true, orders: [], deliveries: [] });
-    }, 60000);
-
-    return () => {
-      clearTimeout(timer1);
-    };
+        // cartItems.forEach((item)=>handleAllDelivery(item))
+        localStorage.clear();
+        updateTable(tableNumber, { available: true, orders: [], deliveries: [] });
+      }, 6000);
+      return () => {
+        clearTimeout(timer1);
+      };
   }, []);
+  cartItems.forEach((item)=>handleAllDelivery(item))
 
   return (
     <div className="payment-page">

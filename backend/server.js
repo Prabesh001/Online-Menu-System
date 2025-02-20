@@ -6,10 +6,10 @@ const http = require("http");
 const app = express();
 const PORT = 5000;
 
-const employeeRoutes = require("./routes/employeeRoutes")
-const menuRoutes = require("./routes/menuRoutes")
-const orderRoutes = require("./routes/orderRoutes")
-const homeMenuRoute = require("./routes/homeMenuRoute")
+const employeeRoutes = require("./routes/employeeRoutes");
+const menuRoutes = require("./routes/menuRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const homeMenuRoute = require("./routes/homeMenuRoute");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -27,16 +27,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose
-  .connect(
-    process.env.MONGO_URI
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("Failed to connect to MongoDB Atlas:", err));
 
-app.use("/api/employee",employeeRoutes)
-app.use("/api/menu",menuRoutes)
-app.use("/api/homeMenu",homeMenuRoute)
-app.use("/api/table",orderRoutes)
+app.use("/api/employee", employeeRoutes);
+app.use("/api/menu", menuRoutes);
+app.use("/api/homeMenu", homeMenuRoute);
+app.use("/api/table", orderRoutes);
 
 // app.get("/api/employee", async (req, res) => {
 //   try {
@@ -68,7 +66,6 @@ app.use("/api/table",orderRoutes)
 //   }
 // });
 
-
 // app.post("/api/employee/login", async (req, res) => {
 //   try {
 //     const { email, password } = req.body;
@@ -92,8 +89,6 @@ app.use("/api/table",orderRoutes)
 //   }
 // });
 
-
-
 // app.get("/api/employee/:id", async (req, res) => {
 //   try {
 //     const employee = await Team.findById(req.params.id);
@@ -105,7 +100,6 @@ app.use("/api/table",orderRoutes)
 //     res.status(500).json({ error: "Failed to fetch employee." });
 //   }
 // });
-
 
 // app.patch("/api/employee/:id", async (req, res) => {
 //   try {
@@ -129,7 +123,6 @@ app.use("/api/table",orderRoutes)
 //     res.status(500).json({ error: "Failed to update employee." });
 //   }
 // });
-
 
 // app.delete("/api/employee/:id", async (req, res) => {
 //   try {

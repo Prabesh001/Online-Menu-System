@@ -26,6 +26,8 @@ function EmployeePage() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [updateRow, setUpdateRow] = useState([]);
 
+  console.log(filteredOrders);
+
   const { loading, setLoading } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
 
@@ -42,7 +44,7 @@ function EmployeePage() {
 
   useEffect(() => {
     if (popupVisiblilty !== "update") {
-      setInterval(() => window.location.reload(), 60000);
+      setInterval(() => window.location.reload(), 120000);
 
       return () => clearInterval();
     }
@@ -92,13 +94,13 @@ function EmployeePage() {
       }
 
       toast.success("Delivered successfully!");
+      setSelectedRows([]);
       setFilteredOrders(
         filteredOrders.filter((order) => !selectedRows.includes(order.id))
       );
     } catch (err) {
       toast.error("Operation Failed: " + err.message);
     } finally {
-      setSelectedRows([]);
       setPopupVisiblilty(null);
     }
   };
@@ -128,6 +130,7 @@ function EmployeePage() {
       }
 
       toast.success("Amount Delivered Successfully!");
+      setSelectedRows([]);
 
       // Update local state: Reduce quantity if partially delivered
       setFilteredOrders(
@@ -199,14 +202,9 @@ function EmployeePage() {
     { field: "id", headerName: "ID", width: 10 },
     { field: "name", headerName: "Item Name", flex: 2 },
     { field: "quantity", headerName: "Quantity", width: 100 },
-    { field: "price", headerName: "Price", flex: 1 },
+    { field: "discountedPrice", headerName: "Price", flex: 1 },
     { field: "orderedTime", headerName: "Ordered Time", flex: 1 },
-    {
-      field: "isDelivered",
-      headerName: "Delivered",
-      description: "Is item delivered?",
-      flex: 1,
-    },
+    { field: "isDelivered", headerName: "Delivered", flex: 1 },
   ];
 
   return (
@@ -236,11 +234,13 @@ function EmployeePage() {
               onChange={handleChange}
               style={{ height: "40px" }}
             >
-              {reservedTable.map((table) => (
-                <MenuItem key={table.table} value={table.table}>
-                  {table.table}
-                </MenuItem>
-              ))}
+              {reservedTable
+                .sort((a, b) => a.table - b.table)
+                .map((table) => (
+                  <MenuItem key={table.table} value={table.table}>
+                    {table.table}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
           <Box sx={{ minHeight: 277, width: "100%", marginTop: "20px" }}>
@@ -272,6 +272,7 @@ function EmployeePage() {
           border: "1px solid green",
           backgroundColor: "green",
           color: "white",
+          padding: "4px 8px",
         }}
         onClick={() => setPopupVisiblilty("update")}
       >
@@ -279,16 +280,16 @@ function EmployeePage() {
       </button>
 
       <button
-        className="delete border-1 text-bg-dark"
-        style={{ margin: "5px" }}
-        onClick={() => setPopupVisiblilty("delete")}
+        className="deliverAll border-1 text-bg-dark"
+        style={{ margin: "5px", padding: "4px 8px" }}
+        onClick={() => setPopupVisiblilty("deliverAll")}
       >
         Deliver All
       </button>
 
       <Footer />
 
-      {selectedRows.length !== 0 && popupVisiblilty === "delete" && (
+      {selectedRows.length !== 0 && popupVisiblilty === "deliverAll" && (
         <Popup
           greeting={"Deliver All!"}
           message={"Are you sure you delivered all?"}
@@ -308,9 +309,16 @@ function EmployeePage() {
         <Popup
           greeting={"Update"}
           message={
-            <form className="flex flex-col gap-2 mt-3 text-[18px]">
+            <form
+              className="flex flex-col gap-2 mt-3 text-[18px]"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+              }}
+            >
               <input
-                type="text"
+                type="hidden"
                 name="id"
                 className="w-full p-2 border border-gray-400 rounded-md"
                 placeholder="Order ID"

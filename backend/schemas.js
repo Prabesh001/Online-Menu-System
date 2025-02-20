@@ -62,9 +62,29 @@ const orderSchema = new mongoose.Schema(
 );
 const Orders = mongoose.model("TableOrders", orderSchema);
 
+const TransactionSchema = new mongoose.Schema(
+  {
+    _id: String,
+    availability: Boolean,
+    category: Array,
+    count: Number,
+    description: String,
+    discountedPrice: Number,
+    isDelivered: Boolean,
+    name: String,
+    orderedTime: Array,
+    photo: String,
+    price: Number,
+    quantity: Number,
+  },
+  { collection: "Transaction", versionKey: false }
+);
+const History = mongoose.model("Transaction", TransactionSchema);
+
 module.exports = {
   Item,
   Orders,
   Home,
   Team,
+  History,
 };

@@ -9,6 +9,9 @@ GET http://localhost:5000/api/home
 GET http://localhost:5000/api/homeMenu
 
 ###
+GET http://localhost:5000/api/homeMenu/transaction
+
+###
 
 GET http://localhost:5000/api/employee
 ###
