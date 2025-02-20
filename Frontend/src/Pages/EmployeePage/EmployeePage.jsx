@@ -19,14 +19,14 @@ import Popup from "../../Components/Popup/index.jsx";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
-  const [selectedTable, setSelectedTable] = useState("");
+  const [selectedTable, setSelectedTable] = useState(null);
   const [allOrders, setAllOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [reservedTable, setReservedTable] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [updateRow, setUpdateRow] = useState([]);
 
-  console.log(filteredOrders);
+  console.log(selectedTable);
 
   const { loading, setLoading } = useContext(ItemContext);
   const { popupVisiblilty, setPopupVisiblilty } = useContext(CartContext);
@@ -49,8 +49,6 @@ function EmployeePage() {
       return () => clearInterval();
     }
   }, []);
-
-  console.log(updateRow);
 
   const [formData, setFormData] = useState({});
 
@@ -232,7 +230,11 @@ function EmployeePage() {
               value={selectedTable}
               label="Table No."
               onChange={handleChange}
-              style={{ height: "40px" }}
+              style={
+                selectedTable
+                  ? { height: "40px" }
+                  : { height: "40px", width: "90px" }
+              }
             >
               {reservedTable
                 .sort((a, b) => a.table - b.table)

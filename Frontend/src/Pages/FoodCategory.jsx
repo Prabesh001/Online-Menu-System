@@ -22,7 +22,7 @@ function FoodCategory() {
   const [itemSelected, setItemSelected] = useState([]);
 
   useEffect(() => {
-    if (itemSelected.length === 0) {
+    if (itemSelected?.length === 0) {
       document.body.style.overflow = "auto";
     } else {
       document.body.style.overflow = "hidden";
@@ -94,7 +94,7 @@ function FoodCategory() {
               <AddToCart item={item} />
             </li>
           ))}
-          {itemSelected.length === 0 ? null : (
+          {itemSelected?.length === 0 ? null : (
             <Card
               itemSelected={itemSelected}
               setItemSelected={setItemSelected}

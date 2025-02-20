@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
-import { fetchHomeMenu } from "../JavaScript/fetchData.js";
+import { fetchHomeMenu, fetchTransaction } from "../JavaScript/fetchData.js";
 import { Grid, Box, Skeleton } from "@mui/material";
+import Badge from "@mui/material/Badge";
 
 function MenuSection({ title, category }) {
   const {
@@ -75,30 +76,17 @@ function MenuSection({ title, category }) {
       <div className="menu-items">
         {items
           .filter((item) => item.category.includes(category))
-          .map((item, i) => (
-            <div key={i} className="menu-item" title={item.description}>
-              <div className="menu-photo">
-                <img
-                  src={item.photo}
-                  alt={<Skeleton variant="rectangular" />}
-                  className="offer-photo no-select"
-                  loading="lazy"
-                  draggable="false"
-                />
-              </div>
-              <div className="item-name" title={item.name}>
-                {item.name}
-              </div>
-              <br />
-              <del className="discounted"> Rs. {item.price.toFixed(0)}</del>
-              {item.discountedPrice && (
-                <span className="actual-price">
-                  Rs. {item.discountedPrice.toFixed(0)}
-                </span>
-              )}
-              <br />
-              <AddToCart item={item} />
-            </div>
+          .map((item, _) => (
+            <Card
+              myItem={item}
+              key={item._id}
+              description={item.description}
+              photo={item.photo}
+              name={item.name}
+              discountedPrice={item.discountedPrice.toFixed(0)}
+              price={item.price.toFixed(0)}
+              cart={<AddToCart item={item} />}
+            />
           ))}
       </div>
     </div>
@@ -112,9 +100,64 @@ function Home() {
     { title: "Christmas Special", category: "christmas" },
     { title: "Combo Offers", category: "combo" },
   ];
+
+  const [mostBought, setMostBought] = useState([]);
+
+  useEffect(() => {
+    setMostBought([]);
+  
+    const getData = async () => {
+      try {
+        const data = await fetchTransaction();
+        
+        // Ensure count is correctly handled (default to 1 if missing)
+        const processedData = data.map((item) => ({
+          ...item,
+          count: item.count ? Number(item.count) : 1,  // Ensure count is a number
+        }));
+  
+        setMostBought(processedData);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+  
+    getData();
+  }, []);
+  
+
   return (
     <>
       <div className="home-section">
+        <div className="home-page">
+          <h2 className="home-offer">Top Seller</h2>
+          <div className="menu-items">
+            {mostBought.map((item, _) => (
+              <div key={item._id}>
+                <Badge
+                  badgeContent={item.count}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  color="error"
+                  max={99}
+                >
+                  <Card
+                    myItem={item}
+                    key={item._id}
+                    description={item.description}
+                    photo={item.photo}
+                    name={item.name}
+                    discountedPrice={item.discountedPrice.toFixed(0)}
+                    price={item.price.toFixed(0)}
+                    cart={<AddToCart item={item} />}
+                  />
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </div>
         {Menu.map((menu, i) => {
           return (
             <MenuSection title={menu.title} category={menu.category} key={i} />
@@ -128,5 +171,31 @@ function Home() {
     </>
   );
 }
+
+const Card = ({ description, photo, name, cart, price, discountedPrice }) => {
+  return (
+    <div className="menu-item" title={description}>
+      <div className="menu-photo">
+        <img
+          src={photo}
+          alt={<Skeleton variant="rectangular" />}
+          className="offer-photo no-select"
+          loading="lazy"
+          draggable="false"
+        />
+      </div>
+      <div className="item-name" title={name}>
+        {name}
+      </div>
+      <br />
+      <del className="discounted"> Rs. {price}</del>
+      {discountedPrice && (
+        <span className="actual-price">Rs. {discountedPrice}</span>
+      )}
+      <br />
+      {cart}
+    </div>
+  );
+};
 
 export default Home;

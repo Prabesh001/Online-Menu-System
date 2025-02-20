@@ -28,7 +28,7 @@ const AddItem = () => {
         price: values.price,
         category: values.category,
         availability: values.availability,
-        photoUrl: values.photoUrl,
+        photo: values.photo,
         foodPreferences: values.foodPreferences,
       };
 
@@ -227,10 +227,10 @@ const AddItem = () => {
                 label="Photo"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.photoUrl}
-                name="photoUrl"
-                error={!!touched.photoUrl && !!errors.photoUrl}
-                helperText={touched.photoUrl && errors.photoUrl}
+                value={values.photo}
+                name="photo"
+                error={!!touched.photo && !!errors.photo}
+                helperText={touched.photo && errors.photo}
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>
@@ -250,7 +250,7 @@ const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
   id: yup.string(),
   foodPreferences: yup.string(),
-  photoUrl: yup.string().required("required"),
+  photo: yup.string().required("required"),
   description: yup.string().required("required"),
   price: yup.number().required("required").positive("Must be positive"),
   category: yup.string().required("required"),
@@ -264,7 +264,7 @@ const initialValues = {
   price: "",
   category: "",
   availability: true,
-  photoUrl: "",
+  photo: "",
   foodPreferences: "Veg",
 };
 

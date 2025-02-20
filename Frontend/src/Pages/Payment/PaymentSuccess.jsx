@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 function PaymentSuccess() {
   const [cartItems, setCartItems] = useState([]);
   const { tableNumber } = useContext(CartContext);
+  const myItems = [];
 
   useEffect(() => {
     const handleCartItems = async () => {
@@ -175,17 +176,35 @@ function PaymentSuccess() {
     });
   };
 
+  cartItems.map(({ orderedTime, ...item }) => {
+    myItems.push(item);
+  });
+
+  myItems.forEach(async (item) => await handleAllDelivery(item));
+
   useEffect(() => {
+    const UpdateTable = async () => {
+      if (!tableNumber) return; 
+      try {
+        await updateTable(tableNumber, {
+          available: true,
+          orders: [],
+          deliveries: [],
+        });
+        console.log("Table updated successfully");
+      } catch (error) {
+        console.error("Failed to update table:", error);
+      }
+    };
+    UpdateTable();
+    
     const timer1 = setTimeout(() => {
-        // cartItems.forEach((item)=>handleAllDelivery(item))
-        localStorage.clear();
-        updateTable(tableNumber, { available: true, orders: [], deliveries: [] });
-      }, 6000);
-      return () => {
-        clearTimeout(timer1);
-      };
-  }, []);
-  cartItems.forEach((item)=>handleAllDelivery(item))
+      localStorage.clear();
+    }, 6000);
+  
+    return () => clearTimeout(timer1);
+  }, [tableNumber]); 
+  
 
   return (
     <div className="payment-page">

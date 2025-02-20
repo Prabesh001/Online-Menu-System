@@ -33,15 +33,15 @@ function MediaCard({ itemSelected, setItemSelected }) {
         </div>
         <CardMedia
           sx={{ height: 200 }}
-          image={itemSelected.photoUrl}
-          title={itemSelected.name}
+          image={itemSelected?.photo}
+          title={itemSelected?.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {itemSelected.name}
+            {itemSelected?.name}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {itemSelected.description}
+            {itemSelected?.description}
           </Typography>
         </CardContent>
         <CardActions>

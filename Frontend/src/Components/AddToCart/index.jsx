@@ -4,15 +4,19 @@ import { MinusIcon, PlusIcon } from "lucide-react";
 import { ItemContext, CartContext } from "../../App";
 import { toast } from "sonner";
 
-function AddToCart({ item, setItemSelected }) {
+function AddToCart({ item = {}, setItemSelected }) {
   const { setItems, setCartItems } = useContext(ItemContext);
   const { playAddToCartSound } = useContext(CartContext);
 
-  const addToCart = (item) => {
+  // If item is null or undefined, return early
+  if (!item || !item._id) return null;
+
+  const addToCart = () => {
     if (!item.availability) {
       toast.error(`${item.name} isn't available!`);
       return;
     }
+
     playAddToCartSound();
     const orderedTime = new Date().toLocaleTimeString();
     const newItem = {
@@ -23,30 +27,55 @@ function AddToCart({ item, setItemSelected }) {
     };
 
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((cartItem) => cartItem._id === newItem._id);
+      const existingItem = prevItems.find(
+        (cartItem) => cartItem._id === newItem._id
+      );
       if (existingItem) {
-        existingItem.quantity += newItem.quantity;
-        existingItem.orderedTime = [...new Set([...existingItem.orderedTime, ...newItem.orderedTime])];
+        return prevItems.map((cartItem) =>
+          cartItem._id === newItem._id
+            ? {
+                ...cartItem,
+                quantity: (cartItem.quantity || 1) + newItem.quantity,
+                orderedTime: [
+                  ...new Set([...cartItem.orderedTime, ...newItem.orderedTime]),
+                ],
+              }
+            : cartItem
+        );
       } else {
-        prevItems.push(newItem);
+        return [...prevItems, newItem];
       }
-      item.quantity = 1;
-      toast.success(`${item.name} added to the table.`);
-      return [...prevItems];
     });
-  };
 
-  const handleAction = (action, itemId) => {
+    // Reset quantity
     setItems((prevItems) =>
-      prevItems.map((item) =>
-        item._id === itemId
-          ? { ...item, quantity: Math.max((item.quantity || 1) + (action === "plus" ? 1 : -1), 1) }
-          : item
+      prevItems.map((i) =>
+        i._id === item._id ? { ...i, quantity: 1 } : i
       )
     );
+
+    toast.success(`${item.name} added to the table.`);
+    setItemSelected([]);;
+  };
+
+  const handleAction = (action) => {
+    setItems((prevItems) =>
+      prevItems.map((i) =>
+        i._id === item._id
+          ? {
+              ...i,
+              quantity: Math.max((i.quantity || 1) + (action === "plus" ? 1 : -1), 1),
+            }
+          : i
+      )
+    );
+
     setItemSelected((prevSelected) =>
-      prevSelected && prevSelected._id === itemId
-        ? { ...prevSelected, quantity: Math.max((prevSelected.quantity || 1) + (action === "plus" ? 1 : -1), 1) }
+      prevSelected && prevSelected._id === item._id
+        ? {
+            ...prevSelected,
+            quantity: Math.max((prevSelected.quantity || 1) + (action === "plus" ? 1 : -1), 1),
+          }
         : prevSelected
     );
   };
@@ -57,12 +86,12 @@ function AddToCart({ item, setItemSelected }) {
         <MinusIcon
           size="16px"
           cursor="pointer"
-          color={item.quantity === 1 ? "grey" : "#ff7a1c"}
+          color={item?.quantity === 1 ? "grey" : "#ff7a1c"}
           style={{ marginTop: "4px" }}
-          onClick={() => handleAction("minus", item._id)}
+          onClick={() => handleAction("minus")}
         />
         <input
-          value={item.quantity || 1}
+          value={item?.quantity || 1}
           readOnly
           style={{
             userSelect: "none",
@@ -76,15 +105,12 @@ function AddToCart({ item, setItemSelected }) {
           color="#ff7a1c"
           cursor="pointer"
           style={{ marginTop: "4px" }}
-          onClick={() => handleAction("plus", item._id)}
+          onClick={() => handleAction("plus")}
         />
       </div>
       <button
         className="add-button no-select"
-        onClick={() => {
-          addToCart(item);
-          setItemSelected(null);
-        }}
+        onClick={addToCart}
       >
         <span>Add</span>
       </button>

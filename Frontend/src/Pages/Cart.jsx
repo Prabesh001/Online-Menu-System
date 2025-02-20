@@ -97,7 +97,7 @@ function Cart({ items, setItems }) {
   }, []);
 
   const totalPrice = deliveryItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + Number(item.price) * Number(item.quantity),
     0
   );
 
@@ -208,7 +208,7 @@ function Cart({ items, setItems }) {
             ))}
             <span style={{ color: "red" }}>
               Cost:{" "}
-              {items.reduce((acc, item) => acc + item.quantity * item.price, 0)}
+              {items.reduce((acc, item) => acc + Number(item.quantity) * Number(item.price), 0)}
             </span>
           </ul>
         )}

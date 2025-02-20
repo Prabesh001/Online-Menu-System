@@ -4,6 +4,7 @@ import {
   API_TEAM_URL,
   API_HOME_MENU_URL,
   API_ORDER_URL,
+  API_TRANSACTION_URL
 } from "./config.js";
 
 const skipFetchRoutes = ["/", "/reserve-seat"];
@@ -25,6 +26,12 @@ export const updateTable = async (tableNo, updatedData) => {
   if (skipFetchRoutes.includes(location.pathname)) {
     return;
   }
+
+  if (!tableNo) {
+    console.error("Table number is missing, cannot update table.");
+    return;
+  }
+
   try {
     const response = await fetch(
       `${API_ORDER_URL}/${tableNo}`,
@@ -40,6 +47,8 @@ export const updateTable = async (tableNo, updatedData) => {
       throw new Error("Failed to update table");
     }
     const data = await response.json();
+    console.log("Table updated successfully:", data);
+    return data;
   } catch (error) {
     console.error("Error updating table:", error);
   }
@@ -51,6 +60,9 @@ export const fetchItems = async () => {
 
 export const fetchOrders = async () => {
   return await fetchAction(`${API_ORDER_URL}`);
+};
+export const fetchTransaction = async () => {
+  return await fetchAction(`${API_TRANSACTION_URL}?limit=7`);
 };
 
 export const fetchTeams = async () => {

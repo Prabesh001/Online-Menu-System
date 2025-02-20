@@ -75,7 +75,6 @@ const TransactionSchema = new mongoose.Schema(
     orderedTime: Array,
     photo: String,
     price: Number,
-    quantity: Number,
   },
   { collection: "Transaction", versionKey: false }
 );

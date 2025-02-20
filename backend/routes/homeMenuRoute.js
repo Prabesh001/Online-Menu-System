@@ -13,7 +13,9 @@ router.get("/", async (req, res) => {
 
 router.get("/transaction", async (req, res) => {
   try {
-    const items = await History.find();
+    const limit = parseInt(req.query.limit) || 7; 
+    const items = await History.find().limit(limit);
+    items.sort((a, b) => b.count - a.count);
     res.json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -22,14 +24,25 @@ router.get("/transaction", async (req, res) => {
 
 router.post("/transaction", async (req, res) => {
   try {
-    const data = req.body;
+    const { _id, quantity, ...rest } = req.body;
 
-    if (!data) {
+    if (!_id || !quantity) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const newItem = new History(data);
+    const existingData = await History.findOne({_id: _id});
 
+    if (existingData) {
+      existingData.count = Number(existingData.count || 0) + Number(quantity);
+      await History.updateOne({}, { $unset: { quantity: 1 } });
+      await existingData.save();
+      return res
+        .status(201)
+        .json({ message: "Item updated successfully", existingData });
+    }
+
+    const newItem = new History({ _id, count: Number(quantity), ...rest });
+    await newItem.updateOne(newItem._id, { $unset: { quantity: 1 } });
     await newItem.save();
     res.status(201).json({ message: "Item added successfully", newItem });
   } catch (err) {
