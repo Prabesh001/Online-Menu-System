@@ -5,6 +5,7 @@ const cors = require("cors");
 const http = require("http");
 const app = express();
 const PORT = 5000;
+const {Users} = require("./schemas")
 
 const employeeRoutes = require("./routes/employeeRoutes");
 const menuRoutes = require("./routes/menuRoutes");
@@ -35,6 +36,23 @@ app.use("/api/employee", employeeRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/homeMenu", homeMenuRoute);
 app.use("/api/table", orderRoutes);
+
+
+ app.post("/api/user", async (req, res) => {
+    try {
+      const data = req.body;
+      if (!data) {
+        return res.status(400).json({ error: "Missing required fields." });
+      }
+  
+      const newUser = new Users(data);
+  
+      await newUser.save();
+      res.status(201).json({ message: "User created successfully!" });
+    } catch (err) {
+      res.status(500).json({ error: "Error creating user." });
+    }
+  });
 
 // app.get("/api/employee", async (req, res) => {
 //   try {

@@ -4,7 +4,7 @@ import {
   API_TEAM_URL,
   API_HOME_MENU_URL,
   API_ORDER_URL,
-  API_TRANSACTION_URL
+  API_TRANSACTION_URL,
 } from "./config.js";
 
 const skipFetchRoutes = ["/", "/reserve-seat"];
@@ -33,16 +33,13 @@ export const updateTable = async (tableNo, updatedData) => {
   }
 
   try {
-    const response = await fetch(
-      `${API_ORDER_URL}/${tableNo}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      }
-    );
+    const response = await fetch(`${API_ORDER_URL}/${tableNo}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
     if (!response.ok) {
       throw new Error("Failed to update table");
     }
@@ -71,4 +68,34 @@ export const fetchTeams = async () => {
 
 export const fetchHomeMenu = async () => {
   return await fetchAction(`${API_HOME_MENU_URL}`);
+};
+
+export const handlePost = async (url, postData) => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Item added successfully:", data);
+    } else {
+      const error = await response.json();
+      console.error("Error adding item:", error);
+    }
+  } catch (err) {
+    console.error("Error:", err);
+  }
+};
+
+export const handleAllDelivery = async (item) => {
+  return await handlePost("http://localhost:5000/api/homeMenu/transaction", postData);
+};
+
+export const handlePostUser = async (user) => {
+  return await handlePost("http://localhost:5000/api/user", user);
 };

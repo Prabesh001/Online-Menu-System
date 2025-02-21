@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Styles/Welcome.css";
 import { CartContext } from "../App.jsx";
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { handlePostUser } from "../JavaScript/fetchData.js";
 
 function Welcome() {
+  const [user, setUser] = useState(null);
   const { setCoupen, tableNumber } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -16,8 +19,15 @@ function Welcome() {
     }
   }
 
-  const handleLoginSuccess = (response) => {
-    console.log("login successful: ", response);
+  const handleLoginSuccess = async(response) => {
+    console.log("Login successful: ", response);
+    localStorage.setItem("credential", response.credential)
+    const decodedUser = jwtDecode(response.credential);
+    await handlePostUser({name:decodedUser.name, email:decodedUser.email, credential:response.credential})
+
+    setUser(decodedUser);
+    console.log(user)
+
     setCoupen(true);
     handleEntry();
   };

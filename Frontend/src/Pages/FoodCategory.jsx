@@ -6,6 +6,8 @@ import { ItemContext } from "../App";
 import LoadingComponent from "../Components/Loading/loading";
 import { fetchItems } from "../JavaScript/fetchData";
 import Card from "../Components/Card";
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 
 function FoodCategory() {
   const {
@@ -20,6 +22,7 @@ function FoodCategory() {
   const { category } = useParams(); // Get the category from the URL params
 
   const [itemSelected, setItemSelected] = useState([]);
+  const [veg, setVeg] = useState(JSON.parse(localStorage.getItem("veg"))||false);
 
   useEffect(() => {
     if (itemSelected?.length === 0) {
@@ -63,14 +66,34 @@ function FoodCategory() {
     return <div className="loading-failed">{error}</div>;
   }
 
+  const handleToggleVeg = ()=>{
+    setVeg((p) => !p)
+    localStorage.setItem("veg", !veg)
+  }
+
+  const displayedItems = veg
+  ? items.filter((item) => item.foodPreferences === "Veg")
+  : items;
+
   return (
     <div className="food-category">
       <h2 className="category-title">{category}</h2>
-      {loading || items.length === 0 ? (
+      <div
+        onClick={handleToggleVeg}
+        style={{ position: "absolute", right: 20, top: 20 }}
+      >
+        Veg:{" "}
+        {!veg ? (
+          <ToggleOffIcon fontSize="large" style={{color:"red"}} />
+        ) : (
+          <ToggleOnIcon fontSize="large" style={{color:"green"}} />
+        )}
+      </div>
+      {loading || displayedItems.length === 0 ? (
         <LoadingComponent mh={50} />
       ) : (
         <ul className="item-list">
-          {items.map((item) => (
+          {displayedItems.map((item) => (
             <li key={item._id} className="item">
               <div
                 className="item-info no-select"

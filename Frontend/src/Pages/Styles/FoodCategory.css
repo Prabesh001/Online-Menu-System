@@ -26,6 +26,7 @@
   background-color: #f9f9f9;
   border: 1px solid #eee;
   border-radius: 8px;
+  box-shadow: 1px 1px 3px lightgray;
 }
 
 .item-info {

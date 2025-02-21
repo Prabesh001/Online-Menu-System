@@ -85,11 +85,17 @@ function Layout() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (
+        location.pathname === "/paymentsuccess" ||
+        location.pathname === "/paymentfailure"
+      ) {
+        return;
+      }
       setLoading(true);
       try {
         const tabledata = await fetchOrders();
 
-        if (tableNumber === null) {
+        if (!tableNumber) {
           navigate("/");
           return;
         }
@@ -114,7 +120,7 @@ function Layout() {
     };
 
     fetchData();
-  }, [tableNumber]);
+  }, [coupen]);
 
   useEffect(() => {
     localStorage.setItem("CartItems", JSON.stringify(cartItems));

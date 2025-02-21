@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../App";
-import { updateTable, fetchOrders } from "../../JavaScript/fetchData";
+import {
+  updateTable,
+  fetchOrders,
+  handleAllDelivery,
+} from "../../JavaScript/fetchData";
 import ExcelJS from "exceljs";
 import {
   PDFDownloadLink,
@@ -11,6 +15,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 import "./Payment.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // Styles for PDF
 const styles = StyleSheet.create({
@@ -47,8 +52,9 @@ const styles = StyleSheet.create({
 
 function PaymentSuccess() {
   const [cartItems, setCartItems] = useState([]);
-  const { tableNumber } = useContext(CartContext);
+  const { tableNumber, coupen } = useContext(CartContext);
   const myItems = [];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleCartItems = async () => {
@@ -61,34 +67,26 @@ function PaymentSuccess() {
     handleCartItems();
   }, []);
 
-  const handleAllDelivery = async (item) => {
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/homeMenu/transaction",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(item),
-        }
-      );
+  useEffect(() => {
+    const preventBack = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Item added successfully:", data);
-      } else {
-        const error = await response.json();
-        console.error("Error adding item:", error);
-      }
-    } catch (err) {
-      console.error("Error:", err);
-    }
-  };
+    window.addEventListener("beforeunload", preventBack);
+    return () => window.removeEventListener("beforeunload", preventBack);
+  }, []);
 
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.discountedPrice * item.quantity,
-    0
+  const estimatedPrice = Number(
+    cartItems.reduce(
+      (acc, item) => acc + item.discountedPrice * item.quantity,
+      0
+    )
+  );
+  const totalPrice = Number(
+    coupen
+      ? (estimatedPrice * 0.1).toFixed(0)
+      : (estimatedPrice * 0.03).toFixed(0)
   );
 
   const quantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -176,35 +174,35 @@ function PaymentSuccess() {
     });
   };
 
-  cartItems.map(({ orderedTime, ...item }) => {
-    myItems.push(item);
-  });
-
-  myItems.forEach(async (item) => await handleAllDelivery(item));
+  useEffect(() => {
+    cartItems.forEach(async (item) => {
+      await handleAllDelivery(item);
+    });
+  }, [cartItems]);
 
   useEffect(() => {
-    const UpdateTable = async () => {
-      if (!tableNumber) return; 
+    if (!tableNumber) return;
+
+    const updateTableAfterDelay = async () => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
         await updateTable(tableNumber, {
           available: true,
           orders: [],
           deliveries: [],
         });
+
         console.log("Table updated successfully");
       } catch (error) {
         console.error("Failed to update table:", error);
       }
     };
-    UpdateTable();
-    
-    const timer1 = setTimeout(() => {
-      localStorage.clear();
-    }, 6000);
-  
-    return () => clearTimeout(timer1);
-  }, [tableNumber]); 
-  
+
+    updateTableAfterDelay();
+
+    localStorage.clear();
+  }, [tableNumber]);
 
   return (
     <div className="payment-page">
@@ -235,9 +233,14 @@ function PaymentSuccess() {
                 </tr>
               ))}
               <tr>
+                <th>Discount</th>
+                <th>{coupen ? "10%" : "3%"}</th>
+                <th>Without discount: {totalPrice}</th>
+              </tr>
+              <tr>
                 <th>Total</th>
                 <th>{quantity}</th>
-                <th>{totalPrice.toFixed(0)}</th>
+                <th>With discount{totalPrice.toFixed(0)}</th>
               </tr>
             </tbody>
           </table>
@@ -254,6 +257,13 @@ function PaymentSuccess() {
           </PDFDownloadLink>
           <button onClick={exportToExcel} className="download-btn">
             Download as Excel
+          </button>
+          <button
+            onClick={() => navigate("/")}
+            className="download-btn"
+            style={{ backgroundColor: "red" }}
+          >
+            Leave
           </button>
         </div>
       )}

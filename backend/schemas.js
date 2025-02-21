@@ -9,7 +9,7 @@ const itemSchema = new mongoose.Schema(
     discountedPrice: Number,
     category: String,
     availability: Boolean,
-    photoUrl: String,
+    photo: String,
     promotion: Boolean,
     foodPreferences: { type: String, enum: ["Veg", "Non-veg"] },
   },
@@ -27,6 +27,7 @@ const homeItemSchema = new mongoose.Schema(
     category: Array,
     availability: Boolean,
     photo: String,
+    count: Number
   },
   { collection: "specialMenu", versionKey: false }
 );
@@ -62,6 +63,16 @@ const orderSchema = new mongoose.Schema(
 );
 const Orders = mongoose.model("TableOrders", orderSchema);
 
+const userSchema = new mongoose.Schema(
+  {
+    credential: String,
+    name: String,
+    email: String,
+  },
+  { collection: "Users", versionKey: false }
+);
+const Users = mongoose.model("Users", userSchema);
+
 const TransactionSchema = new mongoose.Schema(
   {
     _id: String,
@@ -86,4 +97,5 @@ module.exports = {
   Home,
   Team,
   History,
+  Users
 };

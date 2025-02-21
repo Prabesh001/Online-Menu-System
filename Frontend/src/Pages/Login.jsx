@@ -55,10 +55,10 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <h1>TableMate</h1>
-      <i>(Employee Only)</i>
+      <h1 style={{color:"white", textShadow:"1px 1px 3px black"}}>TableMate</h1>
+      <i style={{color:"white", textShadow:"1px 1px 3px black"}}>(Employee Only)</i>
       <div className="login-container">
-        <h2>Log In</h2>
+        <h2 style={{color:"white", textShadow:"3px 2px 3px black"}}>Log In</h2>
         <form className="form" onSubmit={handleSubmit}>
           <input
             type="email"

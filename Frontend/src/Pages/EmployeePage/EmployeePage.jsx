@@ -19,7 +19,7 @@ import Popup from "../../Components/Popup/index.jsx";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
-  const [selectedTable, setSelectedTable] = useState(null);
+  const [selectedTable, setSelectedTable] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [reservedTable, setReservedTable] = useState([]);
@@ -41,14 +41,6 @@ function EmployeePage() {
       setUpdateRow(myData);
     }
   }, [selectedRows]);
-
-  useEffect(() => {
-    if (popupVisiblilty !== "update") {
-      setInterval(() => window.location.reload(), 120000);
-
-      return () => clearInterval();
-    }
-  }, []);
 
   const [formData, setFormData] = useState({});
 
@@ -142,7 +134,7 @@ function EmployeePage() {
                   }
                 : order
             )
-            .filter((order) => order.quantity > 0) // Remove if quantity becomes zero
+            .filter((order) => order.quantity > 0)
       );
 
       setPopupVisiblilty(null);
@@ -174,6 +166,9 @@ function EmployeePage() {
     };
 
     fetchAllOrders();
+    const refreshTimer = setInterval(fetchAllOrders, 60000);
+
+    return () => clearInterval(refreshTimer);
   }, []);
 
   useEffect(() => {
@@ -202,7 +197,6 @@ function EmployeePage() {
     { field: "quantity", headerName: "Quantity", width: 100 },
     { field: "discountedPrice", headerName: "Price", flex: 1 },
     { field: "orderedTime", headerName: "Ordered Time", flex: 1 },
-    { field: "isDelivered", headerName: "Delivered", flex: 1 },
   ];
 
   return (

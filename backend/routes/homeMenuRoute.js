@@ -11,6 +11,43 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const {
+      name,
+      description,
+      price,
+      category,
+      availability,
+      photoUrl,
+      discountedPrice,
+      foodPreferences,
+    } = req.body;
+
+    if (!name || !description || !price || !category || !photo) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const newItem = new Home({
+      name,
+      description,
+      price,
+      category,
+      photoUrl,
+      availability,
+      discountedPrice,
+      foodPreferences,
+      count: 0
+    });
+
+    await newItem.save();
+    res.status(201).json({ message: "Item added successfully", newItem });
+  } catch (err) {
+    console.error("Error in adding item:", err);
+    res.status(500).json({ message: err.message, error: err });
+  }
+});
+
 router.get("/transaction", async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 7; 

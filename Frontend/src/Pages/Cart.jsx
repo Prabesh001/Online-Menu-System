@@ -89,11 +89,9 @@ function Cart({ items, setItems }) {
       }
     };
     handleCartItems();
-    setInterval(() => {
-      window.location.reload();
-    }, 30000);
+    const refreshTimer = setInterval(handleCartItems, 5000);
 
-    return () => clearInterval();
+    return () => clearInterval(refreshTimer);
   }, []);
 
   const totalPrice = deliveryItems.reduce(

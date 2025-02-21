@@ -16,6 +16,7 @@ function MenuSection({ title, category }) {
     items,
     setItems,
   } = useContext(ItemContext);
+  
 
   useEffect(() => {
     setSelectedIndex("Home");
@@ -37,12 +38,15 @@ function MenuSection({ title, category }) {
     getData();
   }, []);
 
-  if (loading) {
+  if (items.length===0) {
     return (
       <>
         <div style={{ padding: "16px" }}>
           <Grid container wrap="wrap" justifyContent="flex-start">
-            {(loading ? Array.from(new Array(6)) : data).map((item, index) => (
+            {(loading || items.length === 0
+              ? Array.from(new Array(6))
+              : data
+            ).map((_, index) => (
               <Box key={index} sx={{ width: 190, marginRight: 4, my: 1 }}>
                 <Skeleton variant="rectangular" width={190} height={225} />
 
@@ -105,57 +109,79 @@ function Home() {
 
   useEffect(() => {
     setMostBought([]);
-  
+
     const getData = async () => {
       try {
         const data = await fetchTransaction();
-        
+
         // Ensure count is correctly handled (default to 1 if missing)
         const processedData = data.map((item) => ({
           ...item,
-          count: item.count ? Number(item.count) : 1,  // Ensure count is a number
+          count: item.count ? Number(item.count) : 1, // Ensure count is a number
         }));
-  
+
         setMostBought(processedData);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
-  
+
     getData();
   }, []);
-  
 
   return (
     <>
       <div className="home-section">
         <div className="home-page">
-          <h2 className="home-offer">Top Seller</h2>
+          <h2 className="home-offer">Top Selling Items</h2>
           <div className="menu-items">
-            {mostBought.map((item, _) => (
-              <div key={item._id}>
-                <Badge
-                  badgeContent={item.count}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  color="error"
-                  max={99}
-                >
-                  <Card
-                    myItem={item}
-                    key={item._id}
-                    description={item.description}
-                    photo={item.photo}
-                    name={item.name}
-                    discountedPrice={item.discountedPrice.toFixed(0)}
-                    price={item.price.toFixed(0)}
-                    cart={<AddToCart item={item} />}
-                  />
-                </Badge>
-              </div>
-            ))}
+            {mostBought.length === 0
+              ? Array.from(new Array(6)).map((_, index) => (
+                  <Box key={index} sx={{ width: 190, marginRight: 4, my: 1 }}>
+                    <Skeleton variant="rectangular" width={190} height={225} />
+                    <Box sx={{ pt: 0.5 }}>
+                      <Skeleton />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Skeleton width={100} height={55} />
+                        <Skeleton
+                          variant="rectangular"
+                          width={80}
+                          height={35}
+                        />
+                      </div>
+                    </Box>
+                  </Box>
+                ))
+              : mostBought.map((item, _) => (
+                  <div key={item._id}>
+                    <Badge
+                      badgeContent={item.count}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      color="primary"
+                      max={99}
+                    >
+                      <Card
+                        myItem={item}
+                        key={item._id}
+                        description={item.description}
+                        photo={item.photo}
+                        name={item.name}
+                        discountedPrice={item.discountedPrice.toFixed(0)}
+                        price={item.price.toFixed(0)}
+                        cart={<AddToCart item={item} />}
+                      />
+                    </Badge>
+                  </div>
+                ))}
           </div>
         </div>
         {Menu.map((menu, i) => {
