@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   boldRow: {
     fontSize: 18,
     fontWeight: "bolder",
+    color: "white",
   },
 });
 
@@ -77,18 +78,13 @@ function PaymentSuccess() {
     return () => window.removeEventListener("beforeunload", preventBack);
   }, []);
 
-  const estimatedPrice = Number(
-    cartItems.reduce(
-      (acc, item) => acc + item.discountedPrice * item.quantity,
-      0
-    )
+  const estimatedPrice = cartItems.reduce(
+    (acc, item) => acc + Number(item.discountedPrice) * Number(item.quantity),
+    0
   );
-  const totalPrice = Number(
-    coupen
-      ? (estimatedPrice * 0.1).toFixed(0)
-      : (estimatedPrice * 0.03).toFixed(0)
-  );
-
+  const totalPrice = coupen
+    ? (estimatedPrice * 0.1).toFixed(0)
+    : (estimatedPrice * 0.03).toFixed(0);
   const quantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   // Create PDF Document
@@ -233,14 +229,9 @@ function PaymentSuccess() {
                 </tr>
               ))}
               <tr>
-                <th>Discount</th>
-                <th>{coupen ? "10%" : "3%"}</th>
-                <th>Without discount: {totalPrice}</th>
-              </tr>
-              <tr>
                 <th>Total</th>
                 <th>{quantity}</th>
-                <th>With discount{totalPrice.toFixed(0)}</th>
+                <th>{totalPrice}</th>
               </tr>
             </tbody>
           </table>
