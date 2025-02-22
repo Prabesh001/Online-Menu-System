@@ -19,12 +19,12 @@ router.post("/", async (req, res) => {
       price,
       category,
       availability,
-      photoUrl,
+      photo,
       discountedPrice,
       foodPreferences,
     } = req.body;
 
-    if (!name || !description || !price || !category || !photoUrl) {
+    if (!name || !description || !price || !category || !photo) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
       description,
       price,
       category,
-      photoUrl,
+      photo,
       availability,
       discountedPrice: price,
       foodPreferences,

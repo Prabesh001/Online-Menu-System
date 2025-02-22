@@ -1,980 +1,799 @@
 [{
-  "_id": "1",
-  "name": "Momo",
-  "description": "Steamed dumplings stuffed with minced chicken or vegetables.",
-  "price": 150,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "2",
-  "name": "Chicken Sekuwa",
-  "description": "Grilled marinated chicken skewers.",
-  "price": 250,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "3",
-  "name": "Buff Sekuwa",
-  "description": "Grilled marinated buffalo meat skewers.",
-  "price": 270,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "4",
   "name": "Paneer Chilly",
   "description": "Spicy paneer stir-fried with bell peppers and onions.",
   "price": 180,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 180,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/fhh4MbZ4FsvMRZk5nvwWh-vfNVuYPJRKZ_UJFUcZbK8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y29va3dpdGhtYW5h/bGkuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDE2LzAxL0No/aWxsaS1QYW5lZXIt/RHJ5LmpwZw",
+  "count": 0
 },
 {
-  "_id": "5",
-  "name": "Chicken Chilly",
-  "description": "Spicy stir-fried chicken with bell peppers and onions.",
-  "price": 220,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "6",
-  "name": "Aloo Sandheko",
-  "description": "Spicy potato salad mixed with green chilies, onions, and cilantro.",
-  "price": 100,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "7",
   "name": "Egg Chilly",
   "description": "Spicy stir-fried eggs with onions and chilies.",
   "price": 150,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 150,
+  "foodPreferences": "Non-veg",
+  "photo": "https://easyindiancookbook.com/wp-content/uploads/2023/12/chilli-eggs-1.jpg",
+  "count": 0
 },
 {
-  "_id": "8",
-  "name": "Mixed Vegetable Pakora",
-  "description": "Deep-fried mixed vegetable fritters.",
-  "price": 100,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "9",
-  "name": "Fried Prawns",
-  "description": "Crispy fried prawns served with a dipping sauce.",
-  "price": 300,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "10",
-  "name": "Fish Fingers",
-  "description": "Crispy fried fish strips served with tartar sauce.",
-  "price": 250,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "11",
-  "name": "Veg Momo",
-  "description": "Steamed dumplings stuffed with mixed vegetables.",
-  "price": 130,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "12",
-  "name": "Chicken Momo",
-  "description": "Steamed dumplings stuffed with minced chicken.",
-  "price": 150,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "13",
-  "name": "Buff Momo",
-  "description": "Steamed dumplings stuffed with minced buffalo meat.",
-  "price": 170,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "14",
-  "name": "Paneer Momo",
-  "description": "Steamed dumplings stuffed with cottage cheese.",
-  "price": 180,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "15",
-  "name": "Jhol Momo",
+  "name": "Veg jhol Momo",
   "description": "Momos served in a tangy, spicy broth.",
   "price": 200,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 200,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/EM1Hx9cFD5M2nqkMsnnlNGisKH8PVc5I_c-j01S6YBA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aG9tZW1hZGUtamhv/bC1tb21vLXYwLWk3/OTZhNW9iOHZrOTEu/anBnP3dpZHRoPTY0/MCZjcm9wPXNtYXJ0/JmF1dG89d2VicCZz/PWNlNmU1YmJhMjY1/YTY0YjAzNjBhY2Fk/ODU1ZTExNWNhMGEz/ZTRmYmE",
+  "count": 0
 },
 {
-  "_id": "16",
   "name": "Vegetable Chow Mein",
   "description": "Nepali-style stir-fried noodles with mixed vegetables.",
   "price": 180,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 180,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/L63H2hb3L-DJQwcQfK9cL4re5twZ7wWohUiE-HJIQCI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jdXBm/dWxvZmthbGUuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIw/LzAyL1ZlZ2FuLVZl/Z2V0YWJsZS1DaG93/LU1laW4uanBn",
+  "count": 0
 },
 {
-  "_id": "17",
   "name": "Chicken Chow Mein",
   "description": "Stir-fried noodles with chicken and vegetables.",
   "price": 200,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 200,
+  "foodPreferences": "Non-veg",
+  "photo": "https://mediavine-res.cloudinary.com/image/upload/s--TimC1a5V--/ar_4:3,c_fill,f_auto,fl_lossy,q_auto/v1693886448/s3ta7myqhgepv3a8dxse.jpg",
+  "count": 0
 },
 {
-  "_id": "18",
-  "name": "Buff Chow Mein",
-  "description": "Stir-fried noodles with buffalo meat and vegetables.",
-  "price": 220,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "19",
-  "name": "Fried Rice",
-  "description": "Nepali-style fried rice with mixed vegetables and egg.",
-  "price": 170,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "20",
-  "name": "Chicken Fried Rice",
-  "description": "Fried rice with chicken and vegetables.",
-  "price": 190,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "21",
   "name": "Buff Fried Rice",
   "description": "Fried rice with buffalo meat and vegetables.",
   "price": 210,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 210,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/e238gGpAh6bDOGMvVdQjcO0KrJ9fdnQxs2Ykm7TCF2E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aGV3/b2tzb2ZsaWZlLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/Ni8wMS9iZWVmLWZy/aWVkLXJpY2UtNi5q/cGc",
+  "count": 0
 },
 {
-  "_id": "22",
-  "name": "Thakali Thali",
-  "description": "Traditional Nepali set meal with rice, lentils, vegetables, and choice of meat.",
-  "price": 300,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "23",
-  "name": "Dal Bhat Tarkari",
-  "description": "Rice served with lentils, vegetables, and curry.",
-  "price": 250,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "24",
-  "name": "Mutton Curry",
-  "description": "Tender mutton cooked in a rich and spicy curry sauce.",
-  "price": 350,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "25",
-  "name": "Chicken Curry",
-  "description": "Spiced chicken cooked in a traditional Nepali curry sauce.",
-  "price": 300,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "26",
   "name": "Paneer Butter Masala",
   "description": "Soft paneer cooked in a creamy tomato-based sauce.",
   "price": 250,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 250,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/-5USUmUQ9FJ33ZxX-m7PCx1IA7gyDaCuIEHcPbRcqH0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9wYW5lZXItYnV0/dGVyLW1hc2FsYS1j/aGVlc2UtY290dGFn/ZS1jdXJyeV80NjY2/ODktNDk3MzYuanBn/P3NlbXQ9YWlzX2h5/YnJpZA",
+  "count": 0
 },
 {
-  "_id": "27",
-  "name": "Saag Paneer",
-  "description": "Paneer cooked with spinach in a flavorful gravy.",
-  "price": 220,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "28",
   "name": "Pork Sekuwa",
   "description": "Grilled marinated pork skewers.",
   "price": 270,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 270,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/tzOPkBEZSxdVhUe3ku4cW7-z9GDqgYQDKouJZiIgQ2M/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9lbmds/aXNoLm9ubGluZWto/YWJhci5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjEvMDkv/YmFqZWtvLXNla3V3/YS5qcGc",
+  "count": 0
 },
 {
-  "_id": "29",
-  "name": "Chicken Biryani",
-  "description": "Fragrant rice cooked with spiced chicken.",
-  "price": 300,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "30",
-  "name": "Veg Biryani",
-  "description": "Fragrant rice cooked with mixed vegetables.",
-  "price": 250,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "31",
   "name": "Coke",
   "description": "Chilled Coca-Cola served in a glass or bottle.",
   "price": 50,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 50,
+  "photo": "https://hungerend.com/wp-content/uploads/2022/03/coke-min.jpg",
+  "count": 0
 },
 {
-  "_id": "32",
-  "name": "Fanta",
-  "description": "Chilled Fanta, perfect for a refreshing break.",
-  "price": 50,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "33",
-  "name": "Sprite",
-  "description": "Chilled Sprite, a refreshing lemon-lime soda.",
-  "price": 50,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "34",
-  "name": "Iced Coffee",
-  "description": "Cold brewed coffee, served with milk and ice.",
-  "price": 120,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "35",
-  "name": "Hot Coffee",
-  "description": "Freshly brewed coffee served hot with milk and sugar.",
-  "price": 100,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "36",
-  "name": "Green Tea",
-  "description": "Light and refreshing green tea, served hot.",
-  "price": 80,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "37",
   "name": "Black Tea",
   "description": "Simple black tea served with or without sugar.",
   "price": 50,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 50,
+  "photo": "https://imgs.search.brave.com/c1XOo1Ggi-0CQIUS-Zn7Vj9zygZi9FqkeGxO3Y1zrGs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTE2/NDUwODEvcGhvdG8v/Y3VwLW9mLWJsYWNr/LXRlYS5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9UThnOE5F/dnFQa0lvS2dDSlhl/VktxWEdSZHNudUN1/RnQyUm1oOTlGSjdH/RT0",
+  "count": 0
 },
 {
-  "_id": "38",
-  "name": "Milk Tea",
-  "description": "Traditional Nepali tea brewed with milk and sugar.",
-  "price": 70,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "39",
   "name": "Cold Coffee",
   "description": "Chilled coffee blended with ice and milk, perfect for a hot day.",
   "price": 130,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 130,
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSJKPQynVCGs8vzXbuYiBPYOPCfg_KzdJ78Q&s",
+  "count": 0
 },
 {
-  "_id": "40",
-  "name": "Chow Mein",
-  "description": "Nepali-style stir-fried noodles with vegetables and your choice of meat.",
-  "price": 200,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "41",
   "name": "Chicken Wings",
   "description": "Crispy fried chicken wings tossed in a spicy sauce.",
   "price": 250,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 250,
+  "foodPreferences": "Non-veg",
+  "photo": "https://bakerbynature.com/wp-content/uploads/2015/02/Sweet-and-Spicy-Sriracha-Chicken-Wings-0-6.jpg",
+  "count": 0
 },
 {
-  "_id": "42",
-  "name": "Prawn Pakora",
-  "description": "Deep-fried prawn fritters served with a tangy dipping sauce.",
-  "price": 280,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "43",
-  "name": "Chicken Drumsticks",
-  "description": "Crispy fried chicken drumsticks served with a spicy dip.",
-  "price": 250,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "44",
-  "name": "Vegetable Samosa",
-  "description": "Crispy pastry filled with spiced potatoes and peas.",
-  "price": 50,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "45",
-  "name": "Egg Rolls",
-  "description": "Crispy rolls filled with spiced egg and vegetables.",
-  "price": 120,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "46",
   "name": "Fish Curry",
   "description": "Tender fish cooked in a rich and spicy curry sauce, served with rice.",
   "price": 350,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 350,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/0uSs5twXhk0Ly0cTMZmvRcT3jn3pYioF4Uoou1mDnjg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA5/NTYwMjkxMC9waG90/by9maXNoLWN1cnJ5/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1RQWZWcWJ1a0I4/b1FUTjBCQkoyVE9k/TWI0YlJRSnFVeEVZ/eVR5eWZqUEgwPQ",
+  "count": 0
 },
 {
-  "_id": "47",
   "name": "Mutton Biryani",
   "description": "Fragrant biryani cooked with spiced mutton.",
   "price": 350,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 350,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/s_ERLn5dqJlzd6hoPUZKHD63y11ivlmNE_vTAtDFfy4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vo/VVJubU9YaV81UkVh/aHZaRUNGdl9DVUg1/bW9ydHU2aUE4djNB/YV91Wm9sSVVJYnZ4/eXpmUUkydDhEbFpk/eEdkMllXQTMtMjI5/b1hYVGh6R0VQbERw/aTN3d0ZJWWRQYVZh/djNWTG9DWW5DVHE1/WmZEWlJ1WXlKMU9T/bzY0cnNpeTMwTGdh/LXdQaGU4cU1NL3Mx/NjAwL3NvdXRoK2lu/ZGlhbittdXR0b24r/YmlyeWFuaStyZWNp/cGUuSlBH",
+  "count": 0
 },
 {
-  "_id": "48",
-  "name": "Plain Naan",
-  "description": "Soft, oven-baked flatbread.",
-  "price": 50,
-  "category": "Side Dish",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "49",
-  "name": "Butter Naan",
-  "description": "Soft naan brushed with butter.",
-  "price": 60,
-  "category": "Side Dish",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "50",
-  "name": "Garlic Naan",
-  "description": "Naan bread topped with garlic and herbs.",
-  "price": 70,
-  "category": "Side Dish",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "51",
-  "name": "Chicken Tikka Masala",
-  "description": "Grilled chicken cooked in a rich tomato-based sauce.",
-  "price": 320,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "52",
   "name": "Vegetable Thali",
   "description": "Nepali set meal with rice, lentils, vegetables, and pickles.",
   "price": 250,
   "category": "Main Course",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 250,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/J6ub04tLGTMkfV6jOyE980fiDw6FGGlLqIE48IG-fA8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9lYXN5/aW5kaWFuY29va2Jv/b2suY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIzLzAyL2lu/ZGlhbi12ZWdldGFy/aWFuLXRoYWxpLTMt/anBnLndlYnA",
+  "count": 0
 },
 {
-  "_id": "53",
-  "name": "Nepali Khaja Set",
-  "description": "A traditional Nepali snack platter with chiura, achar, and fried items.",
-  "price": 180,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "54",
   "name": "Chicken Spring Roll",
   "description": "Crispy rolls filled with spiced chicken and vegetables.",
   "price": 150,
   "category": "Appetizer",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 150,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/afyaUrdLMGgYSnClh76qoy36AReJbSrpHDVUOQYwU0I/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aW5kaWFuaGVhbHRo/eXJlY2lwZXMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE4/LzA1L2NoaWNrZW4t/c3ByaW5nLXJvbGxz/LXJlY2lwZS53ZWJw",
+  "count": 0
 },
 {
-  "_id": "55",
-  "name": "Masala Papad",
-  "description": "Crispy papad topped with spiced onions and tomatoes.",
-  "price": 30,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "56",
   "name": "Chicken Thukpa",
   "description": "Traditional Nepali noodle soup with chicken and vegetables.",
   "price": 200,
   "category": "Soup",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 200,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/jsi0DVjmJXkl_P7iIie_MlOvelUH38EzNz9n9YaomYM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vc2F2b3J5/dGFsZXMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIyLzAz/L0lNR181ODk2LTEu/anBnP3Jlc2l6ZT03/NjgsMTAyNCZzc2w9/MQ",
+  "count": 0
 },
 {
-  "_id": "57",
-  "name": "Veg Thukpa",
-  "description": "Nepali-style hot noodle soup with vegetables.",
-  "price": 180,
-  "category": "Soup",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "58",
-  "name": "Egg Fried Rice",
-  "description": "Fried rice with scrambled eggs and vegetables.",
-  "price": 190,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "59",
-  "name": "Vegetable Soup",
-  "description": "A light and healthy soup made with seasonal vegetables.",
-  "price": 120,
-  "category": "Soup",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "60",
-  "name": "Chicken Clear Soup",
-  "description": "Light chicken broth with herbs and spices.",
-  "price": 150,
-  "category": "Soup",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "61",
-  "name": "Nepali Aloo Chop",
-  "description": "Deep-fried potato patties served with achar.",
-  "price": 80,
-  "category": "Appetizer",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "62",
-  "name": "Kalo Daal",
-  "description": "Black lentil curry served with rice or roti.",
-  "price": 120,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "63",
-  "name": "Tandoori Chicken",
-  "description": "Chicken marinated in yogurt and spices, cooked in a tandoor oven.",
-  "price": 320,
-  "category": "Main Course",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "64",
-  "name": "Lassi",
-  "description": "Refreshing yogurt-based drink, available in sweet or salty flavors.",
-  "price": 80,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "65",
-  "name": "Mango Lassi",
-  "description": "A sweet yogurt-based drink with mango flavor.",
-  "price": 100,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "66",
   "name": "Nepali Butter Tea",
   "description": "Traditional salted tea mixed with butter.",
   "price": 60,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 60,
+  "photo": "https://imgs.search.brave.com/dUQN2-KDS2_Sg9hVovKb_OzWAJKttaXRmd5zAcmc8mA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4x/MS5iaWdjb21tZXJj/ZS5jb20vcy1qbDN0/NXRnL3Byb2R1Y3Rf/aW1hZ2VzL3VwbG9h/ZGVkX2ltYWdlcy90/aWJldGFuLWJ1dHRl/ci10ZWEuanBn",
+  "count": 0
 },
 {
-  "_id": "67",
-  "name": "Hot Chocolate",
-  "description": "Rich and creamy hot chocolate.",
-  "price": 120,
-  "category": "Beverage",
-  "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
-},
-{
-  "_id": "68",
   "name": "Lemon Soda",
   "description": "Chilled soda with a fresh lemon twist.",
   "price": 50,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 50,
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkeQxlQC87d8GWfHn0BcF50bVPibZPR0NLfg&s",
+  "count": 0
 },
 {
-  "_id": "69",
   "name": "Fresh Lime Juice",
   "description": "Freshly squeezed lime juice, served chilled.",
   "price": 50,
   "category": "Beverage",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 50,
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLrW_7oaFpBhk0WadG5n3NLo-_eUz4lLPeaA&s",
+  "count": 0
 },
 {
-  "_id": "70",
+  "name": "Momo",
+  "description": "Steamed dumplings stuffed with minced chicken or vegetables.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 150,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/n1CiBZqmHLSctollJyvw-yZ7cHzBPjiV43zI59f4ed8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ldmVy/ZXN0bGV4LmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8w/Ny92ZWctbW9tby0x/MDI0eDUzNi5qcGc",
+  "count": 0
+},
+{
+  "name": "Aloo Sandheko",
+  "description": "Spicy potato salad mixed with green chilies, onions, and cilantro.",
+  "price": 100,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 100,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/HJz_TvY3GBJxv2n9RDp7OS8CqKOI6sfXaVJk-F1_quQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWct/Z2xvYmFsLmNwY2Ru/LmNvbS9yZWNpcGVz/L2VlNjMxOTBlMDkz/M2EzMDEvNjgweDk2/NGNxNzAvcGlyby1z/YWRla28tYWxvby1w/b3RhdG8td2l0aC10/aW1idXItc2NoZXp3/YW4tcGVwcGVyY29y/bnMtcmVjaXBlLW1h/aW4tcGhvdG8uanBn",
+  "count": 0
+},
+{
+  "name": "Fish Fingers",
+  "description": "Crispy fried fish strips served with tartar sauce.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 250,
+  "foodPreferences": "Non-veg",
+  "photo": "https://i.ndtvimg.com/i/2016-09/fish-fingers-625_625x350_71474443801.jpg",
+  "count": 0
+},
+{
+  "name": "Veg Momo",
+  "description": "Steamed dumplings stuffed with mixed vegetables.",
+  "price": 130,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 130,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/n1CiBZqmHLSctollJyvw-yZ7cHzBPjiV43zI59f4ed8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ldmVy/ZXN0bGV4LmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8w/Ny92ZWctbW9tby0x/MDI0eDUzNi5qcGc",
+  "count": 0
+},
+{
+  "name": "Chicken Momo",
+  "description": "Steamed dumplings stuffed with minced chicken.",
+  "price": 150,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 150,
+  "foodPreferences": "Non-veg",
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvWweMLsRjFVayNya0dO9ue0xrZOGmgeWgBg&s",
+  "count": 0
+},
+{
+  "name": "Buff Chow Mein",
+  "description": "Stir-fried noodles with buffalo meat and vegetables.",
+  "price": 220,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 220,
+  "foodPreferences": "Non-veg",
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjAj1jnLJzPqyAhc7Xxks8YB3D33Oh_BkGIQ&s",
+  "count": 0
+},
+{
+  "name": "Fried Rice",
+  "description": "Nepali-style fried rice with mixed vegetables and egg.",
+  "price": 170,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 170,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/7Vq_6YfLR5vtxrIULCunJslVvh64m9N430gYU7jLYHI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTAz/OTY5MTg1Mi9waG90/by92ZWdldGFibGUt/ZnJpZWQtcmljZS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/eWxPWkRqa2N0U21y/WklXUDI0RFFrTWZf/WEtwZzJ4RlBBNEtP/b2xrM0JfVT0",
+  "count": 0
+},
+{
+  "name": "Chicken Fried Rice",
+  "description": "Fried rice with chicken and vegetables.",
+  "price": 190,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 190,
+  "foodPreferences": "Non-veg",
+  "photo": "https://www.kitchensanctuary.com/wp-content/uploads/2020/04/Chicken-Fried-Rice-square-FS-.jpg",
+  "count": 0
+},
+{
+  "name": "Fanta",
+  "description": "Chilled Fanta, perfect for a refreshing break.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 50,
+  "photo": "https://nepalgramodhyog.store/images/products/Fanta%20Can%20300%20ML.jpg",
+  "count": 0
+},
+{
+  "name": "Sprite",
+  "description": "Chilled Sprite, a refreshing lemon-lime soda.",
+  "price": 50,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 50,
+  "photo": "https://imgs.search.brave.com/3ZukOUBEtoewCKtHkWzLtWwTG9tGI2rHdNM62_QJnTs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA1LzUxLzU5Lzk0/LzM2MF9GXzU1MTU5/OTQ3NV9uaE1uWTJn/WVM4R2dmVU5xVjB0/dTRRTTBzSjJvN2NF/bC5qcGc",
+  "count": 0
+},
+{
+  "name": "Iced Coffee",
+  "description": "Cold brewed coffee, served with milk and ice.",
+  "price": 120,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 120,
+  "photo": "https://imgs.search.brave.com/fBrXL3Bm-a5WxnmX_gbV_y7DMZEJ7xOt3Naq1gB3yP8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTU1/MzcwMTI1L3Bob3Rv/L2ljZWQtY29mZmVl/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1IM1RIaUhsNHB2/Qjh0SjZDM2VHSTJZ/RmpRS1pxWkxad0Fn/UVdfdlJqQWswPQ",
+  "count": 0
+},
+{
+  "name": "Egg Rolls",
+  "description": "Crispy rolls filled with spiced egg and vegetables.",
+  "price": 120,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 120,
+  "foodPreferences": "Non-veg",
+  "photo": "https://www.chefkunalkapur.com/wp-content/uploads/2021/08/CW0_7822-scaled.jpg?v=1628745250",
+  "count": 0
+},
+{
+  "name": "Butter Naan",
+  "description": "Soft naan brushed with butter.",
+  "price": 60,
+  "category": "Side Dish",
+  "availability": true,
+  "discountedPrice": 60,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/QP2arF4iYLdhxa30RBjWv3YUhSlX2YJHiNSj-9Hwh5U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA3LzE4LzE2Lzg3/LzM2MF9GXzcxODE2/ODcwOV9tYzJ6Zlp3/NDZmUXhJODFpZm9Z/QkVXaEp3cHNMNWlQ/WS5qcGc",
+  "count": 0
+},
+{
+  "name": "Chicken Tikka Masala",
+  "description": "Grilled chicken cooked in a rich tomato-based sauce.",
+  "price": 320,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 320,
+  "foodPreferences": "Non-veg",
+  "photo": "https://www.seriouseats.com/thmb/DbQHUK2yNCALBnZE-H1M2AKLkok=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tikka-masala-for-the-grill-recipe-hero-2_1-cb493f49e30140efbffec162d5f2d1d7.JPG",
+  "count": 0
+},
+{
+  "name": "Nepali Khaja Set",
+  "description": "A traditional Nepali snack platter with chiura, achar, and fried items.",
+  "price": 180,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 180,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/I5IeDBcolTY6Ni-HRg3OSrbJaFGJKpd58NFGVHzefZ8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZXZlcmVzdHNhbnRh/cm9zYS5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjMvMDQv/bmV3YXJpLWtoYWph/LTgwMHg2MDAuanBn",
+  "count": 0
+},
+{
+  "name": "Masala Papad",
+  "description": "Crispy papad topped with spiced onions and tomatoes.",
+  "price": 30,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 30,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/oNvU6OPtY9ZItN8mOnOM4y0mWh3bUPQYMMLgKtS2MUQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Zmxhdm9yc29mbXVt/YmFpLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAxNi8wNy9t/YXNhbGEtcGFwYWQt/cmVjaXBlMDkuanBn",
+  "count": 0
+},
+{
+  "name": "Egg Fried Rice",
+  "description": "Fried rice with scrambled eggs and vegetables.",
+  "price": 190,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 190,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/I5N1TMfNU8Wh56gb_iY_7RHUNeTTfoxpp2P1E71A-2Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmVjaXBldGluZWF0/cy5jb20vdGFjaHlv/bi8yMDE4LzAzL0Vn/Zy1GcmllZC1SaWNl/XzYtMS5qcGc",
+  "count": 0
+},
+{
+  "name": "Kalo Daal",
+  "description": "Black lentil curry served with rice or roti.",
+  "price": 120,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 120,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/YnB_Kek_ufgJBJBwvgaKncB0CeBK_oTZXiTsdDI8m1A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dmVncmVjaXBlc29m/aW5kaWEuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDEyLzA0/L2thYWxpLWRhbC1y/ZWNpcGUuanBn",
+  "count": 0
+},
+{
+  "name": "Hot Chocolate",
+  "description": "Rich and creamy hot chocolate.",
+  "price": 120,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 120,
+  "photo": "https://imgs.search.brave.com/7XrfuOaqzVz5gUn6Cyy3wHKBjuSLdmB9S-OOlCSj-cc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzU5LzA5LzM3/LzM2MF9GXzU5MDkz/Nzc5Xzh4SUtSZkNO/ZU9hYjZLOHBPMDdM/amNwNzd2Vk1ndndm/LmpwZw",
+  "count": 0
+},
+{
   "name": "Chocolate Brownie",
   "description": "Rich and fudgy chocolate brownie.",
   "price": 120,
   "category": "Dessert",
   "availability": true,
-  "reviews": [
-    {
-      "name": "",
-      "body": ""
-    }
-  ]
+  "discountedPrice": 120,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/kU9fEDavuLnpdLLTdHV_Ej5AXrpJ56SAI0xz2Mie1Zs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YmlsbHlwYXJpc2ku/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzAzL2Jyb3du/aWVzLTMuanBn",
+  "count": 0
+},
+{
+  "name": "Chicken Sekuwa",
+  "description": "Grilled marinated chicken skewers.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 250,
+  "foodPreferences": "Non-veg",
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlwkp8SJ7-gORtwhd3RilqkM-k5v_vn1f3KA&s",
+  "count": 0
+},
+{
+  "name": "Buff sekuwa",
+  "description": "Grilled marinated buffalo meat skewers.",
+  "price": 270,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 270,
+  "foodPreferences": "Non-veg",
+  "photo": "https://kathmandumomo.com.au/wp-content/uploads/2020/03/Buff-Sekuwa.jpg",
+  "count": 0
+},
+{
+  "name": "Chicken Chilly",
+  "description": "Spicy stir-fried chicken with bell peppers and onions.",
+  "price": 220,
+  "category": "Appetizer",
+  "availability": false,
+  "discountedPrice": 220,
+  "foodPreferences": "Non-veg",
+  "photo": "https://www.indianhealthyrecipes.com/wp-content/uploads/2018/07/chilli-chicken-recipe-500x500.jpg",
+  "count": 0
+},
+{
+  "name": "Mixed Vegetable Pakora",
+  "description": "Deep-fried mixed vegetable fritters.",
+  "price": 100,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 100,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/cUIhMHnGDPbQuUF0UmFCWnQtycmD5HbAhLOiGWsx8Tc/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly93d3cu/aW5kaWFuaGVhbHRo/eXJlY2lwZXMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzAyL3ZlZ2V0YWJs/ZS1wYWtvcmEuanBn",
+  "count": 0
+},
+{
+  "name": "Fried Prawns",
+  "description": "Crispy fried prawns served with a dipping sauce.",
+  "price": 300,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 300,
+  "photo": "https://imgs.search.brave.com/wuLoFRU7Zg85tJb1ib8NUvPYKTaOp6x_e1iDiVBUfxI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hYmJ5/c2hlYXJ0aC5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjQv/MDcvc2VydmUtZnJp/ZWQtcHJhd25zLXdp/dGgtYS1jYWJiYWdl/LXNhbGEuanBlZw",
+  "foodPreferences": "Non-veg",
+  "count": 0
+},
+{
+  "name": "Dal Bhat Tarkari",
+  "description": "Rice served with lentils, vegetables, and curry.",
+  "price": 250,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 250,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/BHQrmocY4DPzPXwaRjdm4ydUjZbfl4ZpVmjsgpP9qT4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hYmJ5/c2hlYXJ0aC5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjIv/MDQvZGFsLWJoYXQt/dGFya2FyaS0xLmpw/Zw",
+  "count": 0
+},
+{
+  "name": "Chicken Curry",
+  "description": "Spiced chicken cooked in a traditional Nepali curry sauce.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 300,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/4W6SQkuJs6-9ZAJHyHFlnXnRk8wxrPbpBoIwR_T5ZVo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEy/NDk3Mzc2NS9waG90/by9jaGlja2VuLWN1/cnJ5LmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ZVGpQR2xm/dlQ3cEhpeTFSWDha/Y29pelNkVUVFOW9j/T0FFRjY1SDRRZ0pB/PQ",
+  "count": 0
+},
+{
+  "name": "Saag Paneer",
+  "description": "Paneer cooked with spinach in a flavorful gravy.",
+  "price": 220,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 220,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/k35ccl1CHt71lyVWluUOGJ0nfHlSWx64pA24OBThMq4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dC5qYW1pZW9saXZl/ci5jb20vaW1hZ2Vz/L2NxN3cyZTcxL3By/b2R1Y3Rpb24vY2I5/MGZhNTZlNGQxMGNl/ZTNlMzdjMDA3ODRm/MTk3MmZkNjM1NWI4/MS05NzN4MTMwMC5q/cGcvY2I5MGZhNTZl/NGQxMGNlZTNlMzdj/MDA3ODRmMTk3MmZk/NjM1NWI4MS05NzN4/MTMwMC5qcGc_cmVj/dD0wLDIsOTczLDEy/OTcmdz01NDQmaD03/MjUmZm09d2VicCZx/PTgwJmZpdD1jcm9w/JmF1dG89Zm9ybWF0",
+  "count": 0
+},
+{
+  "name": "Chicken Biryani",
+  "description": "Fragrant rice cooked with spiced chicken.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 300,
+  "foodPreferences": "Non-veg",
+  "photo": "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe.jpg",
+  "count": 0
+},
+{
+  "name": "Hot Coffee",
+  "description": "Freshly brewed coffee served hot with milk and sugar.",
+  "price": 100,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 100,
+  "photo": "https://www.blibli.com/friends-backend/wp-content/uploads/2024/08/B160980-Cover-cara-membuat-coffe-latte-scaled.jpg",
+  "count": 0
+},
+{
+  "name": "Milk Tea",
+  "description": "Traditional Nepali tea brewed with milk and sugar.",
+  "price": 70,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 70,
+  "photo": "https://imgs.search.brave.com/12ulwMbaZaP5oI-1RYDjHTrMuFx-9DJAQsVFJOimvqM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YXBhcnRtZW50dGhl/cmFweS5pbmZvL2lt/YWdlL3VwbG9hZC9m/X2F1dG8scV9hdXRv/OmVjbyx3XzczMC9r/L1Bob3RvL1JlY2lw/ZXMvMjAyMy0xMi1t/aWxrLXRlYS9taWxr/LXRlYS01ODc",
+  "count": 0
+},
+{
+  "name": "Chicken Drumsticks",
+  "description": "Crispy fried chicken drumsticks served with a spicy dip.",
+  "price": 250,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 250,
+  "foodPreferences": "Non-veg",
+  "photo": "https://hungryhobby.net/wp-content/uploads/2017/07/oven-baked-drumsticks-square-500x375.png",
+  "count": 0
+},
+{
+  "name": "Vegetable Samosa",
+  "description": "Crispy pastry filled with spiced potatoes and peas.",
+  "price": 50,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 50,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/9Cl6GOWUhGshJu85r1ypYDKFHUu36AHL9ZhnlYHrLzU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8x/LzFhL1ZlZ2V0YWJs/ZV9TYW1vc2EuanBn",
+  "count": 0
+},
+{
+  "name": "Tandoori Chicken",
+  "description": "Chicken marinated in yogurt and spices, cooked in a tandoor oven.",
+  "price": 320,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 320,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/_2lV5iMpLhCm1rZLKAEjky9nSae-MTR_rPnkJH2UdbE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c2ltcGx5cmVjaXBl/cy5jb20vdGhtYi95/SlhVcXBoZ3pEY09F/NC1WVGlrMk93VEpB/bGc9LzE1MDB4MC9m/aWx0ZXJzOm5vX3Vw/c2NhbGUoKTptYXhf/Ynl0ZXMoMTUwMDAw/KTpzdHJpcF9pY2Mo/KS9TaW1wbHktUmVj/aXBlcy1UYW5kb29y/aS1DaGlja2VuLUxF/QUQtMDQtNDM3YmI3/NWE0Mzk0NDZmMjhi/ODM0ZmM2YmU3MGJj/OTQuanBn",
+  "count": 0
+},
+{
+  "name": "Buff Momo",
+  "description": "Steamed dumplings stuffed with minced buffalo meat.",
+  "price": 170,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 170,
+  "foodPreferences": "Non-veg",
+  "photo": "https://weekendbackpacker.wordpress.com/wp-content/uploads/2018/01/20171224_1218002079874489.jpg",
+  "count": 0
+},
+{
+  "name": "Paneer Momo",
+  "description": "Steamed dumplings stuffed with cottage cheese.",
+  "price": 180,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 180,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/GwolUWMu6drN0qjZy-ymZ8WobosUYnpVhRDvQG-_4JQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9oZWJi/YXJza2l0Y2hlbi5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTkvMDMvcGFuZWVy/LW1vbW9zLXJlY2lw/ZS1wYW5lZXItbW9t/by12ZWctcGFuZWVy/LW1vbW9zLTItMTAy/NHg2ODMuanBlZw",
+  "count": 0
+},
+{
+  "name": "Thakali Thali",
+  "description": "Traditional Nepali set meal with rice, lentils, vegetables, and choice of meat.",
+  "price": 300,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 300,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/LLv_KxzOcZmdLQZ0bnHk5kaK_gEAplxOUAXl_dDl5kI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cmF2/ZWx0b2dnbGUuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIz/LzA5L0lNR18yMDIx/MTIxNl8yMDQ3MjEt/NzY4eDEwMjQuanBn",
+  "count": 0
+},
+{
+  "name": "Mutton Curry",
+  "description": "Tender mutton cooked in a rich and spicy curry sauce.",
+  "price": 350,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 350,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/WHNP3XE8Db8JgWrLjqsYzh9M50KaTbLJ_14eNz9F27Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9teWZv/b2RzdG9yeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTYv/MTIvRWFzeS1NdXR0/b24tQ3VycnktMS5q/cGc",
+  "count": 0
+},
+{
+  "name": "Green Tea",
+  "description": "Light and refreshing green tea, served hot.",
+  "price": 80,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 80,
+  "photo": "https://imgs.search.brave.com/BnF_4wiDfRWiZJcVrk_Glj31xLmdiCKNvVSEzah7L6c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTg0/OTQ4Nzk3L3Bob3Rv/L2dyZWVuLXRlYS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/ZTNkT0J1NUl4b3NZ/LTE4ZzFxQmpHMTVh/d0NheTF2T2NiTDRG/TlNUSHhrTT0",
+  "count": 0
+},
+{
+  "name": "Chow Mein",
+  "description": "Nepali-style stir-fried noodles with vegetables and your choice of meat.",
+  "price": 200,
+  "category": "Main Course",
+  "availability": true,
+  "discountedPrice": 200,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/iQuREBkPwd4yLFaf3WX7WOxiNEtXHxOJC0nGOjy3LIs/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jdXBm/dWxvZmthbGUuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIw/LzAyL1ZlZ2FuLVZl/Z2V0YWJsZS1DaG93/LU1laW4uanBn",
+  "count": 0
+},
+{
+  "name": "Prawn Pakora",
+  "description": "Deep-fried prawn fritters served with a tangy dipping sauce.",
+  "price": 280,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 280,
+  "photo": "https://static.toiimg.com/thumb/75454706.cms?width=1200&height=900",
+  "foodPreference": "Non-veg",
+  "count": 0
+},
+{
+  "name": "Plain Naan",
+  "description": "Soft, oven-baked flatbread.",
+  "price": 50,
+  "category": "Side Dish",
+  "availability": true,
+  "discountedPrice": 50,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/5yUshTFYVoXJMHM5G-kAB7v-HZijJWFjyrWAYTRsa7g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly92ZWdn/aWVkZXNzZXJ0cy5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTgvMDMvRWFzeS1O/YWFuLUJyZWFkLVJl/Y2lwZS00LmpwZw",
+  "count": 0
+},
+{
+  "name": "Garlic Naan",
+  "description": "Naan bread topped with garlic and herbs.",
+  "price": 70,
+  "category": "Side Dish",
+  "availability": true,
+  "discountedPrice": 70,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/agehKs68Yjhh9ISj_s-zIIgxwLedQZE1Wen1LspdAco/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ob3N0/dGhldG9hc3QuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE4/LzA4L0hvbWVtYWRl/LUdhcmxpYy1OYWFu/LTMuanBn",
+  "count": 0
+},
+{
+  "name": "Veg Thukpa",
+  "description": "Nepali-style hot noodle soup with vegetables.",
+  "price": 180,
+  "category": "Soup",
+  "availability": true,
+  "discountedPrice": 180,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/30f46F5jNVgIjFVxyYlf2d2nBPdZhOf_pd6vRTtX4GQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Y29va3NoaWRlb3V0/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNC8wNC9JbnN0/YW50LVBvdC1UaHVr/cGFfNVMuanBn",
+  "count": 0
+},
+{
+  "name": "Vegetable Soup",
+  "description": "A light and healthy soup made with seasonal vegetables.",
+  "price": 120,
+  "category": "Soup",
+  "availability": true,
+  "discountedPrice": 120,
+  "foodPreferences": "Veg",
+  "photo": "https://downshiftology.com/wp-content/uploads/2023/09/Vegetable-Soup-main-500x375.jpg",
+  "count": 0
+},
+{
+  "name": "Chicken Clear Soup",
+  "description": "Light chicken broth with herbs and spices.",
+  "price": 150,
+  "category": "Soup",
+  "availability": true,
+  "discountedPrice": 150,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/YusMZ1vyWxlBJ47fpWUbyC_Un37O4RzWqjkrlwtq6IM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/eXVtbXl0dW1teWFh/cnRoaS5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjIvMDcv/Y2hpY2tlbi1jbGVh/ci1zb3VwLTEuanBn",
+  "count": 0
+},
+{
+  "name": "Nepali Aloo Chop",
+  "description": "Deep-fried potato patties served with achar.",
+  "price": 80,
+  "category": "Appetizer",
+  "availability": true,
+  "discountedPrice": 80,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/6ahk8lLiHEcgFLpOIVE-NyRXqpyde7zKRmCybN-Okyk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhlZ2Fz/dHJvbm9taWNib25n/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMC8wNi9BbHVy/LWNob3AtcmVjaXBl/LmpwZz9yZXNpemU9/ODAwLDEyMDAmc3Ns/PTE",
+  "count": 0
+},
+{
+  "name": "Lassi",
+  "description": "Refreshing yogurt-based drink, available in sweet or salty flavors.",
+  "price": 80,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 80,
+  "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDJl5giiE26PIj2AiDVRiVzwuqVuXVJX7MHg&s",
+  "count": 0
+},
+{
+  "name": "Mango Lassi",
+  "description": "A sweet yogurt-based drink with mango flavor.",
+  "price": 100,
+  "category": "Beverage",
+  "availability": true,
+  "discountedPrice": 100,
+  "photo": "https://www.yellowthyme.com/wp-content/uploads/2023/03/Mango-Lassi-08589.jpg",
+  "count": 0
+},
+{
+  "name": "Cholocate Milk Shake",
+  "description": "A delicious drink for soothing your thirst.",
+  "price": 250,
+  "category": "Dessert",
+  "availability": true,
+  "discountedPrice": 250,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/fWX_MUnxYLQhj9gVIzQx07rg_6Nj1BuT92rgcdwZrJA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9saWZl/c3R5bGVvZmFmb29k/aWUuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDI0LzAxL0No/b2NvbGF0ZS1NaWxr/c2hha2UtUmVjaXBl/LTE0LTY4M3gxMDI0/LmpwZw",
+  "count": 0
+},
+{
+  "name": "Butter Chicken",
+  "description": "Chicken and Butter.",
+  "price": 500,
+  "category": "Side Dish",
+  "availability": true,
+  "discountedPrice": 500,
+  "foodPreferences": "Non-veg",
+  "photo": "https://imgs.search.brave.com/4mEBSgGLu9CIPGlYYYecLyZl0uO5aez5TuR1ziBkXms/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA5LzE0LzY0LzQz/LzM2MF9GXzkxNDY0/NDM2Ml9nVGg1czY1/MEJqNlJQUGhLQWhu/bms3UDFYRGx2QzRw/dC5qcGc",
+  "count": 0
+},
+{
+  "name": "Fried Rice",
+  "description": "Frying the leftover rice of resterday to make it edible.",
+  "price": 200,
+  "discountedPrice": 200,
+  "category": "Main Course",
+  "availability": true,
+  "foodPreferences": "Veg",
+  "photo": "https://imgs.search.brave.com/1ElKlulgDmMEbcAYVfK-Y0kAWT2ci6x3--8Lygg6pOA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTUz/NzM2NDQ2L3Bob3Rv/L2ZyaWVkLXJpY2Uu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PTNXVUNYWWhtTGU1/Z2lHV1BBUjRQd0lQ/RlQ0RUdzNDF0YWt3/b0h0cnBpb2c9",
+  "count": 0
+},
+{
+  "name": "Chicken Soup",
+  "description": "Hot Chicken Soup to fill your heart in cold weather.",
+  "price": 450,
+  "discountedPrice": 450,
+  "category": "Soup",
+  "availability": true,
+  "photo": "https://imgs.search.brave.com/3JiU3-ejyXTY_h1fHA8mqVhYkLpIyVH-oeh5FxDzlxU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YWxscmVjaXBlcy5j/b20vdGhtYi90c1lq/dDJaU19CRkg2MnVF/aU9aUzVyVy1UZkE9/LzB4NTEyL2ZpbHRl/cnM6bm9fdXBzY2Fs/ZSgpOm1heF9ieXRl/cygxNTAwMDApOnN0/cmlwX2ljYygpLzg4/MTQtaG9tZW1hZGUt/Y2hpY2tlbi1zb3Vw/LURETUZTLWJlYXV0/eS00eDMtMzE2NDAt/OTI0YWRjNjNhNzg1/NDNhNzgyMmM1NzA0/NzI3ZjZlNGIuanBn",
+  "foodPreferences": "Non-veg",
+  "count": 0
+},
+{
+  "name": "Rango Sukuti",
+  "description": "Sukuti meat of Buff.",
+  "price": 400,
+  "discountedPrice": 400,
+  "category": "Side Dish",
+  "availability": false,
+  "photo": "https://imgs.search.brave.com/eHxOjmBf-Mscg4zMSnJ_9e5WJj8YyLR8J_JLgAGVPKI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8z/LzNmL1N1a3V0aS5q/cGc",
+  "foodPreferences": "Non-veg",
+  "count": 0
 }]

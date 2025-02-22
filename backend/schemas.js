@@ -27,7 +27,7 @@ const homeItemSchema = new mongoose.Schema(
     category: Array,
     availability: Boolean,
     photo: String,
-    count: Number
+    count: Number,
   },
   { collection: "specialMenu", versionKey: false }
 );
@@ -38,8 +38,13 @@ const teamSchema = new mongoose.Schema(
   {
     first_name: String,
     last_name: String,
-    Username: String,
-    email: String,
+    Username: { type: String, required: [true, "Username is required"] },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
+    },
     hashedPassword: String,
     age: Number,
     phone_number: String,
@@ -97,5 +102,5 @@ module.exports = {
   Home,
   Team,
   History,
-  Users
+  Users,
 };
