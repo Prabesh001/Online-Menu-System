@@ -16,7 +16,6 @@ function MenuSection({ title, category }) {
     items,
     setItems,
   } = useContext(ItemContext);
-  
 
   useEffect(() => {
     setSelectedIndex("Home");
