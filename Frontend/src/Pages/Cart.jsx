@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Popup from "../Components/Popup/index.jsx";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../App.jsx";
-import "./Styles/cart.css";
+import "./Styles/Cart.css";
 import Payment from "./Payment/Payment.jsx";
 import { fetchOrders } from "../JavaScript/fetchData.js";
 import { MdOutlineTableBar } from "react-icons/md";
