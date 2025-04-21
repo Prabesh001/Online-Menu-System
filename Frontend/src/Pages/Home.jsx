@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Styles/home.css";
 import AddToCart from "../Components/AddToCart/index.jsx";
 import { ItemContext } from "../App.jsx";
@@ -37,15 +37,13 @@ function MenuSection({ title, category }) {
     getData();
   }, []);
 
-  if (items.length===0) {
+  if (items.length === 0) {
     return (
       <>
         <div style={{ padding: "16px" }}>
           <Grid container wrap="wrap" justifyContent="flex-start">
             {(loading || items.length === 0
-              ? Array.from(new Array(6))
-              : data
-            ).map((_, index) => (
+              && Array.from(new Array(6)).map((_, index) => (
               <Box key={index} sx={{ width: 190, marginRight: 4, my: 1 }}>
                 <Skeleton variant="rectangular" width={190} height={225} />
 
@@ -63,7 +61,7 @@ function MenuSection({ title, category }) {
                   </div>
                 </Box>
               </Box>
-            ))}
+            )))}
           </Grid>
         </div>
       </>
