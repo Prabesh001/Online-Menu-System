@@ -6,7 +6,7 @@ import {
   API_ORDER_URL,
   API_TRANSACTION_URL,
 } from "./config.js";
-import { base_url } from "../../../render.js";
+import { base_url } from "../../render.js";
 
 const skipFetchRoutes = ["/", "/reserve-seat"];
 

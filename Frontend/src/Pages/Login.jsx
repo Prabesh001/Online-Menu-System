@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "sonner";
 import { AuthContext } from "../App.jsx";
 import "./Styles/login.css";
-import { base_url } from "../../../render.js";
+import { base_url } from "../../render.js";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";

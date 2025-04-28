@@ -8,7 +8,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Hidden,
 } from "@mui/material";
 import { fetchOrders } from "../../JavaScript/fetchData";
 import { CartContext, ItemContext } from "../../App.jsx";
