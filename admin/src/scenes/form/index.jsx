@@ -14,7 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import bcrypt from "bcryptjs";
-import { base_url } from "../../../../render";
+import { base_url } from "../../../render";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");

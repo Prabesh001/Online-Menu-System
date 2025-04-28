@@ -21,7 +21,7 @@ import { CartContext, ItemContext, AuthContext } from "../../App.jsx";
 import Popup from "../../Components/Popup";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { base_url } from "../../../../render.js";
+import { base_url } from "../../../render.js";
 
 function EmployeeNavbar({ reservedTable }) {
   const [user, setUser] = useState([]);

@@ -16,7 +16,7 @@ import EmployeeNavbar from "./EmployeeNavbar";
 import Footer from "../../Components/Footer";
 import LoadingComponent from "../../Components/Loading/loading.jsx";
 import Popup from "../../Components/Popup/index.jsx";
-import { base_url } from "../../../../render.js";
+import { base_url } from "../../../render.js";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";

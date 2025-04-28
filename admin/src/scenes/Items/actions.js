@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { base_url } from "../../../../render";
+import { base_url } from "../../../render";
 
 const BASE_URL = `${base_url}/api/menu`;
 

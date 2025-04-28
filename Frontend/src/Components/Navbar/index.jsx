@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { ItemContext } from "../../App";
 import { useLocation } from "react-router-dom";
-import { base_url } from "../../../../render";
+import { base_url } from "../../../render";
 
 // TrieNode for Autocomplete
 class TrieNode {

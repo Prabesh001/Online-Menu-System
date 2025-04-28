@@ -15,7 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { base_url } from "../../../../render";
+import { base_url } from "../../../render";
 
 const AddItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
