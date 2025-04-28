@@ -1,4 +1,4 @@
-import { base_url } from "../../../render";
+import { base_url } from "../../render";
 
 export const API_BASE_URL = `${base_url}/api/menu`;
 export const API_HOME_MENU_URL = `${base_url}/api/homeMenu`;
