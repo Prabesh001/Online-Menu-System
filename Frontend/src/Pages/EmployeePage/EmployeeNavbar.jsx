@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   MenuItem,
   Tooltip,
@@ -21,6 +21,7 @@ import { CartContext, ItemContext, AuthContext } from "../../App.jsx";
 import Popup from "../../Components/Popup";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { base_url } from "../../../../render.js";
 
 function EmployeeNavbar({ reservedTable }) {
   const [user, setUser] = useState([]);
@@ -96,7 +97,10 @@ function EmployeeNavbar({ reservedTable }) {
   }, []);
 
   return (
-    <AppBar position="static" style={{ backgroundColor: "#008cba", width:"100%" }}>
+    <AppBar
+      position="static"
+      style={{ backgroundColor: "#008cba", width: "100%" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -176,9 +180,9 @@ function EmployeeNavbar({ reservedTable }) {
                 key={page}
                 onClick={() => {
                   if (page === "Products") {
-                    window.location.href = `http://localhost:5000/api/menu`;
+                    window.location.href = `${base_url}/api/menu`;
                   } else if (page === "Pricing") {
-                    window.location.href = `http://localhost:5173/Home`;
+                    navigate("/home")
                   }
                   handleCloseNavMenu;
                 }}

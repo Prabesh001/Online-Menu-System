@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
+import { base_url } from "../../../../render";
 
-const BASE_URL = "http://localhost:5000/api/menu"; // Centralized API URL
+const BASE_URL = `${base_url}/api/menu`;
 
 // Toggle Availability
 export const handleToggleClick = async (id, currentStatus, setItems) => {

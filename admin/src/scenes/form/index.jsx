@@ -14,6 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import bcrypt from "bcryptjs";
+import { base_url } from "../../../../render";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -33,7 +34,7 @@ const Form = () => {
         photo: values.photo,
       };
   
-      const response = await fetch("http://localhost:5000/api/employee", {
+      const response = await fetch(`${base_url}/api/employee`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

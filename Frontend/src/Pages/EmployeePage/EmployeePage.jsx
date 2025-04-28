@@ -16,6 +16,7 @@ import EmployeeNavbar from "./EmployeeNavbar";
 import Footer from "../../Components/Footer";
 import LoadingComponent from "../../Components/Loading/loading.jsx";
 import Popup from "../../Components/Popup/index.jsx";
+import { base_url } from "../../../../render.js";
 
 function EmployeePage() {
   document.title = "TableMate | Employee";
@@ -70,7 +71,7 @@ function EmployeePage() {
     try {
       for (const orderId of selectedRows) {
         const response = await fetch(
-          "http://localhost:5000/api/table/move-order/full-delivery",
+          `${base_url}/api/table/move-order/full-delivery`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -103,7 +104,7 @@ function EmployeePage() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/table/move-order/partial-delivery",
+        `${base_url}/api/table/move-order/partial-delivery`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -123,18 +124,17 @@ function EmployeePage() {
       setSelectedRows([]);
 
       // Update local state: Reduce quantity if partially delivered
-      setFilteredOrders(
-        (prevOrders) =>
-          prevOrders
-            .map((order) =>
-              order.id === formData.id
-                ? {
-                    ...order,
-                    quantity: order.quantity - formData.amountDelivered,
-                  }
-                : order
-            )
-            .filter((order) => order.quantity > 0)
+      setFilteredOrders((prevOrders) =>
+        prevOrders
+          .map((order) =>
+            order.id === formData.id
+              ? {
+                  ...order,
+                  quantity: order.quantity - formData.amountDelivered,
+                }
+              : order
+          )
+          .filter((order) => order.quantity > 0)
       );
 
       setPopupVisiblilty(null);

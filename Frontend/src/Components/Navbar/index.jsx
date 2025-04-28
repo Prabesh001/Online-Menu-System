@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { ItemContext } from "../../App";
 import { useLocation } from "react-router-dom";
+import { base_url } from "../../../../render";
 
 // TrieNode for Autocomplete
 class TrieNode {
@@ -65,7 +66,7 @@ function Index({ onCategorySelect }) {
 
   useEffect(() => {
     // Populate Trie with menu data
-    fetch("http://localhost:5000/api/menu")
+    fetch(`${base_url}/api/menu`)
       .then((res) => res.json())
       .then((data) => {
         const newTrie = new Trie();
@@ -84,7 +85,7 @@ function Index({ onCategorySelect }) {
       const prefixResults = trie.searchPrefix(value);
 
       // Fetch all menu data and perform substring search
-      fetch("http://localhost:5000/api/menu")
+      fetch(`${base_url}/api/menu`)
         .then((res) => res.json())
         .then((data) => {
           // Perform substring search

@@ -15,6 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { base_url } from "../../../../render";
 
 const AddItem = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -32,7 +33,7 @@ const AddItem = () => {
         foodPreferences: values.foodPreferences,
       };
 
-      const response = await fetch("http://localhost:5000/api/menu", {
+      const response = await fetch(`${base_url}/api/menu`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "sonner";
 import { AuthContext } from "../App.jsx";
 import "./Styles/login.css";
+import { base_url } from "../../../render.js";
 
 const LoginPage = () => {
   document.title = "TableMate | Login";
@@ -26,7 +27,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/employee/login", {
+      const response = await fetch(`${base_url}/api/employee/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

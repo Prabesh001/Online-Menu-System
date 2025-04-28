@@ -6,6 +6,7 @@ import {
   API_ORDER_URL,
   API_TRANSACTION_URL,
 } from "./config.js";
+import { base_url } from "../../../render.js";
 
 const skipFetchRoutes = ["/", "/reserve-seat"];
 
@@ -93,9 +94,9 @@ export const handlePost = async (url, postData) => {
 };
 
 export const handleAllDelivery = async (item) => {
-  return await handlePost("http://localhost:5000/api/homeMenu/transaction", postData);
+  return await handlePost(`${base_url}/api/homeMenu/transaction`, item);
 };
 
 export const handlePostUser = async (user) => {
-  return await handlePost("http://localhost:5000/api/user", user);
+  return await handlePost(`${base_url}/api/user`, user);
 };
