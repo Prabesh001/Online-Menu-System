@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ItemContext } from "../../App";
 import { useLocation } from "react-router-dom";
 import { Navbar, Nav, Container, Form, Button } from "react-bootstrap";
 import "./navbar.css";
-import { API_BASE_URL } from "../../JavaScript/config";
+import { API_BASE_URL } from "../../JavaScript/config.js";
 
 // TrieNode for Autocomplete
 class TrieNode {
